@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jawsmith.model.TableMaintenance" table="table_maintenance" catalog="jawsmith_program">
+        <id name="table_maintenance_id" type="java.lang.Integer">
+            <column name="TABLE_MAINTENANCE_ID" />
+            <generator class="identity" />
+        </id>
+		<property name="code_table_value" type="string">
+            <column name="CODE_TBL_VALUE" length="45" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="255" not-null="true" />
+        </property>
+        <property name="reference_id" type="java.lang.Integer">
+            <column name="REF_ID" not-null="true" />
+        </property>
+ 		<property name="status" type="boolean">
+            <column name="STATUS" not-null="true" default="false"/>
+        </property>
+ 		
+    </class>
+</hibernate-mapping>
