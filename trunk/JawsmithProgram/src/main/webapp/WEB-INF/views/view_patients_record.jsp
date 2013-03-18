@@ -7,14 +7,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
         <jsp:include page="header.jsp" />
-        <link rel="stylesheet" type="text/css" href="css/patients_record.css"/>
-        <link rel="stylesheet" type="text/css" href="css/common.css"/>
-        <link rel="stylesheet" type="text/css" href="css/modal.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
 	</head>
-		<script type="text/javascript" src="javascript/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="javascript/jquery-ui-1.10.2.custom.js"></script>        
-        <script type="text/javascript" src="javascript/common.js"></script>
-        <script type="text/javascript" src="javascript/patients_record.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/patients_record.js"></script>
 	<body>
     <div class="" id="acc_panel">
 		<label id="user_name" class="">Hi Admin!</label><label id="logout_button" class="button mouseout_button">Log Out</label>

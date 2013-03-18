@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jawsmith.model.SystemUser" table="users" catalog="jawsmith_program">
+        <id name="user_id" type="java.lang.Integer">
+            <column name="USER_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="USERNAME" length="45" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="45" not-null="true" />
+        </property>
+        <property name="first_name" type="string">
+            <column name="FIRST_NAME" length="255" not-null="true" />
+        </property>
+        <property name="last_name" type="string">
+            <column name="LAST_NAME" length="255" not-null="true" />
+        </property>
+        <property name="access" type="java.lang.Integer">
+            <column name="ACCESS" length="255" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

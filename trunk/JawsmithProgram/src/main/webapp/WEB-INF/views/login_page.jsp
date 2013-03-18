@@ -7,10 +7,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login_page.css"/>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css"/>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/jquery-prod.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/beauteethful.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/login_page.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/beauteethful.js"></script>
 		</head>
 	<body>
 		<div class="" id="body_div">

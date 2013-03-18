@@ -6,15 +6,15 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Home Page</title>
-	<link rel="stylesheet" type="text/css" href="css/home_page.css"/>
-	<link rel="stylesheet" type="text/css" href="css/common.css"/>
-	<link rel="stylesheet" type="text/css" href="css/modal.css"/>
-	<link rel="stylesheet" type="text/css" href="css/register.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/home_page.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
 	</head>
-	<script type="text/javascript" src="javascript/jquery-prod.js"></script>
-	<script type="text/javascript" src="javascript/jquery-ui.js"></script>
-	<script type="text/javascript" src="javascript/home_page.js"></script>
-	<script type="text/javascript" src="javascript/register.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
 	<jsp:include page="header.jsp" />
 	
 	<body>

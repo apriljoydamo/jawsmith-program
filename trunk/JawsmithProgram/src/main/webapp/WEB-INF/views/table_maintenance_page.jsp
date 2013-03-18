@@ -6,41 +6,28 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<div>
-		Hi Admin!
-		<form action="/JawSmithProgram/logout" method="POST">
-		<input type="submit" value="Logout"/>
-		</form>
-			
-		<form action="/JawSmithProgram/patients" method="POST">
+		<form action="${pageContext.request.contextPath}/patients" method="POST">
 		<input type="submit" value="Patients"/>
 		</form>
 
-		<form action="/JawSmithProgram/tableMaintenance" method="POST">
+		<form action="${pageContext.request.contextPath}/tableMaintenance" method="POST">
 		<input type="submit" value="Table Maintenance"/>
 		</form>
 		
-		<form action="/JawSmithProgram/logout" method="POST">
-		<input type="text" name="search" value="Search" />
-		<input type="submit" value="Search"/>
-		</form>
-		
-		<form action="/JawSmithProgram/advancedSearch" method="POST">
+		<form action="${pageContext.request.contextPath}/advancedSearch" method="POST">
 		<input type="submit" value="Advanced Search"/>
 		</form>
 		
-		<form action="/JawSmithProgram/addSomething" method="POST">
+		<form action="${pageContext.request.contextPath}/resources/addSomething" method="POST">
 		<input type="submit" value="+"/>
 		</form>
 		
-		<form action="/JawSmithProgram/saveReport" method="POST">
+		<form action="${pageContext.request.contextPath}/saveReport" method="POST">
 		<input type="submit" value="Save Report"/>
 		</form>
-		
-		</div>
 	</body>
 </html>

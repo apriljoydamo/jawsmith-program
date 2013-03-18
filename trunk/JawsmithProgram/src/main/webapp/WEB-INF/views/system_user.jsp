@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>System User</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+		<link rel="stylesheet" type="text/css" href={pageContext.request.contextPath}/resources/css/styles.css">
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
