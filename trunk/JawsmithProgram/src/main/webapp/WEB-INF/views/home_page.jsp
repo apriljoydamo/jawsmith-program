@@ -10,33 +10,68 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<div>
+		<div id="home_page_div1">
+			<form action="${pageContext.request.contextPath}/home" method="POST">
+			<input type="submit" value="Patients"/>
+			</form>
+	
+			<c:if test="${user.access!=1}">
+				<form action="${pageContext.request.contextPath}/home?tblmaintenance=true" method="POST">
+				<input type="submit" value="Table Maintenance"/>
+				</form>
+			</c:if>
 			
-		<form action="/JawSmithProgram/patients" method="POST">
-		<input type="submit" value="Patients"/>
-		</form>
-
-		<form action="/JawSmithProgram/tableMaintenance" method="POST">
-		<input type="submit" value="Table Maintenance"/>
-		</form>
-		
-		<form action="/JawSmithProgram/logout" method="POST">
-		<input type="text" name="search" value="Search" />
-		<input type="submit" value="Search"/>
+			<form action="${pageContext.request.contextPath}/advancedSearch" method="POST">
+			<input type="submit" value="Advanced Search"/>
+			</form>
+			
+			<form action="${pageContext.request.contextPath}/addSomething" method="POST">
+			<input type="submit" value="+"/>
 		</form>
 		
-		<form action="/JawSmithProgram/advancedSearch" method="POST">
-		<input type="submit" value="Advanced Search"/>
-		</form>
+		</div>	
+		<div id="home_page_div2">
+			<table>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+						
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			
+			<c:if test="${param.tblmaintenance==true}">
+			<table>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+						
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			</c:if>
+		</div>	
+		<div id="home_page_div3">
+			<form action="${pageContext.request.contextPath}/saveReport" method="POST">
+			<input type="submit" value="Save Report"/>
+			</form>
+		</div>	
 		
-		<form action="/JawSmithProgram/addSomething" method="POST">
-		<input type="submit" value="+"/>
-		</form>
-		
-		<form action="/JawSmithProgram/saveReport" method="POST">
-		<input type="submit" value="Save Report"/>
-		</form>
-		
-		</div>
 	</body>
 </html>

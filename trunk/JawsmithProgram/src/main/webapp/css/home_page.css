@@ -1,0 +1,52 @@
+/* CSS Document */
+
+#homepage_panel{
+	text-align:center;
+	position:relative;
+	top: 50px;
+	left: 0px;
+}
+
+#logout_button{	
+	position: relative;
+	top: 33px;
+}
+
+#save_report_button{
+	position: relative;
+	top: 13px;
+}
+
+#patient_list{
+	text-align:right;
+	width: 960px;
+	position: relative;
+	top: 75px;
+}
+#patient_table{	
+	text-align:center;
+	border: 1px solid black;
+	border-radius: 3px;
+	width: 100%;
+}
+
+tr{
+}
+
+td.results{
+	border-right: 1px solid black;
+}
+
+.header_row{
+	font-weight: bold;
+}
+
+.close_reg{	
+	position: absolute;
+	right: 525px;
+	top: 15px;
+}
+
+body{
+	background-image:url(../images/home_page.png);
+}

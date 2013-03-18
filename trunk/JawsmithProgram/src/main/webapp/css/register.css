@@ -1,0 +1,17 @@
+/* CSS Document */
+
+#register_panel{
+	padding: 12px;
+	background-color: white;
+	margin-top: 10px;
+	margin-left:auto;
+	margin-right:auto;
+	height: 600px;
+	width: 300px;
+	border: 2px solid black;
+	border-radius: 4px;
+}
+#register_div{
+	height: 100%;
+	width: 100%;
+}

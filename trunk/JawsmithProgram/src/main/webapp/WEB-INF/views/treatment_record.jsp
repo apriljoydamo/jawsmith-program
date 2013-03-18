@@ -10,18 +10,32 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<div>
-	
-		<form action="/JawSmithProgram/logout" method="POST">
-		<input type="submit" value="Logout"/>
-		</form>
-			
-	
-		<form action="/JawSmithProgram/treatmentRecord/save" method="POST">
-		<input type="submit" value="Save"/>
-		</form>
+		<div id="treatment_record_div1">
+			<img alt="" src="" />
+		</div>
+		<div id="treatment_record_div2">
+			<table>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>	
+				</tr>
+			</table>
+		</div>
 		
-		
+		<div id="treatment_record_div3">	
+			<form action="${pageContext.request.contextPath}/treatmentRecord/save" method="POST">
+			<input type="submit" value="Save"/>
+			</form>
 		</div>
 	</body>
 </html>

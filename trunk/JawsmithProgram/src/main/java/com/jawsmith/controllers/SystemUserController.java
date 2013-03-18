@@ -25,6 +25,7 @@ import com.jawsmith.model.SystemUser;
 
  
 @Controller
+@RequestMapping("/SystemUsers")
 public class SystemUserController {
 	ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
@@ -34,7 +35,7 @@ public class SystemUserController {
 	/**
 	 * Redirecting to /systemUsersPage
 	 **/
-	@RequestMapping("/systemUsers")
+	@RequestMapping("/")
 	public String systemUsersPage(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -49,7 +50,7 @@ public class SystemUserController {
 	 * This is from /systemUsersPage Add System Users button
 	 * To redirect in ae_systemUsersPages
 	 **/
-	@RequestMapping("/systemUsers/add")
+	@RequestMapping("/add")
 	public String Add(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 		//Filling out the header.jsp
@@ -62,7 +63,7 @@ public class SystemUserController {
 	 * Where the add process is...
 	 * To redirect in systemUsersPage
 	 **/
-	@RequestMapping("/systemUsers/add/done")
+	@RequestMapping("/add/done")
 	public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
 											ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -92,7 +93,7 @@ public class SystemUserController {
 	 * This is from /systemUsersPage Edit System Users button
 	 * To redirect in ae_systemUsersPage
 	 **/
-	@RequestMapping("/systemUsers/edit")
+	@RequestMapping("/edit")
 	public String Edit(HttpServletRequest request, HttpServletResponse response, 
 									  ModelMap model, Principal principal) throws IOException, ServletException{
 		return "login_page";
@@ -103,7 +104,7 @@ public class SystemUserController {
 	 * This is from /systemUsersPage/edit submit button
 	 * To redirect in systemUsersPage
 	 **/
-	@RequestMapping("/systemUsers/edit/done")
+	@RequestMapping("/edit/done")
 	public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
 											ModelMap model, Principal principal) throws IOException, ServletException{
 		return "login_page";
