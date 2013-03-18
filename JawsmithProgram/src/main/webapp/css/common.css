@@ -1,0 +1,68 @@
+/* CSS Document */
+
+.mouseover_button{	
+	border: 1px solid #555555;
+	color: black;
+	background-color: #FFFF26;
+}
+
+.mouseclick_button{	
+	border: 1px solid white;
+	color: white;
+	background-color: #008C00;
+}
+
+.mouseout_button{
+	border: 1px solid #555555;
+	color: black;
+	background-color: #FFFF99;
+}
+.button{	
+	font-weight: bold;
+	padding: 2px 20px;
+}
+.solid_black{
+	border: 1px solid black;
+}
+
+#logout_button{	
+	position: relative;
+	top: 33px;
+}
+#user_name{	
+	margin: 0px 20px;
+	position: relative;
+	top: 33px;
+}
+
+#logout_button{	
+	position: relative;
+	top: 33px;
+}
+
+#acc_panel{
+	padding: 2px;
+	height: 60px;
+	width: 506px;
+	text-align: end;
+	position: relative;
+	left: 470px;
+	top: -30px;
+}
+#user_name{	
+	margin: 0px 20px;
+	position: relative;
+	top: 33px;
+}
+
+body{
+	width: 960px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;	
+	background-repeat: no-repeat;
+	background-position: top;
+	font-family: Century Gothic;
+	background-color: #535362;
+}
