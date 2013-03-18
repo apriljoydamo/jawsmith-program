@@ -12,6 +12,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<a href="${pageContext.request.contextPath}/welcome">jasdhflaisfhnkjwehuawoefhjk</a>
+<a href="${pageContext.request.contextPath}/loginPage">jasdhflaisfhnkjwehuawoefhjk</a>
 </body>
 </html>
