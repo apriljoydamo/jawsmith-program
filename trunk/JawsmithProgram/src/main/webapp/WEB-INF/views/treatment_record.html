@@ -5,20 +5,23 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>System User</title>
+		<title>Beauteethful</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
 		<div>
-		<form action="${pageContext.request.contextPath}/addUser" method="POST">
-			<input type="text" name="last_name" value="Last Name"/>			
-			<input type="text" name="first_name" value="First Name" />
-			<input type="text" name="username" value="Username" />
-			<input type="text" name="password" value="Password" />
-			<input type="hidden" value="1" name="access" />
-			<input type="submit" value="Save"/>
+	
+		<form action="/JawSmithProgram/logout" method="POST">
+		<input type="submit" value="Logout"/>
 		</form>
+			
+	
+		<form action="/JawSmithProgram/treatmentRecord/save" method="POST">
+		<input type="submit" value="Save"/>
+		</form>
+		
+		
 		</div>
 	</body>
 </html>

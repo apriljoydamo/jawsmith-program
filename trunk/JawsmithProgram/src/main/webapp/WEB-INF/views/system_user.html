@@ -11,14 +11,21 @@
 	</head>
 	<body>
 		<div>
-		<form action="${pageContext.request.contextPath}/addUser" method="POST">
+		
+		
+		<form action="/JawSmithProgram/addUser" method="POST">
 			<input type="text" name="last_name" value="Last Name"/>			
 			<input type="text" name="first_name" value="First Name" />
 			<input type="text" name="username" value="Username" />
 			<input type="text" name="password" value="Password" />
-			<input type="hidden" value="1" name="access" />
+			<input type="hidden" value="1" name=access>
+		
 			<input type="submit" value="Save"/>
-		</form>
+			
+			</form>
+			
+			
+			
 		</div>
 	</body>
 </html>

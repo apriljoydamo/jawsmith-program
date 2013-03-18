@@ -3,7 +3,7 @@
 			The header contains the company logo, the system user who is currently logged-in,
 			the current date and time, the current user settings, and the log-out link.
 		-->
-		<div id="header">
+		<div class="" id="acc_panel">
 			<p>Welcome ${user.first_name} ${user.last_name}</p>
 			<p>${serverTime}</p>
 			<p>${headerMessage}</p>

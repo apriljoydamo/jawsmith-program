@@ -10,21 +10,20 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<div id="add_record_div1">
-			<div id="patient_info">
-			${patient.last_name}, ${patient.first_name} ${patient.middle_name}<br/>
-			Last Visit Date ${patient.last_visit_date}
-			Born ${patient.birthday}<br/>
-			${patient.sex}<span>|</span>${patient.relationship_status}<span>|</span>${patient.nationality}<br/>
-			${patient.address}, ${patient.city}<br/>
-			${patient.mobile_number}<span>|</span>${patient.telephone_number}<span>|</span>${patient.email_address}<br/>
-			${patient.occupation}<span>|</span>${patient.religion}<br/>
-			${patient.referred_by}<span>|</span>${patient.guardian}<br/>
-			Status ${patient.status}<br/>
-			</div>
+		<div id="patient_info">
+		${patient.last_name}, ${patient.first_name} ${patient.middle_name}<br/>
+		Last Visit Date ${patient.last_visit_date}
+		Born ${patient.birthday}<br/>
+		${patient.sex}<span>|</span>${patient.relationship_status}<span>|</span>${patient.nationality}<br/>
+		${patient.address}, ${patient.city}<br/>
+		${patient.mobile_number}<span>|</span>${patient.telephone_number}<span>|</span>${patient.email_address}<br/>
+		${patient.occupation}<span>|</span>${patient.religion}<br/>
+		${patient.referred_by}<span>|</span>${patient.guardian}<br/>
+		Status ${patient.status}<br/>
 		</div>
 		
-		<div id="add_record_div2">
+		
+		<div>
 			<form action="${pageContext.request.contextPath}/add_record" method="POST">
 			<div id="patient_medical_info">
 				<h3>Medical History</h3>
@@ -60,6 +59,7 @@
 				<!-- TREATMENT PLAN BASED ON FORM HERE -->
 				</div>
 			</div>
+			
 			<input type="submit" value="Save"/>
 			</form>
 		</div>

@@ -59,6 +59,12 @@ public class HomeController {
 		return "login_page";
 	}
 	
+	@RequestMapping("/add_patientPage")
+	public String add_patientPage(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		return "add_patient";
+	}
+	
 	@RequestMapping("/loginSuccess")
 	public String login(Locale locale, HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
@@ -73,7 +79,12 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("user", user);
 		
-		
+		return "home_page";
+	}
+	
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
 		return "home_page";
 	}
 	
