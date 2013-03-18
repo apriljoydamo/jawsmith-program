@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jawsmith.model.TreatmentRecord" table="treatment_record" catalog="jawsmith_program">
+        <id name="treatment_record_id" type="java.lang.Integer">
+            <column name="TREATMENT_RECORD_ID" />
+            <generator class="identity" />
+        </id>
+
+ 		<property name="last_visit_date" type="date">
+            <column name="LAST_VISIT_DATE" not-null="true"  />
+        </property>
+		<property name="tooth_number" type="string">
+            <column name="TOOTH_NO" length="45" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="255" not-null="true" />
+        </property>
+         <property name="prescription" type="string">
+            <column name="PRESCRIPTION" length="255" not-null="true" />
+        </property>
+        
+        
+        
+        <property name="debit" type="float">
+            <column name="DEBIT" />
+        </property>
+        <property name="credit_date" type="date">
+            <column name="CREDIT_DATE"   />
+        </property>
+       <property name="credit_amount" type="float">
+            <column name="CREDIT_AMT" />
+        </property>
+        
+     
+      
+        <property name="patient_id" type="java.lang.Integer">
+            <column name="patients_PATIENT_ID" not-null="true" />
+        </property>
+ 	
+ 		
+    </class>
+</hibernate-mapping>

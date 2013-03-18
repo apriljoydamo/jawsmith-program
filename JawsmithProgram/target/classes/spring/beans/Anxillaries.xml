@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- System User business object -->
+   <bean id="anxillariesBean" class="com.jawsmith.services.AnxillariesManager" >
+   		<property name="dataAccesses" ref="anxillariesDao" />
+  
+   </bean>
+ 
+   <!-- System User Data Access Object -->
+   <bean id="anxillariesDao" class="com.jawsmith.dao.AnxillariesDao" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>   	  
+ </beans>
