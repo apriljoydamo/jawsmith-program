@@ -4,8 +4,8 @@
 			the current date and time, the current user settings, and the log-out link.
 		-->
 		<div id="header">
-			<p>Welcome ${user}</p>
-			<p>${date} ${time}</p>
+			<p>Welcome ${user.first_name} ${user.last_name}</p>
+			<p>${serverTime}</p>
 			<p>${headerMessage}</p>
 			
 			<form action="${pageContext.request.contextPath}/j_spring_security_logout">
