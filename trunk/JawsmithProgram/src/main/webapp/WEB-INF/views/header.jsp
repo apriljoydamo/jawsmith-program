@@ -1,8 +1,14 @@
 
+		<div class="" id="acc_panel">
+			<label id="user_name" class="">Hi Admin!</label>
+			<label id="logout_button" class="button mouseout_button">
+				<a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a>
+			</label>
+		</div>
+	
 		<!--This div is for the header.
 			The header contains the company logo, the system user who is currently logged-in,
 			the current date and time, the current user settings, and the log-out link.
-		-->
 		<div class="" id="acc_panel">
 			<p>Welcome ${user.first_name} ${user.last_name}</p>
 			<p>${serverTime}</p>
@@ -18,4 +24,5 @@
 				<input type="submit" value="Change Password" class="text_button" />
 			</form>
 		</div>
-	
+		-->
+		

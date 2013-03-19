@@ -3,7 +3,8 @@ package com.jawsmith.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jawsmith.common.GetDateAndTime;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.model.Patient;
 
@@ -67,11 +69,10 @@ public class PatientController {
 			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
 			String middle_name = request.getParameter("middle_name");
-			Date dob = (Date)Date.valueOf(request.getParameter("dob"));
 			String sex = request.getParameter("sex");
 			String rel_status = request.getParameter("rel_status");
 			String address = request.getParameter("address");
-			String city = request.getParameter("city");
+			String city = "manila";
 			String tel_num = request.getParameter("tel_num");
 			String mobile_num = request.getParameter("mobile_num");
 			String email = request.getParameter("email");
@@ -79,7 +80,17 @@ public class PatientController {
 			String religion = request.getParameter("religion");
 			String referred_by = request.getParameter("referred_by");
 			String guardian = request.getParameter("guardian");
+			String patient_num = "1";
+			String nationality="Filipino";
+			Boolean status=Boolean.valueOf("1");
 			
+			Date dob = new Date();
+			Date last_visit_date= new Date();
+			
+			patient.setStatus(status);
+			patient.setLast_visit_date(last_visit_date);
+			patient.setNationality(nationality);
+			patient.setPatient_num(patient_num);
 			patient.setLast_name(last_name);
 			patient.setFirst_name(first_name);
 			patient.setMiddle_name(middle_name);

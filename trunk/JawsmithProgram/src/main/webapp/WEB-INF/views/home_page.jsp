@@ -4,54 +4,50 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Home Page</title>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/home_page.css"/>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Home Page</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/home_page.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
+		<jsp:include page="header.jsp" />
 	</head>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
-	<jsp:include page="header.jsp" />
 	
 	<body>
-	<!--
-	<div class="" id="acc_panel">
-		<label id="user_name" class="">Hi Admin!</label><label id="logout_button" class="button mouseout_button">Log Out</label>
-	</div>
-	-->
 	<div id="register_div" class="modalDialog">
 		<div id="register_panel" class="">
 	      <a href="#close" class="close_reg close" title="">X</a>
 	      <h4>ADD PATIENT</h4>
-	      <table>
-	          <tr>
+	      <form action="${pageContext.request.contextPath}/patient/add/done" >
+	        <table>
+	        <tr>
 	                <td>First Name: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="first_name" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Middle Name: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="middle_name" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Last Name: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="last_name" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Date of Birth: </td>
-	                <td><input type="date" id="" class=""/></td> 
+	                <td><input type="date" id="" name="dob" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>
-	                <td><label><input type="radio" name="gender" value="male" id="" />Male</label>
-	        			<label><input type="radio" name="gender" value="female" id="" />Female</label></td>  
+	                <td><label><input type="radio" name="sex" value="male" id="" />Male</label>
+	        			<label><input type="radio" name="sex" value="female" id="" />Female</label></td>  
 	          </tr>
 	          <tr>              
 	                <td>Marital Status: </td>
-	                <td><select name="select" id="select">
+	                <td><select name="rel_status" id="select">
 	                      <option value="single">Single</option>
 	                      <option value="married">Married</option>
 	                      <option value="widow">Widow</option>
@@ -64,39 +60,43 @@
 	          </tr>
 	          <tr>              
 	                <td>Postal Address: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="address" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Home Phone No. </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="tel_num" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Mobile Number: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="mobile_num" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>E-mail: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="email" class=""/></td> 
 	          </tr>
 	          <tr>               
 	                <td></td> 
 	          </tr>
 	          <tr>              
 	                <td>Occupation: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="occupation" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Religion: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="religion" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Guardian: </td>
-	                <td><input type="text" id="" class=""/></td> 
+	                <td><input type="text" id="" name="guardian" class=""/></td> 
 	          </tr>
 	          <tr>              
-	                <td><input type="button" id="save_button" class="button mouseout_button" value="Save"/></td>
+	                <td><input type="submit" id="save_button" class="button mouseout_button" value="Save"/></td>
 	          </tr>
-	      </table>
+	         
+	      	</table>
+	      	 <input type="hidden" value="Australian" name="nationality"/>
+	      	 <input type="hidden" value="Noel Bermudez" name="referred_by"/>
+	      </form>
 	  </div>
 	</div>
 	<div class="" id="homepage_panel">

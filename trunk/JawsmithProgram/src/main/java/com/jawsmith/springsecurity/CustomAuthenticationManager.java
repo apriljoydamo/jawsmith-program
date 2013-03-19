@@ -68,6 +68,8 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 				System.out.println("correct password");
 				System.out.println("auth password: "+auth.getCredentials());
 				System.out.println("systemUser password: "+systemUser.getPassword());
+			}else{
+				  throw new BadCredentialsException("Wrong username or password");
 			}
 		}catch (Exception e){
 			System.out.println("wrong pass");
