@@ -35,7 +35,7 @@ public class PatientDao extends HibernateDaoSupport implements DataAccesses{
 
 	
 	public List getAll() {
-		List list = getHibernateTemplate().find("from Patient");
+		List list = getHibernateTemplate().find("from Patient ORDER BY LAST_NAME");
 		return list;
 	}
 }

@@ -33,9 +33,6 @@
         <property name="address" type="string">
             <column name="ADDRESS" length="255" not-null="true" />
         </property>
-        <property name="city" type="string">
-            <column name="CITY" length="255" not-null="true" />
-        </property>
         <property name="mobile_number" type="string">
             <column name="MOBILE_NO" length="255" not-null="true" />
         </property>

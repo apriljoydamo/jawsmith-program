@@ -28,7 +28,22 @@
 			<div id="patient_medical_info">
 				<h3>Medical History</h3>
 				<div id="medical_his_div">
-				<!-- MEDICAL HISTORY BASED ON FORM HERE -->
+					<c:forEach var="tbl_med_his" items="medHisQuestionList">
+					<table>
+						<tr><td id="question">Question: <c:out value="${tbl_med_his.description}" /></td></tr>
+						<tr><td>
+								<c:if test="${tbl_med_his.code_table_value=='2'}">
+									<tr><td>Physical Ailments:</td></tr>
+									<c:forEach var="tbl_physical" items="physicalAilmentList">
+										<tr><td>Physical Ailments:</td></tr>
+										<tr><td><c:out value="${tbl_physical.description}" /></td></tr>
+									</c:forEach>
+								</c:if>
+							</td>
+						</tr>
+						<tr><td id="answer"><input type="text" name="answer" /></td></tr>
+					</table>
+					</c:forEach>
 				</div>
 				<h3>Dental History</h3>
 				<div id="dental_his_div">
