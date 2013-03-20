@@ -22,9 +22,13 @@
 		<div id="register_panel" class="">
 	      <a href="#close" class="close_reg close" title="">X</a>
 	      <h4>ADD PATIENT</h4>
-	      <form action="${pageContext.request.contextPath}/patient/add" >
+	      <form action="${pageContext.request.contextPath}/patient/add" method="POST" >
 	        <table>
-	        <tr>
+	          <tr>
+	                <td>Patient No: </td>
+	                <td><input type="text" id="" name="patient_num" class=""/></td> 
+	          </tr>
+	          <tr>
 	                <td>First Name: </td>
 	                <td><input type="text" id="" name="first_name" class=""/></td> 
 	          </tr>
@@ -42,8 +46,8 @@
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>
-	                <td><label><input type="radio" name="sex" value="male" id="" />Male</label>
-	        			<label><input type="radio" name="sex" value="female" id="" />Female</label></td>  
+	                <td><label><input type="radio" name="sex" value="Male" id="" />Male</label>
+	        			<label><input type="radio" name="sex" value="Female" id="" />Female</label></td>  
 	          </tr>
 	          <tr>              
 	                <td>Marital Status: </td>
@@ -53,7 +57,8 @@
 	                      <option value="widow">Widow</option>
 	                      <option value="divorced">Divorced</option>
 	                      <option value="seperated">Seperated</option>
-		                  </select></td> 
+		                  </select>
+		           	</td> 
 	          </tr>
 	          <tr>              
 	                <td></td> 
@@ -78,6 +83,10 @@
 	                <td></td> 
 	          </tr>
 	          <tr>              
+	                <td>Nationality: </td>
+	                <td><input type="text" id="" name="nationality" class=""/></td> 
+	          </tr>
+	          <tr>              
 	                <td>Occupation: </td>
 	                <td><input type="text" id="" name="occupation" class=""/></td> 
 	          </tr>
@@ -90,34 +99,92 @@
 	                <td><input type="text" id="" name="guardian" class=""/></td> 
 	          </tr>
 	          <tr>              
+	                <td>Referred by: </td>
+	                <td><input type="text" id="" name="referred_by" class=""/></td> 
+	          </tr>
+	          
+	          <c:if test="${param.edit==true}">
+	          <tr>              
+	                <td>Patient Status: </td>
+	                <td><select name="status" id="select">
+	                      <option value="1">Active</option>
+	                      <option value="0">Inactive</option>
+		                  </select></td> 
+	          </tr>
+	          </c:if>
+	          
+	          
+	          <tr>              
 	                <td><input type="submit" id="save_button" class="button mouseout_button" value="Save"/></td>
 	          </tr>
-	         
+	          
+	          
 	      	</table>
-	      	 <input type="hidden" value="Australian" name="nationality"/>
-	      	 <input type="hidden" value="Noel Bermudez" name="referred_by"/>
 	      </form>
 	  </div>
 	</div>
+	
+	
+	
 	<div class="" id="homepage_panel">
-		<label id="patients_button" class="button mouseout_button">Patients</label>
-		<label id="table_maintenance_button" class="button mouseout_button">Table Maintenance</label> 
+		<label id="patients_button" class="button mouseout_button">
+			<a href="${pageContext.request.contextPath}/patient/">Patients</a>
+		</label>
+		<c:if test="${user.access==1}">
+	          <label id="table_maintenance_button" class="button mouseout_button">Table Maintenance</label> 
+	    </c:if>
 	    <input type="text" id="" class="" />
 		<label id="search_button" class="button mouseout_button">Search</label>
 		<label id="advance_search_button" class="button mouseout_button">Advance Search</label>
 		<label id="plus_button" class="button mouseout_button">Add Patients</label>
 	</div>
+	
+	
+	
 	<div class="" id="patient_list">
 	<table id="patient_table">
-		<tr class="header_row">
-	    	<td class="results">1</td>
-	    	<td class="results">2</td>
-	    	<td class="results">3</td>
-	        
-	    	<td class="results">4</td>
-	    	<td class="results">5</td>
-	    	<td class="results">6</td>
+	    <tr class="header_row">
+	    	<td class="results">Patient No</td>
+	    	<td class="results">Last Name</td>
+	    	<td class="results">First Name</td>
+	    	<td class="results">Middle Name</td>	    	
+	    	<td class="results">Last Visit Date</td>
+	    	<td class="results">Birthday</td>	    	
+	    	<td class="results">Gender</td>
+	    	<td class="results">Marital Status</td>
+	    	<td class="results">Address</td>
+	    	<td class="results">Tel No.</td>
+	    	<td class="results">Cell No.</td>
+	    	<td class="results">E-mail</td>
+	    	<td class="results">Nationality</td>
+	    	<td class="results">Occupation</td>
+	    	<td class="results">Religion</td>
+	    	<td class="results">Referred By</td>
+	    	<td class="results">Guardian</td>
 	    </tr>
+	    <c:forEach var="patient" items="${patientList}">
+	    <tr class="">	    	
+	    	<td class="results"><c:out value="${patient.patient_num}" /></td>
+	    	<td class="results"><c:out value="${patient.last_name}" /></td>
+	    	<td class="results"><c:out value="${patient.first_name}" /></td>
+	    	<td class="results"><c:out value="${patient.middle_name}" /></td>	    	
+	    	<td class="results"><c:out value="${patient.last_visit_date}" /></td>
+	    	<td class="results"><c:out value="${patient.birthday}" /></td>	    	
+	    	<td class="results"><c:out value="${patient.sex=='M' ? 'Male' : 'Female'}" /></td>
+	    	<td class="results"><c:out value="${patient.relationship_status}" /></td>
+	    	<td class="results"><c:out value="${patient.address}" /></td>
+	    	<td class="results"><c:out value="${patient.telephone_number}" /></td>
+	    	<td class="results"><c:out value="${patient.mobile_number}" /></td>
+	    	<td class="results"><c:out value="${patient.email_address}" /></td>
+	    	<td class="results"><c:out value="${patient.nationality}" /></td>
+	    	<td class="results"><c:out value="${patient.occupation}" /></td>
+	    	<td class="results"><c:out value="${patient.religion}" /></td>
+	    	<td class="results"><c:out value="${patient.referred_by}" /> </td>
+	    	<td class="results"><c:out value="${patient.guardian}" /></td>
+	    	
+	    	    
+	    </tr>
+	    </c:forEach>
 	</table>
 	<label id="save_report_button" class="button mouseout_button">Save Report</label>
 	</div>

@@ -3,7 +3,10 @@ package com.jawsmith.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.SystemUserMethods;
+import com.jawsmith.model.Patient;
 import com.jawsmith.model.SystemUser;
 
 /**
@@ -34,6 +38,7 @@ public class HomeController {
 	ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	SystemUserMethods sysUserMethods = (SystemUserMethods)appContext.getBean("systemUserBean");
+	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -85,11 +90,20 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		
-		SystemUser user = (SystemUser) sysUserMethods.findByName(principal.getName());
-		
-		
+		SystemUser user = (SystemUser) sysUserMethods.findByName(principal.getName());		
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("user", user);
+		//User in session
+		request.getSession().setAttribute("user", user );		
+		
+		//Fills patient table in jsp
+		ArrayList<Patient> list = new ArrayList<Patient>();
+		List<Patient> object = dataAccesses.getAll();
+		Iterator iterate = object.iterator();
+    	while(iterate.hasNext()){
+    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
+    		list.add(iterlist);							//Then add to a list that would be passed in the jsp
+    	}
+		model.addAttribute("patientList",list);
 		
 		return "home_page";
 	}

@@ -1,4 +1,4 @@
-	<!-- include this div for layer effect? -->
+	<!-- UNUSED -->
 		<div id="add_patient_div">
 		
 			<form action="/${pageContext.request.contextPath}/add_patient" method="POST">
