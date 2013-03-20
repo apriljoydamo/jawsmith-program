@@ -42,10 +42,11 @@ public class MedicalHistoryController {
 		 * Method after finishing the add page
 		 * 
 		 **/
-		@RequestMapping("/medical_history/add/done")
+		@RequestMapping("/medical_history/add")
 		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
-		MedicalHistory medicalHistory = new MedicalHistory();
+	
+			MedicalHistory medicalHistory = new MedicalHistory();
 			String questions = request.getParameter("questions");
 			String answer = request.getParameter("answer");
 			
@@ -60,14 +61,19 @@ public class MedicalHistoryController {
 		@RequestMapping("/medical_history/edit")
 		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
-			return null;
-		}
-		
-		
-		@RequestMapping("/medical_history/edit/done")
-		public String EditMethodDone(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
-			return null;
+			
+			MedicalHistory medicalHistory = new MedicalHistory();
+			int editId = Integer.parseInt(request.getParameter("editId"));
+			String questions = request.getParameter("questions");
+			String answer = request.getParameter("answer");
+			
+			medicalHistory.setPatient_id(editId);
+			medicalHistory.setQuestion_id(questions);
+			medicalHistory.setAnswer(answer);
+			
+			dataAccesses.update(medicalHistory);
+			
+	    	return "main_page";
 		}
 		
 		  @RequestMapping(value = "/medical_historyGenerateReport") 

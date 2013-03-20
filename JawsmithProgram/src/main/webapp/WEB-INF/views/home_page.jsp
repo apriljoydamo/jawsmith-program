@@ -22,7 +22,7 @@
 		<div id="register_panel" class="">
 	      <a href="#close" class="close_reg close" title="">X</a>
 	      <h4>ADD PATIENT</h4>
-	      <form action="${pageContext.request.contextPath}/patient/add/done" >
+	      <form action="${pageContext.request.contextPath}/patient/add" >
 	        <table>
 	        <tr>
 	                <td>First Name: </td>

@@ -59,6 +59,18 @@ public class HomeController {
 		return "login_page";
 	}
 	
+	@RequestMapping("/table_maintenance_page")
+	public String tableMaintenancePage(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		return "table_maintenance_page";
+	}
+	
+	@RequestMapping("/view_patients_record")
+	public String PatientRecords(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		return "table_maintenance_page";
+	}
+	
 	@RequestMapping("/add_patientPage")
 	public String add_patientPage(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
@@ -101,4 +113,11 @@ public class HomeController {
 		return "login_page";
 	}
 	
+	  @RequestMapping(value = "/homeGenerateReport") 
+	    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
+	  //   SystemUser_JService downloadService = new SystemUser_JService(); 
+	     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
+	  //   downloadService.downloadXLS(response); 
+	 } 
+	  
 }
