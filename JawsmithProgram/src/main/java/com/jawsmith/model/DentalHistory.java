@@ -1,6 +1,6 @@
 package com.jawsmith.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class DentalHistory {
 	private int dental_his_id;

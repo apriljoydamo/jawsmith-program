@@ -3,8 +3,8 @@ package com.jawsmith.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.model.MedicalHistory;
+import com.jawsmith.model.Patient;
 
 
 
@@ -45,35 +46,76 @@ public class MedicalHistoryController {
 		@RequestMapping("/medical_history/add")
 		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
-	
+		
 			MedicalHistory medicalHistory = new MedicalHistory();
-			String questions = request.getParameter("questions");
-			String answer = request.getParameter("answer");
 			
-			medicalHistory.setQuestion_id(questions);
-			medicalHistory.setAnswer(answer);
+			String question[] = new String[17];
+			question[0] = request.getParameter("question1");
+			
+			String answer[] = new String[17];
+			answer[0] = request.getParameter("answer1");
+			
+			Date last_visit_date= new Date();
+		
+			medicalHistory.setLast_visit_date(last_visit_date);
+			//medicalHistory.setQuestion_id(question);
+		//	medicalHistory.setAnswer(answer);
 			
 			dataAccesses.save(medicalHistory);
 			
-	    	return "main_page";
+			//Adding the list for the view
+			//Return to module main page
+	    	return "view_patient";
 		}
 		
-		@RequestMapping("/medical_history/edit")
+		@RequestMapping("/patient/edit")
 		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			MedicalHistory medicalHistory = new MedicalHistory();
-			int editId = Integer.parseInt(request.getParameter("editId"));
-			String questions = request.getParameter("questions");
-			String answer = request.getParameter("answer");
 			
-			medicalHistory.setPatient_id(editId);
-			medicalHistory.setQuestion_id(questions);
-			medicalHistory.setAnswer(answer);
+			String question[] = new String[17];
+			question[0] = request.getParameter("question1");
+			
+			String answer[] = new String[17];
+			answer[0] = request.getParameter("answer1");
+			
+			Date last_visit_date= new Date();
+		
+			medicalHistory.setLast_visit_date(last_visit_date);
+			//medicalHistory.setQuestion_id(question);
+		//	medicalHistory.setAnswer(answer);
 			
 			dataAccesses.update(medicalHistory);
 			
-	    	return "main_page";
+			//Adding the list for the view
+			//Return to module main page
+	    	return "view_patient";
+		}
+		
+		@RequestMapping("/patient/delete")
+		public String delete(HttpServletRequest request, HttpServletResponse response, 
+		ModelMap model, Principal principal) throws IOException, ServletException{
+			
+	MedicalHistory medicalHistory = new MedicalHistory();
+			
+			String question[] = new String[17];
+			question[0] = request.getParameter("question1");
+			
+			String answer[] = new String[17];
+			answer[0] = request.getParameter("answer1");
+			
+			Date last_visit_date= new Date();
+		
+			medicalHistory.setLast_visit_date(last_visit_date);
+			//medicalHistory.setQuestion_id(question);
+		//	medicalHistory.setAnswer(answer);
+			
+			dataAccesses.update(medicalHistory);
+			
+			//Adding the list for the view
+			//Return to module main page
+	    	return "view_patient";
 		}
 		
 		  @RequestMapping(value = "/medical_historyGenerateReport") 
