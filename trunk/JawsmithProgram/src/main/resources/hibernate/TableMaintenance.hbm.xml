@@ -12,7 +12,7 @@
 		<property name="code_table_value" type="string">
             <column name="CODE_TBL_VALUE" length="45" not-null="true" />
         </property>
-        <property name="description" type="string">
+        <property name="tbl_maintenance_description" type="string">
             <column name="DESCRIPTION" length="255" not-null="true" />
         </property>
         <property name="reference_id" type="java.lang.Integer">

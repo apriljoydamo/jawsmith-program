@@ -1,6 +1,6 @@
 package com.jawsmith.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class OtherInformation {
 	private int other_info_id;

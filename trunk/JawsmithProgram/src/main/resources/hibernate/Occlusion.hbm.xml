@@ -13,13 +13,13 @@
             <column name="LAST_VISIT_DATE" not-null="true" />
         </property>
 		<property name="class_1" type="string">
-            <column name="CLASS_I" length="255" not-null="true" />
+            <column name="CLASS_I" length="255"  />
         </property>
         <property name="class_2" type="string">
-            <column name="CLASS_II" length="255" not-null="true" />
+            <column name="CLASS_II" length="255"  />
         </property>
 		<property name="class_3" type="string">
-            <column name="CLASS_III" length="255" not-null="true" />
+            <column name="CLASS_III" length="255"/>
         </property>    
         <property name="patient_id" type="java.lang.Integer">
             <column name="patients_PATIENT_ID" not-null="true" />

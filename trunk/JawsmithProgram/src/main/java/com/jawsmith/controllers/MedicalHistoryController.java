@@ -27,28 +27,16 @@ import com.jawsmith.model.Patient;
 
 
 @Controller
+@RequestMapping("medical_history")
 public class MedicalHistoryController {
-		ApplicationContext appContext = 
+		static ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-		DataAccesses dataAccesses = (DataAccesses)appContext.getBean("medicalHistoryBean");
+		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("medicalHistoryBean");
 	
-		@RequestMapping("/medical_history")
-		public String view(HttpServletRequest request, HttpServletResponse response, 
-									  ModelMap model, Principal principal) throws IOException, ServletException{
-
-			return "main_page";
-		}
-		
-		/**
-		 * Method after finishing the add page
-		 * 
-		 **/
-		@RequestMapping("/medical_history/add")
-		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/add")
+		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 		
-			MedicalHistory medicalHistory = new MedicalHistory();
-			
 			String question[] = new String[17];
 			question[0] = request.getParameter("question1");
 			
@@ -56,23 +44,23 @@ public class MedicalHistoryController {
 			answer[0] = request.getParameter("answer1");
 			
 			Date last_visit_date= new Date();
-		
+			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			
+			MedicalHistory medicalHistory = new MedicalHistory();
 			medicalHistory.setLast_visit_date(last_visit_date);
+			medicalHistory.setPatient_id(patient_id);
 			//medicalHistory.setQuestion_id(question);
-		//	medicalHistory.setAnswer(answer);
+			//medicalHistory.setAnswer(answer);
 			
 			dataAccesses.save(medicalHistory);
-			
-			//Adding the list for the view
-			//Return to module main page
-	    	return "view_patient";
+			System.out.println("MEDICAL HISTORY SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
-		@RequestMapping("/patient/edit")
-		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/edit")
+		public static void EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
-			MedicalHistory medicalHistory = new MedicalHistory();
+			int medical_history_id = Integer.parseInt(request.getParameter("medical_history_id"));
 			
 			String question[] = new String[17];
 			question[0] = request.getParameter("question1");
@@ -80,49 +68,17 @@ public class MedicalHistoryController {
 			String answer[] = new String[17];
 			answer[0] = request.getParameter("answer1");
 			
-			Date last_visit_date= new Date();
-		
-			medicalHistory.setLast_visit_date(last_visit_date);
+			//Date last_visit_date= new Date();
+			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			
+			
+			MedicalHistory medicalHistory = (MedicalHistory) dataAccesses.findById(medical_history_id);
+			//medicalHistory.setLast_visit_date(last_visit_date);
+			medicalHistory.setPatient_id(patient_id);
 			//medicalHistory.setQuestion_id(question);
-		//	medicalHistory.setAnswer(answer);
+			//medicalHistory.setAnswer(answer);
 			
 			dataAccesses.update(medicalHistory);
-			
-			//Adding the list for the view
-			//Return to module main page
-	    	return "view_patient";
-		}
-		
-		@RequestMapping("/patient/delete")
-		public String delete(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
-			
-	MedicalHistory medicalHistory = new MedicalHistory();
-			
-			String question[] = new String[17];
-			question[0] = request.getParameter("question1");
-			
-			String answer[] = new String[17];
-			answer[0] = request.getParameter("answer1");
-			
-			Date last_visit_date= new Date();
-		
-			medicalHistory.setLast_visit_date(last_visit_date);
-			//medicalHistory.setQuestion_id(question);
-		//	medicalHistory.setAnswer(answer);
-			
-			dataAccesses.update(medicalHistory);
-			
-			//Adding the list for the view
-			//Return to module main page
-	    	return "view_patient";
-		}
-		
-		  @RequestMapping(value = "/medical_historyGenerateReport") 
-		    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
-		    // BusinessUnit_JService downloadService = new BusinessUnit_JService(); 
-		     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
-		  //   downloadService.downloadXLS(response); 
-		 } 
-		  
+			System.out.println("MEDICAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
+		}		  
 }

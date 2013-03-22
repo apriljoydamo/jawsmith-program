@@ -73,13 +73,13 @@ public class HomeController {
 	@RequestMapping("/view_patients_record")
 	public String PatientRecords(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "table_maintenance_page";
+		return "view_patients_record";
 	}
 	
-	@RequestMapping("/add_patientPage")
-	public String add_patientPage(HttpServletRequest request, HttpServletResponse response, 
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "add_patient";
+		return "home_page";
 	}
 	
 	@RequestMapping("/loginSuccess")
@@ -105,12 +105,6 @@ public class HomeController {
     	}
 		model.addAttribute("patientList",list);
 		
-		return "home_page";
-	}
-	
-	@RequestMapping("/search")
-	public String search(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
 		return "home_page";
 	}
 	
