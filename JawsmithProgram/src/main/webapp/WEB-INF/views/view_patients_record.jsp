@@ -6,30 +6,28 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
-        <jsp:include page="header.jsp" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
-	</head>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/patients_record.js"></script>
+		<jsp:include page="header.jsp" />
+	</head>
+		
 	<body>
-    <div class="" id="acc_panel">
-		<label id="user_name" class="">Hi Admin!</label><label id="logout_button" class="button mouseout_button">Log Out</label>
-	</div>
-	<div class="" id="patient_info_panel">
-        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
-        <label class="sub_info" id="">${patient.birthday}</label><br/>
-        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
-        <label class="sub_info" id="">${patient.address}, ${patient.city}</label><br/>
-        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
-        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
-        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
-        <label class="sub_info" id="">${patient.status}</label><br/>
-        <label class="sub_info" id="">${patient.last_visit_date}</label><br/>
-	</div>
+	   <div class="" id="patient_info_panel">
+	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
+	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
+	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
+	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
+	        <label class="sub_info" id="">${patient.address}</label><br/>
+	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
+	        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
+	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
+	        <label class="sub_info" id="">${patient.status}</label><br/>
+		</div>
 		<div id="view_patient_page_div1">
 			<div id="edit_patient_button">
 				<form action="${pageContext.request.contextPath}/editPatient" method="POST">
@@ -87,7 +85,7 @@
         	<form id="edit_patients_record" action="${pageContext.request.contextPath}/editPatient" method="POST">	
 			</form>
             <label id="" class="button mouseout_button" onClick="submitForm('edit_patients_record')">Edit Record</label>
-			<label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/addMedicalRecord')">Add Medical Record</label>
+			<label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/add_record')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatmentRecord')">Treatment Record</label>
 		</div>

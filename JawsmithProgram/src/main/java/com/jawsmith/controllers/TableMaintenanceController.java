@@ -11,5 +11,5 @@ public class TableMaintenanceController {
 	ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
-
+	
 }

@@ -10,73 +10,219 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<div id="patient_info">
-		${patient.last_name}, ${patient.first_name} ${patient.middle_name}<br/>
-		Last Visit Date ${patient.last_visit_date}
-		Born ${patient.birthday}<br/>
-		${patient.sex}<span>|</span>${patient.relationship_status}<span>|</span>${patient.nationality}<br/>
-		${patient.address}, ${patient.city}<br/>
-		${patient.mobile_number}<span>|</span>${patient.telephone_number}<span>|</span>${patient.email_address}<br/>
-		${patient.occupation}<span>|</span>${patient.religion}<br/>
-		${patient.referred_by}<span>|</span>${patient.guardian}<br/>
-		Status ${patient.status}<br/>
+		<div class="" id="patient_info_panel">
+	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
+	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
+	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
+	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
+	        <label class="sub_info" id="">${patient.address}</label><br/>
+	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
+	        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
+	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
+	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
 		
 		
-		<div>
-			<form action="${pageContext.request.contextPath}/add_record" method="POST">
 			<div id="patient_medical_info">
-				<h3>Medical History</h3>
+				<form action="${pageContext.request.contextPath}/patient/add_record/done" method="POST">
+				<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
+				<!-- MEDICAL HISTORY 
+					 * If this does not work out, we may have to redesign medical_history table.
+				-->
 				<div id="medical_his_div">
-					<c:forEach var="tbl_med_his" items="medHisQuestionList">
+				<h3>Medical History</h3>
+					<c:forEach var="tbl_med_his" items="medHisQuestionList" >
 					<table>
-						<tr><td id="question">Question: <c:out value="${tbl_med_his.description}" /></td></tr>
+						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}
+								<input type="hidden" value="${tbl_med_his.code_table_value}" name="question" />
+						</td></tr>
 						<tr><td>
 								<c:if test="${tbl_med_his.code_table_value=='2'}">
 									<tr><td>Physical Ailments:</td></tr>
 									<c:forEach var="tbl_physical" items="physicalAilmentList">
 										<tr><td>Physical Ailments:</td></tr>
-										<tr><td><c:out value="${tbl_physical.description}" /></td></tr>
+										<tr><td>${tbl_physical.tbl_maintenance_description}</td></tr>
 									</c:forEach>
 								</c:if>
 							</td>
 						</tr>
-						<tr><td id="answer"><input type="text" name="answer" /></td></tr>
+						<tr><td><input type="text" name="answer" /></td></tr>
 					</table>
 					</c:forEach>
+					<!-- 
+					<form action="${pageContext.request.contextPath}/medical_history/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-				<h3>Dental History</h3>
+				
+				
+				<!-- DENTAL HISTORY -->
 				<div id="dental_his_div">
-				<!-- DENTAL HISTORY BASED ON FORM HERE -->
+				<h3>Dental History</h3>
+					<input type="checkbox" name="fluoride_treatment" value="true">Fluoride Treatment<br>
+					<input type="checkbox" name="orthodontic_treatment" value="true">Orthodontic Treatment<br>
+					<input type="checkbox" name="pulp_therapy" value="true">Pulp Therapy<br>
+					<input type="checkbox" name="temporo_mandibular" value="true">Temporo Mandibular<br>
+					<input type="checkbox" name="periodontal_therapy" value="true">Periodontal Therapy<br>
+					<input type="checkbox" name="dental_surgery" value="true">Dental Surgery<br>
+					<input type="checkbox" name="extraction" value="true">Extraction<br>
+					<!-- 
+					<form action="${pageContext.request.contextPath}/dental_history/add" method="POST">
+						<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+						<input type="submit" value="Save"/>
+					</form>
+					 -->
 				</div>
-				<h3>Clinical Examination</h3>
+				
+				<!-- CLINICAL EXAM -->
 				<div id="clinic_exam_div">
-				<!-- CLINICAL EXAM BASED ON FORM HERE -->
+				<h3>Clinical Examination</h3>
+					<table>
+						<tr>
+							<td>Gingival Color</td>
+							<td><input type="radio" name="gingival_color" value="pink" />pink</td>
+							<td><input type="radio" name="gingival_color" value="bright red" />bright red</td>
+							<td><input type="radio" name="gingival_color" value="pale" >pale</td>
+						</tr>
+						<tr>
+							<td>Consistency of gingival</td>
+							<td><input type="radio" name="consistency_of_gingival" value="firm" />firm</td>
+							<td><input type="radio" name="consistency_of_gingival" value="hyperplastic" />hyperplastic</td>
+							<td><input type="radio" name="consistency_of_gingival" value="smooth" />smooth</td>
+						</tr>
+						<tr>
+							<td>Tounge</td>
+							<td><input type="radio" name="tounge" value="normal" />normal</td>
+							<td><input type="radio" name="tounge" value="coated" />coated</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Oral Hygiene</td>
+							<td><input type="radio" name="oral_hygiene" value="good" />good</td>
+							<td><input type="radio" name="oral_hygiene" value="fair" />fair</td>
+							<td><input type="radio" name="oral_hygiene" value="bad" />bad</td>
+						</tr>
+						<tr>
+							<td>Lymph Nodes</td>
+							<td><input type="radio" name="lymph_nodes" value="not palpable" />not palpable</td>
+							<td><input type="radio" name="lymph_nodes" value="palpable" />palpable</td>
+							<td></td>
+						</tr>
+					</table>
+					<!-- 
+					<form action="${pageContext.request.contextPath}/clinical_examination/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-				<h3>Occlusion</h3>
+				
+				<!-- OCCLUSION -->
 				<div id="occlusion_div">
-				<!-- OCCLUSION BASED ON FORM HERE -->
+				<h3>Occlusion</h3>
+					<table>
+						<tr>
+							<td>Class I</td>
+							<td>div: <input type="text" name="class_1" /></td>
+						</tr>
+						<tr>
+							<td>Class II</td>
+							<td>div: <input type="text" name="class_2" /></td>
+						</tr>
+						<tr>
+							<td>Class III</td>
+							<td>div: <input type="text" name="class_3" /></td>
+						</tr>
+					</table>
+					<!-- 
+					<form action="${pageContext.request.contextPath}/occlusion/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-				<h3>Anxillaries</h3>
+				
+				<!-- ANXILLARIES -->
 				<div id="anxillaries_div">
-				<!-- ANXILLARIES BASED ON FORM HERE -->
+				<h3>Anxillaries</h3>
+					<table>
+						<tr>
+							<td>Bleeding Time</td>
+							<td><input type="text" name="bleeding_time" /></td>
+						</tr>
+						<tr>
+							<td>Blood Pressure</td>
+							<td><input type="text" name="blood_pressure" /></td>
+						</tr>
+						<tr>
+							<td>Radiographic Interpretation</td>
+							<td><input type="text" name="radiographic_interpretation" /></td>
+						</tr>
+						<tr>
+							<td>Clotting Time</td>
+							<td><input type="text" name="clotting_time" /></td>
+						</tr>
+						<tr>
+							<td>Blood Sugar</td>
+							<td><input type="text" name="blood_sugar" /></td>
+						</tr>
+					</table>
+					
+					<!--<form action="${pageContext.request.contextPath}/anxillaries/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-				<h3>Chief Complaint</h3>
-				<div id="chief_complaint_div">
-				<!-- CHIEF COMPLAINT BASED ON FORM HERE -->
+				
+				<!-- OTHER INFORMATION-->
+				<div id="other_info_div">
+					<h3>Other Information</h3>
+					<table>
+						<tr>
+							<td>Chief Complaint</td>
+							<td><input type="text" name="chief_complaint" /></td>
+						</tr>
+						<tr>
+							<td>Diagnosis</td>
+							<td><input type="text" name="diagnosis" /></td>
+						</tr>
+					</table>
+					<!--<form action="${pageContext.request.contextPath}/other_information/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-				<h3>Diagnosis</h3>
-				<div id="diagnosis_div">
-				<!-- DIAGNOSIS BASED ON FORM HERE -->
-				</div>
-				<h3>Treatment Plan</h3>
+				
+				<!-- TREATMENT PLAN -->
 				<div id="treatment_plan_div">
-				<!-- TREATMENT PLAN BASED ON FORM HERE -->
+				<h3>Treatment Plan</h3>
+				<table>
+						<tr>
+							<td>Treatment:</td>
+							<td><input type="text" name="treatment" /></td>
+							<td>Treatment Fee:</td>
+							<td><input type="text" name="treatment_fee" /></td>	
+						</tr>
+						<tr>
+							<td>Alternative Treatment:</td>
+							<td><input type="text" name="alternative_treatment" /></td>
+							<td>Alternative Treatment Fee:</td>
+							<td><input type="text" name="alternative_treatment_fee" /></td>	
+						</tr>
+					</table>
+					<!--<form action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
+					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
+					<input type="submit" value="Save"/>
+					</form>
+					-->
 				</div>
-			</div>
-			
-			<input type="submit" value="Save"/>
+				
+				<input type="submit" value="Save"/>
 			</form>
-		</div>
+			</div>
 	</body>
 </html>

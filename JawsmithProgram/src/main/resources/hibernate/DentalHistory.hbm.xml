@@ -28,10 +28,10 @@
             <column name="PERIODONTAL_THERAPY" not-null="true" default="false" />
         </property>
         <property name="dental_surgery" type="boolean">
-            <column name="DENTAL_SURGERY" not-null="true" default="false"/>
+            <column name="DENTAL_SURGERY" not-null="true" default="false" />
         </property>
-          <property name="extraction" type="java.lang.Integer">
-            <column name="EXTRACTION" not-null="true" />
+          <property name="extraction" type="boolean">
+            <column name="EXTRACTION" not-null="true" default="false" />
         </property>
         <property name="patient_id" type="java.lang.Integer">
             <column name="patients_PATIENT_ID" not-null="true" />

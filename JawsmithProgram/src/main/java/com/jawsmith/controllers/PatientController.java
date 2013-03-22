@@ -22,19 +22,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.common.GetDateAndTime;
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.TableMaintenanceMethods;
 import com.jawsmith.model.Patient;
-
-
+import com.jawsmith.model.TableMaintenance;
 
 @Controller
+@RequestMapping("patient")
 public class PatientController {
-
-
-		ApplicationContext appContext = 
+ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
+		DataAccesses tblMaintenanceDataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
+		TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
+		int MED_HIS_QUESTIONS_REF_ID = 2;
+		int PHYSICAL_AILMENTS_REF_ID = 3;
 		
-		public void view(ModelMap model){
+		@RequestMapping("/")
+		public String view(ModelMap model){
 			ArrayList<Patient> list = new ArrayList<Patient>();
 			List<Patient> object = dataAccesses.getAll();
 	    	
@@ -44,20 +48,15 @@ public class PatientController {
 	    		list.add(iterlist);							//Then add to a list that would be passed in the jsp
 	    	}
 			model.addAttribute("patientList",list);
+			return "home_page";
 		}
 		
-
-		
-		/**
-		 * Method after finishing the add page
-		 * 
-		 **/
-		@RequestMapping("/patient/add")
-		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/add")
+		public String addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
-		Patient patient = new Patient();
+			Patient patient = new Patient();
 		
-		if(validator(request, model)==true){
+			if(validator(request, model)==true){
 			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
 			String middle_name = request.getParameter("middle_name");
@@ -101,12 +100,12 @@ public class PatientController {
 			//Adding the list for the view
 			view(model);
 			//Return to module main page
-		}
+			}
 	    	return "home_page";
 		}
 		
-		@RequestMapping("/patient/edit")
-		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/edit")
+		public String editMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			Patient patient = new Patient();
@@ -157,14 +156,68 @@ public class PatientController {
 			return "home_page";
 		}
 		
-		@RequestMapping("/patient/delete")
-		public String delete(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
+		@RequestMapping("/inactive")
+		public String inactive(HttpServletRequest request, HttpServletResponse response, 
+								ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			int editId = Integer.parseInt(request.getParameter("editId"));
 			Patient patient = (Patient)dataAccesses.findById(editId);
 			patient.setStatus(Boolean.valueOf("0"));
 			return "home_page";	
+		}
+		
+		@RequestMapping("/add_record")
+		public String addRecord(HttpServletRequest request, HttpServletResponse response, 
+								ModelMap model, Principal principal) throws IOException, ServletException{
+			
+			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			Patient patient = (Patient)dataAccesses.findById(1);
+			
+			List tempMedHisQuestionList = tblMaintenanceMethods.findAllByRefId(MED_HIS_QUESTIONS_REF_ID);
+			List tempPhysicalAilmentList = tblMaintenanceMethods.findAllByRefId(PHYSICAL_AILMENTS_REF_ID);
+			
+			ArrayList<TableMaintenance> medHisQuestionList = new ArrayList<TableMaintenance>();
+			List<TableMaintenance> physicalAilmentList = new ArrayList<TableMaintenance>();
+			
+			Iterator iter = tempMedHisQuestionList.iterator();
+			while(iter.hasNext()){
+				TableMaintenance medHis = (TableMaintenance) iter.next();
+				System.out.println("Desc: MedHis - "+medHis.getTbl_maintenance_description());
+				medHisQuestionList.add(medHis);
+			}
+			
+			Iterator iter2 = tempPhysicalAilmentList.iterator();
+			while(iter2.hasNext()){
+				TableMaintenance physicalAilment = (TableMaintenance) iter2.next();
+				System.out.println("Desc: PhysicalAilment - "+physicalAilment.getTbl_maintenance_description());
+				medHisQuestionList.add(physicalAilment);
+			}
+			
+			model.addAttribute("patient",patient);
+			model.addAttribute("medHisQuestionList", medHisQuestionList);
+			model.addAttribute("physicalAilmentList", physicalAilmentList);
+			
+			return "add_record";	
+		}
+		
+		@RequestMapping("/add_record/done")
+		public String addRecordDone(HttpServletRequest request, HttpServletResponse response, 
+								ModelMap model, Principal principal) throws IOException, ServletException{
+			
+			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			Patient patient = (Patient)dataAccesses.findById(1);
+			
+			AnxillariesController.addMethod(request, response, model, principal);
+			ClinicalExaminationController.addMethod(request, response, model, principal);
+			DentalHistoryController.addMethod(request, response, model, principal);
+			//MedicalHistoryController.addMethod(request, response, model, principal);
+			OcclusionController.addMethod(request, response, model, principal);
+			OtherInformationController.addMethod(request, response, model, principal);
+			TreatmentPlanController.addMethod(request, response, model, principal);
+			model.addAttribute("patient",patient);
+			
+			
+			return "view_patients_record";	
 		}
 		
 		public Boolean validator(HttpServletRequest request,

@@ -103,7 +103,7 @@
 	                <td><input type="text" id="" name="referred_by" class=""/></td> 
 	          </tr>
 	          
-	          <c:if test="${param.edit==true}">
+	          <c:if test="${param.edit==true && user.access==1}">
 	          <tr>              
 	                <td>Patient Status: </td>
 	                <td><select name="status" id="select">
@@ -112,7 +112,6 @@
 		                  </select></td> 
 	          </tr>
 	          </c:if>
-	          
 	          
 	          <tr>              
 	                <td><input type="submit" id="save_button" class="button mouseout_button" value="Save"/></td>
@@ -181,8 +180,6 @@
 	    	<td class="results"><c:out value="${patient.religion}" /></td>
 	    	<td class="results"><c:out value="${patient.referred_by}" /> </td>
 	    	<td class="results"><c:out value="${patient.guardian}" /></td>
-	    	
-	    	    
 	    </tr>
 	    </c:forEach>
 	</table>

@@ -3,10 +3,7 @@ package com.jawsmith.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,17 +21,14 @@ import com.jawsmith.model.TreatmentPlan;
 
 
 @Controller
+@RequestMapping("treatment_plan")
 public class TreatmentPlanController {
-
-
-		ApplicationContext appContext = 
+		static ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-		DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentPlanBean");
+		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentPlanBean");
 	
-		@RequestMapping("/treatment_plan")
 		public String view(HttpServletRequest request, HttpServletResponse response, 
-									  ModelMap model, Principal principal) throws IOException, ServletException{
-
+							ModelMap model, Principal principal) throws IOException, ServletException{
 			return "view_patients_record";
 		}
 		
@@ -43,39 +36,50 @@ public class TreatmentPlanController {
 		 * Method after finishing the add page
 		 * 
 		 **/
-		@RequestMapping("/treatment_plan/add/done")
-		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/add")
+		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
-		TreatmentPlan treatmentPlan = new TreatmentPlan();
+			
 			String treatment = request.getParameter("treatment");
-			String alternateTreatment = request.getParameter("alternateTreatment");
+			Float treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
+			String alternateTreatment = request.getParameter("alternative_treatment");
+			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
+			Date treatment_date = new Date();
+			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			
+			TreatmentPlan treatmentPlan = new TreatmentPlan();
 			
 			treatmentPlan.setTreatment(treatment);
+			treatmentPlan.setTreatment_fee(treatment_fee);
 			treatmentPlan.setAlternative_treatment(alternateTreatment);
+			treatmentPlan.setAlternative_treatment_fee(alternative_treatment_fee);
+			treatmentPlan.setTreatment_date(treatment_date);
+			treatmentPlan.setPatient_id(patient_id);
+			dataAccesses.save(treatmentPlan);
+			System.out.println("TREATMENT PLAN SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
+		}
+		
+		@RequestMapping("/edit")
+		public void editMethod(HttpServletRequest request, HttpServletResponse response, 
+									ModelMap model, Principal principal) throws IOException, ServletException{
 			
-			dataAccesses.save(treatment);
+			int treatment_plan_id = Integer.parseInt(request.getParameter("treatment_plan_id"));
+			String treatment = request.getParameter("treatment");
+			Float treatment_fee = Float.parseFloat(request.getParameter("fee"));
+			String alternateTreatment = request.getParameter("alternateTreatment");
+			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
+			Date treatment_date = new Date();
+			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			
-	    	return "view_patients_record";
+			TreatmentPlan treatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_id);
+			treatmentPlan.setTreatment(treatment);
+			treatmentPlan.setTreatment_fee(treatment_fee);
+			treatmentPlan.setAlternative_treatment(alternateTreatment);
+			treatmentPlan.setAlternative_treatment_fee(alternative_treatment_fee);
+			treatmentPlan.setTreatment_date(treatment_date);
+			treatmentPlan.setPatient_id(patient_id);
+			dataAccesses.save(treatmentPlan);
+			System.out.println("TREATMENT PLAN UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
+			
 		}
-		
-		@RequestMapping("/treatment_plan/edit")
-		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
-			return null;
-		}
-		
-		
-		@RequestMapping("/treatment_plan/edit/done")
-		public String EditMethodDone(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
-			return null;
-		}
-		
-		  @RequestMapping(value = "/treatment_planGenerateReport") 
-		    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
-		    // BusinessUnit_JService downloadService = new BusinessUnit_JService(); 
-		     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
-		  //   downloadService.downloadXLS(response); 
-		 } 
-		  
 }
