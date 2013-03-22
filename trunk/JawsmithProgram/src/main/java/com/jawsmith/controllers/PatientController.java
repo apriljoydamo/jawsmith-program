@@ -4,8 +4,6 @@ package com.jawsmith.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,18 +27,14 @@ import com.jawsmith.model.Patient;
 
 
 @Controller
-@RequestMapping("patient")
 public class PatientController {
 
 
 		ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
-		
-		@RequestMapping("/")
-		public String view(ModelMap model){
+		public void view(ModelMap model){
 			ArrayList<Patient> list = new ArrayList<Patient>();
 			List<Patient> object = dataAccesses.getAll();
 	    	
@@ -50,7 +44,6 @@ public class PatientController {
 	    		list.add(iterlist);							//Then add to a list that would be passed in the jsp
 	    	}
 			model.addAttribute("patientList",list);
-			return "home_page";
 		}
 		
 
@@ -59,37 +52,30 @@ public class PatientController {
 		 * Method after finishing the add page
 		 * 
 		 **/
-		@RequestMapping("/add")
+		@RequestMapping("/patient/add")
 		public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
-			Patient patient = new Patient();
-
-			String patient_num = request.getParameter("patient_num");
+		Patient patient = new Patient();
+		
+		if(validator(request, model)==true){
+			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
 			String middle_name = request.getParameter("middle_name");
-			String last_name = request.getParameter("last_name");
 			String sex = request.getParameter("sex");
 			String rel_status = request.getParameter("rel_status");
 			String address = request.getParameter("address");
 			String tel_num = request.getParameter("tel_num");
 			String mobile_num = request.getParameter("mobile_num");
 			String email = request.getParameter("email");
-			String nationality = request.getParameter("nationality");
 			String occupation = request.getParameter("occupation");
 			String religion = request.getParameter("religion");
 			String referred_by = request.getParameter("referred_by");
 			String guardian = request.getParameter("guardian");
-			Boolean status = true;
-			String s_birthday = request.getParameter("dob");
-			Date d_birthday = null;
-			Date last_visit_date = new Date();
-			
-			try {
-				d_birthday = formatter.parse(s_birthday); 
-				System.out.println(d_birthday);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			String patient_num = "1";
+			String nationality="Filipino";
+			Boolean status=Boolean.valueOf("1");
+			Date dob = new Date();
+			Date last_visit_date= new Date();
 			
 			patient.setStatus(status);
 			patient.setLast_visit_date(last_visit_date);
@@ -98,7 +84,7 @@ public class PatientController {
 			patient.setLast_name(last_name);
 			patient.setFirst_name(first_name);
 			patient.setMiddle_name(middle_name);
-			patient.setBirthday(d_birthday);
+			patient.setBirthday(dob);
 			patient.setSex(sex.charAt(0));
 			patient.setRelationship_status(rel_status);
 			patient.setAddress(address);
@@ -115,15 +101,17 @@ public class PatientController {
 			//Adding the list for the view
 			view(model);
 			//Return to module main page
+		}
 	    	return "home_page";
 		}
 		
-		@RequestMapping("/edit")
+		@RequestMapping("/patient/edit")
 		public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			Patient patient = new Patient();
 			
+			if(validator(request, model)==true){
 			int editId = Integer.parseInt(request.getParameter("editId"));
 			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
@@ -165,10 +153,11 @@ public class PatientController {
 			patient.setPatient_id(editId);
 			
 			dataAccesses.update(patient);
+			}
 			return "home_page";
 		}
 		
-		@RequestMapping("/delete")
+		@RequestMapping("/patient/delete")
 		public String delete(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
@@ -178,11 +167,192 @@ public class PatientController {
 			return "home_page";	
 		}
 		
-		@RequestMapping(value = "/patientGenerateReport") 
-		public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
+		public Boolean validator(HttpServletRequest request,
+				ModelMap model) throws IOException, ServletException{
+					
+			Boolean validateStatus = true;
+			String error[] = new String[17];
+			String last_name; //error[0]
+			String first_name; //error[1]
+			String middle_name; //error[2]
+			String sex; //error[3]
+			String rel_status; //error[4]
+			String address; //error[5]
+			String city; 
+			String tel_num; //error[7]
+			String mobile_num; //error[8]
+			String email;
+			String occupation;
+			String religion;
+			String referred_by;
+			String guardian;
+			String patient_num;
+			String nationality;
+			
+			try{
+			last_name = request.getParameter("last_name");
+				if(last_name.equals("")){
+					error[0]="Last name cannot be empty";
+					validateStatus=false;
+				}
+			}catch(Exception e){
+				error[0]="Last name cannot be empty";
+				validateStatus=false;
+			}
+			
+			try{
+				first_name = request.getParameter("first_name");
+					if(first_name.equals("")){
+						error[1]="First name cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){
+					error[1]="First name cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				middle_name = request.getParameter("middle_name");
+					if(middle_name.equals("")){
+						error[2]="Middle name cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[2]="Middle name cannot be empty";
+					validateStatus=false;
+			}
+					
+			try{
+				sex = request.getParameter("sex");
+					if(sex.equals("")){
+						error[3]="Sex cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[3]="Sex cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				rel_status = request.getParameter("rel_status");
+					if(rel_status.equals("")){
+						error[4]="Relationship status cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[4]="Relationship status cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				address = request.getParameter("address");
+					if(address.equals("")){
+						error[5]="Address cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[5]="Address cannot be empty";
+					validateStatus=false;
+			}
+			
+			
+			try{
+				tel_num = request.getParameter("tel_num");
+					if(tel_num.equals("")){
+						error[7]="Telephone Number cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[7]="Telephone Number cannot be empty";
+					validateStatus=false;
+			}
+		
+			try{
+				mobile_num = request.getParameter("mobile_num");
+					if(mobile_num.equals("")){
+						error[8]="Mobile Number cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[8]="Mobile Number cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				email = request.getParameter("email");
+					if(email.equals("")){
+						error[9]="Email Address cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[9]="Email Address cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				occupation = request.getParameter("occupation");
+					if(occupation.equals("")){
+						error[10]="Occupation cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[10]="Occupation cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				religion = request.getParameter("religion");
+					if(religion.equals("")){
+						error[11]="Religion cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[11]="Religion cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				referred_by = request.getParameter("referred_by");
+					if(referred_by.equals("")){
+						error[12]="Referred By cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[12]="Referred By cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				guardian = request.getParameter("guardian");
+					if(guardian.equals("")){
+						error[12]="Guardian cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[12]="Guardian cannot be empty";
+					validateStatus=false;
+			}
+			
+			try{
+				nationality = request.getParameter("nationality");
+					if(nationality.equals("")){
+						error[13]="Nationality cannot be empty";
+						validateStatus=false;
+					}
+			}catch(Exception e){				
+					error[13]="Nationality cannot be empty";
+					validateStatus=false;
+			}
+		
+			model.addAttribute(error);
+			return validateStatus;
+			}
+		
+		  @RequestMapping(value = "/patientGenerateReport") 
+		    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
 		    // BusinessUnit_JService downloadService = new BusinessUnit_JService(); 
 		     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
 		  //   downloadService.downloadXLS(response); 
-		} 
+		 } 
 		  
 }
