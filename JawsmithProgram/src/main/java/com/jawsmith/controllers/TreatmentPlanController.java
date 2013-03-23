@@ -36,7 +36,7 @@ public class TreatmentPlanController {
 		 * Method after finishing the add page
 		 * 
 		 **/
-		@RequestMapping("/add")
+		//@RequestMapping("/add")
 		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 			
@@ -59,7 +59,7 @@ public class TreatmentPlanController {
 			System.out.println("TREATMENT PLAN SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
-		@RequestMapping("/edit")
+		//@RequestMapping("/edit")
 		public void editMethod(HttpServletRequest request, HttpServletResponse response, 
 									ModelMap model, Principal principal) throws IOException, ServletException{
 			
