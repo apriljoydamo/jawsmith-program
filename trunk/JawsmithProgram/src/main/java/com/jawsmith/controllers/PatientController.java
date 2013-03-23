@@ -38,7 +38,15 @@ ApplicationContext appContext =
 		int PHYSICAL_AILMENTS_REF_ID = 3;
 		
 		@RequestMapping("/")
-		public String view(ModelMap model){
+		public String view(HttpServletRequest request, ModelMap model){
+			
+			try{
+				//destroys the patient attribute in session
+				request.getSession().removeAttribute("patient");
+			}catch(Exception e){
+				System.out.println();
+			}
+			
 			ArrayList<Patient> list = new ArrayList<Patient>();
 			List<Patient> object = dataAccesses.getAll();
 	    	
@@ -98,7 +106,7 @@ ApplicationContext appContext =
 			dataAccesses.save(patient);
 			
 			//Adding the list for the view
-			view(model);
+			view(request, model);
 			//Return to module main page
 			}
 	    	return "home_page";
@@ -171,7 +179,8 @@ ApplicationContext appContext =
 								ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
-			Patient patient = (Patient)dataAccesses.findById(1);
+			//Patient patient = (Patient)dataAccesses.findById(1);
+			//model.addAttribute("patient",patient);
 			
 			List tempMedHisQuestionList = tblMaintenanceMethods.findAllByRefId(MED_HIS_QUESTIONS_REF_ID);
 			List tempPhysicalAilmentList = tblMaintenanceMethods.findAllByRefId(PHYSICAL_AILMENTS_REF_ID);
@@ -193,7 +202,6 @@ ApplicationContext appContext =
 				physicalAilmentList.add(physicalAilment);
 			}
 			
-			model.addAttribute("patient",patient);
 			model.addAttribute("medHisQuestionList", medHisQuestionList);
 			model.addAttribute("physicalAilmentList", physicalAilmentList);
 			
@@ -205,7 +213,8 @@ ApplicationContext appContext =
 								ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
-			Patient patient = (Patient)dataAccesses.findById(1);
+			//Patient patient = (Patient)dataAccesses.findById(1);
+			//model.addAttribute("patient",patient);
 			
 			AnxillariesController.addMethod(request, response, model, principal);
 			ClinicalExaminationController.addMethod(request, response, model, principal);
@@ -214,8 +223,6 @@ ApplicationContext appContext =
 			OcclusionController.addMethod(request, response, model, principal);
 			OtherInformationController.addMethod(request, response, model, principal);
 			TreatmentPlanController.addMethod(request, response, model, principal);
-			model.addAttribute("patient",patient);
-			
 			
 			return "view_patients_record";	
 		}
@@ -224,8 +231,12 @@ ApplicationContext appContext =
 		public String patientRecords(HttpServletRequest request, HttpServletResponse response, 
 									  ModelMap model, Principal principal) throws IOException, ServletException{
 			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			//model.addAttribute("patient",patient);
+			
+			
 			Patient patient = (Patient)dataAccesses.findById(1);
-			model.addAttribute("patient",patient);
+			//puts the chosen patient in session
+			request.getSession().setAttribute("patient", patient);		
 			
 			return "view_patients_record";
 		}
