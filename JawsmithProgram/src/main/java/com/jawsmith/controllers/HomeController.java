@@ -70,12 +70,6 @@ public class HomeController {
 		return "table_maintenance_page";
 	}
 	
-	@RequestMapping("/view_patients_record")
-	public String PatientRecords(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "view_patients_record";
-	}
-	
 	@RequestMapping("/search")
 	public String search(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{

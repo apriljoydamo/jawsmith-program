@@ -177,8 +177,8 @@ ApplicationContext appContext =
 			List tempPhysicalAilmentList = tblMaintenanceMethods.findAllByRefId(PHYSICAL_AILMENTS_REF_ID);
 			
 			ArrayList<TableMaintenance> medHisQuestionList = new ArrayList<TableMaintenance>();
-			List<TableMaintenance> physicalAilmentList = new ArrayList<TableMaintenance>();
-			
+			ArrayList<TableMaintenance> physicalAilmentList = new ArrayList<TableMaintenance>();
+		
 			Iterator iter = tempMedHisQuestionList.iterator();
 			while(iter.hasNext()){
 				TableMaintenance medHis = (TableMaintenance) iter.next();
@@ -190,7 +190,7 @@ ApplicationContext appContext =
 			while(iter2.hasNext()){
 				TableMaintenance physicalAilment = (TableMaintenance) iter2.next();
 				System.out.println("Desc: PhysicalAilment - "+physicalAilment.getTbl_maintenance_description());
-				medHisQuestionList.add(physicalAilment);
+				physicalAilmentList.add(physicalAilment);
 			}
 			
 			model.addAttribute("patient",patient);
@@ -210,7 +210,7 @@ ApplicationContext appContext =
 			AnxillariesController.addMethod(request, response, model, principal);
 			ClinicalExaminationController.addMethod(request, response, model, principal);
 			DentalHistoryController.addMethod(request, response, model, principal);
-			//MedicalHistoryController.addMethod(request, response, model, principal);
+			MedicalHistoryController.addMethod(request, response, model, principal);
 			OcclusionController.addMethod(request, response, model, principal);
 			OtherInformationController.addMethod(request, response, model, principal);
 			TreatmentPlanController.addMethod(request, response, model, principal);
@@ -219,6 +219,18 @@ ApplicationContext appContext =
 			
 			return "view_patients_record";	
 		}
+		
+		@RequestMapping("/view_patients_record")
+		public String patientRecords(HttpServletRequest request, HttpServletResponse response, 
+									  ModelMap model, Principal principal) throws IOException, ServletException{
+			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			Patient patient = (Patient)dataAccesses.findById(1);
+			model.addAttribute("patient",patient);
+			
+			return "view_patients_record";
+		}
+		
+		
 		
 		public Boolean validator(HttpServletRequest request,
 				ModelMap model) throws IOException, ServletException{

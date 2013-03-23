@@ -1,0 +1,64 @@
+/* CSS Document */
+
+body{
+	background-image:url(../images/patients_record.png);
+}
+#patient_info_panel{
+	text-align: right;
+	height: 140px;
+	width: 970px;
+	position: relative;
+	top: -15px;
+}
+
+#view_patient_controllers{
+	position: relative;
+	top: 15px;
+}
+
+#patient_medical_info{
+	position: relative;
+	top: 50px;
+	width: 400px;
+	height: 600px;
+}
+
+.patient_medical_info{
+	margin: 2px;
+	padding: 2px;
+	border-radius: 5px;
+}
+
+.patient_medical_info_mouseout{
+	background-color: #4D4DFF;
+}
+.patient_medical_info_mouseover{
+	background-color: #FFFFBF;
+}
+.patient_medical_info_mouseclick{
+	background-color: #99FF99;
+}
+
+#add_treatment_panel{
+	width: 500px;
+	margin: 30px auto;
+	border: 3px solid black;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.close_add_treat{	
+	position: absolute;
+	right: 436px;
+	top: 35px;
+}
+
+#acc_panel{
+	padding: 2px;
+	height: 60px;
+	width: 506px;
+	text-align: end;
+	position: relative;
+	left: 470px;
+	top: 20px;
+}
