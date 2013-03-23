@@ -116,8 +116,6 @@
 	          <tr>              
 	                <td><input type="submit" id="save_button" class="button mouseout_button" value="Save"/></td>
 	          </tr>
-	          
-	          
 	      	</table>
 	      </form>
 	  </div>
@@ -126,9 +124,8 @@
 	
 	
 	<div class="" id="homepage_panel">
-		<label id="patients_button" class="button mouseout_button">
-			<a href="${pageContext.request.contextPath}/patient/">Patients</a>
-		</label>
+		<label id="patients_button" onclick="buttonNextPage('${pageContext.request.contextPath}/patient/')" class="button mouseout_button">
+		Patients</label>
 		<c:if test="${user.access==1}">
 	          <label id="table_maintenance_button" class="button mouseout_button">Table Maintenance</label> 
 	    </c:if>
@@ -162,7 +159,7 @@
 	    	<td class="results">Guardian</td>
 	    </tr>
 	    <c:forEach var="patient" items="${patientList}">
-	    <tr class="">	    	
+	    <tr id="patient_id_${patient.patient_id}" class="patient_records">	    	
 	    	<td class="results"><c:out value="${patient.patient_num}" /></td>
 	    	<td class="results"><c:out value="${patient.last_name}" /></td>
 	    	<td class="results"><c:out value="${patient.first_name}" /></td>
@@ -183,6 +180,7 @@
 	    </tr>
 	    </c:forEach>
 	</table>
+	
 	<label id="save_report_button" class="button mouseout_button">Save Report</label>
 	</div>
 	</body>

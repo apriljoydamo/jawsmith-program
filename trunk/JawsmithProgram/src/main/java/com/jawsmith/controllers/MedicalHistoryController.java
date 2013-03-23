@@ -33,7 +33,7 @@ public class MedicalHistoryController {
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("medicalHistoryBean");
 	
-		@RequestMapping("/add")
+		//@RequestMapping("/add")
 		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -56,7 +56,7 @@ public class MedicalHistoryController {
 			System.out.println("MEDICAL HISTORY SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
-		@RequestMapping("/edit")
+		//@RequestMapping("/edit")
 		public static void EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			

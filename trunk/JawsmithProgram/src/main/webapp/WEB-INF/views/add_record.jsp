@@ -26,35 +26,28 @@
 			<div id="patient_medical_info">
 				<form action="${pageContext.request.contextPath}/patient/add_record/done" method="POST">
 				<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
-				<!-- MEDICAL HISTORY 
-					 * If this does not work out, we may have to redesign medical_history table.
-				-->
+				
+				<!-- MEDICAL HISTORY -->
 				<div id="medical_his_div">
 				<h3>Medical History</h3>
-					<c:forEach var="tbl_med_his" items="medHisQuestionList" >
+					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 					<table>
 						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}
 								<input type="hidden" value="${tbl_med_his.code_table_value}" name="question" />
 						</td></tr>
-						<tr><td>
-								<c:if test="${tbl_med_his.code_table_value=='2'}">
-									<tr><td>Physical Ailments:</td></tr>
-									<c:forEach var="tbl_physical" items="physicalAilmentList">
-										<tr><td>Physical Ailments:</td></tr>
-										<tr><td>${tbl_physical.tbl_maintenance_description}</td></tr>
-									</c:forEach>
-								</c:if>
-							</td>
-						</tr>
-						<tr><td><input type="text" name="answer" /></td></tr>
+						<c:choose>
+							<c:when test="${tbl_med_his.code_table_value=='2'}">
+								<tr><td>Physical Ailments:</td></tr>
+								<c:forEach var="tbl_physical" items="${physicalAilmentList}">
+									<tr><td><input type="checkbox" name="physical_ailments" value="${tbl_physical.code_table_value}"> ${tbl_physical.tbl_maintenance_description}</td></tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr><td><input type="text" name="answer" /></td></tr>
+							</c:otherwise>
+						</c:choose>
 					</table>
 					</c:forEach>
-					<!-- 
-					<form action="${pageContext.request.contextPath}/medical_history/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				
@@ -68,12 +61,6 @@
 					<input type="checkbox" name="periodontal_therapy" value="true">Periodontal Therapy<br>
 					<input type="checkbox" name="dental_surgery" value="true">Dental Surgery<br>
 					<input type="checkbox" name="extraction" value="true">Extraction<br>
-					<!-- 
-					<form action="${pageContext.request.contextPath}/dental_history/add" method="POST">
-						<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-						<input type="submit" value="Save"/>
-					</form>
-					 -->
 				</div>
 				
 				<!-- CLINICAL EXAM -->
@@ -86,6 +73,7 @@
 							<td><input type="radio" name="gingival_color" value="bright red" />bright red</td>
 							<td><input type="radio" name="gingival_color" value="pale" >pale</td>
 						</tr>
+						
 						<tr>
 							<td>Consistency of gingival</td>
 							<td><input type="radio" name="consistency_of_gingival" value="firm" />firm</td>
@@ -111,12 +99,6 @@
 							<td></td>
 						</tr>
 					</table>
-					<!-- 
-					<form action="${pageContext.request.contextPath}/clinical_examination/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				<!-- OCCLUSION -->
@@ -136,12 +118,6 @@
 							<td>div: <input type="text" name="class_3" /></td>
 						</tr>
 					</table>
-					<!-- 
-					<form action="${pageContext.request.contextPath}/occlusion/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				<!-- ANXILLARIES -->
@@ -169,12 +145,6 @@
 							<td><input type="text" name="blood_sugar" /></td>
 						</tr>
 					</table>
-					
-					<!--<form action="${pageContext.request.contextPath}/anxillaries/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				<!-- OTHER INFORMATION-->
@@ -190,11 +160,6 @@
 							<td><input type="text" name="diagnosis" /></td>
 						</tr>
 					</table>
-					<!--<form action="${pageContext.request.contextPath}/other_information/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				<!-- TREATMENT PLAN -->
@@ -214,11 +179,6 @@
 							<td><input type="text" name="alternative_treatment_fee" /></td>	
 						</tr>
 					</table>
-					<!--<form action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
-					<input type="hidden" name="patient_id" value="${patient.patient_id}" />
-					<input type="submit" value="Save"/>
-					</form>
-					-->
 				</div>
 				
 				<input type="submit" value="Save"/>

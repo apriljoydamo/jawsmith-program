@@ -24,7 +24,7 @@ public class User
     	 insert **/
     	SystemUser user = new SystemUser();
     	user.setAccess(1);
-    	user.setFirst_name("arnulfo");
+    	user.setFirst_name("aj");
     	user.setLast_name("damo");
     	user.setPassword("121212");
     	user.setUsername("aj");
