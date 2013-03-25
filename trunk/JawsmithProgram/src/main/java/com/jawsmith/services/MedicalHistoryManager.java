@@ -2,12 +2,14 @@ package com.jawsmith.services;
 
 import java.util.List;
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.MedicalHistoryMethods;
 
 
 
-public class MedicalHistoryManager implements DataAccesses{
+public class MedicalHistoryManager implements DataAccesses, MedicalHistoryMethods {
 
 	private DataAccesses dataAccesses;
+	private MedicalHistoryMethods medicalHistoryMethods;
 	
 	/**
 	 * @return the dataAccesses
@@ -50,6 +52,11 @@ public class MedicalHistoryManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return medicalHistoryMethods.findByPatientId(patientId);
 	}
 
 }

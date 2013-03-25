@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="medicalHistoryBean" class="com.jawsmith.services.MedicalHistoryManager" >
    		<property name="dataAccesses" ref="medicalHistoryDao" />
-  
+  		<property name="MedicalHistoryMethods" ref="medicalHistoryDao" />
    </bean>
  
    <!-- System User Data Access Object -->

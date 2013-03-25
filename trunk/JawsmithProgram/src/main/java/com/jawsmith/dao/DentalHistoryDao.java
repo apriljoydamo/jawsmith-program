@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.DentalHistoryMethods;
 
 
-public class DentalHistoryDao extends HibernateDaoSupport implements DataAccesses{
+public class DentalHistoryDao extends HibernateDaoSupport implements DataAccesses, DentalHistoryMethods{
 
 	
 	public void save(Object obj) {
@@ -37,5 +38,12 @@ public class DentalHistoryDao extends HibernateDaoSupport implements DataAccesse
 	public List getAll() {
 		List list = getHibernateTemplate().find("from DentalHistory");
 		return list;
+	}
+
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		List list = getHibernateTemplate().find("from DentalHistory where patients_PATIENT_ID=?",patientId);
+		return list.get(0);
 	}
 }

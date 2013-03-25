@@ -15,8 +15,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.DentalHistoryMethods;
 import com.jawsmith.model.DentalHistory;
 import com.jawsmith.model.MedicalHistory;
+import com.jawsmith.model.Patient;
 
 @Controller
 @RequestMapping("dental_history")
@@ -24,7 +26,7 @@ public class DentalHistoryController {
 	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("dentalHistoryBean");
-	
+	static DentalHistoryMethods dentalHistoryMethods = (DentalHistoryMethods)appContext.getBean("dentalHistoryBean");
 	/***
 	 * NOTE: THIS METHOD DOES NOT RETURN TO ANY PAGE. IT JUST SAVES ALL OF THESE INTO ITS RESPECTIVE DATABASE
     	
@@ -70,7 +72,9 @@ public class DentalHistoryController {
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		int dental_his_id = Integer.parseInt(request.getParameter("dental_his_id"));
+		Patient patient = (Patient)request.getAttribute("patient");
+		int dental_history_patient_id =patient.getPatient_id();
+		
 		Boolean fluoride_treatment = Boolean.parseBoolean(request.getParameter("fluoride_treatment"));
 		Boolean orthodontic_treatment = Boolean.parseBoolean(request.getParameter("orthodontic_treatment"));
 		Boolean pulp_therapy = Boolean.parseBoolean(request.getParameter("pulp_therapy"));
@@ -79,10 +83,10 @@ public class DentalHistoryController {
 		Boolean dental_surgery = Boolean.parseBoolean(request.getParameter("dental_surgery"));
 		Boolean extraction = Boolean.parseBoolean(request.getParameter("extraction"));
 		//Date last_visit_date = new Date();
-		int patient_id = Integer.parseInt(request.getParameter("patient_id"));
-	
-		DentalHistory dentalHistory = (DentalHistory) dataAccesses.findById(dental_his_id);
 		
+	
+		DentalHistory dentalHistory = (DentalHistory) dentalHistoryMethods.findByPatientId(dental_history_patient_id);
+	
 		//dentalHistory.setLast_visit_date(last_visit_date);
 		dentalHistory.setFluoride_treatment(fluoride_treatment);
 		dentalHistory.setOrthodontic_treatment(orthodontic_treatment);
@@ -91,7 +95,7 @@ public class DentalHistoryController {
 		dentalHistory.setPeriodontal_therapy(periodontal_therapy);
 		dentalHistory.setDental_surgery(dental_surgery);
 		dentalHistory.setExtraction(extraction);
-		dentalHistory.setPatient_id(patient_id);
+		dentalHistory.setPatient_id(dental_history_patient_id);
 		dataAccesses.update(dentalHistory);
 		System.out.println("DENTAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 		

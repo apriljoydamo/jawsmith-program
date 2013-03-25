@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="clinicalExaminationBean" class="com.jawsmith.services.ClinicalExaminationManager" >
    		<property name="dataAccesses" ref="clinicalExaminationDao" />
-  
+ 		<property name="clinicalExaminationMethods" ref="clinicalExaminationDao" />
    </bean>
  
    <!-- System User Data Access Object -->

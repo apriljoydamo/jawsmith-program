@@ -16,6 +16,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.TreatmentPlanMethods;
+import com.jawsmith.model.Patient;
 import com.jawsmith.model.TreatmentPlan;
 
 
@@ -26,7 +28,8 @@ public class TreatmentPlanController {
 		static ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentPlanBean");
-	
+		static TreatmentPlanMethods treatmentPlanMethods = (TreatmentPlanMethods)appContext.getBean("treatmentPlanBean");
+		
 		public String view(HttpServletRequest request, HttpServletResponse response, 
 							ModelMap model, Principal principal) throws IOException, ServletException{
 			return "view_patients_record";
@@ -62,8 +65,10 @@ public class TreatmentPlanController {
 		//@RequestMapping("/edit")
 		public void editMethod(HttpServletRequest request, HttpServletResponse response, 
 									ModelMap model, Principal principal) throws IOException, ServletException{
-			
-			int treatment_plan_id = Integer.parseInt(request.getParameter("treatment_plan_id"));
+		
+			Patient patient = (Patient) request.getAttribute("patient");
+			int treatment_plan_patient_id = patient.getPatient_id();
+		
 			String treatment = request.getParameter("treatment");
 			Float treatment_fee = Float.parseFloat(request.getParameter("fee"));
 			String alternateTreatment = request.getParameter("alternateTreatment");
@@ -71,7 +76,7 @@ public class TreatmentPlanController {
 			Date treatment_date = new Date();
 			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			
-			TreatmentPlan treatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_id);
+			TreatmentPlan treatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_patient_id);
 			treatmentPlan.setTreatment(treatment);
 			treatmentPlan.setTreatment_fee(treatment_fee);
 			treatmentPlan.setAlternative_treatment(alternateTreatment);

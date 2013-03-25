@@ -2,11 +2,11 @@ package com.jawsmith.dao;
 
 import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.jawsmith.interfaces.AnxillariesMethods;
 import com.jawsmith.interfaces.DataAccesses;
 
-public class AnxillariesDao extends HibernateDaoSupport implements DataAccesses{
-
-	DataAccesses dataAccesses;
+public class AnxillariesDao extends HibernateDaoSupport implements DataAccesses, AnxillariesMethods{
 
 
 	public void save(Object obj) {
@@ -36,5 +36,12 @@ public class AnxillariesDao extends HibernateDaoSupport implements DataAccesses{
 	public List getAll() {
 		List list = getHibernateTemplate().find("from Anxillaries");
 		return list;
+	}
+
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		List list = getHibernateTemplate().find("from Anxillaries where patients_PATIENT_ID=?",patientId);
+		return list.get(0);
 	}
 }

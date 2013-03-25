@@ -2,14 +2,15 @@ package com.jawsmith.services;
 
 import java.util.List;
 
+import com.jawsmith.interfaces.ClinicalExaminationMethods;
 import com.jawsmith.interfaces.DataAccesses;
 
 
 
-public class ClinicalExaminationManager implements DataAccesses{
+public class ClinicalExaminationManager implements DataAccesses, ClinicalExaminationMethods{
 
 	private DataAccesses dataAccesses;
-	
+	private ClinicalExaminationMethods clinicalExaminationMethods;
 	/**
 	 * @return the dataAccesses
 	 */
@@ -46,6 +47,11 @@ public class ClinicalExaminationManager implements DataAccesses{
 
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return clinicalExaminationMethods.findByPatientId(patientId);
 	}
 
 }

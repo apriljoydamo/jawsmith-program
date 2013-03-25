@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.OcclusionMethods;
 
 
-public class OcclusionDao extends HibernateDaoSupport implements DataAccesses{
+public class OcclusionDao extends HibernateDaoSupport implements DataAccesses,OcclusionMethods{
 
 	
 	public void save(Object obj) {
@@ -37,5 +38,12 @@ public class OcclusionDao extends HibernateDaoSupport implements DataAccesses{
 	public List getAll() {
 		List list = getHibernateTemplate().find("from Occlusion");
 		return list;
+	}
+
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		List list = getHibernateTemplate().find("from Occlusion where patients_PATIENT_ID=?",patientId);
+		return list.get(0);
 	}
 }

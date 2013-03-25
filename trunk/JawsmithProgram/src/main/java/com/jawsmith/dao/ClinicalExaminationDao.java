@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.jawsmith.interfaces.ClinicalExaminationMethods;
 import com.jawsmith.interfaces.DataAccesses;
 
 
-public class ClinicalExaminationDao extends HibernateDaoSupport implements DataAccesses{
+public class ClinicalExaminationDao extends HibernateDaoSupport implements DataAccesses, ClinicalExaminationMethods{
 
 	
 	public void save(Object obj) {
@@ -37,5 +38,12 @@ public class ClinicalExaminationDao extends HibernateDaoSupport implements DataA
 	public List getAll() {
 		List list = getHibernateTemplate().find("from ClinicalExamination");
 		return list;
+	}
+
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		List list = getHibernateTemplate().find("from ClinicalExamination where patients_PATIENT_ID=?",patientId);
+		return list.get(0);
 	}
 }

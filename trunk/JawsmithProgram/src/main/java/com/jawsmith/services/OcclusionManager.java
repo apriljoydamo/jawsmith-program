@@ -3,13 +3,14 @@ package com.jawsmith.services;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.OcclusionMethods;
 
 
 
-public class OcclusionManager implements DataAccesses{
+public class OcclusionManager implements DataAccesses, OcclusionMethods{
 
 	private DataAccesses dataAccesses;
-	
+	private OcclusionMethods occlusionMethods;
 	/**
 	 * @return the dataAccesses
 	 */
@@ -51,6 +52,11 @@ public class OcclusionManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return occlusionMethods.findByPatientId(patientId);
 	}
 
 }
