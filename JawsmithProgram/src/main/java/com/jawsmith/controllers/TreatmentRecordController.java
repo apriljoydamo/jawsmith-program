@@ -15,20 +15,24 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.TreatmentRecordMethods;
+import com.jawsmith.model.Patient;
 import com.jawsmith.model.TreatmentPlan;
 import com.jawsmith.model.TreatmentRecord;
 
 @Controller
 @RequestMapping("treatment_record")
 public class TreatmentRecordController {
-	ApplicationContext appContext = 
+	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
+	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
+	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentPlanBean");
 	
 	
 	@RequestMapping("/add")
 	public void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
+		Patient patient = (Patient) request.getAttribute("patient");
 		
 		String tooth_number = request.getParameter("tooth_number");
 		String description = request.getParameter("description");
@@ -37,7 +41,7 @@ public class TreatmentRecordController {
 		Date credit_date = new Date();
 		Float credit_amount = Float.parseFloat(request.getParameter("credit_amount"));
 		Date last_visit_date = new Date();
-		int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+		int treatment_record_patient_id = patient.getPatient_id();
 		
 		TreatmentRecord treatmentRecord = new TreatmentRecord();
 		
@@ -48,7 +52,7 @@ public class TreatmentRecordController {
 		treatmentRecord.setCredit_date(credit_date);
 		treatmentRecord.setCredit_amount(credit_amount);
 		treatmentRecord.setLast_visit_date(last_visit_date);
-		treatmentRecord.setPatient_id(patient_id);
+		treatmentRecord.setPatient_id(treatment_record_patient_id);
 		dataAccesses.save(treatmentRecord);
 		System.out.println("TREATMENT RECORD SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 	}

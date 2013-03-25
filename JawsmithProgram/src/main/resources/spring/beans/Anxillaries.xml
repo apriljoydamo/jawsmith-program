@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="anxillariesBean" class="com.jawsmith.services.AnxillariesManager" >
    		<property name="dataAccesses" ref="anxillariesDao" />
-  
+  		<property name="anxillariesMethods" ref="anxillariesDao" />	
    </bean>
  
    <!-- System User Data Access Object -->

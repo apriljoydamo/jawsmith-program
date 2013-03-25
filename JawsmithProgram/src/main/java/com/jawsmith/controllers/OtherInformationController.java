@@ -15,9 +15,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.OtherInformationMethods;
 import com.jawsmith.model.Anxillaries;
 import com.jawsmith.model.ClinicalExamination;
 import com.jawsmith.model.OtherInformation;
+import com.jawsmith.model.Patient;
 
 @Controller
 @RequestMapping("other_information")
@@ -25,6 +27,8 @@ public class OtherInformationController {
 	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("otherInformationBean");
+	static OtherInformationMethods otherInformationMethods = (OtherInformationMethods)appContext.getBean("otherInformationBean");
+	
 	
 	@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
@@ -51,13 +55,15 @@ public class OtherInformationController {
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
 		
+		Patient patient = (Patient) request.getAttribute("patient");
+		
 		int other_info_id = Integer.parseInt(request.getParameter("other_info_id"));
 		String chief_complaint = (String)request.getParameter("chief_complaint");
 		String diagnosis = (String)request.getParameter("diagnosis");
 		//Date last_visit_date = new Date();
-		int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+		int patient_id = patient.getPatient_id();
 		
-		OtherInformation otherInformation = (OtherInformation) dataAccesses.findById(other_info_id);
+		OtherInformation otherInformation = (OtherInformation) otherInformationMethods.findByPatientId(other_info_id);
 		
 		otherInformation.setChief_complaint(chief_complaint);
 		otherInformation.setDiagnosis(diagnosis);

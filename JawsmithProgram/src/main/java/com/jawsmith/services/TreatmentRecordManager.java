@@ -2,13 +2,14 @@ package com.jawsmith.services;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.TreatmentRecordMethods;
 
 
 
-public class TreatmentRecordManager implements DataAccesses{
+public class TreatmentRecordManager implements DataAccesses, TreatmentRecordMethods{
 
 	private DataAccesses dataAccesses;
-	
+	private TreatmentRecordMethods treatmentRecordMethods;
 	/**
 	 * @return the dataAccesses
 	 */
@@ -50,6 +51,11 @@ public class TreatmentRecordManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return treatmentRecordMethods.findByPatientId(patientId);
 	}
 
 }

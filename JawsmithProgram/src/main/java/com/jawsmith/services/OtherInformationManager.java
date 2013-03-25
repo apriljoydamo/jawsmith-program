@@ -2,12 +2,14 @@ package com.jawsmith.services;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.OtherInformationMethods;
 
 
 
-public class OtherInformationManager implements DataAccesses{
+public class OtherInformationManager implements DataAccesses, OtherInformationMethods{
 
 	private DataAccesses dataAccesses;
+	private OtherInformationMethods otherInformationMethods;
 	
 	/**
 	 * @return the dataAccesses
@@ -50,6 +52,11 @@ public class OtherInformationManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return otherInformationMethods.findByPatientId(patientId);
 	}
 
 }

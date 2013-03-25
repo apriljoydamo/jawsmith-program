@@ -20,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.MedicalHistoryMethods;
 import com.jawsmith.model.MedicalHistory;
 import com.jawsmith.model.Patient;
 
@@ -32,16 +33,30 @@ public class MedicalHistoryController {
 		static ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("medicalHistoryBean");
-	
+		static MedicalHistoryMethods medicalHistoryMethods = (MedicalHistoryMethods)appContext.getBean("medicalHistoryBean");
+		
+		
 		//@RequestMapping("/add")
 		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 		
-			String question[] = new String[17];
+			String question[] = new String[7];
 			question[0] = request.getParameter("question1");
+			question[1] = request.getParameter("question2");
+			question[2] = request.getParameter("question3");
+			question[3] = request.getParameter("question4");
+			question[4] = request.getParameter("question5");
+			question[5] = request.getParameter("question6");
+			question[6] = request.getParameter("question7");
 			
-			String answer[] = new String[17];
+			String answer[] = new String[7];
 			answer[0] = request.getParameter("answer1");
+			answer[1] = request.getParameter("answer2");
+			answer[2] = request.getParameter("answer3");
+			answer[3] = request.getParameter("answer4");
+			answer[4] = request.getParameter("answer5");
+			answer[5] = request.getParameter("answer6");
+			answer[6] = request.getParameter("answer7");
 			
 			Date last_visit_date= new Date();
 			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
@@ -49,6 +64,8 @@ public class MedicalHistoryController {
 			MedicalHistory medicalHistory = new MedicalHistory();
 			medicalHistory.setLast_visit_date(last_visit_date);
 			medicalHistory.setPatient_id(patient_id);
+			medicalHistory.setQuestion_id(question);
+			medicalHistory.setAnswer(answer);
 			//medicalHistory.setQuestion_id(question);
 			//medicalHistory.setAnswer(answer);
 			
@@ -60,21 +77,39 @@ public class MedicalHistoryController {
 		public static void EditMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
-			int medical_history_id = Integer.parseInt(request.getParameter("medical_history_id"));
+		
+			Patient patient = (Patient) request.getAttribute("patient");
+			int med_history_patient_id = (Integer)patient.getPatient_id();
+		
+	
+			MedicalHistory medicalHistory = (MedicalHistory)medicalHistoryMethods.findByPatientId(med_history_patient_id);
+			
 			
 			String question[] = new String[17];
 			question[0] = request.getParameter("question1");
+			question[1] = request.getParameter("question2");
+			question[2] = request.getParameter("question3");
+			question[3] = request.getParameter("question4");
+			question[4] = request.getParameter("question5");
+			question[5] = request.getParameter("question6");
+			question[6] = request.getParameter("question7");
 			
 			String answer[] = new String[17];
 			answer[0] = request.getParameter("answer1");
+			answer[1] = request.getParameter("answer2");
+			answer[2] = request.getParameter("answer3");
+			answer[3] = request.getParameter("answer4");
+			answer[4] = request.getParameter("answer5");
+			answer[5] = request.getParameter("answer6");
+			answer[6] = request.getParameter("answer7");
 			
 			//Date last_visit_date= new Date();
-			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			
 			
-			MedicalHistory medicalHistory = (MedicalHistory) dataAccesses.findById(medical_history_id);
+			
 			//medicalHistory.setLast_visit_date(last_visit_date);
-			medicalHistory.setPatient_id(patient_id);
+			medicalHistory.setQuestion_id(question);
+			medicalHistory.setAnswer(answer);
 			//medicalHistory.setQuestion_id(question);
 			//medicalHistory.setAnswer(answer);
 			

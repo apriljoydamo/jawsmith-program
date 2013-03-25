@@ -1,13 +1,16 @@
 package com.jawsmith.services;
 
 import java.util.List;
+
+import com.jawsmith.interfaces.AnxillariesMethods;
 import com.jawsmith.interfaces.DataAccesses;
 
 
 
-public class AnxillariesManager implements DataAccesses{
+public class AnxillariesManager implements DataAccesses, AnxillariesMethods{
 
 	private DataAccesses dataAccesses;
+	private AnxillariesMethods anxillariesMethods;
 	
 	/**
 	 * @return the dataAccesses
@@ -50,6 +53,11 @@ public class AnxillariesManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public Object findByPatientId(int patientId) {
+		return anxillariesMethods.findByPatientId(patientId);
 	}
 
 }

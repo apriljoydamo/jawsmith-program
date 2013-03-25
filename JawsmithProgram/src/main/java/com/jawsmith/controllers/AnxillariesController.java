@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jawsmith.interfaces.AnxillariesMethods;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.model.Anxillaries;
+import com.jawsmith.model.Patient;
 
 @Controller
 @RequestMapping("anxillaries")
@@ -23,6 +25,8 @@ public class AnxillariesController {
 	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("anxillariesBean");
+	static AnxillariesMethods anxillariesMethods = (AnxillariesMethods)appContext.getBean("anxillariesBean");
+	
 	
 	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
@@ -52,16 +56,19 @@ public class AnxillariesController {
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
+		Patient patient = (Patient) request.getAttribute("patient");
+		int patient_id = patient.getPatient_id();
 		int anxillaries_id = Integer.parseInt(request.getParameter("anxillaries_id"));
+		
 		String bleeding_time = (String)request.getParameter("bleeding_time");
 		String blood_pressure = (String)request.getParameter("blood_pressure");
 		String radiographic_interpretation = (String)request.getParameter("radiographic_interpretation");
 		String clotting_time = (String)request.getParameter("clotting_time");
 		String blood_sugar = (String)request.getParameter("blood_sugar");
 		//Date last_visit_date = new Date();
-		int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+	
 		
-		Anxillaries anxillaries = (Anxillaries) dataAccesses.findById(anxillaries_id);
+		Anxillaries anxillaries = (Anxillaries) anxillariesMethods.findByPatientId(anxillaries_id);
 		
 		anxillaries.setBleeding_time(bleeding_time);
 		anxillaries.setBlood_pressure(blood_pressure);

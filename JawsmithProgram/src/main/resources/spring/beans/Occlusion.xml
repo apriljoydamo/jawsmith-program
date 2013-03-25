@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="occlusionBean" class="com.jawsmith.services.OcclusionManager" >
    		<property name="dataAccesses" ref="occlusionDao" />
-  
+  		<property name="occlusionMethods" ref="occlusionDao" />
    </bean>
  
    <!-- System User Data Access Object -->

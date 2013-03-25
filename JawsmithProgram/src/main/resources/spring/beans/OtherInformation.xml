@@ -7,8 +7,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="otherInformationBean" class="com.jawsmith.services.OtherInformationManager" >
    		<property name="dataAccesses" ref="otherInformationDao" />
-  
-   </bean>
+  		<property name="otherInformationMethods" ref="otherInformationDao" />
+  	</bean>
  
    <!-- System User Data Access Object -->
    <bean id="otherInformationDao" class="com.jawsmith.dao.OtherInformationDao" >
