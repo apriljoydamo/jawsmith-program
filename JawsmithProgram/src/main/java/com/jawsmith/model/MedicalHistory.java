@@ -8,6 +8,7 @@ public class MedicalHistory {
 	private String question_id[];
 	private String answer[];
 	private int patient_id;
+	private String description_notes;
 	
 	public int getMedical_history_id() {
 		return medical_history_id;
@@ -39,6 +40,12 @@ public class MedicalHistory {
 	}
 	public void setPatient_id(int patient_id) {
 		this.patient_id = patient_id;
+	}
+	public void setDescription_notes(String description_notes) {
+		this.description_notes = description_notes;
+	}
+	public String getDescription_notes() {
+		return description_notes;
 	}
 	
 }

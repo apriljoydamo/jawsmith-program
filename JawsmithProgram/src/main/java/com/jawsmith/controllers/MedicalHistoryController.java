@@ -103,10 +103,9 @@ public class MedicalHistoryController {
 			answer[5] = request.getParameter("answer6");
 			answer[6] = request.getParameter("answer7");
 			
-			//Date last_visit_date= new Date();
+			String description_notes = request.getParameter("desc_notes");
 			
-			
-			
+			medicalHistory.setDescription_notes(description_notes);
 			//medicalHistory.setLast_visit_date(last_visit_date);
 			medicalHistory.setQuestion_id(question);
 			medicalHistory.setAnswer(answer);
@@ -115,5 +114,7 @@ public class MedicalHistoryController {
 			
 			dataAccesses.update(medicalHistory);
 			System.out.println("MEDICAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
-		}		  
+		}		
+		
+		
 }
