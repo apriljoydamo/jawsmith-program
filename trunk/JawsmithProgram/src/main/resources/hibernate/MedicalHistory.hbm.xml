@@ -21,5 +21,8 @@
         <property name="patient_id" type="java.lang.Integer">
             <column name="patients_PATIENT_ID" not-null="true" />
         </property>
+         <property name="description_notes" type="string">
+            <column name="DESC_NOTES" />
+        </property>
     </class>
 </hibernate-mapping>
