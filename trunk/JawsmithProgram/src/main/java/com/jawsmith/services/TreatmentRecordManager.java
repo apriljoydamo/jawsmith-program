@@ -26,6 +26,21 @@ public class TreatmentRecordManager implements DataAccesses, TreatmentRecordMeth
 
 
 	
+	/**
+	 * @return the treatmentRecordMethods
+	 */
+	public TreatmentRecordMethods getTreatmentRecordMethods() {
+		return treatmentRecordMethods;
+	}
+
+	/**
+	 * @param treatmentRecordMethods the treatmentRecordMethods to set
+	 */
+	public void setTreatmentRecordMethods(
+			TreatmentRecordMethods treatmentRecordMethods) {
+		this.treatmentRecordMethods = treatmentRecordMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

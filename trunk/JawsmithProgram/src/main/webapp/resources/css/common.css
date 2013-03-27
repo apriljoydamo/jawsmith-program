@@ -33,6 +33,34 @@
 	border: 1px solid black;
 }
 
+.table_header{
+	border-bottom: 1px solid #99FF99;
+	border-right: 1px solid #99FF99;
+}
+
+.header_row{
+	font-weight: bold;
+	font-size: 20px;
+	background-color: #99FF99;
+}
+
+.patient_records{
+	background-color: white;
+}
+
+.record_mouseclick_button{
+	background-color: #FFFFBF;
+	
+}
+
+.record_mouseout_button{
+	background-color: white;
+}
+
+.record_mouseover_button{
+	background-color: #BFBFFF;
+}
+
 #logout_button{	
 	position: relative;
 	top: 33px;
@@ -61,6 +89,23 @@
 	margin: 0px 20px;
 	position: relative;
 	top: 33px;
+}
+
+textarea {
+    resize: none;
+    height: 50px;
+}
+
+#footer_panel{
+	width: 960px;
+	height: 30px;
+	position: relative;
+	top: 75px;
+}
+
+#asterisk{
+	color: red;
+	font-size: 20px;
 }
 
 body{

@@ -1,7 +1,7 @@
 /* CSS Document */
 
 #homepage_panel{
-	text-align:center;
+	text-align: right;
 	position:relative;
 	top: 50px;
 	left: 0px;
@@ -17,33 +17,38 @@
 	top: 13px;
 }
 
-#patient_list{
+#patient_list{	
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+	padding: 10px;
+	border: 2px solid black;
+	border-radius: 20px;
 	text-align:right;
-	width: 960px;
+	width: 930px;
+	height: 500px;
 	position: relative;
 	top: 75px;
 }
 #patient_table{	
-	text-align:center;
+	text-align: center;
 	border: 1px solid black;
-	border-radius: 3px;
-	width: 100%;
+	border-radius: 15px;
+	width: 930px;
+	background-color: black;
 }
 
-tr{
-}
-
-td.results{
-	border-right: 1px solid black;
-}
-
-.header_row{
+#add_patient_label{
 	font-weight: bold;
+	font-size: 20px;
+}
+
+td{
 }
 
 .close_reg{	
 	position: absolute;
-	right: 525px;
+	right: 505px;
 	top: 15px;
 }
 

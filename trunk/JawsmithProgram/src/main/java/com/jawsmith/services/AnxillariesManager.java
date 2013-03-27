@@ -28,6 +28,20 @@ public class AnxillariesManager implements DataAccesses, AnxillariesMethods{
 
 
 	
+	/**
+	 * @return the anxillariesMethods
+	 */
+	public AnxillariesMethods getAnxillariesMethods() {
+		return anxillariesMethods;
+	}
+
+	/**
+	 * @param anxillariesMethods the anxillariesMethods to set
+	 */
+	public void setAnxillariesMethods(AnxillariesMethods anxillariesMethods) {
+		this.anxillariesMethods = anxillariesMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

@@ -27,6 +27,20 @@ public class DentalHistoryManager implements DataAccesses,DentalHistoryMethods{
 
 
 	
+	/**
+	 * @return the dentalHistoryMethods
+	 */
+	public DentalHistoryMethods getDentalHistoryMethods() {
+		return dentalHistoryMethods;
+	}
+
+	/**
+	 * @param dentalHistoryMethods the dentalHistoryMethods to set
+	 */
+	public void setDentalHistoryMethods(DentalHistoryMethods dentalHistoryMethods) {
+		this.dentalHistoryMethods = dentalHistoryMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

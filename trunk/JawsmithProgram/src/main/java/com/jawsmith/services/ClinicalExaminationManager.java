@@ -26,6 +26,21 @@ public class ClinicalExaminationManager implements DataAccesses, ClinicalExamina
 	}
 
 
+	/**
+	 * @return the clinicalExaminationMethods
+	 */
+	public ClinicalExaminationMethods getClinicalExaminationMethods() {
+		return clinicalExaminationMethods;
+	}
+
+	/**
+	 * @param clinicalExaminationMethods the clinicalExaminationMethods to set
+	 */
+	public void setClinicalExaminationMethods(
+			ClinicalExaminationMethods clinicalExaminationMethods) {
+		this.clinicalExaminationMethods = clinicalExaminationMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

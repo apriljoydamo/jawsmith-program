@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report_treatment_record" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1d6859fe-0f7f-4b66-945a-34b21a3448ba">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select * from treatment_record where patients_PATIENT_ID=1]]>
+	</queryString>
+	<field name="TREATMENT_RECORD_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LAST_VISIT_DATE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOOTH_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PRESCRIPTION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DEBIT" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CREDIT_DATE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CREDIT_AMT" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="patients_PATIENT_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="BALANCE_PER_DATE" class="java.lang.String"/>
+	<variable name="TOTAL_BALANCE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="75895098-247f-4609-b494-9fa1043b1ce1" x="0" y="0" width="110" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Treatment Record]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="290" splitType="Stretch">
+			<image>
+				<reportElement uuid="f63eb764-a7f9-43c5-a0a1-ea4a247903c0" x="75" y="12" width="480" height="269"/>
+				<imageExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\chart3.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ac6a2edb-beb8-4d19-8362-b3fdb564c707" x="3" y="4" width="48" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Visit Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f46857a7-a087-48a4-8d05-266be5d705b2" x="51" y="4" width="34" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tooth No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fcd8d703-27c4-43db-8f2e-2faa3ede55f5" x="85" y="4" width="112" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e42e2d45-f8f0-4d9f-810a-3213d6e49bd6" x="197" y="4" width="99" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prescription]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="325978fb-f288-4b90-b67d-51e282ea4896" x="296" y="4" width="64" height="35"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit Amt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="41b67196-b132-421e-9a17-7f6d4ba49ae0" x="360" y="4" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26ddebdd-5af8-4876-a03f-4dd62c194e04" x="417" y="4" width="65" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit Amt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a6f9e7e1-4ee7-4e26-97df-cb482ede8ce8" x="482" y="4" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="bc4ebd88-4ba2-4818-93be-aa22ac2c1925" x="3" y="35" width="552" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d99a3ae0-eb5a-483d-b98a-fc602e9e0cd2" x="3" y="0" width="48" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LAST_VISIT_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aa928688-79f5-42f4-932d-0333b74043ee" x="51" y="0" width="34" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TOOTH_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="582173d7-00ca-4910-8a02-ed6aa1db615c" x="85" y="0" width="112" height="33"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6090e85f-835c-4964-9d83-3c226e59168b" x="197" y="0" width="99" height="33"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{PRESCRIPTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5672b9f9-4fb5-4e9f-aaf9-d7f873b6c9ca" x="360" y="0" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CREDIT_DATE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="eecb4771-8206-4dd3-8467-bbd1be086257" x="417" y="0" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CREDIT_AMT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="5c05e619-b00f-4ceb-bcbd-9ef2614ba56b" x="296" y="0" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="d542e96e-96e7-47e7-92ab-6df7498d8c53" x="482" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{BALANCE_PER_DATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="3dcaf267-39b2-44ab-8ef5-3b5ded390f03" x="479" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{TOTAL_BALANCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7f863a0e-498f-4b8d-a465-0e0b628bf243" x="406" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Total Balance:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
