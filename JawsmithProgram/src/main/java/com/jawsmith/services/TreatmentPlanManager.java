@@ -26,6 +26,20 @@ public class TreatmentPlanManager implements DataAccesses, TreatmentPlanMethods{
 
 
 	
+	/**
+	 * @return the treatmentPlanMethods
+	 */
+	public TreatmentPlanMethods getTreatmentPlanMethods() {
+		return treatmentPlanMethods;
+	}
+
+	/**
+	 * @param treatmentPlanMethods the treatmentPlanMethods to set
+	 */
+	public void setTreatmentPlanMethods(TreatmentPlanMethods treatmentPlanMethods) {
+		this.treatmentPlanMethods = treatmentPlanMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

@@ -27,6 +27,20 @@ public class MedicalHistoryManager implements DataAccesses, MedicalHistoryMethod
 
 
 	
+	/**
+	 * @return the medicalHistoryMethods
+	 */
+	public MedicalHistoryMethods getMedicalHistoryMethods() {
+		return medicalHistoryMethods;
+	}
+
+	/**
+	 * @param medicalHistoryMethods the medicalHistoryMethods to set
+	 */
+	public void setMedicalHistoryMethods(MedicalHistoryMethods medicalHistoryMethods) {
+		this.medicalHistoryMethods = medicalHistoryMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

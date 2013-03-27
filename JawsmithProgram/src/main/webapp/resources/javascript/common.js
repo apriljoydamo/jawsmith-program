@@ -3,9 +3,23 @@
 //CHANGE URL
 ////document.location.href = newUrl;
 
+function setHighlightRecords(){
+	$(".patient_records").mousedown(function() {        
+		$(this).attr("class", "patient_records record_mouseclick_button");
+    });
+	$(".patient_records").mouseout(function() {        
+		$(this).attr("class", "patient_records record_mouseout_button");
+    });
+	$(".patient_records").mouseup(function() {        
+		$(this).attr("class", "patient_records record_mouseover_button");
+    });
+	$(".patient_records").mouseover(function() {        
+		$(this).attr("class", "patient_records record_mouseover_button");
+    });
+
+}
 
 function buttonNextPage(nextPage){
-	alert(nextPage);
 	document.location.href = nextPage;
 }
 

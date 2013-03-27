@@ -27,6 +27,21 @@ public class OtherInformationManager implements DataAccesses, OtherInformationMe
 
 
 	
+	/**
+	 * @return the otherInformationMethods
+	 */
+	public OtherInformationMethods getOtherInformationMethods() {
+		return otherInformationMethods;
+	}
+
+	/**
+	 * @param otherInformationMethods the otherInformationMethods to set
+	 */
+	public void setOtherInformationMethods(
+			OtherInformationMethods otherInformationMethods) {
+		this.otherInformationMethods = otherInformationMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

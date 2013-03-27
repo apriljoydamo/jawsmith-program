@@ -27,6 +27,20 @@ public class OcclusionManager implements DataAccesses, OcclusionMethods{
 
 
 	
+	/**
+	 * @return the occlusionMethods
+	 */
+	public OcclusionMethods getOcclusionMethods() {
+		return occlusionMethods;
+	}
+
+	/**
+	 * @param occlusionMethods the occlusionMethods to set
+	 */
+	public void setOcclusionMethods(OcclusionMethods occlusionMethods) {
+		this.occlusionMethods = occlusionMethods;
+	}
+
 	public void save(Object obj) {
 		dataAccesses.save(obj);
 		

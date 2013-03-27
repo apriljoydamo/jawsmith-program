@@ -1,3 +1,5 @@
+DROP SCHEMA IF EXISTS `jawsmith_program` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; 
+
 CREATE SCHEMA IF NOT EXISTS `jawsmith_program` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; 
 
 CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`patients` (
@@ -124,6 +126,8 @@ CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`other_information` (
   `CHIEF_COMPLAINT` VARCHAR(255) NULL ,
   `DIAGNOSIS` VARCHAR(255) NULL ,
   `LAST_VISIT_DATE` DATE NULL ,
+  `DESC_NOTES` VARCHAR(255) NULL ,
+  `DATE_NOTED` DATE NULL ,
   `patients_PATIENT_ID` INT NOT NULL ,
   PRIMARY KEY (`OTHER_INFO_ID`, `patients_PATIENT_ID`) ,
   INDEX `fk_other_information_patients1_idx` (`patients_PATIENT_ID` ASC) ,

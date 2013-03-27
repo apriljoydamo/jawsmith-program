@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.TreatmentRecordMethods;
 import com.jawsmith.model.Patient;
-import com.jawsmith.model.TreatmentPlan;
 import com.jawsmith.model.TreatmentRecord;
 
 @Controller
@@ -26,7 +25,7 @@ public class TreatmentRecordController {
 	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
-	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentPlanBean");
+	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
 	
 	
 	@RequestMapping("/add")
