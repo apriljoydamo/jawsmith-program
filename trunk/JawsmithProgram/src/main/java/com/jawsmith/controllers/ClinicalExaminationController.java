@@ -28,7 +28,7 @@ public class ClinicalExaminationController {
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("clinicalExaminationBean");
 	static ClinicalExaminationMethods clinicalExaminationMethods = (ClinicalExaminationMethods)appContext.getBean("clinicalExaminationBean");
 
-	@RequestMapping("/add")
+	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 	
@@ -54,7 +54,7 @@ public class ClinicalExaminationController {
 		
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		

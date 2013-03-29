@@ -190,10 +190,9 @@
 	    	<td class="results">TEST</td>
 	    </tr>
 	</table>
-	<form id="view_patient_form" action="" method="post">
+	<form id="view_patient_form" action="${pageContext.request.contextPath}/patient/view_patient" method="post">
 		<input type="hidden" id="patient_id"/>
 	</form>
-	<label id="save_report_button" class="button mouseout_button">Save Report</label>
 	</div>
 	
 	<div id="footer_panel" class="">

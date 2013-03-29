@@ -29,7 +29,7 @@ public class OcclusionController {
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("occlusionBean");
 	static OcclusionMethods occlusionMethods = (OcclusionMethods)appContext.getBean("occlusionBean");
 	
-	@RequestMapping("/add")
+	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -51,7 +51,7 @@ public class OcclusionController {
 		
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 

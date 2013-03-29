@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- System User business object -->
+   <bean id="treatmentRecordBean" class="com.jawsmith.services.TreatmentRecordManager" >
+   		<property name="dataAccesses" ref="treatmentRecordDao" />
+   		<property name="treatmentRecordMethods" ref="treatmentRecordDao" />
+  
+   </bean>
+ 
+   <!-- System User Data Access Object -->
+   <bean id="treatmentRecordDao" class="com.jawsmith.dao.TreatmentRecordDao" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>   	  
+ </beans>

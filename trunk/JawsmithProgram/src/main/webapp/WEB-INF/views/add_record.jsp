@@ -1,30 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Beauteethful</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
-		<jsp:include page="header.jsp" />
-	</head>
-	<body>
-		<div class="" id="patient_info_panel">
-	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
-	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
-	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
-	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
-	        <label class="sub_info" id="">${patient.address}</label><br/>
-	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
-	        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
-	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
-	        <label class="sub_info" id="">${patient.status}</label><br/>
-		</div>
-		
-		
-			<div id="patient_medical_info">
-				<form action="${pageContext.request.contextPath}/patient/add_record/done" method="POST">
+<div id="add_record_div" name="add_record_div" class="modalDialog">
+	     	<div name="add_record_div_form" id="add_record_div_form"> 
+				<a id="close_add_record" href="#close" class="close_add_record close" title="">X</a>	
+	     		<form id="add_record_form" action="${pageContext.request.contextPath}/patient/add_record/done" method="POST">
 				<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
 				
 				<!-- MEDICAL HISTORY -->
@@ -181,8 +158,7 @@
 					</table>
 				</div>
 				
-				<input type="submit" value="Save"/>
+				<label id="" class="button mouseout_button" onClick="submitForm('add_record_form')">Save</label>
 			</form>
 			</div>
-	</body>
-</html>
+</div>

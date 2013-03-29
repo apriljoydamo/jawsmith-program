@@ -115,11 +115,4 @@ public class HomeController {
 		return "login_page";
 	}
 	
-	  @RequestMapping(value = "/homeGenerateReport") 
-	    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
-	  //   SystemUser_JService downloadService = new SystemUser_JService(); 
-	     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
-	  //   downloadService.downloadXLS(response); 
-	 } 
-	  
 }

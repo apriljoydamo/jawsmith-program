@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Database Configuration -->
+	<import resource="../database/DataSource.xml"/>
+	<import resource="../database/Hibernate.xml"/>
+	
+	<!-- Beans Declaration-->
+	<import resource="../beans/Anxillaries.xml"/>
+	<import resource="../beans/ClinicalExamination.xml"/>
+	<import resource="../beans/DentalHistory.xml"/>
+	<import resource="../beans/MedicalHistory.xml"/>
+	<import resource="../beans/Occlusion.xml"/>
+	<import resource="../beans/OtherInformation.xml"/>
+	<import resource="../beans/Patient.xml"/>
+	<import resource="../beans/TableMaintenance.xml"/>
+	<import resource="../beans/TreatmentPlan.xml"/>
+	<import resource="../beans/TreatmentRecord.xml"/>
+	<import resource="../beans/SystemUser.xml"/>
+</beans>

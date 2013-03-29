@@ -53,8 +53,12 @@
 	<field name="patients_PATIENT_ID" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="BALANCE_PER_DATE" class="java.lang.String"/>
-	<variable name="TOTAL_BALANCE" class="java.lang.String"/>
+	<variable name="BALANCE_PER_DATE" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{DEBIT}.floatValue()-$F{CREDIT_AMT}.floatValue()]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_BALANCE" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$V{BALANCE_PER_DATE}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -141,7 +145,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="33" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<textField>
 				<reportElement uuid="d99a3ae0-eb5a-483d-b98a-fc602e9e0cd2" x="3" y="0" width="48" height="20"/>
 				<textElement/>
@@ -187,17 +191,20 @@
 	<columnFooter>
 		<band height="31" splitType="Stretch">
 			<textField pattern="¤ #,##0.00">
-				<reportElement uuid="3dcaf267-39b2-44ab-8ef5-3b5ded390f03" x="479" y="0" width="73" height="20"/>
+				<reportElement uuid="3dcaf267-39b2-44ab-8ef5-3b5ded390f03" x="479" y="6" width="73" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$V{TOTAL_BALANCE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="7f863a0e-498f-4b8d-a465-0e0b628bf243" x="406" y="0" width="73" height="20"/>
+				<reportElement uuid="7f863a0e-498f-4b8d-a465-0e0b628bf243" x="406" y="6" width="73" height="20"/>
 				<textElement>
 					<font isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Total Balance:]]></text>
 			</staticText>
+			<line>
+				<reportElement uuid="ea30a8e7-fc3a-48f0-9e16-b1155041b26e" x="8" y="2" width="544" height="2"/>
+			</line>
 		</band>
 	</columnFooter>
 </jasperReport>

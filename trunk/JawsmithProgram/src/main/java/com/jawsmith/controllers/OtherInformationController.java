@@ -30,7 +30,7 @@ public class OtherInformationController {
 	static OtherInformationMethods otherInformationMethods = (OtherInformationMethods)appContext.getBean("otherInformationBean");
 	
 	
-	@RequestMapping("/add")
+	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 	
@@ -50,7 +50,7 @@ public class OtherInformationController {
 		
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -62,6 +62,8 @@ public class OtherInformationController {
 		String diagnosis = (String)request.getParameter("diagnosis");
 		//Date last_visit_date = new Date();
 		int patient_id = patient.getPatient_id();
+		String description_notes = request.getParameter("desc_notes");
+		
 		
 		OtherInformation otherInformation = (OtherInformation) otherInformationMethods.findByPatientId(other_info_id);
 		
@@ -69,6 +71,7 @@ public class OtherInformationController {
 		otherInformation.setDiagnosis(diagnosis);
 		//otherInformation.setLast_visit_date(last_visit_date);
 		otherInformation.setPatient_id(patient_id);
+		otherInformation.setDescription_notes(description_notes);
 		dataAccesses.save(otherInformation);
 		System.out.println("OTHER INFO UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 	}

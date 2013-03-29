@@ -1,0 +1,23 @@
+#add_record_div{
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+#add_record_div_form{	
+	border: 15px solid black;
+	border-radius: 15px;
+	margin: 0px auto;
+	background-color: white;
+	width: 510px;
+	height: 610px;
+	overflow-y: scroll;
+	padding: 4px;
+}
+
+.close_add_record{	
+	position: absolute;
+	right: 435px;
+	top: 15px;
+	
+}

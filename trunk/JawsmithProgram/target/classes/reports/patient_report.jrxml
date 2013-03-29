@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report" language="groovy" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0aa3140c-23e5-4af6-a23b-563580a02350">
 	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="139"/>
+	<property name="ireport.y" value="150"/>
 	<subDataset name="medhis_query" uuid="d3ce24f5-af77-4865-9577-c9af1c0bcd90">
 		<queryString>
 			<![CDATA[select * from medical_history where patients_PATIENT_ID=1]]>
@@ -61,6 +61,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\"]]></defaultValueExpression>
 	</parameter>
+	
 	<queryString>
 		<![CDATA[select * from patients where PATIENT_ID=1]]>
 	</queryString>
@@ -323,49 +324,49 @@
 				<textFieldExpression><![CDATA[$F{MOBILE_NO}+"/"+$F{TEL_NO}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="58">
+		<band height="61">
 			<subreport>
 				<reportElement uuid="eb43bc75-e813-4acd-9e42-5c3d8ec4aa9a" x="0" y="0" width="555" height="58"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_medhis.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="54">
+		<band height="56">
 			<subreport>
 				<reportElement uuid="70534285-ff6a-4bbd-9115-7ac9b9d06f3f" x="0" y="2" width="555" height="50"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_dentalhis.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="65">
+		<band height="68">
 			<subreport>
 				<reportElement uuid="1022d2a7-5e53-404a-b5d6-72576190cf4f" x="0" y="0" width="555" height="64"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_clinical.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="57">
+		<band height="60">
 			<subreport>
 				<reportElement uuid="7efc695c-b8f3-402f-bea6-ef665dcf24d5" x="1" y="0" width="554" height="56"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_occlusion.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="51">
+		<band height="54">
 			<subreport>
 				<reportElement uuid="71e20e17-ae70-415b-ab5f-058fcd7bc6a8" x="1" y="0" width="554" height="50"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_anxillaries.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="73">
+		<band height="54">
 			<subreport>
 				<reportElement uuid="81561e75-838b-4443-b1d0-122fa2859979" x="1" y="1" width="554" height="50"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "patient_report_other_info.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="51">
+		<band height="54">
 			<subreport>
 				<reportElement uuid="16b380ce-5f45-4505-85b9-0037388688f6" x="1" y="0" width="554" height="51"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>

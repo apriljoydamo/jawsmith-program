@@ -6,9 +6,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/add_record.css"/>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
@@ -17,6 +18,7 @@
 	</head>
 		
 	<body>
+	<jsp:include page="add_record.jsp" />
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
@@ -28,14 +30,13 @@
 	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
 	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
-		<div id="view_patient_page_div1">
-			<div id="edit_patient_button">
-				<form action="${pageContext.request.contextPath}/editPatient" method="POST">
-					<label style="position:relative; top: 50px;" id="" class="button mouseout_button" onClick="submitForm('edit_patient')">Edit Patient</label>
-				</form>
-			</div>
+		<div id="edit_patient_button">
+			<form action="${pageContext.request.contextPath}/editPatient" method="POST">
+				<label style="position:relative; top: 50px;" id="" class="button mouseout_button" onClick="submitForm('edit_patient')">Edit Patient</label>
+			</form>
 		</div>
-		<div id="view_patient_page_div2">
+
+		<div id="view_patient_page_div">
 			<div id="patient_medical_info">
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
 				<div id="medical_his_div" class="">
@@ -85,7 +86,7 @@
         	<form id="edit_patients_record" action="${pageContext.request.contextPath}/editPatient" method="POST">	
 			</form>
             <label id="" class="button mouseout_button" onClick="submitForm('edit_patients_record')">Edit Record</label>
-			<label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/add_record')">Add Medical Record</label>
+			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatmentRecord')">Treatment Record</label>
 		</div>

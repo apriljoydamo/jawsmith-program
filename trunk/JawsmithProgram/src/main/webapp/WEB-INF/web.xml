@@ -48,6 +48,11 @@
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+	<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.jrxml</url-pattern>
+	</servlet-mapping>
+	
 
 	<!-- Spring Security -->
 	<filter>
