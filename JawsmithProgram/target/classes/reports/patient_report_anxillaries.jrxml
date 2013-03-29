@@ -63,7 +63,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="25">
+		<band height="22">
 			<staticText>
 				<reportElement uuid="c34fd629-f980-42e4-9764-af416fb62480" x="0" y="0" width="100" height="20"/>
 				<textElement>
@@ -107,7 +107,7 @@
 				<textFieldExpression><![CDATA[$F{BLOOD_PRESSURE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="5e6fe5eb-5b45-4cea-a9cf-763c130e60e3" x="151" y="40" width="214" height="14"/>
+				<reportElement uuid="5e6fe5eb-5b45-4cea-a9cf-763c130e60e3" x="151" y="40" width="364" height="30"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{RADIOGRAPHIC_INTERPRETATION}]]></textFieldExpression>
 			</textField>

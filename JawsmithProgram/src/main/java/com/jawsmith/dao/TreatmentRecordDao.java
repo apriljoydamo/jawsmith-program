@@ -39,8 +39,8 @@ public class TreatmentRecordDao extends HibernateDaoSupport implements DataAcces
 		return list;
 	}
 	
-	public Object findByPatientId(int patientId) {
+	public List findByPatientId(int patientId) {
 		List list = getHibernateTemplate().find("from TreatmentRecord where patients_PATIENT_ID=?",patientId);
-		return list.get(0);
+		return list;
 	}
 }

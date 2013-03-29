@@ -13,9 +13,7 @@
 		entry-point-ref="authenticationEntryPoint" >
 	  
 		<security:intercept-url pattern="${pageContext.request.contextPath}/loginPage" access="hasRole('ROLE_ADMIN')"/>
-		<security:intercept-url pattern="${pageContext.request.contextPath}/css/**" filters="none"/>
-		<security:intercept-url pattern="${pageContext.request.contextPath}/javascript/**" filters="none"/>
-		<security:intercept-url pattern="${pageContext.request.contextPath}/images/**" filters="none"/>
+		<security:intercept-url pattern="${pageContext.request.contextPath}/resources/reports/**" access="none"/>
 		
 		<security:logout
 	    	invalidate-session="true"

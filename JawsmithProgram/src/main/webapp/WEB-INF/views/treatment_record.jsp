@@ -10,6 +10,7 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
+	
 		<div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>

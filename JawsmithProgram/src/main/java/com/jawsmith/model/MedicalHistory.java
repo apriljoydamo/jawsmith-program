@@ -5,10 +5,9 @@ import java.util.Date;
 public class MedicalHistory {
 	private int medical_history_id;
 	private Date last_visit_date;
-	private String question_id[];
-	private String answer[];
+	private String question_id;
+	private String answer;
 	private int patient_id;
-	private String description_notes;
 	
 	public int getMedical_history_id() {
 		return medical_history_id;
@@ -23,16 +22,16 @@ public class MedicalHistory {
 		this.last_visit_date = last_visit_date;
 	}
 
-	public String[] getQuestion_id() {
+	public String getQuestion_id() {
 		return question_id;
 	}
-	public void setQuestion_id(String[] question_id) {
-		this.question_id = question_id;
+	public void setQuestion_id(String question) {
+		this.question_id = question;
 	}
-	public String[] getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
-	public void setAnswer(String[] answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 	public int getPatient_id() {
@@ -41,11 +40,6 @@ public class MedicalHistory {
 	public void setPatient_id(int patient_id) {
 		this.patient_id = patient_id;
 	}
-	public void setDescription_notes(String description_notes) {
-		this.description_notes = description_notes;
-	}
-	public String getDescription_notes() {
-		return description_notes;
-	}
+	
 	
 }

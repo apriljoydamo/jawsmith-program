@@ -27,6 +27,7 @@ public class DentalHistoryController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("dentalHistoryBean");
 	static DentalHistoryMethods dentalHistoryMethods = (DentalHistoryMethods)appContext.getBean("dentalHistoryBean");
+	
 	/***
 	 * NOTE: THIS METHOD DOES NOT RETURN TO ANY PAGE. IT JUST SAVES ALL OF THESE INTO ITS RESPECTIVE DATABASE
     	
@@ -68,7 +69,7 @@ public class DentalHistoryController {
 		//return "view_patient";
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		

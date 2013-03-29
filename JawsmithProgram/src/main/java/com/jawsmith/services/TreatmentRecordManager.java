@@ -69,7 +69,7 @@ public class TreatmentRecordManager implements DataAccesses, TreatmentRecordMeth
 	}
 
 	@Override
-	public Object findByPatientId(int patientId) {
+	public List findByPatientId(int patientId) {
 		return treatmentRecordMethods.findByPatientId(patientId);
 	}
 

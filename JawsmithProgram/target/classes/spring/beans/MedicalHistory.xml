@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- System User business object -->
+   <bean id="medicalHistoryBean" class="com.jawsmith.services.MedicalHistoryManager" >
+   		<property name="dataAccesses" ref="medicalHistoryDao" />
+  		<property name="medicalHistoryMethods" ref="medicalHistoryDao" />
+   </bean>
+ 
+   <!-- System User Data Access Object -->
+   <bean id="medicalHistoryDao" class="com.jawsmith.dao.MedicalHistoryDao" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>   	  
+ </beans>

@@ -52,7 +52,7 @@ public class AnxillariesController {
 		System.out.println("ANXILLARIES SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 	}
 	
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		

@@ -1,13 +1,17 @@
 package com.jawsmith.controllers;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +24,21 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jawsmith.common.GetDateAndTime;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.TableMaintenanceMethods;
 import com.jawsmith.model.Patient;
 import com.jawsmith.model.TableMaintenance;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+
 
 @Controller
 @RequestMapping("patient")
@@ -44,7 +58,7 @@ ApplicationContext appContext =
 				//destroys the patient attribute in session
 				request.getSession().removeAttribute("patient");
 			}catch(Exception e){
-				System.out.println();
+				System.out.println("ERROR IN DESTROYING SESSION");
 			}
 			
 			ArrayList<Patient> list = new ArrayList<Patient>();
@@ -64,11 +78,11 @@ ApplicationContext appContext =
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 			Patient patient = new Patient();
 		
-			if(validator(request, model)==true){
+			//if(validator(request, model)==true){
 			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
 			String middle_name = request.getParameter("middle_name");
-			String sex = request.getParameter("sex");
+			String sex = request.getParameter("add_patient_sex");
 			String rel_status = request.getParameter("rel_status");
 			String address = request.getParameter("address");
 			String tel_num = request.getParameter("tel_num");
@@ -78,7 +92,7 @@ ApplicationContext appContext =
 			String religion = request.getParameter("religion");
 			String referred_by = request.getParameter("referred_by");
 			String guardian = request.getParameter("guardian");
-			String patient_num = "1";
+			String patient_num = request.getParameter("patient_num");
 			String nationality="Filipino";
 			Boolean status=Boolean.valueOf("1");
 			Date dob = new Date();
@@ -108,13 +122,13 @@ ApplicationContext appContext =
 			//Adding the list for the view
 			view(request, model);
 			//Return to module main page
-			}
+			//}
 	    	return "home_page";
 		}
 		
 		@RequestMapping("/edit")
 		public String editMethod(HttpServletRequest request, HttpServletResponse response, 
-		ModelMap model, Principal principal) throws IOException, ServletException{
+				ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			Patient patient = new Patient();
 			
@@ -123,7 +137,7 @@ ApplicationContext appContext =
 			String last_name = request.getParameter("last_name");
 			String first_name = request.getParameter("first_name");
 			String middle_name = request.getParameter("middle_name");
-			String sex = request.getParameter("sex");
+			String sex = request.getParameter("add_patient_sex");
 			String rel_status = request.getParameter("rel_status");
 			String address = request.getParameter("address");
 			String tel_num = request.getParameter("tel_num");
@@ -133,7 +147,7 @@ ApplicationContext appContext =
 			String religion = request.getParameter("religion");
 			String referred_by = request.getParameter("referred_by");
 			String guardian = request.getParameter("guardian");
-			String patient_num = "1";
+			String patient_num = request.getParameter("patient_num");
 			String nationality="Filipino";
 			Boolean status=Boolean.valueOf("1");
 			Date dob = new Date();
@@ -227,16 +241,17 @@ ApplicationContext appContext =
 			return "view_patients_record";	
 		}
 		
-		@RequestMapping("/view_patients_record")
+		@RequestMapping("/view_patient")
 		public String patientRecords(HttpServletRequest request, HttpServletResponse response, 
 									  ModelMap model, Principal principal) throws IOException, ServletException{
-			//int patient_id = Integer.parseInt(request.getParameter("patient_id"));
-			//model.addAttribute("patient",patient);
 			
-			
-			Patient patient = (Patient)dataAccesses.findById(1);
+			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			Patient patient = (Patient)dataAccesses.findById(patient_id);
 			//puts the chosen patient in session
 			request.getSession().setAttribute("patient", patient);		
+			
+			
+			
 			
 			return "view_patients_record";
 		}
@@ -424,11 +439,71 @@ ApplicationContext appContext =
 			return validateStatus;
 			}
 		
-		  @RequestMapping(value = "/patientGenerateReport") 
-		    public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
-		    // BusinessUnit_JService downloadService = new BusinessUnit_JService(); 
-		     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
-		  //   downloadService.downloadXLS(response); 
-		 } 
+		  @RequestMapping(value = "/generate_pdf_file") 
+		    public void getPDF(HttpServletResponse response,HttpServletRequest request, 
+		    						Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+			 	
+			  	//LAYOUTS
+			  	InputStream inputStreamPatientReport = new FileInputStream("reports/patient_report.jrxml");
+				/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
+			  	InputStream inputStreamReportClinical = new FileInputStream("reports/patient_report_clinical.jrxml");
+				InputStream  inputStreamReportDentalHis = new FileInputStream("reports/patient_report_dentalhis.jrxml");
+			  	InputStream inputStreamReportMedHis = new FileInputStream("reports/patient_report_medhis.jrxml");
+				InputStream  inputStreamReportOcclusion = new FileInputStream("reports/patient_report_occlusion.jrxml");
+			  	InputStream inputStreamReportOtherInfo = new FileInputStream("reports/patient_report_other_info.jrxml");
+				InputStream  inputStreamReportTreatmentPlan = new FileInputStream("reports/patient_report_treatment_plan.jrxml");
+				InputStream  inputStreamReportTreatmentRecord = new FileInputStream("reports/patient_report_treatment_record.jrxml");
+				*/
+			  	
+				//VALUES TO BE PRINTED HERE
+			  	//DataBeanMaker dataBeanMaker = new DataBeanMaker();
+				//ArrayList<DataBean> dataBeanList = dataBeanMaker.getDataBeanList();
+				Patient patient = (Patient) request.getSession().getAttribute("patient");
+				ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
+				dataBeanList.add(patient);
+				JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+				
+				//COMPILE JRXML FILES
+				/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
+				JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
+				JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
+				JasperDesign jasperSubDesign4 = JRXmlLoader.load(inputStreamReportMedHis);
+				JasperDesign jasperSubDesign5 = JRXmlLoader.load(inputStreamReportOcclusion);
+				JasperDesign jasperSubDesign6 = JRXmlLoader.load(inputStreamReportOtherInfo);
+				JasperDesign jasperSubDesign7 = JRXmlLoader.load(inputStreamReportTreatmentPlan);
+				JasperDesign jasperSubDesign8 = JRXmlLoader.load(inputStreamReportTreatmentRecord);
+				*/JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
+				
+		        
+		        //COMPILE REPORT
+				/*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
+				JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
+				JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
+				JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
+				JasperReport jasperSubReport5 = JasperCompileManager.compileReport(jasperSubDesign5);
+				JasperReport jasperSubReport6 = JasperCompileManager.compileReport(jasperSubDesign6);
+				JasperReport jasperSubReport7 = JasperCompileManager.compileReport(jasperSubDesign7);
+				JasperReport jasperSubReport8 = JasperCompileManager.compileReport(jasperSubDesign8);
+				*/JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+		        
+				//FILL REPORT
+				Map<String, Object> parameters = new HashMap<String, Object>();
+				/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
+				parameters.put("subreportParameterClinical", jasperSubReport2);
+				parameters.put("subreportParameterDentalHis", jasperSubReport3);
+				parameters.put("subreportParameterMedHis", jasperSubReport4);
+				parameters.put("subreportParameterOcclusion", jasperSubReport5);
+				parameters.put("subreportParameterOtherInfo", jasperSubReport6);
+				parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
+				parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
+				*/
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+	
+		        //EXPORT REPORT
+		        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper.pdf"); 
+		
+		        
+		  
+		  } 
 		  
 }

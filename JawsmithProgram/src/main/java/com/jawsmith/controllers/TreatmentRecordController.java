@@ -3,6 +3,7 @@ package com.jawsmith.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,19 @@ public class TreatmentRecordController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
 	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
+	
+	
+	@RequestMapping("/view_treatment_record")
+	public String viewMethod(HttpServletRequest request, HttpServletResponse response, 
+									 ModelMap model, Principal principal) throws IOException, ServletException{
+		Patient patient = (Patient) request.getAttribute("patient");
+		
+		List<TreatmentRecord> treatmentRecordList = treatmentRecordMethods.findByPatientId(patient.getPatient_id());
+		model.addAttribute("treatmentRecordList", treatmentRecordList);
+		
+		return "treatment_record";
+	}
+	
 	
 	
 	@RequestMapping("/add")

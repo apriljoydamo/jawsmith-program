@@ -48,6 +48,7 @@ public class MedicalHistoryController {
 			question[4] = request.getParameter("question5");
 			question[5] = request.getParameter("question6");
 			question[6] = request.getParameter("question7");
+			question[7] = request.getParameter("question8");
 			
 			String answer[] = new String[7];
 			answer[0] = request.getParameter("answer1");
@@ -57,24 +58,25 @@ public class MedicalHistoryController {
 			answer[4] = request.getParameter("answer5");
 			answer[5] = request.getParameter("answer6");
 			answer[6] = request.getParameter("answer7");
+			answer[7] = request.getParameter("answer8");
 			
 			Date last_visit_date= new Date();
 			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			
-			MedicalHistory medicalHistory = new MedicalHistory();
-			medicalHistory.setLast_visit_date(last_visit_date);
-			medicalHistory.setPatient_id(patient_id);
-			medicalHistory.setQuestion_id(question);
-			medicalHistory.setAnswer(answer);
-			//medicalHistory.setQuestion_id(question);
-			//medicalHistory.setAnswer(answer);
+			for(int x=0; x<=8; x++){
+				MedicalHistory medicalHistory = new MedicalHistory();
+				medicalHistory.setLast_visit_date(last_visit_date);
+				medicalHistory.setPatient_id(patient_id);
+				medicalHistory.setQuestion_id(question[x]);
+				medicalHistory.setAnswer(answer[x]);
+				dataAccesses.save(medicalHistory);
+			}
 			
-			dataAccesses.save(medicalHistory);
 			System.out.println("MEDICAL HISTORY SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
 		//@RequestMapping("/edit")
-		public static void EditMethod(HttpServletRequest request, HttpServletResponse response, 
+		public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
 		
@@ -93,6 +95,7 @@ public class MedicalHistoryController {
 			question[4] = request.getParameter("question5");
 			question[5] = request.getParameter("question6");
 			question[6] = request.getParameter("question7");
+			question[7] = request.getParameter("question8");
 			
 			String answer[] = new String[17];
 			answer[0] = request.getParameter("answer1");
@@ -102,17 +105,18 @@ public class MedicalHistoryController {
 			answer[4] = request.getParameter("answer5");
 			answer[5] = request.getParameter("answer6");
 			answer[6] = request.getParameter("answer7");
+			answer[7] = request.getParameter("answer8");
 			
-			String description_notes = request.getParameter("desc_notes");
-			
-			medicalHistory.setDescription_notes(description_notes);
 			//medicalHistory.setLast_visit_date(last_visit_date);
-			medicalHistory.setQuestion_id(question);
-			medicalHistory.setAnswer(answer);
 			//medicalHistory.setQuestion_id(question);
 			//medicalHistory.setAnswer(answer);
-			
-			dataAccesses.update(medicalHistory);
+			//medicalHistory.setQuestion_id(question);
+			//medicalHistory.setAnswer(answer);
+			for(int x=0; x<=8; x++){
+				medicalHistory.setQuestion_id(question[x]);
+				medicalHistory.setAnswer(answer[x]);
+				dataAccesses.update(medicalHistory);
+			}
 			System.out.println("MEDICAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 		}		
 		
