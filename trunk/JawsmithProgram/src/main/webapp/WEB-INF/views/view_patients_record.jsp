@@ -85,10 +85,10 @@
 		<div id="view_patient_controllers">			
         	<form id="edit_patients_record" action="${pageContext.request.contextPath}/editPatient" method="POST">	
 			</form>
-            <label id="" class="button mouseout_button" onClick="submitForm('edit_patients_record')">Edit Record</label>
+            <label id="" class="button mouseout_button" onClick="submitForm('edit_patients_record')">Edit Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
-            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatmentRecord')">Treatment Record</label>
+            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
 		</div>
         
 		<div id="add_treatment_plan" class="modalDialog">

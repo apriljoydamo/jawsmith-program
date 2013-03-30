@@ -78,7 +78,7 @@ function selectPatient(id){
 	$("#patient_id").val(id);
 	alert($("#patient_id").val());
 	
-	$("#view_patien_form").submit();
+	$("#view_patient_form").submit();
 }
 
 $(document).ready(function(e) {
