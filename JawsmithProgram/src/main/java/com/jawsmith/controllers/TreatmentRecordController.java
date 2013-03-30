@@ -29,11 +29,11 @@ public class TreatmentRecordController {
 	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
 	
 	
-	@RequestMapping("/view_treatment_record")
+	@RequestMapping("/view")
 	public String viewMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
-		Patient patient = (Patient) request.getAttribute("patient");
 		
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		List<TreatmentRecord> treatmentRecordList = treatmentRecordMethods.findByPatientId(patient.getPatient_id());
 		model.addAttribute("treatmentRecordList", treatmentRecordList);
 		

@@ -191,7 +191,7 @@
 	    </tr>
 	</table>
 	<form id="view_patient_form" action="${pageContext.request.contextPath}/patient/view_patient" method="post">
-		<input type="hidden" id="patient_id"/>
+		<input type="hidden" id="patient_id" name="patient_id"/>
 	</form>
 	</div>
 	

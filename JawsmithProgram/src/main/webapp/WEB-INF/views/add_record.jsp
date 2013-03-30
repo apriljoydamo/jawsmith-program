@@ -1,3 +1,4 @@
+
 <div id="add_record_div" name="add_record_div" class="modalDialog">
 	     	<div name="add_record_div_form" id="add_record_div_form"> 
 				<a id="close_add_record" href="#close" class="close_add_record close" title="">X</a>	
