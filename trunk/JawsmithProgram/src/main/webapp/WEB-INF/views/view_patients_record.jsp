@@ -40,9 +40,13 @@
 			<div id="patient_medical_info">
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
 				<div id="medical_his_div" class="">
-                    ${medical_his.question} - ${medical_his.answer}<br/>
-                    ${medical_his.question} - ${medical_his.answer}<br/>
-                    ${medical_his.question} - ${medical_his.answer}<br/>
+                    <c:forEach var="medhis" items="${medHisList}">
+                    	<table>
+                    		<tr>
+                    			<td></td>                    			
+                    		</tr>
+                    	</table>
+                    </c:forEach>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
 				<div id="dental_his_div">
@@ -89,6 +93,7 @@
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
+            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Save Report</label>
 		</div>
         
 		<div id="add_treatment_plan" class="modalDialog">

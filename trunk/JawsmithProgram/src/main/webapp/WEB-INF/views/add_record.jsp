@@ -1,8 +1,8 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <div id="add_record_div" name="add_record_div" class="modalDialog">
 	     	<div name="add_record_div_form" id="add_record_div_form"> 
 				<a id="close_add_record" href="#close" class="close_add_record close" title="">X</a>	
-	     		<form id="add_record_form" action="${pageContext.request.contextPath}/patient/add_record/done" method="POST">
+	     		<form id="add_record_form" action="${pageContext.request.contextPath}/patient/add_record" method="POST">
 				<input type="hidden" name="patient_id" value="${patient.patient_id}" /> 
 				
 				<!-- MEDICAL HISTORY -->
@@ -11,7 +11,7 @@
 					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 					<table>
 						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}
-								<input type="hidden" value="${tbl_med_his.code_table_value}" name="question" />
+								<input type="hidden" value="${tbl_med_his.code_table_value}" name="'question'+${tbl_med_his.code_table_value}" />
 						</td></tr>
 						<c:choose>
 							<c:when test="${tbl_med_his.code_table_value=='2'}">

@@ -32,10 +32,10 @@ public class SystemUserController {
 	/**
 	 * Redirecting to /systemUsersPage
 	 **/
-	@RequestMapping("/")
+	@RequestMapping("/view")
 	public String systemUsersPage(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "systemUsersPage";
+		return "system_user";
 	}
 	
 	/**
@@ -43,22 +43,8 @@ public class SystemUserController {
 	 * To redirect in ae_systemUsersPages
 	 **/
 	@RequestMapping("/add")
-	public String Add(HttpServletRequest request, HttpServletResponse response, 
+	public String add(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
-		//Filling out the header.jsp
-    	return "ae_systemUsers";
-	}
-	
-	/**
-	 * changes in url
-	 * This is from /systemUsersPage/add submit button
-	 * Where the add process is...
-	 * To redirect in systemUsersPage
-	 **/
-	@RequestMapping("/add/done")
-	public String AddMethod(HttpServletRequest request, HttpServletResponse response, 
-											ModelMap model, Principal principal) throws IOException, ServletException{
-		
 		//Instantiate System User
 		SystemUser sysUser = new SystemUser();
 		
@@ -77,7 +63,7 @@ public class SystemUserController {
 		
 		sysUserDataAccesses.save(sysUser);
 		
-		return "login_page";
+		return "redirect:/loginPage";
 	}
 	
 	/**
@@ -86,27 +72,27 @@ public class SystemUserController {
 	 * To redirect in ae_systemUsersPage
 	 **/
 	@RequestMapping("/edit")
-	public String Edit(HttpServletRequest request, HttpServletResponse response, 
+	public String edit(HttpServletRequest request, HttpServletResponse response, 
 									  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "login_page";
+		
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		SystemUser sysUser = (SystemUser) sysUserDataAccesses.findById(user_id);
+		
+		//Get all values from the jsp
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String first_name = request.getParameter("first_name");
+		String last_name = request.getParameter("last_name");
+		int access = Integer.parseInt(request.getParameter("access"));
+		
+		sysUser.setUsername(username);
+		sysUser.setPassword(password);
+		sysUser.setFirst_name(first_name);
+		sysUser.setLast_name(last_name);
+		sysUser.setAccess(access);
+		
+		sysUserDataAccesses.update(sysUser);
+
+		return "redirect:/loginPage";
 	}
- 
-	/**
-	 * changes in url
-	 * This is from /systemUsersPage/edit submit button
-	 * To redirect in systemUsersPage
-	 **/
-	@RequestMapping("/edit/done")
-	public String EditMethod(HttpServletRequest request, HttpServletResponse response, 
-											ModelMap model, Principal principal) throws IOException, ServletException{
-		return "login_page";
-	}
-	
-	@RequestMapping(value = "/systemUserGenerateReport") 
-	public void getXLS(HttpServletResponse response,HttpServletRequest request, Model model) throws ClassNotFoundException { 
-	  //   SystemUser_JService downloadService = new SystemUser_JService(); 
-	     // Delegate to downloadService. Make sure to pass an instance of HttpServletResponse  
-	  //   downloadService.downloadXLS(response); 
-	} 
-	  
 }
