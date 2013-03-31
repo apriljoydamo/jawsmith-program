@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.PatientMethods;
 
 
-public class PatientDao extends HibernateDaoSupport implements DataAccesses{
+public class PatientDao extends HibernateDaoSupport implements DataAccesses, PatientMethods{
 
 	
 	public void save(Object obj) {
@@ -38,4 +39,9 @@ public class PatientDao extends HibernateDaoSupport implements DataAccesses{
 		List list = getHibernateTemplate().find("from Patient ORDER BY LAST_NAME");
 		return list;
 	}
+	
+   public List paginatedView(int offset, int numOfRecord) {
+	   List list = getHibernateTemplate().find("from Patient LIMIT "+offset+","+numOfRecord+" ");
+		return list;
+   }
 }

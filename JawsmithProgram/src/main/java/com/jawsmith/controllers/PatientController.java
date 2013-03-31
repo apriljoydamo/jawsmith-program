@@ -25,6 +25,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.PatientMethods;
 import com.jawsmith.interfaces.TableMaintenanceMethods;
 import com.jawsmith.model.Patient;
 import com.jawsmith.model.TableMaintenance;
@@ -46,6 +47,7 @@ public class PatientController {
 ApplicationContext appContext = 
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
+		PatientMethods patientMethods = (PatientMethods)appContext.getBean("patientsBean");
 		DataAccesses tblMaintenanceDataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
 		TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
 		int MED_HIS_QUESTIONS_REF_ID = 2;
@@ -506,4 +508,26 @@ ApplicationContext appContext =
 		  
 		  } 
 		  
+		  public void pagination(HttpServletResponse response,HttpServletRequest request, ModelMap model) throws ClassNotFoundException { 
+			  int pageNum = 1;
+			  int offset = 0;
+			  int recordsPerPage = 20;
+			  try{
+				pageNum=(Integer)request.getAttribute("pageNum");
+				offset=(Integer)request.getAttribute("offset");
+				offset=offset*pageNum;
+			  }catch(Exception E){
+				  model.addAttribute("pageNum", pageNum);
+				  model.addAttribute("offset", offset);
+				  
+			  }
+			        if(request.getParameter("page") != null)
+			            pageNum = Integer.parseInt(request.getParameter("page"));
+			        Patient dao = new Patient();
+			        List<Patient> patientlist =(List)patientMethods.paginatedView(offset, recordsPerPage);
+			        model.addAttribute("patientlist", patientlist);
+			        
+			    
+			  }
+			 
 }
