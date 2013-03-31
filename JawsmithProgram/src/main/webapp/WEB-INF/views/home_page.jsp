@@ -123,10 +123,10 @@
 	</div>
 	
 	<div class="" id="homepage_panel">
-		<label id="patients_button" onclick="buttonNextPage('${pageContext.request.contextPath}/patient/')" class="button mouseout_button">
+		<label id="patients_button" onclick="buttonNextPage('${pageContext.request.contextPath}/patient/list')" class="button mouseout_button">
 		Patients</label>
 		<c:if test="${user.access==1}">
-	          <label id="table_maintenance_button" class="button mouseout_button">Table Maintenance</label> 
+	          <label id="table_maintenance_button" onclick="buttonNextPage('${pageContext.request.contextPath}/admin')" class="button mouseout_button">Admin Tools</label>
 	    </c:if>
 	    <input type="text" id="" class="" />
 		<label id="search_button" class="button mouseout_button">Search</label>

@@ -10,24 +10,5 @@
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-		<form action="${pageContext.request.contextPath}/patients" method="POST">
-		<input type="submit" value="Patients"/>
-		</form>
-
-		<form action="${pageContext.request.contextPath}/tableMaintenance" method="POST">
-		<input type="submit" value="Table Maintenance"/>
-		</form>
-		
-		<form action="${pageContext.request.contextPath}/advancedSearch" method="POST">
-		<input type="submit" value="Advanced Search"/>
-		</form>
-		
-		<form action="${pageContext.request.contextPath}/resources/addSomething" method="POST">
-		<input type="submit" value="+"/>
-		</form>
-		
-		<form action="${pageContext.request.contextPath}/saveReport" method="POST">
-		<input type="submit" value="Save Report"/>
-		</form>
 	</body>
 </html>

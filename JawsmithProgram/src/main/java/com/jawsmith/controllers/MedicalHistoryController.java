@@ -60,6 +60,9 @@ public class MedicalHistoryController {
 			answer[6] = request.getParameter("answer7");
 			answer[7] = request.getParameter("answer8");
 			
+			//String physical_ailments = request.getParameter("physical_ailments");
+			
+			
 			Date last_visit_date= new Date();
 			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			

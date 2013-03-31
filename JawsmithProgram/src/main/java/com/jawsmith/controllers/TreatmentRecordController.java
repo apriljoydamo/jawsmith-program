@@ -3,6 +3,7 @@ package com.jawsmith.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,10 +33,19 @@ public class TreatmentRecordController {
 	@RequestMapping("/view")
 	public String viewMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
-		
+		float balancePerDate;
+		float totalBalance = 0;
 		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		List<TreatmentRecord> treatmentRecordList = treatmentRecordMethods.findByPatientId(patient.getPatient_id());
+		
+		Iterator<TreatmentRecord> iter = treatmentRecordList.iterator();
+		while(iter.hasNext()){
+			TreatmentRecord tr = (TreatmentRecord) iter.next();
+			balancePerDate = tr.getDebit()-tr.getCredit_amount();
+			totalBalance += balancePerDate;
+		}
 		model.addAttribute("treatmentRecordList", treatmentRecordList);
+		model.addAttribute("totalBalance", totalBalance);
 		
 		return "treatment_record";
 	}
@@ -43,9 +53,9 @@ public class TreatmentRecordController {
 	
 	
 	@RequestMapping("/add")
-	public void addMethod(HttpServletRequest request, HttpServletResponse response, 
+	public String addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
-		Patient patient = (Patient) request.getAttribute("patient");
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		
 		String tooth_number = request.getParameter("tooth_number");
 		String description = request.getParameter("description");
@@ -68,10 +78,14 @@ public class TreatmentRecordController {
 		treatmentRecord.setPatient_id(treatment_record_patient_id);
 		dataAccesses.save(treatmentRecord);
 		System.out.println("TREATMENT RECORD SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
+	
+		return "redirect:/treatment_record/view";
 	}
 	
+	
+	
 	@RequestMapping("/edit")
-	public void editMethod(HttpServletRequest request, HttpServletResponse response, 
+	public String editMethod(HttpServletRequest request, HttpServletResponse response, 
 								ModelMap model, Principal principal) throws IOException, ServletException{
 		
 		String tooth_number = request.getParameter("tooth_number");
@@ -80,7 +94,7 @@ public class TreatmentRecordController {
 		Float debit = Float.parseFloat(request.getParameter("debit"));
 		Date credit_date = new Date();
 		Float credit_amount = Float.parseFloat(request.getParameter("credit_amount"));
-		Date last_visit_date = new Date();
+		//Date last_visit_date = new Date();
 		int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 		int treatment_record_id = Integer.parseInt(request.getParameter("treatment_record_id"));
 		
@@ -92,10 +106,11 @@ public class TreatmentRecordController {
 		treatmentRecord.setDebit(debit);
 		treatmentRecord.setCredit_date(credit_date);
 		treatmentRecord.setCredit_amount(credit_amount);
-		treatmentRecord.setLast_visit_date(last_visit_date);
+		//treatmentRecord.setLast_visit_date(last_visit_date);
 		treatmentRecord.setPatient_id(patient_id);
 		dataAccesses.update(treatmentRecord);
 		System.out.println("TREATMENT RECORD UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 		
+		return "redirect:/treatment_record/view";
 	}
 }

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Beauteethful</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
@@ -24,7 +24,7 @@
 		</div>
 		
 		<div id="treatment_record_div1">
-			<img alt="" src="" />
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/chart3.jpg" />
 		</div>
 		
 		<div id="treatment_record_div2">
@@ -45,43 +45,54 @@
 					<td><c:out value="${treatment_rec.tooth_number}" /></td>
 					<td><c:out value="${treatment_rec.description}" /></td>
 					<td><c:out value="${treatment_rec.prescription}" /></td>
-					<td><c:out value="${treatment_rec.debit}" /></td>
+					<td><fmt:formatNumber value="${treatment_rec.debit}" type="currency" currencySymbol="" /></td>
 					<td><c:out value="${treatment_rec.credit_date}" /></td>
-					<td><c:out value="${treatment_rec.credit_amount}" /></td>
-					<td><c:out value="${treatment_rec.debit - treatment_rec.credit_amount}" /></td>		
+					<td><fmt:formatNumber value="${treatment_rec.credit_amount}" type="currency" currencySymbol="" /></td>
+					<td><fmt:formatNumber value="${treatment_rec.debit - treatment_rec.credit_amount}" type="currency" currencySymbol=""/></td>	
 				</tr>
 				</c:forEach>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>Total Balance:</td>
+					<td><fmt:formatNumber value="${totalBalance}" type="currency" currencySymbol="" /></td>
+				</tr>
 			</table>
 		</div>
 		
-		<div id="treatment_record_div3">	
-			<form action="${pageContext.request.contextPath}/treatmentRecord/save" method="POST">
-				<table>
-					<tr>
-						<td>Tooth No.</td>
-						<td><input type="text" name="tooth_number"></td>
-					</tr>
-					<tr><td>Description</td>
-						<td><input type="text" name="description"></td>
-					</tr>
-					<tr>
-						<td>Prescription</td>
-						<td><input type="text" name="prescription"></td>
-					</tr>
-					<tr>
-						<td>Debit</td>
-						<td><input type="text" name="debit"></td>
-					</tr>
-					<tr>
-						<td>Credit Date</td>
-						<td><input type="text" name="credit_date" value="yyyy-MM-dd"></td>
-					</tr>
-					<tr>
-						<td>Credit Amount</td>
-						<td><input type="text" name="credit_amount"></td>
-					</tr>
-				</table>
-				<input type="submit" value="Save"/>
+		<div id="add_treatment_record" class="modalDialog">
+			<a href="#close" class="close_add_treat close">X</a>     
+			<form action="${pageContext.request.contextPath}/treatment_record/add" method="POST">
+			<table>
+				<tr>
+					<td>Tooth No.</td>
+					<td><input type="text" name="tooth_number"></td>
+				</tr>
+				<tr><td>Description</td>
+					<td><input type="text" name="description"></td>
+				</tr>
+				<tr>
+					<td>Prescription</td>
+					<td><input type="text" name="prescription"></td>
+				</tr>
+				<tr>
+					<td>Debit</td>
+					<td><input type="text" name="debit"></td>
+				</tr>
+				<tr>
+					<td>Credit Date</td>
+					<td><input type="text" name="credit_date" value="yyyy-MM-dd"></td>
+				</tr>
+				<tr>
+					<td>Credit Amount</td>
+					<td><input type="text" name="credit_amount"></td>
+				</tr>
+			</table>
+			<input type="submit" value="Save"/>
 			</form>
 		</div>
 	</body>

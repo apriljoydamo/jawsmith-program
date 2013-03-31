@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.SystemUserMethods;
+import com.jawsmith.interfaces.TableMaintenanceMethods;
 import com.jawsmith.model.Patient;
 import com.jawsmith.model.SystemUser;
+import com.jawsmith.model.TableMaintenance;
 
 /**
  * Handles requests for the application home page.
@@ -39,6 +41,10 @@ public class HomeController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	SystemUserMethods sysUserMethods = (SystemUserMethods)appContext.getBean("systemUserBean");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
+	//DataAccesses tblMaintenanceDataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
+	TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
+	int MED_HIS_QUESTIONS_REF_ID = 2;
+	int PHYSICAL_AILMENTS_REF_ID = 3;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -64,22 +70,9 @@ public class HomeController {
 		return "login_page";
 	}
 	
-	@RequestMapping("/table_maintenance_page")
-	public String tableMaintenancePage(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "table_maintenance_page";
-	}
-	
-	@RequestMapping("/search")
-	public String search(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "home_page";
-	}
-	
 	@RequestMapping("/loginSuccess")
 	public String login(Locale locale, HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
@@ -89,17 +82,32 @@ public class HomeController {
 		//User in session
 		request.getSession().setAttribute("user", user );		
 		
-		//Fills patient table in jsp
-		ArrayList<Patient> list = new ArrayList<Patient>();
-		List<Patient> object = dataAccesses.getAll();
-		Iterator iterate = object.iterator();
-    	while(iterate.hasNext()){
-    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
-    		list.add(iterlist);							//Then add to a list that would be passed in the jsp
-    	}
-		model.addAttribute("patientList",list);
+		//ADDS ALL RECORDS(in the form of attributes containing lists) FROM TABLE MAINTENANCE TO THE SESSION 
+		//(These attributes would float in the application context as long as the app is not closed
+		List tempMedHisQuestionList = tblMaintenanceMethods.findAllByRefId(MED_HIS_QUESTIONS_REF_ID);
+		List tempPhysicalAilmentList = tblMaintenanceMethods.findAllByRefId(PHYSICAL_AILMENTS_REF_ID);
 		
-		return "home_page";
+		ArrayList<TableMaintenance> medHisQuestionList = new ArrayList<TableMaintenance>();
+		ArrayList<TableMaintenance> physicalAilmentList = new ArrayList<TableMaintenance>();
+	
+		Iterator<TableMaintenance> iter = tempMedHisQuestionList.iterator();
+		while(iter.hasNext()){
+			TableMaintenance medHis = (TableMaintenance) iter.next();
+			System.out.println("Desc: MedHis - "+medHis.getTbl_maintenance_description());
+			medHisQuestionList.add(medHis);
+		}
+		
+		Iterator<TableMaintenance> iter2 = tempPhysicalAilmentList.iterator();
+		while(iter2.hasNext()){
+			TableMaintenance physicalAilment = (TableMaintenance) iter2.next();
+			System.out.println("Desc: PhysicalAilment - "+physicalAilment.getTbl_maintenance_description());
+			physicalAilmentList.add(physicalAilment);
+		}
+		
+		request.getSession().setAttribute("medHisQuestionList", medHisQuestionList);
+		request.getSession().setAttribute("physicalAilmentList", physicalAilmentList);
+		
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("/logout")
@@ -113,6 +121,34 @@ public class HomeController {
 								  ModelMap model, Principal principal) throws IOException, ServletException{
 		System.out.println("User is denied of access");
 		return "login_page";
+	}
+	
+	@RequestMapping("/search")
+	public String search(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		return "home_page";
+	}
+	
+	@RequestMapping("/admin")
+	public String adminTools(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		return "admin_page";
+	}
+	
+	@RequestMapping("/home")
+	public String home(Locale locale, HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		//Fills patient table in jsp
+		ArrayList<Patient> list = new ArrayList<Patient>();
+		List<Patient> object = dataAccesses.getAll();
+		Iterator<Patient> iterate = object.iterator();
+    	while(iterate.hasNext()){
+    		Patient iterlist = (Patient) iterate.next();	
+    		list.add(iterlist);						
+    	}
+		model.addAttribute("patientList",list);
+		
+		return "home_page";
 	}
 	
 }
