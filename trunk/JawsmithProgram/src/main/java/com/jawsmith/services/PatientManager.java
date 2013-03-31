@@ -2,13 +2,23 @@ package com.jawsmith.services;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.PatientMethods;
 
 
 
-public class PatientManager implements DataAccesses{
+public class PatientManager implements DataAccesses, PatientMethods{
 
 	private DataAccesses dataAccesses;
+	private PatientMethods patientMethods;
 	
+	public PatientMethods getPatientMethods() {
+		return patientMethods;
+	}
+
+	public void setPatientMethods(PatientMethods patientMethods) {
+		this.patientMethods = patientMethods;
+	}
+
 	/**
 	 * @return the dataAccesses
 	 */
@@ -50,6 +60,11 @@ public class PatientManager implements DataAccesses{
 	
 	public List getAll() {
 		return dataAccesses.getAll();
+	}
+
+	@Override
+	public List paginatedView(int offset, int numOfRecords) {
+		return (List)patientMethods.paginatedView(offset, numOfRecords);
 	}
 
 }
