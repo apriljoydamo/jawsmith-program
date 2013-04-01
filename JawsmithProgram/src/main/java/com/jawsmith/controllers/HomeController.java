@@ -41,7 +41,6 @@ public class HomeController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	SystemUserMethods sysUserMethods = (SystemUserMethods)appContext.getBean("systemUserBean");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
-	//DataAccesses tblMaintenanceDataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
 	TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
 	int MED_HIS_QUESTIONS_REF_ID = 2;
 	int PHYSICAL_AILMENTS_REF_ID = 3;

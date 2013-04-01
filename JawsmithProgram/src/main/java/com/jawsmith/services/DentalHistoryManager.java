@@ -1,5 +1,6 @@
 package com.jawsmith.services;
 
+import java.util.Date;
 import java.util.List;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.DentalHistoryMethods;
@@ -71,6 +72,12 @@ public class DentalHistoryManager implements DataAccesses,DentalHistoryMethods{
 	@Override
 	public Object findByPatientId(int patientId) {
 		return dentalHistoryMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return dentalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

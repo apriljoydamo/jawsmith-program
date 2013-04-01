@@ -11,7 +11,7 @@
 					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 					<table>
 						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}
-								<input type="hidden" value="${tbl_med_his.code_table_value}" name="'question'+${tbl_med_his.code_table_value}" />
+								<input type="hidden" value="${tbl_med_his.code_table_value}" name="question" />
 						</td></tr>
 						<c:choose>
 							<c:when test="${tbl_med_his.code_table_value=='2'}">

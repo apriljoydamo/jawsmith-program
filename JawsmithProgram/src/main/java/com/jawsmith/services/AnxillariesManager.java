@@ -1,5 +1,6 @@
 package com.jawsmith.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.AnxillariesMethods;
@@ -72,6 +73,12 @@ public class AnxillariesManager implements DataAccesses, AnxillariesMethods{
 	@Override
 	public Object findByPatientId(int patientId) {
 		return anxillariesMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return anxillariesMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -44,6 +46,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 @Controller
 @RequestMapping("patient")
 public class PatientController {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
@@ -57,6 +60,7 @@ public class PatientController {
 			request.getSession().removeAttribute("patient");
 		}catch(Exception e){
 			System.out.println("ERROR IN DESTROYING SESSION");
+			logger.error("ERROR IN DESTROYING SESSION");
 		}
 		
 		ArrayList<Patient> list = new ArrayList<Patient>();
@@ -188,13 +192,13 @@ public class PatientController {
 	public String addRecordDone(HttpServletRequest request, HttpServletResponse response, 
 							ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		AnxillariesController.addMethod(request, response, model, principal);
-		ClinicalExaminationController.addMethod(request, response, model, principal);
-		DentalHistoryController.addMethod(request, response, model, principal);
+		//AnxillariesController.addMethod(request, response, model, principal);
+		//ClinicalExaminationController.addMethod(request, response, model, principal);
+		//DentalHistoryController.addMethod(request, response, model, principal);
 		MedicalHistoryController.addMethod(request, response, model, principal);
-		OcclusionController.addMethod(request, response, model, principal);
-		OtherInformationController.addMethod(request, response, model, principal);
-		TreatmentPlanController.addMethod(request, response, model, principal);
+		//OcclusionController.addMethod(request, response, model, principal);
+		//OtherInformationController.addMethod(request, response, model, principal);
+		//TreatmentPlanController.addMethod(request, response, model, principal);
 		
 		return "redirect:/patient/view_patient/details";
 	}
