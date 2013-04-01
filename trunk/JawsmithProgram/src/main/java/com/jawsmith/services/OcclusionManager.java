@@ -1,5 +1,6 @@
 package com.jawsmith.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
@@ -71,6 +72,12 @@ public class OcclusionManager implements DataAccesses, OcclusionMethods{
 	@Override
 	public Object findByPatientId(int patientId) {
 		return occlusionMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return occlusionMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

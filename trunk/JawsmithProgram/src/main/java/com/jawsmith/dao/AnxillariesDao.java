@@ -1,5 +1,6 @@
 package com.jawsmith.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -42,6 +43,14 @@ public class AnxillariesDao extends HibernateDaoSupport implements DataAccesses,
 	@Override
 	public Object findByPatientId(int patientId) {
 		List list = getHibernateTemplate().find("from Anxillaries where patients_PATIENT_ID=?",patientId);
+		return list.get(0);
+	}
+
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		List list = getHibernateTemplate().find("from Anxillaries where patients_PATIENT_ID='"+patientId+"' and LAST_VISIT_DATE='"+lastVisitDate+"'");
 		return list.get(0);
 	}
 }

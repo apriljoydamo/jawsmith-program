@@ -1,4 +1,5 @@
 package com.jawsmith.services;
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
@@ -71,6 +72,12 @@ public class TreatmentRecordManager implements DataAccesses, TreatmentRecordMeth
 	@Override
 	public List findByPatientId(int patientId) {
 		return treatmentRecordMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return treatmentRecordMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

@@ -1,4 +1,5 @@
 package com.jawsmith.services;
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
@@ -70,6 +71,12 @@ public class TreatmentPlanManager implements DataAccesses, TreatmentPlanMethods{
 	@Override
 	public Object findByPatientId(int patientId) {
 		return treatmentPlanMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return treatmentPlanMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

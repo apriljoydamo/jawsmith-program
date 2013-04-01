@@ -1,5 +1,6 @@
 package com.jawsmith.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -42,5 +43,13 @@ public class TreatmentRecordDao extends HibernateDaoSupport implements DataAcces
 	public List findByPatientId(int patientId) {
 		List list = getHibernateTemplate().find("from TreatmentRecord where patients_PATIENT_ID=?",patientId);
 		return list;
+	}
+
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		List list = getHibernateTemplate().find("from TreatmentRecord where patients_PATIENT_ID='"+patientId+"' and LAST_VISIT_DATE='"+lastVisitDate+"'");
+		return list.get(0);
 	}
 }

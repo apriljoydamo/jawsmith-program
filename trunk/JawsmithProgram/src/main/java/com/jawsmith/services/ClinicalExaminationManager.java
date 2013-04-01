@@ -1,5 +1,6 @@
 package com.jawsmith.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.ClinicalExaminationMethods;
@@ -67,6 +68,12 @@ public class ClinicalExaminationManager implements DataAccesses, ClinicalExamina
 	@Override
 	public Object findByPatientId(int patientId) {
 		return clinicalExaminationMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return clinicalExaminationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }

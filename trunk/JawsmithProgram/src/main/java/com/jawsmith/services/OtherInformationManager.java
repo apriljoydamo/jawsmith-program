@@ -1,4 +1,5 @@
 package com.jawsmith.services;
+import java.util.Date;
 import java.util.List;
 
 import com.jawsmith.interfaces.DataAccesses;
@@ -72,6 +73,12 @@ public class OtherInformationManager implements DataAccesses, OtherInformationMe
 	@Override
 	public Object findByPatientId(int patientId) {
 		return otherInformationMethods.findByPatientId(patientId);
+	}
+
+	@Override
+	public Object findByPatientIdAndLastVisitDate(int patientId,
+			Date lastVisitDate) {
+		return otherInformationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 	}
 
 }
