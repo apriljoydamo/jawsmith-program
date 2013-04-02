@@ -43,7 +43,7 @@
 	          </tr>
 	          <tr>              
 	                <td>Date of Birth: </td>
-	                <td><input placeholder=" dd-mm-yyyy" type="text" id="add_patient_date_of_birth" name="dob" class=""/></td> 
+	                <td><input placeholder="yyyy-MM-dd" type="text" id="add_patient_date_of_birth" name="dob" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>

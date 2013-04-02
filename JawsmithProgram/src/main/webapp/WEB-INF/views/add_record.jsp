@@ -8,8 +8,8 @@
 				<!-- MEDICAL HISTORY -->
 				<div id="medical_his_div">
 				<h3>Medical History</h3>
-					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 					<table>
+					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}
 								<input type="hidden" value="${tbl_med_his.code_table_value}" name="question" />
 						</td></tr>
@@ -24,8 +24,8 @@
 								<tr><td><input type="text" name="answer" /></td></tr>
 							</c:otherwise>
 						</c:choose>
-					</table>
 					</c:forEach>
+					</table>
 				</div>
 				
 				

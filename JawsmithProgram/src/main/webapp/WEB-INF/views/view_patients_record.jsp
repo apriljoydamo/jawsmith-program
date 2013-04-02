@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -40,48 +41,181 @@
 			<div id="patient_medical_info">
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
 				<div id="medical_his_div" class="">
-                    <c:forEach var="medhis" items="${medHisList}">
-                    	<table>
-                    		<tr>
-                    			<td></td>                    			
-                    		</tr>
-                    	</table>
-                    </c:forEach>
+                   <table>
+					<c:forEach var="medhis" items="${latestMedHisList}" >
+						<tr>
+							<td><c:out value="${medhis.question_id}" /></td>
+							<td><c:out value="${medhis.answer}" /></td>
+						</tr>
+					</c:forEach>
+					</table>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
 				<div id="dental_his_div">
-                    ${dental_his.fluoride_treatment}<br/>
-                    ${dental_his.orthodontic_treatment}<br/>
+                  <img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/>
+                  <img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/>
+                  
+                   <table>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Fluoride Treatment</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Orthodontic Treatment</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Pulp Therapy</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Temporo Mandibular</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Periodontal Therapy</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Dental Surgery</td>
+                  		</tr>
+                  		<tr>
+                  			<td>
+                  				<c:choose>
+                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
+                  				</c:choose>
+                  			</td>
+                  			<td>Extraction</td>
+                  		</tr>
+                   </table>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Clinical Examination</h3>
 				<div id="clinic_exam_div">
-                    ${clinic_exam.gingival_color}<br/>
-                    ${clinic_exam.consistency_of_gingival}<br/>
-                    ${clinic_exam.tounge}<br/>
+                    <table>
+                   		<tr>
+                   			<td>Gingival Color:</td>
+                   			<td><c:out value="${clinical.gingival_color}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Consistency of Gingival:</td>
+                   			<td><c:out value="${clinical.consistency_of_gingival}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Tounge:</td>
+                   			<td><c:out value="${clinical.tounge}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Oral Hygiene:</td>
+                   			<td><c:out value="${clinical.oral_hygiene}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Lymph Nodes:</td>
+                   			<td><c:out value="${clinical.lymph_nodes}" /></td>
+                   		</tr>
+                    </table>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Occlusion</h3>
 				<div id="occlusion_div">
-                    ${occlusion.class_1}<br/>
-                    ${occlusion.class_2}<br/>
-                    ${occlusion.class_3}<br/>
+                   <table>
+                   		<tr>
+                   			<td>Class I</td>
+                   			<td>div: <c:out value="${occlusion.class_1}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Class II</td>
+                   			<td>div: <c:out value="${occlusion.class_2}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Class III</td>
+                   			<td>div: <c:out value="${occlusion.class_3}" /></td>
+                   		</tr>
+                    </table>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Anxillaries</h3>
 				<div id="anxillaries_div">
-                    ${anxillaries.bleeding_time}<br/>
-                    ${anxillaries.blood_pressure}<br/>
-                    ${anxillaries.radiographic_interpretation}<br/>
+                   <table>
+                   		<tr>
+                   			<td>Bleeding Time:</td>
+                   			<td><c:out value="${anxillaries.bleeding_time}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Blood Pressure:</td>
+                   			<td><c:out value="${anxillaries.blood_pressure}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Radiographic Interpretation</td>
+                   			<td><c:out value="${anxillaries.radiographic_interpretation}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Clotting Time</td>
+                   			<td><c:out value="${anxillaries.clotting_time}" /></td>
+                   		</tr>
+                   		<tr>
+                   			<td>Blood Sugar</td>
+                   			<td><c:out value="${anxillaries.blood_sugar}" /></td>
+                   		</tr>
+                    </table>
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Chief Complaint</h3>
 				<div id="chief_complaint_div">
-                	test complaints
+                	<c:out value="${other.chief_complaint}" />
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Diagnosis</h3>
 				<div id="diagnosis_div">
-					test diagnosis
+					<c:out value="${other.diagnosis}" />
+                </div>
+                <h3 class="patient_medical_info patient_medical_info_mouseout">Note/s</h3>
+				<div id="notes_div">
+					<c:out value="${other.description_notes}" />
                 </div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Treatment Plan</h3>
 				<div id="treatment_plan_div">
-					test plan
+					<table>
+						<tr>
+							<td>Treatment:</td>
+							<td><c:out value="${treatmentplan.treatment}" /></td>
+							<td>Treatment Fee:</td>
+							<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
+						</tr>
+						<tr>
+							<td>Alternative Treatment:</td>
+							<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
+							<td>Alternative Treatment Fee:</td>
+							<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
+						</tr>
+					</table>
                 </div>
 			</div>
 		</div>

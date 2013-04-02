@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,11 +28,21 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jawsmith.interfaces.AnxillariesMethods;
+import com.jawsmith.interfaces.ClinicalExaminationMethods;
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.DentalHistoryMethods;
 import com.jawsmith.interfaces.PatientMethods;
 import com.jawsmith.interfaces.TableMaintenanceMethods;
+import com.jawsmith.model.Anxillaries;
+import com.jawsmith.model.ClinicalExamination;
+import com.jawsmith.model.DentalHistory;
+import com.jawsmith.model.MedicalHistory;
+import com.jawsmith.model.Occlusion;
+import com.jawsmith.model.OtherInformation;
 import com.jawsmith.model.Patient;
 import com.jawsmith.model.TableMaintenance;
+import com.jawsmith.model.TreatmentPlan;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -78,6 +90,7 @@ public class PatientController {
 	@RequestMapping("/add")
 	public String addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
+		
 		Patient patient = new Patient();
 	
 		//if(validator(request, model)==true){
@@ -95,10 +108,15 @@ public class PatientController {
 		String referred_by = request.getParameter("referred_by");
 		String guardian = request.getParameter("guardian");
 		String patient_num = request.getParameter("patient_num");
-		String nationality="Filipino";
-		Boolean status=Boolean.valueOf("1");
-		Date dob = new Date();
-		Date last_visit_date= new Date();
+		String nationality = request.getParameter("nationality");
+		Boolean status = true;
+		Date last_visit_date = new Date();
+		Date dob = null;
+		try {
+			dob = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob"));
+		} catch (ParseException e) {
+			System.out.println("ERROR WITH PARSING DATE OF BIRTH");
+		}
 		
 		patient.setStatus(status);
 		patient.setLast_visit_date(last_visit_date);
@@ -128,10 +146,10 @@ public class PatientController {
 	public String editMethod(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		Patient patient = new Patient();
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		
-		if(validator(request, model)==true){
-		int editId = Integer.parseInt(request.getParameter("editId"));
+		//if(validator(request, model)==true){
+		//int editId = Integer.parseInt(request.getParameter("editId"));
 		String last_name = request.getParameter("last_name");
 		String first_name = request.getParameter("first_name");
 		String middle_name = request.getParameter("middle_name");
@@ -146,10 +164,16 @@ public class PatientController {
 		String referred_by = request.getParameter("referred_by");
 		String guardian = request.getParameter("guardian");
 		String patient_num = request.getParameter("patient_num");
-		String nationality="Filipino";
-		Boolean status=Boolean.valueOf("1");
-		Date dob = new Date();
-		Date last_visit_date= new Date();
+		String nationality = request.getParameter("nationality");
+		Boolean status = true;
+		Date last_visit_date = new Date();
+		Date dob = null;
+		try {
+			dob = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob"));
+			System.out.println("DATE OF BIRTH: "+dob);
+		} catch (ParseException e) {
+			System.out.println("ERROR WITH PARSING DATE OF BIRTH");
+		}
 		
 		patient.setStatus(status);
 		patient.setLast_visit_date(last_visit_date);
@@ -169,10 +193,10 @@ public class PatientController {
 		patient.setReligion(religion);
 		patient.setReferred_by(referred_by);
 		patient.setGuardian(guardian);
-		patient.setPatient_id(editId);
+		//patient.setPatient_id(editId);
 		
 		dataAccesses.update(patient);
-		}
+		//}
 		
     	return "redirect:/patient/list";
 	}
@@ -192,13 +216,19 @@ public class PatientController {
 	public String addRecordDone(HttpServletRequest request, HttpServletResponse response, 
 							ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		//AnxillariesController.addMethod(request, response, model, principal);
-		//ClinicalExaminationController.addMethod(request, response, model, principal);
-		//DentalHistoryController.addMethod(request, response, model, principal);
+		AnxillariesController.addMethod(request, response, model, principal);
+		ClinicalExaminationController.addMethod(request, response, model, principal);
+		DentalHistoryController.addMethod(request, response, model, principal);
 		MedicalHistoryController.addMethod(request, response, model, principal);
-		//OcclusionController.addMethod(request, response, model, principal);
-		//OtherInformationController.addMethod(request, response, model, principal);
-		//TreatmentPlanController.addMethod(request, response, model, principal);
+		OcclusionController.addMethod(request, response, model, principal);
+		OtherInformationController.addMethod(request, response, model, principal);
+		TreatmentPlanController.addMethod(request, response, model, principal);
+		
+		//update Patient's last visit date
+		Date last_visit_date = new Date();
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
+		patient.setLast_visit_date(last_visit_date);
+		dataAccesses.update(patient);
 		
 		return "redirect:/patient/view_patient/details";
 	}
@@ -220,12 +250,102 @@ public class PatientController {
 								  ModelMap model, Principal principal) throws IOException, ServletException{
 		
 		Patient patient = (Patient) request.getSession().getAttribute("patient");		
+		int patientId = patient.getPatient_id();
+		Date lastVisitDate = patient.getLast_visit_date();
+		System.out.println("patientID: "+ patientId);
+		System.out.println("LastVisitDate: "+lastVisitDate);
 		
 		//ALL THE LATEST MEDICAL RECORDS TO BE SHOWN HERE
-
-		return "view_patients_record";
+		try{
+			List<MedicalHistory> latestMedHisList = MedicalHistoryController.medicalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			DentalHistory dentalhis = (DentalHistory) DentalHistoryController.dentalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			ClinicalExamination clinical = (ClinicalExamination) ClinicalExaminationController.clinicalExaminationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			Anxillaries anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			Occlusion occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			OtherInformation other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			TreatmentPlan treatmentplan = (TreatmentPlan) TreatmentPlanController.treatmentPlanMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			
+			model.addAttribute("latestMedHisList", latestMedHisList);
+			model.addAttribute("dentalhis", dentalhis);
+			model.addAttribute("clinical", clinical);
+			model.addAttribute("anxillaries", anxillaries);
+			model.addAttribute("occlusion", occlusion);
+			model.addAttribute("other", other);
+			model.addAttribute("treatmentplan", treatmentplan);
+		}catch(Exception e){
+			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
+		}
+		
+		    return "view_patients_record";
 	}
 	
+	
+	@RequestMapping(value = "/generate_pdf_file") 
+    public String getPDF(HttpServletResponse response,HttpServletRequest request, 
+    						Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+	 	
+	  	//LAYOUTS
+	  	InputStream inputStreamPatientReport = new FileInputStream("reports/patient_report.jrxml");
+		/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
+	  	InputStream inputStreamReportClinical = new FileInputStream("reports/patient_report_clinical.jrxml");
+		InputStream  inputStreamReportDentalHis = new FileInputStream("reports/patient_report_dentalhis.jrxml");
+	  	InputStream inputStreamReportMedHis = new FileInputStream("reports/patient_report_medhis.jrxml");
+		InputStream  inputStreamReportOcclusion = new FileInputStream("reports/patient_report_occlusion.jrxml");
+	  	InputStream inputStreamReportOtherInfo = new FileInputStream("reports/patient_report_other_info.jrxml");
+		InputStream  inputStreamReportTreatmentPlan = new FileInputStream("reports/patient_report_treatment_plan.jrxml");
+		InputStream  inputStreamReportTreatmentRecord = new FileInputStream("reports/patient_report_treatment_record.jrxml");
+		*/
+	  	
+		//VALUES TO BE PRINTED HERE
+	  	//DataBeanMaker dataBeanMaker = new DataBeanMaker();
+		//ArrayList<DataBean> dataBeanList = dataBeanMaker.getDataBeanList();
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
+		ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
+		dataBeanList.add(patient);
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+		
+		//COMPILE JRXML FILES
+		/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
+		JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
+		JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
+		JasperDesign jasperSubDesign4 = JRXmlLoader.load(inputStreamReportMedHis);
+		JasperDesign jasperSubDesign5 = JRXmlLoader.load(inputStreamReportOcclusion);
+		JasperDesign jasperSubDesign6 = JRXmlLoader.load(inputStreamReportOtherInfo);
+		JasperDesign jasperSubDesign7 = JRXmlLoader.load(inputStreamReportTreatmentPlan);
+		JasperDesign jasperSubDesign8 = JRXmlLoader.load(inputStreamReportTreatmentRecord);
+		*/JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
+		
+        
+        //COMPILE REPORT
+		/*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
+		JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
+		JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
+		JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
+		JasperReport jasperSubReport5 = JasperCompileManager.compileReport(jasperSubDesign5);
+		JasperReport jasperSubReport6 = JasperCompileManager.compileReport(jasperSubDesign6);
+		JasperReport jasperSubReport7 = JasperCompileManager.compileReport(jasperSubDesign7);
+		JasperReport jasperSubReport8 = JasperCompileManager.compileReport(jasperSubDesign8);
+		*/JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+        
+		//FILL REPORT
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
+		parameters.put("subreportParameterClinical", jasperSubReport2);
+		parameters.put("subreportParameterDentalHis", jasperSubReport3);
+		parameters.put("subreportParameterMedHis", jasperSubReport4);
+		parameters.put("subreportParameterOcclusion", jasperSubReport5);
+		parameters.put("subreportParameterOtherInfo", jasperSubReport6);
+		parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
+		parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
+		*/
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+
+        //EXPORT REPORT
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper.pdf"); 
+
+        return "redirect:/home";
+  
+  } 
 	
 	public Boolean validator(HttpServletRequest request,
 			ModelMap model) throws IOException, ServletException{
@@ -408,74 +528,8 @@ public class PatientController {
 		return validateStatus;
 		}
 	
-	  @RequestMapping(value = "/generate_pdf_file") 
-	    public String getPDF(HttpServletResponse response,HttpServletRequest request, 
-	    						Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
-		 	
-		  	//LAYOUTS
-		  	InputStream inputStreamPatientReport = new FileInputStream("reports/patient_report.jrxml");
-			/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
-		  	InputStream inputStreamReportClinical = new FileInputStream("reports/patient_report_clinical.jrxml");
-			InputStream  inputStreamReportDentalHis = new FileInputStream("reports/patient_report_dentalhis.jrxml");
-		  	InputStream inputStreamReportMedHis = new FileInputStream("reports/patient_report_medhis.jrxml");
-			InputStream  inputStreamReportOcclusion = new FileInputStream("reports/patient_report_occlusion.jrxml");
-		  	InputStream inputStreamReportOtherInfo = new FileInputStream("reports/patient_report_other_info.jrxml");
-			InputStream  inputStreamReportTreatmentPlan = new FileInputStream("reports/patient_report_treatment_plan.jrxml");
-			InputStream  inputStreamReportTreatmentRecord = new FileInputStream("reports/patient_report_treatment_record.jrxml");
-			*/
-		  	
-			//VALUES TO BE PRINTED HERE
-		  	//DataBeanMaker dataBeanMaker = new DataBeanMaker();
-			//ArrayList<DataBean> dataBeanList = dataBeanMaker.getDataBeanList();
-			Patient patient = (Patient) request.getSession().getAttribute("patient");
-			ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
-			dataBeanList.add(patient);
-			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
-			
-			//COMPILE JRXML FILES
-			/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
-			JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
-			JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
-			JasperDesign jasperSubDesign4 = JRXmlLoader.load(inputStreamReportMedHis);
-			JasperDesign jasperSubDesign5 = JRXmlLoader.load(inputStreamReportOcclusion);
-			JasperDesign jasperSubDesign6 = JRXmlLoader.load(inputStreamReportOtherInfo);
-			JasperDesign jasperSubDesign7 = JRXmlLoader.load(inputStreamReportTreatmentPlan);
-			JasperDesign jasperSubDesign8 = JRXmlLoader.load(inputStreamReportTreatmentRecord);
-			*/JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
-			
-	        
-	        //COMPILE REPORT
-			/*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
-			JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
-			JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
-			JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
-			JasperReport jasperSubReport5 = JasperCompileManager.compileReport(jasperSubDesign5);
-			JasperReport jasperSubReport6 = JasperCompileManager.compileReport(jasperSubDesign6);
-			JasperReport jasperSubReport7 = JasperCompileManager.compileReport(jasperSubDesign7);
-			JasperReport jasperSubReport8 = JasperCompileManager.compileReport(jasperSubDesign8);
-			*/JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
-	        
-			//FILL REPORT
-			Map<String, Object> parameters = new HashMap<String, Object>();
-			/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
-			parameters.put("subreportParameterClinical", jasperSubReport2);
-			parameters.put("subreportParameterDentalHis", jasperSubReport3);
-			parameters.put("subreportParameterMedHis", jasperSubReport4);
-			parameters.put("subreportParameterOcclusion", jasperSubReport5);
-			parameters.put("subreportParameterOtherInfo", jasperSubReport6);
-			parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
-			parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
-			*/
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
-
-	        //EXPORT REPORT
-	        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper.pdf"); 
 	
-	        return "redirect:/home";
-	  
-	  } 
-	  
-	  public void pagination(HttpServletResponse response,HttpServletRequest request, ModelMap model) throws ClassNotFoundException { 
+	public void pagination(HttpServletResponse response,HttpServletRequest request, ModelMap model) throws ClassNotFoundException { 
 		  int pageNum = 1;
 		  int offset = 0;
 		  int recordsPerPage = 20;

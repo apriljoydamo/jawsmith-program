@@ -59,29 +59,7 @@ public class MedicalHistoryController {
 			System.out.println("Question: "+question.length);
 			System.out.println("Answer: "+answer.length);
 			System.out.println("Appended Physical Ailments: "+appendedPhysicalAilments);
-			/*
-			ArrayList<String> questions = new ArrayList<String>();
-			questions.add(request.getParameter("question1"));
-			questions.add(request.getParameter("question2"));
-			questions.add(request.getParameter("question3"));
-			questions.add(request.getParameter("question4"));
-			questions.add(request.getParameter("question5"));
-			questions.add(request.getParameter("question6"));
-			questions.add(request.getParameter("question7"));
-			questions.add(request.getParameter("question8"));
-			
-			String answer[] = new String[8];
-			answer[0] = request.getParameter("answer1");
-			answer[1] = request.getParameter("physical_ailments");
-			answer[2] = request.getParameter("answer3");
-			answer[3] = request.getParameter("answer4");
-			answer[4] = request.getParameter("answer5");
-			answer[5] = request.getParameter("answer6");
-			answer[6] = request.getParameter("answer7");
-			answer[7] = request.getParameter("answer8");
-			
-			*/
-			
+				
 			Date last_visit_date= new Date();
 			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			int y = 0;
@@ -111,43 +89,53 @@ public class MedicalHistoryController {
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
 		
-			Patient patient = (Patient) request.getAttribute("patient");
-			int med_history_patient_id = (Integer)patient.getPatient_id();
-		
+			Patient patient = (Patient) request.getSession().getAttribute("patient");
+			int patientId = patient.getPatient_id();
+			Date lastVisitDate = patient.getLast_visit_date();
 	
-			MedicalHistory medicalHistory = (MedicalHistory)medicalHistoryMethods.findByPatientId(med_history_patient_id);
+			List<MedicalHistory> medicalHistoryList = medicalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
 			
 			
-			String question[] = new String[17];
-			question[0] = request.getParameter("question1");
-			question[1] = request.getParameter("question2");
-			question[2] = request.getParameter("question3");
-			question[3] = request.getParameter("question4");
-			question[4] = request.getParameter("question5");
-			question[5] = request.getParameter("question6");
-			question[6] = request.getParameter("question7");
-			question[7] = request.getParameter("question8");
+			String appendedPhysicalAilments = "";
 			
-			String answer[] = new String[17];
-			answer[0] = request.getParameter("answer1");
-			answer[1] = request.getParameter("answer2");
-			answer[2] = request.getParameter("answer3");
-			answer[3] = request.getParameter("answer4");
-			answer[4] = request.getParameter("answer5");
-			answer[5] = request.getParameter("answer6");
-			answer[6] = request.getParameter("answer7");
-			answer[7] = request.getParameter("answer8");
+			String[] question = (String[]) request.getParameterValues("question");
+			String[] answer = (String[]) request.getParameterValues("answer");
+			String[] physical_ailments = (String[]) request.getParameterValues("physical_ailments");
 			
-			//medicalHistory.setLast_visit_date(last_visit_date);
-			//medicalHistory.setQuestion_id(question);
-			//medicalHistory.setAnswer(answer);
-			//medicalHistory.setQuestion_id(question);
-			//medicalHistory.setAnswer(answer);
-			for(int x=0; x<=8; x++){
-				medicalHistory.setQuestion_id(question[x]);
-				medicalHistory.setAnswer(answer[x]);
-				dataAccesses.update(medicalHistory);
+			//Append physical ailments
+			if(physical_ailments!=null){
+				for(int i=0;i<physical_ailments.length;i++){
+					System.out.println(physical_ailments[i]);
+					if(i==(physical_ailments.length-1))
+						appendedPhysicalAilments+=physical_ailments[i];
+					else
+						appendedPhysicalAilments+=physical_ailments[i] + ",";
+				}
 			}
+			System.out.println("Question: "+question.length);
+			System.out.println("Answer: "+answer.length);
+			System.out.println("Appended Physical Ailments: "+appendedPhysicalAilments);
+				
+			Iterator iter = medicalHistoryList.iterator();
+			while(iter.hasNext()){
+				int y = 0;
+				for(int x=0; x<question.length; x++){
+					System.out.println("Value of x:"+x);
+					MedicalHistory medicalHistory = (MedicalHistory) iter.next();
+					medicalHistory.setQuestion_id(question[x]);
+					System.out.println("Question #"+question[x]);
+					if(x==1){
+						medicalHistory.setAnswer(appendedPhysicalAilments);
+						System.out.println("Anwer: "+appendedPhysicalAilments);					
+					}else{
+						medicalHistory.setAnswer(answer[y]);
+						System.out.println("Answer: "+answer[y]);
+						y++;
+					}
+					dataAccesses.update(medicalHistory);
+				}
+			}
+			
 			System.out.println("MEDICAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 		}		
 		
