@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface PatientMethods {
 	Object paginatedView(int offset, int numOfRecords);
-	
+	int getNumOfRecords();
 }

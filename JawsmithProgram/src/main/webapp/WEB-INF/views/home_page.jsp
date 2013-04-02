@@ -190,6 +190,23 @@
 	    	<td class="results">TEST</td>
 	    </tr>
 	</table>
+	
+	<table border="1" cellpadding="5" cellspacing="5">
+        <tr>
+
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${pageNum eq i}">
+                        <td>${i}</td>
+                    </c:when>
+                    <c:otherwise>
+	       				<td><a href="${pageContext.request.contextPath}/patient/list?page=${i}">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </tr>
+    </table>
+    
 	<form id="view_patient_form" action="${pageContext.request.contextPath}/patient/view_patient" method="post">
 		<input type="hidden" id="patient_id" name="patient_id"/>
 	</form>

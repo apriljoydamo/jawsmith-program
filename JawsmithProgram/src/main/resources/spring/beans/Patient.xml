@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<!-- System User business object -->
    <bean id="patientsBean" class="com.jawsmith.services.PatientManager" >
    		<property name="dataAccesses" ref="patientDao" />
-  
+  		<property name="patientMethods" ref="patientDao" />
    </bean>
  
    <!-- System User Data Access Object -->

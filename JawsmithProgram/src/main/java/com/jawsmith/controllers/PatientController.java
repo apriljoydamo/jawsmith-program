@@ -75,15 +75,7 @@ public class PatientController {
 			logger.error("ERROR IN DESTROYING SESSION");
 		}
 		
-		ArrayList<Patient> list = new ArrayList<Patient>();
-		List<Patient> object = dataAccesses.getAll();
-    	
-		Iterator iterate = object.iterator();
-    	while(iterate.hasNext()){
-    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
-    		list.add(iterlist);							//Then add to a list that would be passed in the jsp
-    	}
-		model.addAttribute("patientList",list);
+		pagination(request, model);
 		return "home_page";
 	}
 	
@@ -529,24 +521,42 @@ public class PatientController {
 		}
 	
 	
-	public void pagination(HttpServletResponse response,HttpServletRequest request, ModelMap model) throws ClassNotFoundException { 
+	public void pagination(HttpServletRequest request, ModelMap model){ 
 		  int pageNum = 1;
 		  int offset = 0;
 		  int recordsPerPage = 20;
+		  int noOfRecords = patientMethods.getNumOfRecords();
+		  int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+		  model.addAttribute("noOfPages", noOfPages);
+		
+
+		  
 		  try{
-			pageNum=(Integer)request.getAttribute("pageNum");
+			  System.out.println("getting page property..");
+			  pageNum= Integer.parseInt(request.getParameter("page"));
+			
+			System.out.println("pagenum is : "+pageNum);
 			offset=(Integer)request.getAttribute("offset");
 			offset=offset*pageNum;
 		  }catch(Exception E){
+			  System.out.println("failed to get page property.."); 
 			  model.addAttribute("pageNum", pageNum);
 			  model.addAttribute("offset", offset);
 			  
 		  }
 		        if(request.getParameter("page") != null)
-		            pageNum = Integer.parseInt(request.getParameter("page"));
-		        Patient dao = new Patient();
-		        List<Patient> patientlist =(List)patientMethods.paginatedView(offset, recordsPerPage);
-		        model.addAttribute("patientlist", patientlist);	    
+		        	model.addAttribute("pageNum", pageNum);
+		 
+		        
+		        ArrayList<Patient> patientList = new ArrayList<Patient>();
+		        List<Patient> object =(List)patientMethods.paginatedView(offset, recordsPerPage);
+		        Iterator iterate = object.iterator();
+		    	while(iterate.hasNext()){
+		    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
+		    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
+		    	}
+		    	
+		        model.addAttribute("patientList", patientList);	    
 	  }
 			 
 }

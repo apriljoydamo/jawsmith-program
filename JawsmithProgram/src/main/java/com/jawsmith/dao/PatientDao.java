@@ -2,6 +2,7 @@ package com.jawsmith.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.jawsmith.interfaces.DataAccesses;
@@ -41,7 +42,16 @@ public class PatientDao extends HibernateDaoSupport implements DataAccesses, Pat
 	}
 	
    public List paginatedView(int offset, int numOfRecord) {
-	   List list = getHibernateTemplate().find("from Patient LIMIT "+offset+","+numOfRecord+" ");
-		return list;
+	   Query q = getSession().createQuery("FROM Patient");
+	   q.setFirstResult(offset);
+	   q.setMaxResults(numOfRecord);
+	   
+	   return q.list();
+   }
+   
+   public int getNumOfRecords() {
+	   int count = ((Long)getSession().createQuery("select count(*) from Patient").uniqueResult()).intValue();
+	System.out.println("value counted was: "+count);
+	   return count;
    }
 }
