@@ -38,7 +38,6 @@ public class DentalHistoryController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */	
-	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -69,12 +68,11 @@ public class DentalHistoryController {
 		//return "view_patient";
 	}
 	
-	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		Patient patient = (Patient)request.getAttribute("patient");
-		int dental_history_patient_id =patient.getPatient_id();
+		Patient patient = (Patient)request.getSession().getAttribute("patient");
+		int patient_id = patient.getPatient_id();
 		
 		Boolean fluoride_treatment = Boolean.parseBoolean(request.getParameter("fluoride_treatment"));
 		Boolean orthodontic_treatment = Boolean.parseBoolean(request.getParameter("orthodontic_treatment"));
@@ -83,12 +81,12 @@ public class DentalHistoryController {
 		Boolean periodontal_therapy = Boolean.parseBoolean(request.getParameter("periodontal_therapy"));
 		Boolean dental_surgery = Boolean.parseBoolean(request.getParameter("dental_surgery"));
 		Boolean extraction = Boolean.parseBoolean(request.getParameter("extraction"));
-		//Date last_visit_date = new Date();
+		Date last_visit_date = new Date();
 		
 	
-		DentalHistory dentalHistory = (DentalHistory) dentalHistoryMethods.findByPatientId(dental_history_patient_id);
+		DentalHistory dentalHistory = (DentalHistory) dentalHistoryMethods.findByPatientId(patient_id);
 	
-		//dentalHistory.setLast_visit_date(last_visit_date);
+		dentalHistory.setLast_visit_date(last_visit_date);
 		dentalHistory.setFluoride_treatment(fluoride_treatment);
 		dentalHistory.setOrthodontic_treatment(orthodontic_treatment);
 		dentalHistory.setPulp_therapy(pulp_therapy);
@@ -96,10 +94,9 @@ public class DentalHistoryController {
 		dentalHistory.setPeriodontal_therapy(periodontal_therapy);
 		dentalHistory.setDental_surgery(dental_surgery);
 		dentalHistory.setExtraction(extraction);
-		dentalHistory.setPatient_id(dental_history_patient_id);
+		//dentalHistory.setPatient_id(patient_id);
 		dataAccesses.update(dentalHistory);
 		System.out.println("DENTAL HISTORY UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 		
-    	//return "view_patient";
 	}
 }

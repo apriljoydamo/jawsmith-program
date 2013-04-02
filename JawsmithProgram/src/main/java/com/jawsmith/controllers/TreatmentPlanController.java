@@ -39,7 +39,6 @@ public class TreatmentPlanController {
 		 * Method after finishing the add page
 		 * 
 		 **/
-		//@RequestMapping("/add")
 		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 			
@@ -62,28 +61,26 @@ public class TreatmentPlanController {
 			System.out.println("TREATMENT PLAN SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
-		//@RequestMapping("/edit")
-		public void editMethod(HttpServletRequest request, HttpServletResponse response, 
+		public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 									ModelMap model, Principal principal) throws IOException, ServletException{
 		
-			Patient patient = (Patient) request.getAttribute("patient");
-			int treatment_plan_patient_id = patient.getPatient_id();
+			Patient patient = (Patient) request.getSession().getAttribute("patient");
+			int patient_id = patient.getPatient_id();
 		
 			String treatment = request.getParameter("treatment");
-			Float treatment_fee = Float.parseFloat(request.getParameter("fee"));
-			String alternateTreatment = request.getParameter("alternateTreatment");
+			Float treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
+			String alternateTreatment = request.getParameter("alternative_treatment");
 			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
 			Date treatment_date = new Date();
-			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
 			
-			TreatmentPlan treatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_patient_id);
+			TreatmentPlan treatmentPlan = (TreatmentPlan) treatmentPlanMethods.findByPatientId(patient_id);
 			treatmentPlan.setTreatment(treatment);
 			treatmentPlan.setTreatment_fee(treatment_fee);
 			treatmentPlan.setAlternative_treatment(alternateTreatment);
 			treatmentPlan.setAlternative_treatment_fee(alternative_treatment_fee);
 			treatmentPlan.setTreatment_date(treatment_date);
 			treatmentPlan.setPatient_id(patient_id);
-			dataAccesses.save(treatmentPlan);
+			dataAccesses.update(treatmentPlan);
 			System.out.println("TREATMENT PLAN UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 			
 		}

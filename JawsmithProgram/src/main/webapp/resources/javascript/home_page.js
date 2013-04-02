@@ -76,7 +76,7 @@ function validatePatient(){
 
 function selectPatient(id){
 	$("#patient_id").val(id);
-	alert($("#patient_id").val());
+	//alert($("#patient_id").val());
 	
 	$("#view_patient_form").submit();
 }

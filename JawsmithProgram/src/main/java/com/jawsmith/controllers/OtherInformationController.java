@@ -30,7 +30,6 @@ public class OtherInformationController {
 	static OtherInformationMethods otherInformationMethods = (OtherInformationMethods)appContext.getBean("otherInformationBean");
 	
 	
-	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 	
@@ -50,29 +49,26 @@ public class OtherInformationController {
 		
 	}
 	
-	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
 		
-		Patient patient = (Patient) request.getAttribute("patient");
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
+		int patient_id = patient.getPatient_id();
 		
-		int other_info_id = Integer.parseInt(request.getParameter("other_info_id"));
 		String chief_complaint = (String)request.getParameter("chief_complaint");
 		String diagnosis = (String)request.getParameter("diagnosis");
-		//Date last_visit_date = new Date();
-		int patient_id = patient.getPatient_id();
-		String description_notes = request.getParameter("desc_notes");
+		Date last_visit_date = new Date();
+		//String description_notes = request.getParameter("desc_notes");
 		
 		
-		OtherInformation otherInformation = (OtherInformation) otherInformationMethods.findByPatientId(other_info_id);
+		OtherInformation otherInformation = (OtherInformation) otherInformationMethods.findByPatientId(patient_id);
 		
 		otherInformation.setChief_complaint(chief_complaint);
 		otherInformation.setDiagnosis(diagnosis);
-		//otherInformation.setLast_visit_date(last_visit_date);
-		otherInformation.setPatient_id(patient_id);
-		otherInformation.setDescription_notes(description_notes);
-		dataAccesses.save(otherInformation);
+		otherInformation.setLast_visit_date(last_visit_date);
+		//otherInformation.setDescription_notes(description_notes);
+		dataAccesses.update(otherInformation);
 		System.out.println("OTHER INFO UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 	}
 }

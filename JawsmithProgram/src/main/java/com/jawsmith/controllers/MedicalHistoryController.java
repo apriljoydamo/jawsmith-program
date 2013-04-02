@@ -36,7 +36,6 @@ public class MedicalHistoryController {
 		static MedicalHistoryMethods medicalHistoryMethods = (MedicalHistoryMethods)appContext.getBean("medicalHistoryBean");
 		
 		
-		//@RequestMapping("/add")
 		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -84,7 +83,6 @@ public class MedicalHistoryController {
 			System.out.println("MEDICAL HISTORY SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 		}
 		
-		//@RequestMapping("/edit")
 		public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 		ModelMap model, Principal principal) throws IOException, ServletException{
 			
@@ -132,6 +130,7 @@ public class MedicalHistoryController {
 						System.out.println("Answer: "+answer[y]);
 						y++;
 					}
+					medicalHistory.setLast_visit_date(lastVisitDate);
 					dataAccesses.update(medicalHistory);
 				}
 			}

@@ -6,11 +6,10 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Beauteethful</title>
+		<title>Treatment Records</title>
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
-	
 		<div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
@@ -46,7 +45,7 @@
 					<td><c:out value="${treatment_rec.description}" /></td>
 					<td><c:out value="${treatment_rec.prescription}" /></td>
 					<td><fmt:formatNumber value="${treatment_rec.debit}" type="currency" currencySymbol="" /></td>
-					<td><c:out value="${treatment_rec.credit_date}" /></td>
+					<td><fmt:formatDate value="${treatment_rec.credit_date}" pattern="yyyy-MM-dd" /></td>
 					<td><fmt:formatNumber value="${treatment_rec.credit_amount}" type="currency" currencySymbol="" /></td>
 					<td><fmt:formatNumber value="${treatment_rec.debit - treatment_rec.credit_amount}" type="currency" currencySymbol=""/></td>	
 				</tr>
@@ -66,6 +65,7 @@
 		
 		<div id="add_treatment_record" class="modalDialog">
 			<a href="#close" class="close_add_treat close">X</a>     
+			<h3>TREATMENT RECORD</h3>
 			<form action="${pageContext.request.contextPath}/treatment_record/add" method="POST">
 			<table>
 				<tr>
@@ -95,5 +95,7 @@
 			<input type="submit" value="Save"/>
 			</form>
 		</div>
+		<jsp:include page="edit_treatment_record.jsp"/>
+		
 	</body>
 </html>

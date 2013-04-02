@@ -29,7 +29,6 @@ public class OcclusionController {
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("occlusionBean");
 	static OcclusionMethods occlusionMethods = (OcclusionMethods)appContext.getBean("occlusionBean");
 	
-	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 									 ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -51,25 +50,24 @@ public class OcclusionController {
 		
 	}
 	
-	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 
-		Patient patient = (Patient) request.getAttribute("patient");
-		int occlusion_patient_id = patient.getPatient_id();
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
+		int patient_id = patient.getPatient_id();
 		
 		String class_1 = (String)request.getParameter("class_1");
 		String class_2 = (String)request.getParameter("class_2");
 		String class_3 = (String)request.getParameter("class_3");
-		//Date last_visit_date = new Date();
+		Date last_visit_date = new Date();
 		
 		
-		Occlusion occlusion = (Occlusion) occlusionMethods.findByPatientId(occlusion_patient_id);
+		Occlusion occlusion = (Occlusion) occlusionMethods.findByPatientId(patient_id);
 		
 		occlusion.setClass_1(class_1);
 		occlusion.setClass_2(class_2);
 		occlusion.setClass_3(class_3);
-		//occlusion.setLast_visit_date(last_visit_date);
+		occlusion.setLast_visit_date(last_visit_date);
 		dataAccesses.update(occlusion);
 		System.out.println("OCCLUSION UPDATED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 	}

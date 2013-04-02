@@ -28,7 +28,6 @@ public class AnxillariesController {
 	static AnxillariesMethods anxillariesMethods = (AnxillariesMethods)appContext.getBean("anxillariesBean");
 	
 	
-	//@RequestMapping("/add")
 	public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
 							ModelMap model, Principal principal) throws IOException, ServletException{
 		
@@ -52,34 +51,31 @@ public class AnxillariesController {
 		System.out.println("ANXILLARIES SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
 	}
 	
-	//@RequestMapping("/edit")
 	public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
 	ModelMap model, Principal principal) throws IOException, ServletException{
 		
-		Patient patient = (Patient) request.getAttribute("patient");
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		int patient_id = patient.getPatient_id();
-		int anxillaries_id = Integer.parseInt(request.getParameter("anxillaries_id"));
 		
 		String bleeding_time = (String)request.getParameter("bleeding_time");
 		String blood_pressure = (String)request.getParameter("blood_pressure");
 		String radiographic_interpretation = (String)request.getParameter("radiographic_interpretation");
 		String clotting_time = (String)request.getParameter("clotting_time");
 		String blood_sugar = (String)request.getParameter("blood_sugar");
-		//Date last_visit_date = new Date();
+		Date last_visit_date = new Date();
 	
 		
-		Anxillaries anxillaries = (Anxillaries) anxillariesMethods.findByPatientId(anxillaries_id);
+		Anxillaries anxillaries = (Anxillaries) anxillariesMethods.findByPatientId(patient_id);
 		
 		anxillaries.setBleeding_time(bleeding_time);
 		anxillaries.setBlood_pressure(blood_pressure);
 		anxillaries.setBlood_sugar(blood_sugar);
 		anxillaries.setClotting_time(clotting_time);
 		anxillaries.setRadiographic_interpretation(radiographic_interpretation);
-		//anxillaries.setLast_visit_date(last_visit_date);
+		anxillaries.setLast_visit_date(last_visit_date);
 		anxillaries.setPatient_id(patient_id);
 		dataAccesses.update(anxillaries);
 		System.out.println("ANXILLARIES UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
-    	//return "view_patient";
-	}
+   	}
 	
 }
