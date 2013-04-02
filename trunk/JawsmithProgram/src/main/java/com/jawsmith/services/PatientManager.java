@@ -67,4 +67,9 @@ public class PatientManager implements DataAccesses, PatientMethods{
 		return (List)patientMethods.paginatedView(offset, numOfRecords);
 	}
 
+	@Override
+	public int getNumOfRecords() {
+		return (int)patientMethods.getNumOfRecords();
+	}
+
 }

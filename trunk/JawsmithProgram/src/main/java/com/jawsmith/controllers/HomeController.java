@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.interfaces.PatientMethods;
 import com.jawsmith.interfaces.SystemUserMethods;
 import com.jawsmith.interfaces.TableMaintenanceMethods;
 import com.jawsmith.model.Patient;
@@ -42,6 +43,7 @@ public class HomeController {
 	SystemUserMethods sysUserMethods = (SystemUserMethods)appContext.getBean("systemUserBean");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
 	TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
+	PatientMethods patientMethods = (PatientMethods)appContext.getBean("patientsBean");
 	int MED_HIS_QUESTIONS_REF_ID = 2;
 	int PHYSICAL_AILMENTS_REF_ID = 3;
 	
@@ -138,7 +140,8 @@ public class HomeController {
 	public String home(Locale locale, HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
 		//Fills patient table in jsp
-		ArrayList<Patient> list = new ArrayList<Patient>();
+		
+		/*ArrayList<Patient> list = new ArrayList<Patient>();
 		List<Patient> object = dataAccesses.getAll();
 		Iterator<Patient> iterate = object.iterator();
     	while(iterate.hasNext()){
@@ -146,8 +149,48 @@ public class HomeController {
     		list.add(iterlist);						
     	}
 		model.addAttribute("patientList",list);
+		*/
 		
+		pagination(request, model);
 		return "home_page";
 	}
+	
+	public void pagination(HttpServletRequest request, ModelMap model){ 
+		  int pageNum = 1;
+		  int offset = 0;
+		  int recordsPerPage = 20;
+		  int noOfRecords = patientMethods.getNumOfRecords();
+		  int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+		  model.addAttribute("noOfPages", noOfPages);
+		
+
+		  
+		  try{
+			  System.out.println("getting page property..");
+			  pageNum= Integer.parseInt(request.getParameter("page"));
+			
+			System.out.println("pagenum is : "+pageNum);
+			offset=(Integer)request.getAttribute("offset");
+			offset=offset*pageNum;
+		  }catch(Exception E){
+			  System.out.println("failed to get page property.."); 
+			  model.addAttribute("pageNum", pageNum);
+			  model.addAttribute("offset", offset);
+			  
+		  }
+		        if(request.getParameter("page") != null)
+		        	model.addAttribute("pageNum", pageNum);
+		 
+		        
+		        ArrayList<Patient> patientList = new ArrayList<Patient>();
+		        List<Patient> object =(List)patientMethods.paginatedView(offset, recordsPerPage);
+		        Iterator iterate = object.iterator();
+		    	while(iterate.hasNext()){
+		    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
+		    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
+		    	}
+		    	
+		        model.addAttribute("patientList", patientList);	    
+	  }
 	
 }
