@@ -7,7 +7,7 @@
 				
 				<!-- MEDICAL HISTORY -->
 				<div id="medical_his_div">
-				<h3>Medical History</h3>
+				<h3>ADD MEDICAL RECORDS</h3>
 					<table>
 					<c:forEach var="tbl_med_his" items="${medHisQuestionList}" >
 						<tr><td>Question: ${tbl_med_his.tbl_maintenance_description}

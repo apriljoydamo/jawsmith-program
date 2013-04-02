@@ -11,19 +11,24 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/add_record.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/patients_record.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
 		<jsp:include page="header.jsp" />
 	</head>
 		
 	<body>
+	<jsp:include page="edit_record.jsp" />
+	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
-	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
-	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
+	        <label class="sub_info" id="">Last Visit Date: <fmt:formatDate value="${patient.last_visit_date}" pattern="yyyy-MM-dd"/></label><br/>
+	        <label class="sub_info" id="">Birthday: <fmt:formatDate value="${patient.birthday}" pattern="yyyy-MM-dd"/></label><br/>
 	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
 	        <label class="sub_info" id="">${patient.address}</label><br/>
 	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
@@ -32,9 +37,7 @@
 	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
 		<div id="edit_patient_button">
-			<form action="${pageContext.request.contextPath}/editPatient" method="POST">
-				<label style="position:relative; top: 50px;" id="" class="button mouseout_button" onClick="submitForm('edit_patient')">Edit Patient</label>
-			</form>
+			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
 		</div>
 
 		<div id="view_patient_page_div">
@@ -42,6 +45,10 @@
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
 				<div id="medical_his_div" class="">
                    <table>
+                  	 	<tr>
+							<th>Question</th>
+							<th>Answer</th>
+						</tr>
 					<c:forEach var="medhis" items="${latestMedHisList}" >
 						<tr>
 							<td><c:out value="${medhis.question_id}" /></td>
@@ -52,14 +59,11 @@
 				</div>
 				<h3 class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
 				<div id="dental_his_div">
-                  <img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/>
-                  <img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/>
-                  
-                   <table>
+                  <table>
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.fluoride_treatment=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -68,7 +72,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.orthodontic_treatment=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -77,7 +81,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.pulp_therapy=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -86,7 +90,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.temporo_mandibular=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -95,7 +99,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.periodontal_therapy=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -104,7 +108,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.dental_surgery=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -113,7 +117,7 @@
                   		<tr>
                   			<td>
                   				<c:choose>
-                  					<c:when test="${dentalhis.fluoride_treatment==true}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
+                  					<c:when test="${dentalhis.extraction=='true'}"><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox2.png"/></c:when>
                   					<c:otherwise><img alt="" src="${pageContext.request.contextPath}/resources/images/checkbox.png"/></c:otherwise>
                   				</c:choose>
                   			</td>
@@ -196,11 +200,7 @@
 				<div id="diagnosis_div">
 					<c:out value="${other.diagnosis}" />
                 </div>
-                <h3 class="patient_medical_info patient_medical_info_mouseout">Note/s</h3>
-				<div id="notes_div">
-					<c:out value="${other.description_notes}" />
-                </div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Treatment Plan</h3>
+                <h3 class="patient_medical_info patient_medical_info_mouseout">Treatment Plan</h3>
 				<div id="treatment_plan_div">
 					<table>
 						<tr>
@@ -221,9 +221,7 @@
 		</div>
 
 		<div id="view_patient_controllers">			
-        	<form id="edit_patients_record" action="${pageContext.request.contextPath}/editPatient" method="POST">	
-			</form>
-            <label id="" class="button mouseout_button" onClick="submitForm('edit_patients_record')">Edit Medical Record</label>
+        	<label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_record_div')">Edit Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>

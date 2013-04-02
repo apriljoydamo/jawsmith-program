@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS `jawsmith_program` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; 
+DROP SCHEMA IF EXISTS `jawsmith_program`;
 
 CREATE SCHEMA IF NOT EXISTS `jawsmith_program` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; 
 
@@ -139,7 +139,7 @@ CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`other_information` (
 ENGINE = InnoDB;
 
 CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`treatment_plan` (
-  `TREATMENT_PLAN_ID` INT NOT NULL ,
+  `TREATMENT_PLAN_ID` INT NOT NULL AUTO_INCREMENT,
   `TREATMENT_DATE` DATE NULL ,
   `TREATMENT` VARCHAR(255) NULL ,
   `TREATMENT_FEE` FLOAT NULL ,
@@ -156,7 +156,7 @@ CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`treatment_plan` (
 ENGINE = InnoDB;
 
 CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`treatment_record` (
-  `TREATMENT_RECORD_ID` INT NOT NULL ,
+  `TREATMENT_RECORD_ID` INT NOT NULL AUTO_INCREMENT,
   `LAST_VISIT_DATE` DATE NULL ,
   `TOOTH_NO` VARCHAR(45) NULL ,
   `DESCRIPTION` VARCHAR(255) NULL ,
@@ -164,6 +164,7 @@ CREATE  TABLE IF NOT EXISTS `jawsmith_program`.`treatment_record` (
   `DEBIT` FLOAT NULL ,
   `CREDIT_DATE` DATE NULL ,
   `CREDIT_AMT` FLOAT NULL ,
+  `DESC_NOTES` VARCHAR(255) NULL ,
   `patients_PATIENT_ID` INT NOT NULL ,
   PRIMARY KEY (`TREATMENT_RECORD_ID`, `patients_PATIENT_ID`) ,
   INDEX `fk_treatment_record_patients1_idx` (`patients_PATIENT_ID` ASC) ,

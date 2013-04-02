@@ -45,7 +45,7 @@ public class MedicalHistoryDao extends HibernateDaoSupport implements DataAccess
 	@Override
 	public Object findByPatientId(int patientId) {
 		List list = getHibernateTemplate().find("from MedicalHistory where patients_PATIENT_ID=?",patientId);
-		return list.get(0);
+		return list;
 	}
 
 

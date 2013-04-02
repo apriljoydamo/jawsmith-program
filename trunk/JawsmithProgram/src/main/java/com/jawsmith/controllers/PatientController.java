@@ -157,7 +157,7 @@ public class PatientController {
 		String guardian = request.getParameter("guardian");
 		String patient_num = request.getParameter("patient_num");
 		String nationality = request.getParameter("nationality");
-		Boolean status = true;
+		Boolean status = Boolean.parseBoolean(request.getParameter("status"));
 		Date last_visit_date = new Date();
 		Date dob = null;
 		try {
@@ -190,7 +190,7 @@ public class PatientController {
 		dataAccesses.update(patient);
 		//}
 		
-    	return "redirect:/patient/list";
+    	return "redirect:/patient/view_patient/details";
 	}
 	
 	@RequestMapping("/inactive")
@@ -225,6 +225,27 @@ public class PatientController {
 		return "redirect:/patient/view_patient/details";
 	}
 	
+	@RequestMapping("/edit_record")
+	public String editRecordDone(HttpServletRequest request, HttpServletResponse response, 
+							ModelMap model, Principal principal) throws IOException, ServletException{
+		
+		AnxillariesController.editMethod(request, response, model, principal);
+		ClinicalExaminationController.editMethod(request, response, model, principal);
+		DentalHistoryController.editMethod(request, response, model, principal);
+		MedicalHistoryController.editMethod(request, response, model, principal);
+		OcclusionController.editMethod(request, response, model, principal);
+		OtherInformationController.editMethod(request, response, model, principal);
+		TreatmentPlanController.editMethod(request, response, model, principal);
+		
+		//update Patient's last visit date
+		Date last_visit_date = new Date();
+		Patient patient = (Patient) request.getSession().getAttribute("patient");
+		patient.setLast_visit_date(last_visit_date);
+		dataAccesses.update(patient);
+		
+		return "redirect:/patient/view_patient/details";
+	}
+	
 	@RequestMapping("/view_patient")
 	public String patientRecords(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
@@ -247,28 +268,36 @@ public class PatientController {
 		System.out.println("patientID: "+ patientId);
 		System.out.println("LastVisitDate: "+lastVisitDate);
 		
+		List<MedicalHistory> latestMedHisList = null;
+		DentalHistory dentalhis = null;
+		ClinicalExamination clinical = null;
+		Anxillaries anxillaries = null;
+		Occlusion occlusion = null;
+		OtherInformation other = null;
+		TreatmentPlan treatmentplan = null;
+		
 		//ALL THE LATEST MEDICAL RECORDS TO BE SHOWN HERE
 		try{
-			List<MedicalHistory> latestMedHisList = MedicalHistoryController.medicalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			DentalHistory dentalhis = (DentalHistory) DentalHistoryController.dentalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			ClinicalExamination clinical = (ClinicalExamination) ClinicalExaminationController.clinicalExaminationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			Anxillaries anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			Occlusion occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			OtherInformation other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			TreatmentPlan treatmentplan = (TreatmentPlan) TreatmentPlanController.treatmentPlanMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
-			
-			model.addAttribute("latestMedHisList", latestMedHisList);
-			model.addAttribute("dentalhis", dentalhis);
-			model.addAttribute("clinical", clinical);
-			model.addAttribute("anxillaries", anxillaries);
-			model.addAttribute("occlusion", occlusion);
-			model.addAttribute("other", other);
-			model.addAttribute("treatmentplan", treatmentplan);
+			latestMedHisList = (List<MedicalHistory>) MedicalHistoryController.medicalHistoryMethods.findByPatientId(patientId);
+			dentalhis = (DentalHistory) DentalHistoryController.dentalHistoryMethods.findByPatientId(patientId);
+			clinical = (ClinicalExamination) ClinicalExaminationController.clinicalExaminationMethods.findByPatientId(patientId);
+			anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientId(patientId);
+			occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientId(patientId);
+			other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientId(patientId);
+			treatmentplan = (TreatmentPlan) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
 		}catch(Exception e){
 			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
 		}
 		
-		    return "view_patients_record";
+		model.addAttribute("latestMedHisList", latestMedHisList);
+		model.addAttribute("dentalhis", dentalhis);
+		model.addAttribute("clinical", clinical);
+		model.addAttribute("anxillaries", anxillaries);
+		model.addAttribute("occlusion", occlusion);
+		model.addAttribute("other", other);
+		model.addAttribute("treatmentplan", treatmentplan);
+		
+		return "view_patients_record";
 	}
 	
 	
