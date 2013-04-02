@@ -52,7 +52,7 @@ public class TreatmentPlanDao extends HibernateDaoSupport implements DataAccesse
 	@Override
 	public Object findByPatientIdAndLastVisitDate(int patientId,
 			Date lastVisitDate) {
-		List list = getHibernateTemplate().find("from TreatmentPlan where patients_PATIENT_ID='"+patientId+"' and LAST_VISIT_DATE='"+lastVisitDate+"'");
+		List list = getHibernateTemplate().find("from TreatmentPlan where patients_PATIENT_ID='"+patientId+"' and TREATMENT_DATE='"+lastVisitDate+"'");
 		return list.get(0);
 	}
 }
