@@ -61,7 +61,6 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\"]]></defaultValueExpression>
 	</parameter>
-	
 	<queryString>
 		<![CDATA[select * from patients where PATIENT_ID=1]]>
 	</queryString>
