@@ -129,9 +129,9 @@
 								<text><![CDATA[QUESTION]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 2_TD" height="45" rowSpan="1">
 							<textField>
-								<reportElement uuid="1344a43a-a1a2-4c8f-a65b-190d5a61e372" x="0" y="0" width="90" height="20"/>
+								<reportElement uuid="1344a43a-a1a2-4c8f-a65b-190d5a61e372" x="0" y="0" width="376" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{QUESTION_ID}]]></textFieldExpression>
 							</textField>
@@ -147,9 +147,9 @@
 								<text><![CDATA[ANSWER]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 2_TD" height="45" rowSpan="1">
 							<textField>
-								<reportElement uuid="5813c3e5-e981-4434-859e-8f4ea2ff426c" x="0" y="0" width="90" height="20"/>
+								<reportElement uuid="5813c3e5-e981-4434-859e-8f4ea2ff426c" x="0" y="0" width="176" height="44"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{ANSWER}]]></textFieldExpression>
 							</textField>
