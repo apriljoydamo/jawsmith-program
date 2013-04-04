@@ -72,4 +72,14 @@ public class PatientManager implements DataAccesses, PatientMethods{
 		return (int)patientMethods.getNumOfRecords();
 	}
 
+	@Override
+	public List searchByLastname(String toSearch) {
+		return (List)patientMethods.searchByLastname(toSearch);
+	}
+
+	@Override
+	public List paginatedSearch(int offset, int numOfRecords, String toSearch) {
+		return (List)patientMethods.paginatedSearch(offset, numOfRecords, toSearch);
+	}
+
 }
