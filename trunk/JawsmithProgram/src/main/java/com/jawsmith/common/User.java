@@ -27,7 +27,7 @@ public class User
     	user.setFirst_name("aj");
     	user.setLast_name("damo");
     	user.setPassword("121212");
-    	user.setUsername("aj");
+    	user.setUsername("arnulfo");
   
     	
     	sysUserBo.save(user);

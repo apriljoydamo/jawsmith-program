@@ -45,13 +45,24 @@ public class PatientDao extends HibernateDaoSupport implements DataAccesses, Pat
 	   Query q = getSession().createQuery("FROM Patient");
 	   q.setFirstResult(offset);
 	   q.setMaxResults(numOfRecord);
-	   
 	   return q.list();
    }
    
    public int getNumOfRecords() {
 	   int count = ((Long)getSession().createQuery("select count(*) from Patient").uniqueResult()).intValue();
-	System.out.println("value counted was: "+count);
 	   return count;
    }
+@Override
+public List searchByLastname(String toSearch) {
+	List list = getHibernateTemplate().find("from Patient LIKE LAST_NAME");
+	return list;
+}
+
+public List paginatedSearch(int offset, int numOfRecord,String seachedValue) {
+	   Query q = getSession().createQuery("FROM Patient LIKE LAST_NAME");
+	   q.setFirstResult(offset);
+	   q.setMaxResults(numOfRecord);
+	   return q.list();
+}
+
 }
