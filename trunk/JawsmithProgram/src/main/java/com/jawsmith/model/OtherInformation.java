@@ -8,7 +8,7 @@ public class OtherInformation {
 	private String diagnosis;
 	private Date last_visit_date;
 	private int patient_id;
-	private String description_notes;
+	//private String description_notes;
 	
 	public int getOther_info_id() {
 		return other_info_id;
@@ -39,12 +39,6 @@ public class OtherInformation {
 	}
 	public void setPatient_id(int patient_id) {
 		this.patient_id = patient_id;
-	}
-	public void setDescription_notes(String description_notes) {
-		this.description_notes = description_notes;
-	}
-	public String getDescription_notes() {
-		return description_notes;
 	}
 	
 }

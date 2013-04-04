@@ -25,6 +25,7 @@
 	<jsp:include page="edit_record.jsp" />
 	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
+	 
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: <fmt:formatDate value="${patient.last_visit_date}" pattern="yyyy-MM-dd"/></label><br/>
@@ -38,6 +39,7 @@
 		</div>
 		<div id="edit_patient_button">
 			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
+			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Save Report</label>
 		</div>
 
 		<div id="view_patient_page_div">
@@ -200,54 +202,80 @@
 				<div id="diagnosis_div">
 					<c:out value="${other.diagnosis}" />
                 </div>
-                <h3 class="patient_medical_info patient_medical_info_mouseout">Treatment Plan</h3>
-				<div id="treatment_plan_div">
-					<table>
-						<tr>
-							<td>Treatment:</td>
-							<td><c:out value="${treatmentplan.treatment}" /></td>
-							<td>Treatment Fee:</td>
-							<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
-						</tr>
-						<tr>
-							<td>Alternative Treatment:</td>
-							<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
-							<td>Alternative Treatment Fee:</td>
-							<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
-						</tr>
-					</table>
-                </div>
-			</div>
+            </div>
+			<div id="treatment_plan_div">
+				<table>
+					<tr>
+						<th>Treatment Date</th>
+						<th>Treatment</th>
+						<th>Treatment Fee</th>
+						<th>Alternative Treatment</th>
+						<th>Alternative Treatment Fee</th>
+					</tr>
+					<c:forEach var="treatmentplan" items="${treatmentPlanList}">
+					<tr>
+						<td><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
+						<td><c:out value="${treatmentplan.treatment}" /></td>
+						<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
+						<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
+						<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
+					</tr>
+					</c:forEach>
+				</table>
+	        </div>
 		</div>
-
+		
 		<div id="view_patient_controllers">			
         	<label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_record_div')">Edit Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
+            <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
-            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Save Report</label>
 		</div>
         
-		<div id="add_treatment_plan" class="modalDialog">
-		        <div id="add_treatment_panel">
-		        <a href="#close" class="close_add_treat close">X</a>     
-					<h1>TREATMENT PLAN</h1>			
-					<form id="saveRecord" action="${pageContext.request.contextPath}/add_record" method="POST">
-		            	<table>
-		                <tr>
-		                	<td>Treatment: </td>
-		                	<td><input type="text" name="treatment" value="" />	</td>
-		                	<td><input type="text" name="fee" value="Fee" /></td>
-		                </tr>
-		                <tr>
-		                	<td>Alternate Treatment: </td>
-		                	<td><input type="text" name="alternateTreatment" value="" /></td>
-		                	<td><input type="text" name="altFee" value="Fee" /></td>
-		                </tr>
-		                </table>
-		                <label id="" class="button mouseout_button" onClick="submitForm('saveRecord')">Add Treatment Plan</label>
-					</form>
-				</div>
+        <div id="add_treatment_plan" class="modalDialog">
+		    <div id="add_treatment_panel">
+		    <a href="#close" class="close_add_treat close">X</a>     
+			<h1>ADD TREATMENT PLAN</h1>			
+			<form id="saveRecord" action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
+			         	<table>
+			             <tr>
+			             	<td>Treatment: </td>
+			             	<td><input type="text" name="treatment" value="" />	</td>
+			             	<td><input type="text" name="treatment_fee" value="Fee" /></td>
+			             </tr>
+			             <tr>
+			             	<td>Alternate Treatment: </td>
+			             	<td><input type="text" name="alternative_treatment" value="" /></td>
+			             	<td><input type="text" name="alternative_treatment_fee" value="Fee" /></td>
+			             </tr>
+			             </table>
+			             <label id="" class="button mouseout_button" onClick="submitForm('saveRecord')">Add Treatment Plan</label>
+				</form>
+			</div>
 		</div>
+		
+		<div id="edit_treatment_plan" class="modalDialog">
+		    <div id="add_treatment_panel">
+		    <a href="#close" class="close_add_treat close">X</a>     
+			<h1>EDIT TREATMENT PLAN</h1>			
+			<form id="editRecord" action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
+			         	<table>
+			             <tr>
+			             	<td>Treatment: </td>
+			             	<td><input type="text" name="treatment" value="${treatmentplan.treatment}" />	</td>
+			             	<td><input type="text" name="treatment_fee" value="${treatmentplan.treatment_fee}" /></td>
+			             </tr>
+			             <tr>
+			             	<td>Alternate Treatment: </td>
+			             	<td><input type="text" name="alternative_treatment" value="${treatmentplan.alternative_treatment}" /></td>
+			             	<td><input type="text" name="alternative_treatment_fee" value="${treatmentplan.alternative_treatment_fee}" /></td>
+			             </tr>
+			             </table>
+			             <label id="" class="button mouseout_button" onClick="submitForm('editRecord')">Edit Treatment Plan</label>
+				</form>
+			</div>
+		</div>
+		
 	</body>
 </html>

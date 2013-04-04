@@ -69,7 +69,7 @@ public class TreatmentPlanManager implements DataAccesses, TreatmentPlanMethods{
 	}
 
 	@Override
-	public Object findByPatientId(int patientId) {
+	public List findByPatientId(int patientId) {
 		return treatmentPlanMethods.findByPatientId(patientId);
 	}
 

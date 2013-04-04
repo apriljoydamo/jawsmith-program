@@ -133,6 +133,8 @@ public class HomeController {
 	@RequestMapping("/admin")
 	public String adminTools(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
+		SystemUserController.systemUsersPage(request, response, model, principal);
+		TableMaintenanceController.tableMaintenancePage(request, response, model, principal);
 		return "admin_page";
 	}
 	

@@ -1,24 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>System User</title>
-		<link rel="stylesheet" type="text/css" href={pageContext.request.contextPath}/resources/css/styles.css">
-		<jsp:include page="header.jsp" />
-	</head>
-	<body>
-		<div>
-		<form action="${pageContext.request.contextPath}/addUser" method="POST">
-			<input type="text" name="last_name" value="Last Name"/>			
-			<input type="text" name="first_name" value="First Name" />
-			<input type="text" name="username" value="Username" />
-			<input type="text" name="password" value="Password" />
-			<input type="hidden" value="1" name="access" />
-			<input type="submit" value="Save"/>
+
+	
+	<div id="register_div" class="modalDialog">
+		<div id="register_panel" class="">
+	    <a href="#close" class="close_reg close" title="">X</a>
+	    <label id="add_patient_label">ADD SYSTEM USER</label>
+		<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
+			<table>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" name="first_name" value="First Name" /></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" name="last_name" value="Last Name"/></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td><input type="text" name="username" value="Username" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="text" name="password" value="Password" /></td>
+				</tr>
+				<tr>
+					<td>User Access</td>
+					<td>
+						<select>
+							<option value="1">Administrator</option>
+							<option value="2">Doctor</option>
+							<option value="3">Secretary</option>
+						</select>
+					</td>
+				</tr>
+			 	<tr>              
+                <td><label id="save_button" class="button mouseout_button">Save</label></td>
+	          </tr>
+	      	</table>
 		</form>
 		</div>
-	</body>
-</html>
+	</div>	

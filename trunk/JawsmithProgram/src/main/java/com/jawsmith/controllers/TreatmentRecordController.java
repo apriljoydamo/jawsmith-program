@@ -24,10 +24,10 @@ import com.jawsmith.model.TreatmentRecord;
 @Controller
 @RequestMapping("treatment_record")
 public class TreatmentRecordController {
-	static ApplicationContext appContext = 
+	 ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
-	static TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
+	 DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentRecordBean");
+	 TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
 	
 	
 	@RequestMapping("/view")

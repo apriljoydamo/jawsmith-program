@@ -11,6 +11,8 @@ public class TreatmentRecord {
 	private float debit;
 	private Date credit_date;
 	private float credit_amount;
+	private String description_notes;
+	private Date date_noted;
 	private int patient_id;
 	
 	public int getTreatment_record_id() {
@@ -60,6 +62,18 @@ public class TreatmentRecord {
 	}
 	public void setCredit_amount(float credit_amount) {
 		this.credit_amount = credit_amount;
+	}
+	public void setDescription_notes(String description_notes) {
+		this.description_notes = description_notes;
+	}
+	public String getDescription_notes() {
+		return description_notes;
+	}
+	public void setDate_noted(Date date_noted) {
+		this.date_noted = date_noted;
+	}
+	public Date getDate_noted() {
+		return date_noted;
 	}
 	public int getPatient_id() {
 		return patient_id;

@@ -18,9 +18,6 @@
         <property name="diagnosis" type="string">
             <column name="DIAGNOSIS" length="255" />
         </property>
-        <property name="description_notes" type="string">
-            <column name="DESC_NOTES" length="255" />
-        </property>
         <property name="patient_id" type="java.lang.Integer">
             <column name="patients_PATIENT_ID" not-null="true" />
         </property>

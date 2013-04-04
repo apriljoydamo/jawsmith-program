@@ -78,4 +78,9 @@ public class TableMaintenanceManager implements DataAccesses, TableMaintenanceMe
 		return tblMaintenanceMethods.findAllByCodeValue(code_table_value);
 	}
 
+	@Override
+	public Object findByRefIdAndCodeValue(int ref_id, String code_table_value) {
+		return tblMaintenanceMethods.findByRefIdAndCodeValue(ref_id, code_table_value);
+	}
+
 }

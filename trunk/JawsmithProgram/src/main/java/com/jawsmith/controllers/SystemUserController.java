@@ -3,6 +3,7 @@ package com.jawsmith.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,18 +25,22 @@ import com.jawsmith.model.SystemUser;
 @Controller
 @RequestMapping("system_users")
 public class SystemUserController {
-	ApplicationContext appContext = 
+	static ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 
-	DataAccesses sysUserDataAccesses = (DataAccesses)appContext.getBean("systemUserBean");
+	static DataAccesses sysUserDataAccesses = (DataAccesses)appContext.getBean("systemUserBean");
 	
 	/**
 	 * Redirecting to /systemUsersPage
 	 **/
 	@RequestMapping("/view")
-	public String systemUsersPage(HttpServletRequest request, HttpServletResponse response, 
+	public static String systemUsersPage(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		return "system_user";
+		
+		List<SystemUser> sysUsersList = sysUserDataAccesses.getAll();
+		model.addAttribute("sysUsersList", sysUsersList);
+		
+		return "admin_page";
 	}
 	
 	/**
@@ -63,7 +68,7 @@ public class SystemUserController {
 		
 		sysUserDataAccesses.save(sysUser);
 		
-		return "redirect:/loginPage";
+		return "redirect:/system_users/view";
 	}
 	
 	/**
@@ -93,6 +98,6 @@ public class SystemUserController {
 		
 		sysUserDataAccesses.update(sysUser);
 
-		return "redirect:/loginPage";
+		return "redirect:/system_users/view";
 	}
 }

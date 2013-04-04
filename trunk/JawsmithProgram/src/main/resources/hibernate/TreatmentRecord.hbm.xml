@@ -31,9 +31,15 @@
        <property name="credit_amount" type="float">
             <column name="CREDIT_AMT" />
         </property>
-        <property name="patient_id" type="java.lang.Integer">
-            <column name="patients_PATIENT_ID" not-null="true" />
+        <property name="description_notes" type="string">
+            <column name="DESC_NOTES" length="255" />
         </property>
+         <property name="date_noted" type="date">
+            <column name="DATE_NOTED" />
+       </property>
+       <property name="patient_id" type="java.lang.Integer">
+            <column name="patients_PATIENT_ID" not-null="true" />
+       </property>
  	
  		
     </class>

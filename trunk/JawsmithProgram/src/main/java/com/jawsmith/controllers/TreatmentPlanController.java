@@ -29,25 +29,19 @@ public class TreatmentPlanController {
 			new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentPlanBean");
 		static TreatmentPlanMethods treatmentPlanMethods = (TreatmentPlanMethods)appContext.getBean("treatmentPlanBean");
+		static DataAccesses patientDataAccesses = (DataAccesses)appContext.getBean("patientsBean");
 		
-		public String view(HttpServletRequest request, HttpServletResponse response, 
-							ModelMap model, Principal principal) throws IOException, ServletException{
-			return "view_patients_record";
-		}
-		
-		/**
-		 * Method after finishing the add page
-		 * 
-		 **/
-		public static void addMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/add")
+		public static String addMethod(HttpServletRequest request, HttpServletResponse response, 
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 			
+			Patient patient = (Patient) request.getSession().getAttribute("patient");
 			String treatment = request.getParameter("treatment");
 			Float treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
 			String alternateTreatment = request.getParameter("alternative_treatment");
 			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
 			Date treatment_date = new Date();
-			int patient_id = Integer.parseInt(request.getParameter("patient_id"));
+			int patient_id = patient.getPatient_id();
 			
 			TreatmentPlan treatmentPlan = new TreatmentPlan();
 			
@@ -58,10 +52,18 @@ public class TreatmentPlanController {
 			treatmentPlan.setTreatment_date(treatment_date);
 			treatmentPlan.setPatient_id(patient_id);
 			dataAccesses.save(treatmentPlan);
+		
+			//update Patient's last visit date
+			patient.setLast_visit_date(treatment_date);
+			patientDataAccesses.update(patient);
+			
 			System.out.println("TREATMENT PLAN SAVED. CHANGE THE BUTTON IN JSP FROM 'SAVE' INTO 'SAVED' USING JS");
+			
+			return "redirect:/patient/view_patient/details";
 		}
 		
-		public static void editMethod(HttpServletRequest request, HttpServletResponse response, 
+		@RequestMapping("/edit")
+		public static String editMethod(HttpServletRequest request, HttpServletResponse response, 
 									ModelMap model, Principal principal) throws IOException, ServletException{
 		
 			Patient patient = (Patient) request.getSession().getAttribute("patient");
@@ -81,7 +83,13 @@ public class TreatmentPlanController {
 			treatmentPlan.setTreatment_date(treatment_date);
 			treatmentPlan.setPatient_id(patient_id);
 			dataAccesses.update(treatmentPlan);
+			
+			
+			//update Patient's last visit date
+			patient.setLast_visit_date(treatment_date);
+			patientDataAccesses.update(patient);
 			System.out.println("TREATMENT PLAN UPDATED. CHANGE THE BUTTON IN JSP FROM 'UPDATE' INTO 'UPDATED' USING JS");
 			
+			return "redirect:/patient/view_patient/details";
 		}
 }
