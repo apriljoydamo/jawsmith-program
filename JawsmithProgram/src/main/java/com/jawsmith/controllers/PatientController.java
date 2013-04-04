@@ -1,10 +1,12 @@
 package com.jawsmith.controllers;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -307,8 +309,14 @@ public class PatientController {
     						Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
 	 	
 	  	//LAYOUTS
-	  	InputStream inputStreamPatientReport = new FileInputStream("reports/patient_report.jrxml");
-		/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
+		
+		//java.io.InputStream inputStreamPatientReport = new java.io.FileInputStream("/reports/patient_report.jrxml");
+
+		//InputStream inputStreamPatientReport = getClass().getResourceAsStream("reports/patient_report.jrxml");
+		InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report.jrxml");
+	
+	  	
+	  	/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
 	  	InputStream inputStreamReportClinical = new FileInputStream("reports/patient_report_clinical.jrxml");
 		InputStream  inputStreamReportDentalHis = new FileInputStream("reports/patient_report_dentalhis.jrxml");
 	  	InputStream inputStreamReportMedHis = new FileInputStream("reports/patient_report_medhis.jrxml");
