@@ -53,4 +53,11 @@ public class TableMaintenanceDao extends HibernateDaoSupport implements DataAcce
 		List list = getHibernateTemplate().find("from TableMaintenance where CODE_TBL_VALUE=?",code_table_value);
 		return list;
 	}
+
+
+	@Override
+	public Object findByRefIdAndCodeValue(int ref_id, String code_table_value) {
+		List list = getHibernateTemplate().find("from TableMaintenance where REF_ID="+ref_id+"and CODE_TBL_VALUE="+code_table_value);
+		return list.get(0);
+	}
 }

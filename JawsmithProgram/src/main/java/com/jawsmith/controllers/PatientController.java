@@ -214,7 +214,7 @@ public class PatientController {
 		MedicalHistoryController.addMethod(request, response, model, principal);
 		OcclusionController.addMethod(request, response, model, principal);
 		OtherInformationController.addMethod(request, response, model, principal);
-		TreatmentPlanController.addMethod(request, response, model, principal);
+		//TreatmentPlanController.addMethod(request, response, model, principal);
 		
 		//update Patient's last visit date
 		Date last_visit_date = new Date();
@@ -235,7 +235,7 @@ public class PatientController {
 		MedicalHistoryController.editMethod(request, response, model, principal);
 		OcclusionController.editMethod(request, response, model, principal);
 		OtherInformationController.editMethod(request, response, model, principal);
-		TreatmentPlanController.editMethod(request, response, model, principal);
+		//TreatmentPlanController.editMethod(request, response, model, principal);
 		
 		//update Patient's last visit date
 		Date last_visit_date = new Date();
@@ -274,7 +274,7 @@ public class PatientController {
 		Anxillaries anxillaries = null;
 		Occlusion occlusion = null;
 		OtherInformation other = null;
-		TreatmentPlan treatmentplan = null;
+		List<TreatmentPlan> treatmentplan = null;
 		
 		//ALL THE LATEST MEDICAL RECORDS TO BE SHOWN HERE
 		try{
@@ -284,7 +284,7 @@ public class PatientController {
 			anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientId(patientId);
 			occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientId(patientId);
 			other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientId(patientId);
-			treatmentplan = (TreatmentPlan) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
+			treatmentplan = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
 		}catch(Exception e){
 			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
 		}
@@ -297,6 +297,7 @@ public class PatientController {
 		model.addAttribute("other", other);
 		model.addAttribute("treatmentplan", treatmentplan);
 		
+		//model.addAttribute("medHisListDesc",changeToTblMaintenanceDesc(latestMedHisList));
 		return "view_patients_record";
 	}
 	
@@ -587,5 +588,4 @@ public class PatientController {
 		    	
 		        model.addAttribute("patientList", patientList);	    
 	  }
-			 
 }

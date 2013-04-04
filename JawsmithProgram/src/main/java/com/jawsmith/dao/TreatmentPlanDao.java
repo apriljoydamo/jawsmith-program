@@ -43,9 +43,9 @@ public class TreatmentPlanDao extends HibernateDaoSupport implements DataAccesse
 
 
 	@Override
-	public Object findByPatientId(int patientId) {
+	public List findByPatientId(int patientId) {
 		List list = getHibernateTemplate().find("from TreatmentPlan where patients_PATIENT_ID=?",patientId);
-		return list.get(0);
+		return list;
 	}
 
 
