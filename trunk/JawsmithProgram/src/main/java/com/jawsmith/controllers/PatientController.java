@@ -312,7 +312,7 @@ public class PatientController {
 		model.addAttribute("anxillaries", anxillaries);
 		model.addAttribute("occlusion", occlusion);
 		model.addAttribute("other", other);
-		model.addAttribute("treatmentplan", treatmentplan);
+		model.addAttribute("treatmentplanList", treatmentplan);
 		
 		//model.addAttribute("medHisListDesc",changeToTblMaintenanceDesc(latestMedHisList));
 		return "view_patients_record";
@@ -326,19 +326,18 @@ public class PatientController {
 	  	//LAYOUTS
 		
 		//java.io.InputStream inputStreamPatientReport = new java.io.FileInputStream("/reports/patient_report.jrxml");
-
 		//InputStream inputStreamPatientReport = getClass().getResourceAsStream("reports/patient_report.jrxml");
 		InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report.jrxml");
 	
 	  	
-	  	/*InputStream  inputStreamReportAnxillaries = new FileInputStream("reports/patient_report_anxillaries.jrxml");
-	  	InputStream inputStreamReportClinical = new FileInputStream("reports/patient_report_clinical.jrxml");
-		InputStream  inputStreamReportDentalHis = new FileInputStream("reports/patient_report_dentalhis.jrxml");
-	  	InputStream inputStreamReportMedHis = new FileInputStream("reports/patient_report_medhis.jrxml");
-		InputStream  inputStreamReportOcclusion = new FileInputStream("reports/patient_report_occlusion.jrxml");
-	  	InputStream inputStreamReportOtherInfo = new FileInputStream("reports/patient_report_other_info.jrxml");
-		InputStream  inputStreamReportTreatmentPlan = new FileInputStream("reports/patient_report_treatment_plan.jrxml");
-		InputStream  inputStreamReportTreatmentRecord = new FileInputStream("reports/patient_report_treatment_record.jrxml");
+	  	/*InputStream  inputStreamReportAnxillaries = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_anxillaries.jrxml");
+	  	InputStream inputStreamReportClinical = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_clinical.jrxml");
+		InputStream  inputStreamReportDentalHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_dentalhis.jrxml");
+	  	InputStream inputStreamReportMedHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_medhis.jrxml");
+		InputStream  inputStreamReportOcclusion = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_occlusion.jrxml");
+	  	InputStream inputStreamReportOtherInfo = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_other_info.jrxml");
+		InputStream  inputStreamReportTreatmentPlan = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_treatment_plan.jrxml");
+		InputStream  inputStreamReportTreatmentRecord = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_treatment_record.jrxml");
 		*/
 	  	
 		//VALUES TO BE PRINTED HERE
@@ -347,9 +346,11 @@ public class PatientController {
 		Patient patient = (Patient) request.getSession().getAttribute("patient");
 		ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
 		dataBeanList.add(patient);
+		
 		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
 		
 		//COMPILE JRXML FILES
+		JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
 		/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
 		JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
 		JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
@@ -358,11 +359,11 @@ public class PatientController {
 		JasperDesign jasperSubDesign6 = JRXmlLoader.load(inputStreamReportOtherInfo);
 		JasperDesign jasperSubDesign7 = JRXmlLoader.load(inputStreamReportTreatmentPlan);
 		JasperDesign jasperSubDesign8 = JRXmlLoader.load(inputStreamReportTreatmentRecord);
-		*/JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
-		
+		*/
         
         //COMPILE REPORT
-		/*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
+		JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+        /*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
 		JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
 		JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
 		JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
@@ -370,8 +371,7 @@ public class PatientController {
 		JasperReport jasperSubReport6 = JasperCompileManager.compileReport(jasperSubDesign6);
 		JasperReport jasperSubReport7 = JasperCompileManager.compileReport(jasperSubDesign7);
 		JasperReport jasperSubReport8 = JasperCompileManager.compileReport(jasperSubDesign8);
-		*/JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
-        
+		*/
 		//FILL REPORT
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
@@ -382,17 +382,77 @@ public class PatientController {
 		parameters.put("subreportParameterOtherInfo", jasperSubReport6);
 		parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
 		parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
+		
+		<parameter name="subreportParameterAnxillaries" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterClinical" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterDentalHis" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterMedHis" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterOcclusion" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterOtherInfo" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterTreatmentPlan" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameterTreatmentRecord" class="net.sf.jasperreports.engine.JasperReport"/>
+	
+		
 		*/
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
 
         //EXPORT REPORT
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper.pdf"); 
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper_patient.pdf"); 
 
         return "redirect:/home";
   
   } 
 	
-	public Boolean validator(HttpServletRequest request,
+	public void pagination(HttpServletRequest request, ModelMap model,String searchedValue){ 
+		  int pageNum = 1;
+		  int offset = 0;
+		  int recordsPerPage = 1;
+		  int noOfRecords = patientMethods.getNumOfRecords();
+		  int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+		  model.addAttribute("noOfPages", noOfPages);
+		
+
+		  
+		  try{
+			  System.out.println("getting page property..");
+			  pageNum= Integer.parseInt(request.getParameter("page"));
+			
+			System.out.println("pagenum is : "+pageNum);
+			offset=(offset+1)*((pageNum-1)*recordsPerPage);
+			System.out.println("offset is : "+offset);
+		  }catch(Exception E){
+			  System.out.println("failed to get page property.."); 
+			  model.addAttribute("pageNum", pageNum);
+			  model.addAttribute("offset", offset);
+			  
+		  }
+		        if(request.getParameter("page") != null)
+		        	model.addAttribute("pageNum", pageNum);
+		 
+		        ArrayList<Patient> patientList = new ArrayList<Patient>();
+		       try{
+		    	   List<Patient> object =(List) patientMethods.paginatedSearch(offset, recordsPerPage, searchedValue) ;
+		    	   Iterator iterate = object.iterator();
+		    	   while(iterate.hasNext()){
+			    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
+			    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
+			    	}
+		       }catch(Exception E){
+		        List<Patient> object =(List)patientMethods.paginatedView(offset, recordsPerPage);
+		        Iterator iterate = object.iterator();
+		    	while(iterate.hasNext()){
+		    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
+		    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
+		    	}
+		       }
+		    	
+		        model.addAttribute("patientList", patientList);	    
+	  }
+	
+	
+	/**
+	 * 
+	 * public Boolean validator(HttpServletRequest request,
 			ModelMap model) throws IOException, ServletException{
 				
 		Boolean validateStatus = true;
@@ -571,52 +631,5 @@ public class PatientController {
 	
 		model.addAttribute(error);
 		return validateStatus;
-		}
-	
-	
-	public void pagination(HttpServletRequest request, ModelMap model,String searchedValue){ 
-		  int pageNum = 1;
-		  int offset = 0;
-		  int recordsPerPage = 1;
-		  int noOfRecords = patientMethods.getNumOfRecords();
-		  int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-		  model.addAttribute("noOfPages", noOfPages);
-		
-
-		  
-		  try{
-			  System.out.println("getting page property..");
-			  pageNum= Integer.parseInt(request.getParameter("page"));
-			
-			System.out.println("pagenum is : "+pageNum);
-			offset=(offset+1)*((pageNum-1)*recordsPerPage);
-			System.out.println("offset is : "+offset);
-		  }catch(Exception E){
-			  System.out.println("failed to get page property.."); 
-			  model.addAttribute("pageNum", pageNum);
-			  model.addAttribute("offset", offset);
-			  
-		  }
-		        if(request.getParameter("page") != null)
-		        	model.addAttribute("pageNum", pageNum);
-		 
-		        ArrayList<Patient> patientList = new ArrayList<Patient>();
-		       try{
-		    	   List<Patient> object =(List) patientMethods.paginatedSearch(offset, recordsPerPage, searchedValue) ;
-		    	   Iterator iterate = object.iterator();
-		    	   while(iterate.hasNext()){
-			    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
-			    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
-			    	}
-		       }catch(Exception E){
-		        List<Patient> object =(List)patientMethods.paginatedView(offset, recordsPerPage);
-		        Iterator iterate = object.iterator();
-		    	while(iterate.hasNext()){
-		    		Patient iterlist = (Patient) iterate.next();	//Must change each object in the list as SystemUser
-		    		patientList.add(iterlist);							//Then add to a list that would be passed in the jsp
-		    	}
-		       }
-		    	
-		        model.addAttribute("patientList", patientList);	    
-	  }
+		}**/
 }

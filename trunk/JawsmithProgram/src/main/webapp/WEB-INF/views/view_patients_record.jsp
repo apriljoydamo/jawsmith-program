@@ -22,10 +22,11 @@
 	</head>
 		
 	<body>
-	<jsp:include page="edit_record.jsp" />
 	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
-	 
+	<jsp:include page="edit_record.jsp" />
+	<jsp:include page="treatment_plan.jsp" />
+	
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: <fmt:formatDate value="${patient.last_visit_date}" pattern="yyyy-MM-dd"/></label><br/>
@@ -232,50 +233,7 @@
             <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
 		</div>
-        
-        <div id="add_treatment_plan" class="modalDialog">
-		    <div id="add_treatment_panel">
-		    <a href="#close" class="close_add_treat close">X</a>     
-			<h1>ADD TREATMENT PLAN</h1>			
-			<form id="saveRecord" action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
-			         	<table>
-			             <tr>
-			             	<td>Treatment: </td>
-			             	<td><input type="text" name="treatment" value="" />	</td>
-			             	<td><input type="text" name="treatment_fee" value="Fee" /></td>
-			             </tr>
-			             <tr>
-			             	<td>Alternate Treatment: </td>
-			             	<td><input type="text" name="alternative_treatment" value="" /></td>
-			             	<td><input type="text" name="alternative_treatment_fee" value="Fee" /></td>
-			             </tr>
-			             </table>
-			             <label id="" class="button mouseout_button" onClick="submitForm('saveRecord')">Add Treatment Plan</label>
-				</form>
-			</div>
-		</div>
-		
-		<div id="edit_treatment_plan" class="modalDialog">
-		    <div id="add_treatment_panel">
-		    <a href="#close" class="close_add_treat close">X</a>     
-			<h1>EDIT TREATMENT PLAN</h1>			
-			<form id="editRecord" action="${pageContext.request.contextPath}/treatment_plan/add" method="POST">
-			         	<table>
-			             <tr>
-			             	<td>Treatment: </td>
-			             	<td><input type="text" name="treatment" value="${treatmentplan.treatment}" />	</td>
-			             	<td><input type="text" name="treatment_fee" value="${treatmentplan.treatment_fee}" /></td>
-			             </tr>
-			             <tr>
-			             	<td>Alternate Treatment: </td>
-			             	<td><input type="text" name="alternative_treatment" value="${treatmentplan.alternative_treatment}" /></td>
-			             	<td><input type="text" name="alternative_treatment_fee" value="${treatmentplan.alternative_treatment_fee}" /></td>
-			             </tr>
-			             </table>
-			             <label id="" class="button mouseout_button" onClick="submitForm('editRecord')">Edit Treatment Plan</label>
-				</form>
-			</div>
-		</div>
+       
 		
 	</body>
 </html>
