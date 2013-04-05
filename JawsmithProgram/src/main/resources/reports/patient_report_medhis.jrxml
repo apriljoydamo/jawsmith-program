@@ -63,43 +63,43 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="medhis_query" uuid="8e77cd52-9872-4da5-9587-24d13d1d6116">
+	<subDataset name="medhis_query" uuid="d3ce24f5-af77-4865-9577-c9af1c0bcd90">
 		<queryString>
-			<![CDATA[select * from medical_history where patients_PATIENT_ID=1]]>
+			<![CDATA[]]>
 		</queryString>
 		<field name="MED_HIS_ID" class="java.lang.Integer">
-			<fieldDescription><![CDATA[]]></fieldDescription>
+			<fieldDescription><![CDATA[medical_history_id]]></fieldDescription>
 		</field>
 		<field name="LAST_VISIT_DATE" class="java.sql.Date">
-			<fieldDescription><![CDATA[]]></fieldDescription>
+			<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
 		</field>
 		<field name="QUESTION_ID" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
+			<fieldDescription><![CDATA[question_id]]></fieldDescription>
 		</field>
 		<field name="ANSWER" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
+			<fieldDescription><![CDATA[answer]]></fieldDescription>
 		</field>
 		<field name="patients_PATIENT_ID" class="java.lang.Integer">
-			<fieldDescription><![CDATA[]]></fieldDescription>
+			<fieldDescription><![CDATA[patient_id]]></fieldDescription>
 		</field>
 	</subDataset>
 	<queryString>
-		<![CDATA[select * from medical_history where patients_PATIENT_ID=1]]>
+		<![CDATA[]]>
 	</queryString>
 	<field name="MED_HIS_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[medical_history_id]]></fieldDescription>
 	</field>
 	<field name="LAST_VISIT_DATE" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
 	</field>
 	<field name="QUESTION_ID" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[question_id]]></fieldDescription>
 	</field>
 	<field name="ANSWER" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[answer]]></fieldDescription>
 	</field>
 	<field name="patients_PATIENT_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
