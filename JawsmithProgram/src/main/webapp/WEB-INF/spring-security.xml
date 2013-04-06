@@ -12,10 +12,15 @@
 	<security:http auto-config="false" use-expressions="true" access-denied-page="/denied" 
 		entry-point-ref="authenticationEntryPoint" >
 	  
-		<security:intercept-url pattern="${pageContext.request.contextPath}/loginPage" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="${pageContext.request.contextPath}/css/**" filters="none"/>
 		<security:intercept-url pattern="${pageContext.request.contextPath}/javascript/**" filters="none"/>
 		<security:intercept-url pattern="${pageContext.request.contextPath}/images/**" filters="none"/>
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+	 	<security:intercept-url pattern="/system_user/edit" access="hasRole('ROLE_ADMIN')"/>
+	 	<security:intercept-url pattern="/system_user/add" access="hasRole('ROLE_ADMIN')"/>
+	 	<security:intercept-url pattern="/table_maintenance/edit" access="hasRole('ROLE_ADMIN')"/>
+	 	<security:intercept-url pattern="/table_maintenance/add" access="hasRole('ROLE_ADMIN')"/>
+	  	
 		
 		<security:logout
 	    	invalidate-session="true"

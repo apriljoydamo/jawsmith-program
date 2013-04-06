@@ -9,10 +9,8 @@
 	</parameter>
 	
 	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$F{PATIENT_ID}]]></defaultValueExpression>
 	</parameter>
-	
-	<parameter name="subreportParameterAnxillaries" class="net.sf.jasperreports.engine.JasperReport"/>
 	
 	<queryString>
 		<![CDATA[]]>
@@ -68,7 +66,7 @@
 	<field name="GUARDIAN" class="java.lang.String">
 		<fieldDescription><![CDATA[guardian]]></fieldDescription>
 	</field>
-	<field name="LAST_VISIT_DATE" class="java.sql.Date">
+	<field name="LAST_VISIT_DATE" class="java.util.Date">
 		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
 	</field>
 	<field name="STATUS" class="java.lang.Boolean">
@@ -278,19 +276,7 @@
 				<textFieldExpression><![CDATA[$F{MOBILE_NO}.toString()+"/"+$F{TEL_NO}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
-		
-		<band height="54">
-			<subreport>
-				<reportElement x="1" y="0" width="571" height="50"/>
-				<subreportParameter name="CHOSEN_PATIENT_ID">
-                    <subreportParameterExpression><![CDATA[$F{PATIENT_ID}]]></subreportParameterExpression>
-                </subreportParameter>
-                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportParameterAnxillaries}]]></subreportExpression>
-			</subreport>
-		</band>
-		
-		
+				
 		
 	</detail>
 </jasperReport>

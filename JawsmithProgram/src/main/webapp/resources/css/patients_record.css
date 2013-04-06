@@ -6,10 +6,12 @@ body{
 }
 #patient_info_panel{
 	text-align: right;
-	height: 140px;
-	width: 970px;
+	font-size: 15px;
+	height: auto;
+	float: right;
+	padding-right: 10px;
 	position: relative;
-	top: 25px;
+	top: 100px;
 }
 
 #edit_patient_button{
@@ -65,16 +67,6 @@ body{
 	position: absolute;
 	right: 436px;
 	top: 35px;
-}
-
-#acc_panel{
-	padding: 2px;
-	height: 60px;
-	width: 506px;
-	text-align: end;
-	position: relative;
-	left: 470px;
-	top: 20px;
 }
 
 #body_div {

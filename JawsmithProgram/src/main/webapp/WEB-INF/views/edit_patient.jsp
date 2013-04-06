@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="register_div" class="modalDialog">
 		<div id="register_panel" class="">
@@ -84,7 +85,7 @@
 	                <td><input type="text" id="add_patient_referred_by" name="referred_by" class="" value="${patient.referred_by}"/></td> 
 	          </tr>
 	          
-	          <c:if test="${param.edit==true && user.access==1}">
+	          <c:if test="${user.access==1}">
 	          <tr>              
 	                <td>Patient Status: </td>
 	                <td><select name="status" id="add_patient_status">

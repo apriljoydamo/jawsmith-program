@@ -9,62 +9,69 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
-		<jsp:include page="header.jsp" />
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>		
 	</head>
+	<center>
 	<body>
-		<div class="" id="homepage_panel">
+	<div id="body_div">
+	<jsp:include page="header.jsp" />
+		<div id="homepage_panel">
 			<label id="add_system_users" onclick="buttonNextPage('')" class="button mouseout_button">Add System Users</label>  
 			<label id="edit_system_users" onclick="buttonNextPage('')" class="button mouseout_button">Edit System Users</label>  
 			<label id="add_table_maintenance" onclick="buttonNextPage('')" class="button mouseout_button">Add Table Maintenance</label>
 	        <label id="edit_table_maintenance" onclick="buttonNextPage('')" class="button mouseout_button">Edit Table Maintenance</label>
-	        
-			
-			<div>
+		</div>   
+		<div id=user_list>
 			<h3>SYSTEM USERS</h3>
-			<table>
+		<center>
+			<table id="user_table">
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Username</th>
-					<th>Password</th>
-					<th>User Access</th>
+					<th class="table_header">First Name</th>
+					<th class="table_header">Last Name</th>
+					<th class="table_header">Username</th>
+					<th class="table_header">Password</th>
+					<th class="table_header">User Access</th>
 				</tr>
 				<c:forEach var="sysUser" items="${sysUsersList}">
 				<tr>
-					<td><c:out value="${sysUser.first_name}"/></td>
-					<td><c:out value="${sysUser.last_name}"/></td>
-					<td><c:out value="${sysUser.username}"/></td>
-					<td><c:out value="${sysUser.password}"/></td>
-					<td>${sysUser.access}
+					<td w_bg><c:out value="${sysUser.first_name}"/></td>
+					<td w_bg><c:out value="${sysUser.last_name}"/></td>
+					<td w_bg><c:out value="${sysUser.username}"/></td>
+					<td w_bg><c:out value="${sysUser.password}"/></td>
+					<td w_bg>${sysUser.access}
 						
 					</td>
 				</tr>
 				</c:forEach>
 			</table>
-			</div>
+		</center>	
 		</div>
 		
+		<div id="tm_bg">
 		<h3>TABLE MAINTENANCE</h3>
+		<div id="tablem_list">
 			<div>
-			<table>
+			<table id="tablem_table">
 				<tr>
-					<th>Reference Id</th>
-					<th>Code Table Value</th>
-					<th>Description</th>
-					<th>Status</th>
+					<th class="table_header">Reference Id</th>
+					<th class="table_header">Code Table Value</th>
+					<th class="table_header">Description</th>
+					<th class="table_header">Status</th>
 				</tr>
 				<c:forEach var="tblMaintenance" items="${tblMaintenanceList}">
 				<tr>
-					<td><c:out value="${tblMaintenance.reference_id}"/></td>
-					<td><c:out value="${tblMaintenance.code_table_value}"/></td>
-					<td><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
-					<td><c:out value="${tblMaintenance.status}"/></td>
+					<td w_bg><c:out value="${tblMaintenance.reference_id}"/></td>
+					<td w_bg><c:out value="${tblMaintenance.code_table_value}"/></td>
+					<td w_bg><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
+					<td w_bg><c:out value="${tblMaintenance.status}"/></td>
 				</tr>
 				</c:forEach>
 			</table>
 			</div>
-			
+		</div>
+		</div>
 			<jsp:include page="${system_user.jsp}" />
-	</body>
+	</div>		
+	</body>	
+	</center>
 </html>

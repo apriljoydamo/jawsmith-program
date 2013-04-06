@@ -14,8 +14,8 @@
 		</head>
 	<body>
 		<div class="" id="body_div">
-			<label id="enter_info_label">Please enter your username and password:</label>
 		    <div id="enter_info_panel" class="">
+			<label id="enter_info_label">Please enter your username and password:</label>
 		    <form action="j_spring_security_check" method="POST">
 				<table>
 					<tr>
