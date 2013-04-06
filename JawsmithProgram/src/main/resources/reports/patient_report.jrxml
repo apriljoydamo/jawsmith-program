@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report" language="groovy" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="150"/>
+	<property name="ireport.y" value="0"/>
+	
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\"]]></defaultValueExpression>
+	</parameter>
+	
+	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	
+	<parameter name="subreportParameterAnxillaries" class="net.sf.jasperreports.engine.JasperReport"/>
 	
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	
 	<field name="PATIENT_ID" class="java.lang.Integer">
 		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
 	</field>
@@ -65,6 +74,8 @@
 	<field name="STATUS" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[status]]></fieldDescription>
 	</field>
+	
+	
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -72,10 +83,10 @@
 		<band height="58" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="2" width="409" height="56"/>
-				<imageExpression><![CDATA["\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="307" y="38" width="248" height="20"/>
+				<reportElement x="324" y="28" width="248" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -86,7 +97,7 @@
 	<pageHeader>
 		<band height="41" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="8" width="555" height="33"/>
+				<reportElement x="0" y="8" width="572" height="33"/>
 				<textElement>
 					<font size="18" isBold="true"/>
 				</textElement>
@@ -94,12 +105,10 @@
 			</textField>
 		</band>
 	</pageHeader>
-	
-	
 	<detail>
 		<band height="153" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="20" width="555" height="124"/>
+				<reportElement x="0" y="20" width="572" height="124"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="0" y="0" width="133" height="20"/>
@@ -123,14 +132,14 @@
 				<text><![CDATA[Birthday:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="214" y="40" width="61" height="20"/>
+				<reportElement x="224" y="40" width="61" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gender:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="363" y="40" width="77" height="20"/>
+				<reportElement x="380" y="40" width="77" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
@@ -144,7 +153,7 @@
 				<text><![CDATA[Contact No.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="363" y="60" width="77" height="20"/>
+				<reportElement x="380" y="60" width="77" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
@@ -158,14 +167,14 @@
 				<text><![CDATA[Nationality:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="214" y="80" width="61" height="20"/>
+				<reportElement x="224" y="80" width="61" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Occupation:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="363" y="80" width="77" height="20"/>
+				<reportElement x="380" y="80" width="77" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
@@ -179,7 +188,7 @@
 				<text><![CDATA[Referred By:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="363" y="100" width="77" height="20"/>
+				<reportElement x="380" y="100" width="77" height="20"/>
 				<textElement markup="none">
 					<font isBold="true"/>
 				</textElement>
@@ -193,7 +202,7 @@
 				<text><![CDATA[Last Visit Date:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="363" y="120" width="77" height="20"/>
+				<reportElement x="380" y="120" width="77" height="20"/>
 				<textElement markup="none">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -202,73 +211,86 @@
 			<textField>
 				<reportElement x="77" y="21" width="478" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{ADDRESS}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ADDRESS}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="41" width="137" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{BIRTHDAY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{BIRTHDAY}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="80" width="137" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{NATIONALITY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NATIONALITY}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="100" width="137" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{REFERRED_BY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{REFERRED_BY}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="120" width="137" height="20"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{LAST_VISIT_DATE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{LAST_VISIT_DATE}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="275" y="41" width="88" height="20"/>
+				<reportElement x="285" y="41" width="88" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{SEX}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="275" y="80" width="88" height="20"/>
+				<reportElement x="285" y="80" width="88" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{OCCUPATION}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{OCCUPATION}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="41" width="115" height="20"/>
+				<reportElement x="457" y="41" width="115" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{REL_STATUS}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{REL_STATUS}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="61" width="115" height="20"/>
+				<reportElement x="457" y="61" width="115" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{EMAIL}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{EMAIL}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="80" width="115" height="20"/>
+				<reportElement x="457" y="80" width="115" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{RELIGION}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{RELIGION}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="100" width="115" height="20"/>
+				<reportElement x="457" y="100" width="115" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{GUARDIAN}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{GUARDIAN}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="120" width="115" height="20"/>
+				<reportElement x="457" y="120" width="115" height="20"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{STATUS}.toString()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="60" width="286" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{MOBILE_NO}+"/"+$F{TEL_NO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{MOBILE_NO}.toString()+"/"+$F{TEL_NO}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
+		
+		<band height="54">
+			<subreport>
+				<reportElement x="1" y="0" width="571" height="50"/>
+				<subreportParameter name="CHOSEN_PATIENT_ID">
+                    <subreportParameterExpression><![CDATA[$F{PATIENT_ID}]]></subreportParameterExpression>
+                </subreportParameter>
+                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{subreportParameterAnxillaries}]]></subreportExpression>
+			</subreport>
+		</band>
+		
+		
 		
 	</detail>
 </jasperReport>

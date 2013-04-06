@@ -1,0 +1,56 @@
+body {
+	background-image:url(../images/treatment_record.png);
+	height: 1200px;
+}
+
+#treatment_record_image{
+	text-align: center;
+	position: relative;
+	top: 130px;
+}
+
+#patients_treatment_plan{
+	position: relative;
+	top: 140px;
+}
+
+#add_record_button{
+	position: relative;
+	top: 60px;
+}
+
+.close_edit_treat{
+	margin-right: 100px;
+	margin-top: -10px;
+}
+.close_add_treat{
+	margin-right: 100px;
+	margin-top: -10px;
+}
+#add_treatment_record{
+	background-color: white;
+	border: 3px solid black;
+	border-radius: 5px;
+	width: 250px;
+	margin: 30px auto;
+}
+#edit_treatment_record{
+	background-color: white;
+	border: 3px solid black;
+	border-radius: 5px;
+	width: 300px;
+	margin: 30px auto;
+}
+
+#add_treatment_record_div{
+	text-align: center;
+}
+
+#record_table{
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 0px;
+	background-color: black;
+	width: 100%;
+	margin: 0px auto;
+}

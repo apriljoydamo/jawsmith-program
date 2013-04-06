@@ -1,7 +1,8 @@
 /* CSS Document */
 
 body{
-	background-image:url(../images/patients_record.png);
+	/*background-image:url(../images/patients_record.png);*/
+	background-color: #4a4a4a;
 }
 #patient_info_panel{
 	text-align: right;
@@ -74,4 +75,17 @@ body{
 	position: relative;
 	left: 470px;
 	top: 20px;
+}
+
+#body_div {
+	background-image: url(../images/pages_bg.jpg);
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 675px;
+	position: absolute;
+	/*right: -660px;
+	top: 180px;
+	padding: 20px;
+	text-align:left;
+	border-radius: 50px;*/
 }

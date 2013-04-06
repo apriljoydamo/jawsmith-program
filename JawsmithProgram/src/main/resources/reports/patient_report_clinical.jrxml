@@ -3,34 +3,62 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	
+	<subDataset name="clinical_query" uuid="fa959c66-3a6c-42b3-96fb-ee06ca9d0716">
+		<queryString>
+			<![CDATA[select * from clinical_examination]]>
+		</queryString>
+		<field name="CLINIC_EXAM_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LAST_VISIT_DATE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="GINGIVAL_COLOR" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CONSISTENCY_OF_GINGIVAL" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="TOUNGE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="ORAL_HYGIENE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LYMPH_NODES" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="patients_PATIENT_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[select * from clinical_examination where patients_PATIENT_ID=1]]>
 	</queryString>
-	
 	<field name="CLINIC_EXAM_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[clinical_exam_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="LAST_VISIT_DATE" class="java.lang.String">
-		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="GINGIVAL_COLOR" class="java.lang.String">
-		<fieldDescription><![CDATA[gingival_color]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CONSISTENCY_OF_GINGIVAL" class="java.lang.String">
-		<fieldDescription><![CDATA[consistency_of_gingival]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="TOUNGE" class="java.lang.String">
-		<fieldDescription><![CDATA[tounge]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ORAL_HYGIENE" class="java.lang.String">
-		<fieldDescription><![CDATA[oral_hygiene]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="LYMPH_NODES" class="java.lang.String">
-		<fieldDescription><![CDATA[lymph_nodes]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="patients_PATIENT_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>

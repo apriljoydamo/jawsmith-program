@@ -22,11 +22,10 @@
 	</head>
 		
 	<body>
+	<jsp:include page="edit_record.jsp" />
 	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
-	<jsp:include page="edit_record.jsp" />
-	<jsp:include page="treatment_plan.jsp" />
-	
+	 
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: <fmt:formatDate value="${patient.last_visit_date}" pattern="yyyy-MM-dd"/></label><br/>
@@ -233,7 +232,9 @@
             <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
             <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
 		</div>
-       
+        
+        <jsp:include page="add_treatment_plan.jsp"/>
+		<jsp:include page="edit_treatment_plan.jsp"/>
 		
 	</body>
 </html>

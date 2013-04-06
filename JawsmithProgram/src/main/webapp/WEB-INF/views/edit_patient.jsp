@@ -27,8 +27,8 @@
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>
-	                <td><label><input type="radio" name="add_patient_sex" value="Male" ${patient.sex=='M' ? 'checked' : ''}/>Male</label>
-	        			<label><input type="radio" name="add_patient_sex" value="Female" ${patient.sex=='F' ? 'checked' : ''}/>Female</label></td>  
+	                <td><label><input type="radio" name="add_patient_sex" value="Male" ${patient.sex=="M" ? 'checked' : ''}/>Male</label>
+	        			<label><input type="radio" name="add_patient_sex" value="Female" ${patient.sex=="F" ? 'checked' : ''}/>Female</label></td>  
 	          </tr>
 	          <tr>              
 	                <td>Marital Status: </td>

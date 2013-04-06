@@ -14,14 +14,13 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
 		<jsp:include page="header.jsp" />
 	</head>
 	
 	<body>
 	<div id="register_div" class="modalDialog">
 		<div id="register_panel" class="">
-	      <a href="#close" class="close_reg close" title="">X</a>
+	      <a href="#close" class="close_reg close" title="">X</a><br/>
 	      <label id="add_patient_label">ADD PATIENT</label>
 	      <form id="add_patient_form" action="${pageContext.request.contextPath}/patient/add" method="POST" >
 	        <table>
@@ -154,7 +153,7 @@
 	    	<td class="results"><c:out value="${patient.middle_name}" /></td>	    	
 	    	<td class="results"><c:out value="${patient.last_visit_date}" /></td>
 	    	<td class="results"><c:out value="${patient.birthday}" /></td>	    	
-	    	<td class="results"><c:out value="${patient.sex=='M' ? 'Male' : 'Female'}" /></td>
+	    	<td class="results"><c:out value="${patient.sex}" /></td>
 	    	<td class="results"><c:out value="${patient.relationship_status}" /></td>
 	    </tr>
 	    </c:forEach>

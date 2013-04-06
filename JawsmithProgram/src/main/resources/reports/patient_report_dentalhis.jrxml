@@ -43,39 +43,74 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-
+	<subDataset name="dentalhis_query" uuid="48239f90-91f3-43dc-91e3-842268c9cc01">
+		<queryString>
+			<![CDATA[select * from dental_history where patients_PATIENT_ID=1]]>
+		</queryString>
+		<field name="DENTAL_HIS_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LAST_VISIT_DATE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="FLUORIDE_TREATMENT" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="ORTHODONTIC_TREATMENT" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="PULP_THERAPY" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="TEMPORO_MANDIBULAR_THERAPY" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="PERIODONTAL_THERAPY" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="DENTAL_SURGERY" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="EXTRACTION" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="patients_PATIENT_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[select * from dental_history where patients_PATIENT_ID=$P{CHOSEN_PATIENT_ID}]]>
 	</queryString>
 	<field name="DENTAL_HIS_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[dental_his_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="LAST_VISIT_DATE" class="java.lang.String">
-		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="FLUORIDE_TREATMENT" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[fluoride_treatment]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ORTHODONTIC_TREATMENT" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[orthodontic_treatment]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="PULP_THERAPY" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[pulp_therapy]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="TEMPORO_MANDIBULAR_THERAPY" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[temporo_mandibular]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="PERIODONTAL_THERAPY" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[periodontal_therapy]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="DENTAL_SURGERY" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[dental_surgery]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="EXTRACTION" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[extraction]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="patients_PATIENT_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
