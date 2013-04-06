@@ -54,12 +54,12 @@ public class PatientDao extends HibernateDaoSupport implements DataAccesses, Pat
    }
 @Override
 public List searchByLastname(String toSearch) {
-	List list = getHibernateTemplate().find("from Patient LIKE LAST_NAME");
+	List list = getHibernateTemplate().find("from Patient where LAST_NAME LIKE=?",toSearch);
 	return list;
 }
 
-public List paginatedSearch(int offset, int numOfRecord,String seachedValue) {
-	   Query q = getSession().createQuery("FROM Patient LIKE LAST_NAME");
+public List paginatedSearch(int offset, int numOfRecord,String searchedValue) {
+	  Query q = getSession().createQuery("FROM Patient where LAST_NAME LIKE '"+searchedValue+"' ");
 	   q.setFirstResult(offset);
 	   q.setMaxResults(numOfRecord);
 	   return q.list();
