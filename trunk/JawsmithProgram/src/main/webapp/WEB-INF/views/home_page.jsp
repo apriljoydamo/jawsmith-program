@@ -14,10 +14,12 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
-		<jsp:include page="header.jsp" />
 	</head>
 	
+	<center>
 	<body>
+	<div id="body_div">
+	<jsp:include page="header.jsp" />
 	<div id="register_div" class="modalDialog">
 		<div id="register_panel" class="">
 	      <a href="#close" class="close_reg close" title="">X</a><br/>
@@ -133,6 +135,7 @@
 		<label id="plus_button" class="button mouseout_button">Add Patients</label>
 	</div>
 	
+	<center>
 	<div class="" id="patient_list">
 	<table id="patient_table">
 	    <tr class="header_row">
@@ -190,7 +193,16 @@
 	    </tr>
 	</table>
 	
-	<table border="1" cellpadding="5" cellspacing="5">
+    
+	<form id="view_patient_form" action="${pageContext.request.contextPath}/patient/view_patient" method="post">
+		<input type="hidden" id="patient_id" name="patient_id"/>
+	</form>
+	</div>
+	</center>
+	
+	<div id="footer_panel" class="">
+	
+	<table border="1" cellpadding="2" cellspacing="5">
         <tr>
 
             <c:forEach begin="1" end="${noOfPages}" var="i">
@@ -205,13 +217,8 @@
             </c:forEach>
         </tr>
     </table>
-    
-	<form id="view_patient_form" action="${pageContext.request.contextPath}/patient/view_patient" method="post">
-		<input type="hidden" id="patient_id" name="patient_id"/>
-	</form>
 	</div>
-	
-	<div id="footer_panel" class="">
 	</div>
 	</body>
+	</center>
 </html>

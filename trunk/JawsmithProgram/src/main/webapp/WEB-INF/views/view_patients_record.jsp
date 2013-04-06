@@ -38,7 +38,9 @@
 	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
 		<div id="edit_patient_button">
+			<c:if test="${user.access==1 || user.access==2}">
 			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
+			</c:if>
 			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Save Report</label>
 		</div>
 
@@ -226,11 +228,17 @@
 		</div>
 		
 		<div id="view_patient_controllers">			
-        	<label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_record_div')">Edit Medical Record</label>
-			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
-			<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
-            <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
-            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
+        	<c:if test="${user.access==1 || user.access==2}">
+				<c:if test="${isNewUser==false}">
+					<label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_record_div')">Edit Medical Record</label>
+				</c:if>
+				<c:if test="${isNewUser==true}">
+					<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
+				</c:if>
+				<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
+	            <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
+	            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
+			</c:if>
 		</div>
         
         <jsp:include page="add_treatment_plan.jsp"/>

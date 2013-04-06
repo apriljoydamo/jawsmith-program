@@ -157,5 +157,12 @@ public class HomeController {
 		return "redirect:/patient/list";
 	}
 	
+	@RequestMapping("/general_error")
+	public String errorPage(HttpServletRequest request, HttpServletResponse response, 
+			  ModelMap model){
+		return "error_page";
+		
+	}
+	
 	
 }

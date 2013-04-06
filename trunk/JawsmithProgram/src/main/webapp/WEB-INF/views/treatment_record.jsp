@@ -15,10 +15,13 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/treatment_page.js"></script>
-		<jsp:include page="header.jsp" />
 	</head>
+	
+	<center>
 	<body>
-		<div class="" id="patient_info_panel">
+	<div id="body_div">		
+	<jsp:include page="header.jsp" />
+ 		<div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
 	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
@@ -76,6 +79,7 @@
 		
 		<jsp:include page="add_treatment_record.jsp"/>
 		<jsp:include page="edit_treatment_record.jsp"/>
-		
+	</div>	
 	</body>
+	</center>
 </html>

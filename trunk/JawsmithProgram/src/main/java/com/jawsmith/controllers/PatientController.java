@@ -282,6 +282,7 @@ public class PatientController {
 		Patient patient = (Patient) request.getSession().getAttribute("patient");		
 		int patientId = patient.getPatient_id();
 		Date lastVisitDate = patient.getLast_visit_date();
+		Boolean isNewUser = false;
 		System.out.println("patientID: "+ patientId);
 		System.out.println("LastVisitDate: "+lastVisitDate);
 		
@@ -304,6 +305,7 @@ public class PatientController {
 			treatmentplan = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
 		}catch(Exception e){
 			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
+			isNewUser = true;
 		}
 		
 		model.addAttribute("latestMedHisList", latestMedHisList);
@@ -313,8 +315,8 @@ public class PatientController {
 		model.addAttribute("occlusion", occlusion);
 		model.addAttribute("other", other);
 		model.addAttribute("treatmentplanList", treatmentplan);
-		
-		//model.addAttribute("medHisListDesc",changeToTblMaintenanceDesc(latestMedHisList));
+		model.addAttribute("isNewUser", isNewUser);
+		System.out.print("NEW USER:"+isNewUser);
 		return "view_patients_record";
 	}
 	
@@ -323,15 +325,15 @@ public class PatientController {
     public String getPDF(HttpServletResponse response,HttpServletRequest request, 
     						Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
 	 	
-	  	//LAYOUTS
+	  	
+		//LAYOUTS
 		
 		//java.io.InputStream inputStreamPatientReport = new java.io.FileInputStream("/reports/patient_report.jrxml");
 		//InputStream inputStreamPatientReport = getClass().getResourceAsStream("reports/patient_report.jrxml");
 		InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report.jrxml");
-		System.out.println(inputStreamPatientReport.toString());
-	  	
-	  	InputStream  inputStreamReportAnxillaries = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_anxillaries.jrxml");
-	  	/*InputStream inputStreamReportClinical = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_clinical.jrxml");
+		
+	  	/*InputStream  inputStreamReportAnxillaries = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_anxillaries.jrxml");
+	  	InputStream inputStreamReportClinical = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_clinical.jrxml");
 		InputStream  inputStreamReportDentalHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_dentalhis.jrxml");
 	  	InputStream inputStreamReportMedHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_medhis.jrxml");
 		InputStream  inputStreamReportOcclusion = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_occlusion.jrxml");
@@ -353,8 +355,8 @@ public class PatientController {
 		
 		//COMPILE JRXML FILES
 		JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
-		JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
-		/*JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
+		/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
+		JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
 		JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
 		JasperDesign jasperSubDesign4 = JRXmlLoader.load(inputStreamReportMedHis);
 		JasperDesign jasperSubDesign5 = JRXmlLoader.load(inputStreamReportOcclusion);
@@ -365,8 +367,8 @@ public class PatientController {
         
         //COMPILE REPORT
 		JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
-		JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
-		/*JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
+		/*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
+		JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
 		JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
 		JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
 		JasperReport jasperSubReport5 = JasperCompileManager.compileReport(jasperSubDesign5);
@@ -376,30 +378,23 @@ public class PatientController {
 		*/
 		//FILL REPORT
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("subreportParameterAnxillaries", jasperSubReport1);
-		/*parameters.put("subreportParameterClinical", jasperSubReport2);
+		/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
+		parameters.put("subreportParameterClinical", jasperSubReport2);
 		parameters.put("subreportParameterDentalHis", jasperSubReport3);
 		parameters.put("subreportParameterMedHis", jasperSubReport4);
 		parameters.put("subreportParameterOcclusion", jasperSubReport5);
 		parameters.put("subreportParameterOtherInfo", jasperSubReport6);
 		parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
 		parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
-		
-	<parameter name="subreportParameterClinical" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterDentalHis" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterMedHis" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterOcclusion" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterOtherInfo" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterTreatmentPlan" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subreportParameterTreatmentRecord" class="net.sf.jasperreports.engine.JasperReport"/>
-	
-		
 		*/
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
 
         //EXPORT REPORT
 			 
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper_patient.pdf"); 
+		String pathFile = "C:/Users/April Joy Damo/Documents/JasperReports/reports/";
+		String nameOfPatient = patient.getLast_name()+"_"+patient.getFirst_name();
+		JasperExportManager.exportReportToPdfFile(jasperPrint, pathFile+nameOfPatient+".pdf"); 
 
         return "redirect:/home";
   

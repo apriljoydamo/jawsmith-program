@@ -1,12 +1,22 @@
-body {
-	background-image:url(../images/treatment_record.png);
-	height: 1200px;
+body{
+	background-color: #4a4a4a;
+	font-family: century gothic;
+}
+
+#body_div {
+	background-image: url(../images/pages_bg.jpg);
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 675px;
+	position: relative;
 }
 
 #treatment_record_image{
 	text-align: center;
 	position: relative;
-	top: 130px;
+	float: left;
+	top: -30px;
+	left: 30px;
 }
 
 #patients_treatment_plan{
