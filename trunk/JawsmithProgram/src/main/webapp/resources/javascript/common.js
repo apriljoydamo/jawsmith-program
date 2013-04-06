@@ -41,3 +41,4 @@ function setButtons(){
 		$(this).attr("class", "button mouseover_button");
     });
 }
+

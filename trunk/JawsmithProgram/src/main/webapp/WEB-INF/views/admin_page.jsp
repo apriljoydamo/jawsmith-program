@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>		
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_page.js"></script>		
 	</head>
 	<center>
 	<body>
@@ -17,10 +18,8 @@
 	<jsp:include page="header.jsp" />
 		<div id="homepage_panel">
 			<label id="add_system_users" onclick="buttonNextPage('')" class="button mouseout_button">Add System Users</label>  
-			<label id="edit_system_users" onclick="buttonNextPage('')" class="button mouseout_button">Edit System Users</label>  
 			<label id="add_table_maintenance" onclick="buttonNextPage('')" class="button mouseout_button">Add Table Maintenance</label>
-	        <label id="edit_table_maintenance" onclick="buttonNextPage('')" class="button mouseout_button">Edit Table Maintenance</label>
-		</div>   
+	    </div>   
 		<div id=user_list>
 			<h3>SYSTEM USERS</h3>
 		<center>
@@ -33,7 +32,7 @@
 					<th class="table_header">User Access</th>
 				</tr>
 				<c:forEach var="sysUser" items="${sysUsersList}">
-				<tr>
+				<tr id="user_id" class="patient_records" onclick="selectUser('${sysUser.user_id}')">
 					<td w_bg><c:out value="${sysUser.first_name}"/></td>
 					<td w_bg><c:out value="${sysUser.last_name}"/></td>
 					<td w_bg><c:out value="${sysUser.username}"/></td>
@@ -47,6 +46,10 @@
 		</center>	
 		</div>
 		
+		<form id="user_form_id" action="">
+			<input type="hidden" value="" id="user_id_hidden" />
+		</form>
+		
 		<div id="tm_bg">
 		<h3>TABLE MAINTENANCE</h3>
 		<div id="tablem_list">
@@ -59,7 +62,7 @@
 					<th class="table_header">Status</th>
 				</tr>
 				<c:forEach var="tblMaintenance" items="${tblMaintenanceList}">
-				<tr>
+				<tr id="tbl_maintenance_id" class="patient_records" onclick="selectTblMaintenance('${tblMaintenance.table_maintenance_id}')">
 					<td w_bg><c:out value="${tblMaintenance.reference_id}"/></td>
 					<td w_bg><c:out value="${tblMaintenance.code_table_value}"/></td>
 					<td w_bg><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
@@ -70,6 +73,9 @@
 			</div>
 		</div>
 		</div>
+		<form id="tablem_form_id" action="">
+			<input type="hidden" value="" id="tablem_id_hidden" />
+		</form>
 			<jsp:include page="${system_user.jsp}" />
 	</div>		
 	</body>	
