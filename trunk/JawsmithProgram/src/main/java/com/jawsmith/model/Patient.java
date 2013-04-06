@@ -10,7 +10,7 @@ public class Patient {
 	private String middle_name;
 	private String last_name;
 	private Date birthday;
-	private char sex;
+	private String sex;
 	private String relationship_status;
 	private String address;
 	private String mobile_number;
@@ -101,13 +101,13 @@ public class Patient {
 	/**
 	 * @return the sex
 	 */
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 	/**
 	 * @param sex the sex to set
 	 */
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 	/**

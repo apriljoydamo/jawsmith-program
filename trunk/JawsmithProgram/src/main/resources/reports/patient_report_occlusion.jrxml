@@ -3,27 +3,50 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	
+	<subDataset name="occlusion_query" uuid="4a001122-cb90-4429-aac9-088b582d28c9">
+		<queryString>
+			<![CDATA[select * from occlusion]]>
+		</queryString>
+		<field name="OCCLUSION_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LAST_VISIT_DATE" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CLASS_I" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CLASS_II" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CLASS_III" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="patients_PATIENT_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[select * from occlusion where patients_PATIENT_ID=1]]>
 	</queryString>
 	<field name="OCCLUSION_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[occlusion_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="LAST_VISIT_DATE" class="java.sql.Date">
-		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CLASS_I" class="java.lang.String">
-		<fieldDescription><![CDATA[class_1]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CLASS_II" class="java.lang.String">
-		<fieldDescription><![CDATA[class_2]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CLASS_III" class="java.lang.String">
-		<fieldDescription><![CDATA[class_3]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="patients_PATIENT_ID" class="java.lang.Integer">
-		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>

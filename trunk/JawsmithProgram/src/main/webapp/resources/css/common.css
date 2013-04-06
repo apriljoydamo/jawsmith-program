@@ -40,8 +40,9 @@
 
 .header_row{
 	font-weight: bold;
-	font-size: 20px;
-	background-color: #99FF99;
+	font-size: 15px;
+	color: white;
+	background-color: #5070cd;
 }
 
 .patient_records{

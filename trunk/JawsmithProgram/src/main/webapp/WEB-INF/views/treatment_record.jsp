@@ -7,6 +7,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Treatment Records</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/treatment_record.css"/>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/treatment_page.js"></script>
 		<jsp:include page="header.jsp" />
 	</head>
 	<body>
@@ -22,12 +30,12 @@
 	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
 		
-		<div id="treatment_record_div1">
+		<div id="treatment_record_image" class="">
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/chart3.jpg" />
 		</div>
 		
-		<div id="treatment_record_div2">
-			<table>
+		<div id="patients_treatment_plan" class="">
+			<table id="record_table">
 				<tr>
 					<th>Date</th>
 					<th>Tooth No.</th>
@@ -63,38 +71,10 @@
 			</table>
 		</div>
 		
-		<div id="add_treatment_record" class="modalDialog">
-			<a href="#close" class="close_add_treat close">X</a>     
-			<h3>TREATMENT RECORD</h3>
-			<form action="${pageContext.request.contextPath}/treatment_record/add" method="POST">
-			<table>
-				<tr>
-					<td>Tooth No.</td>
-					<td><input type="text" name="tooth_number"></td>
-				</tr>
-				<tr><td>Description</td>
-					<td><input type="text" name="description"></td>
-				</tr>
-				<tr>
-					<td>Prescription</td>
-					<td><input type="text" name="prescription"></td>
-				</tr>
-				<tr>
-					<td>Debit</td>
-					<td><input type="text" name="debit"></td>
-				</tr>
-				<tr>
-					<td>Credit Date</td>
-					<td><input type="text" name="credit_date" value="yyyy-MM-dd"></td>
-				</tr>
-				<tr>
-					<td>Credit Amount</td>
-					<td><input type="text" name="credit_amount"></td>
-				</tr>
-			</table>
-			<input type="submit" value="Save"/>
-			</form>
-		</div>
+		<label id="add_record_button" class="button mouseout_button">Add Record</label>
+		
+		
+		<jsp:include page="add_treatment_record.jsp"/>
 		<jsp:include page="edit_treatment_record.jsp"/>
 		
 	</body>

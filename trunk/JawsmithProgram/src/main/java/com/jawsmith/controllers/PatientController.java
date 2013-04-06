@@ -135,7 +135,7 @@ public class PatientController {
 		patient.setFirst_name(first_name);
 		patient.setMiddle_name(middle_name);
 		patient.setBirthday(dob);
-		patient.setSex(sex.charAt(0));
+		patient.setSex(""+sex.charAt(0));
 		patient.setRelationship_status(rel_status);
 		patient.setAddress(address);
 		patient.setTelephone_number(tel_num);
@@ -192,7 +192,7 @@ public class PatientController {
 		patient.setFirst_name(first_name);
 		patient.setMiddle_name(middle_name);
 		patient.setBirthday(dob);
-		patient.setSex(sex.charAt(0));
+		patient.setSex(""+sex.charAt(0));
 		patient.setRelationship_status(rel_status);
 		patient.setAddress(address);
 		patient.setTelephone_number(tel_num);
@@ -328,10 +328,10 @@ public class PatientController {
 		//java.io.InputStream inputStreamPatientReport = new java.io.FileInputStream("/reports/patient_report.jrxml");
 		//InputStream inputStreamPatientReport = getClass().getResourceAsStream("reports/patient_report.jrxml");
 		InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report.jrxml");
-	
+		System.out.println(inputStreamPatientReport.toString());
 	  	
-	  	/*InputStream  inputStreamReportAnxillaries = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_anxillaries.jrxml");
-	  	InputStream inputStreamReportClinical = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_clinical.jrxml");
+	  	InputStream  inputStreamReportAnxillaries = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_anxillaries.jrxml");
+	  	/*InputStream inputStreamReportClinical = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_clinical.jrxml");
 		InputStream  inputStreamReportDentalHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_dentalhis.jrxml");
 	  	InputStream inputStreamReportMedHis = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_medhis.jrxml");
 		InputStream  inputStreamReportOcclusion = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_occlusion.jrxml");
@@ -347,12 +347,14 @@ public class PatientController {
 		ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
 		dataBeanList.add(patient);
 		
+		//Anxillaries ax = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientId(patient.getPatient_id());
+		
 		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
 		
 		//COMPILE JRXML FILES
 		JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
-		/*JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
-		JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
+		JasperDesign jasperSubDesign1 = JRXmlLoader.load(inputStreamReportAnxillaries);
+		/*JasperDesign jasperSubDesign2 = JRXmlLoader.load(inputStreamReportClinical);
 		JasperDesign jasperSubDesign3 = JRXmlLoader.load(inputStreamReportDentalHis);
 		JasperDesign jasperSubDesign4 = JRXmlLoader.load(inputStreamReportMedHis);
 		JasperDesign jasperSubDesign5 = JRXmlLoader.load(inputStreamReportOcclusion);
@@ -363,8 +365,8 @@ public class PatientController {
         
         //COMPILE REPORT
 		JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
-        /*JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
-		JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
+		JasperReport jasperSubReport1 = JasperCompileManager.compileReport(jasperSubDesign1);
+		/*JasperReport jasperSubReport2 = JasperCompileManager.compileReport(jasperSubDesign2);
 		JasperReport jasperSubReport3 = JasperCompileManager.compileReport(jasperSubDesign3);
 		JasperReport jasperSubReport4 = JasperCompileManager.compileReport(jasperSubDesign4);
 		JasperReport jasperSubReport5 = JasperCompileManager.compileReport(jasperSubDesign5);
@@ -374,8 +376,8 @@ public class PatientController {
 		*/
 		//FILL REPORT
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		/*parameters.put("subreportParameterAnxillaries", jasperSubReport1);
-		parameters.put("subreportParameterClinical", jasperSubReport2);
+		parameters.put("subreportParameterAnxillaries", jasperSubReport1);
+		/*parameters.put("subreportParameterClinical", jasperSubReport2);
 		parameters.put("subreportParameterDentalHis", jasperSubReport3);
 		parameters.put("subreportParameterMedHis", jasperSubReport4);
 		parameters.put("subreportParameterOcclusion", jasperSubReport5);
@@ -383,7 +385,6 @@ public class PatientController {
 		parameters.put("subreportParameterTreatmentPlan", jasperSubReport7);
 		parameters.put("subreportParameterTreatmentRecord", jasperSubReport8);
 		
-		<parameter name="subreportParameterAnxillaries" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="subreportParameterClinical" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="subreportParameterDentalHis" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="subreportParameterMedHis" class="net.sf.jasperreports.engine.JasperReport"/>
@@ -394,9 +395,10 @@ public class PatientController {
 	
 		
 		*/
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
 
         //EXPORT REPORT
+			 
         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/April Joy Damo/Documents/JasperReports/reports/test_jasper_patient.pdf"); 
 
         return "redirect:/home";
@@ -406,7 +408,7 @@ public class PatientController {
 	public void pagination(HttpServletRequest request, ModelMap model,String searchedValue){ 
 		  int pageNum = 1;
 		  int offset = 0;
-		  int recordsPerPage = 1;
+		  int recordsPerPage = 10;
 		  int noOfRecords = patientMethods.getNumOfRecords();
 		  int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 		  model.addAttribute("noOfPages", noOfPages);
