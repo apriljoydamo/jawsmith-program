@@ -84,6 +84,7 @@ public class PatientController {
 	@RequestMapping("/search")
 	public String searchedList(HttpServletRequest request, ModelMap model){
 		
+		String searchedValue = (String)request.getParameter("searchedValue");
 		try{
 			//destroys the patient attribute in session
 			request.getSession().removeAttribute("patient");
@@ -91,8 +92,7 @@ public class PatientController {
 			System.out.println("ERROR IN DESTROYING SESSION");
 			logger.error("ERROR IN DESTROYING SESSION");
 		}
-		
-		pagination(request, model,(String)request.getAttribute("searchedValue"));
+		pagination(request, model,searchedValue);
 		return "home_page";
 	}
 	
@@ -428,6 +428,7 @@ public class PatientController {
 		 
 		        ArrayList<Patient> patientList = new ArrayList<Patient>();
 		       try{
+		    	   if(searchedValue.equals(null)||searchedValue.equals(""));
 		    	   List<Patient> object =(List) patientMethods.paginatedSearch(offset, recordsPerPage, searchedValue) ;
 		    	   Iterator iterate = object.iterator();
 		    	   while(iterate.hasNext()){
