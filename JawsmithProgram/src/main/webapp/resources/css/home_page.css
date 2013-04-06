@@ -25,6 +25,7 @@
 	border: solid 1px;
 	position: relative;
 	top: 130px;
+	overflow: auto;
 }
 #patient_table{	
 	font-size: 12px;
