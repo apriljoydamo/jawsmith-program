@@ -1,4 +1,4 @@
-<div id="add_treatment_record_div" class="modalDialog">
+<div name="add_treatment_record_div" id="add_treatment_record_div" class="modalDialog">
 	<div id="add_treatment_record">
 		<a href="#close" class="close_add_treat close">X</a>
 		<h3>TREATMENT RECORD</h3>

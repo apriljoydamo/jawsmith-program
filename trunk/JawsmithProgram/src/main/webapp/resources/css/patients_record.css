@@ -1,9 +1,55 @@
 /* CSS Document */
 
-body{
-	/*background-image:url(../images/patients_record.png);*/
-	background-color: #4a4a4a;
+#body_div {
+	background-image: url(../images/pages_bg.jpg);
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 675px;
+	position: relative;
+	/*right: -660px;
+	top: 180px;
+	padding: 20px;
+	text-align:left;
+	border-radius: 50px;*/
 }
+
+body{
+	background-color: #4a4a4a;
+	font-family: century gothic;
+}
+
+[blue_bg]{
+	font-weight: bold;
+	font-size: 15px;
+	color: white;
+	background-color: #5070cd;
+}
+
+[w_bg]{
+	background-color: white;
+}
+
+#treatment_plan_div{
+	top: -435px;
+	width: 450px;
+	position: relative;
+	overflow-y: auto;
+	left: 440px;
+	height:220px;
+	border: 1px solid black;
+	background-color:white;
+}
+
+#treatment_table{
+	position: relative;
+	font-size: 12px;
+	text-align: center;
+	width: 450px;
+	height: auto;
+	overflow: auto;
+	background-color: black;
+}
+
 #patient_info_panel{
 	text-align: right;
 	font-size: 15px;
@@ -11,17 +57,17 @@ body{
 	float: right;
 	padding-right: 10px;
 	position: relative;
-	top: 100px;
+	top: 115px;
 }
 
 #edit_patient_button{
 	position: relative;
-	top: 10px;
+	top: 70px;
 }
 
 #view_patient_controllers{
 	position: relative;
-	top: 15px;
+	top: -270px;
 }
 
 #patient_medical_info{
@@ -29,14 +75,10 @@ body{
 	height: 600px;
 }
 
-#edit_patient_button{
-	position: relative;
-	top: 40px;
-}
-
 #view_patient_page_div{
 	position: relative;
-	top: 110px;
+	top: 140px;
+	left: -230px;
 }
 
 .patient_medical_info{
@@ -58,26 +100,22 @@ body{
 #add_treatment_panel{
 	width: 500px;
 	margin: 30px auto;
-	border: 3px solid black;
+	border: 1px solid black;
 	border-radius: 5px;
 	background-color: white;
+}
+
+#edit_treatment_panel{
+	width: 500px;
+	height: 200px;
+	margin: 30px auto;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 8px;
 }
 
 .close_add_treat{	
 	position: absolute;
 	right: 436px;
 	top: 35px;
-}
-
-#body_div {
-	background-image: url(../images/pages_bg.jpg);
-	background-repeat: no-repeat;
-	width: 900px;
-	height: 675px;
-	position: absolute;
-	/*right: -660px;
-	top: 180px;
-	padding: 20px;
-	text-align:left;
-	border-radius: 50px;*/
 }

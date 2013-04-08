@@ -61,7 +61,7 @@ function validatePatient(){
 	
 	//CHECK FOR EMPTY VALUES
 	for(var x = 0 ; x<fields.length; x++){
-		if($.trim(fields[x].val()) == "" || fields[x].val() == null||fields[x].legnth()>254){
+		if($.trim(fields[x].val()) == "" || fields[x].val() == null){
 		//alert(fields[x].parent().child().length);
 		if ( fields[x].parent().child().length < 2 ) {
 		fields[x].parent().append('<label id="asterisk">*</label>');
@@ -71,10 +71,10 @@ function validatePatient(){
 		}
 	}
 	alert(approved);
-	
 	if(!approved){
 		alert("INVALID");
 	} else if(approved){
+		alert('approved');
 		$("#add_patient_form").submit();
 	}
 }

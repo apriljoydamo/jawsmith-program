@@ -116,7 +116,7 @@
 	          </c:if>
 	          
 	          <tr>              
-	                <td><label id="save_button" class="button mouseout_button" onclick="validatePatient()" >Save</label></td>
+	                <td><label id="save_button" class="button mouseout_button" onclick="validatePatient()">Save</label></td>
 	          </tr>
 	      	</table>
 	      </form>
@@ -124,15 +124,21 @@
 	</div>
 	
 	<div class="" id="homepage_panel">
-		<label id="patients_button" onclick="buttonNextPage('${pageContext.request.contextPath}/patient/list')" class="button mouseout_button">
-		Patients</label>
+	<table>
+		<tr><label id="patients_button" onclick="buttonNextPage('${pageContext.request.contextPath}/patient/list')" class="button mouseout_button">
+		Patients</label></tr>
 		<c:if test="${user.access==1}">
-	          <label id="table_maintenance_button" onclick="buttonNextPage('${pageContext.request.contextPath}/admin')" class="button mouseout_button">Admin Tools</label>
+	          <tr><label id="table_maintenance_button" onclick="buttonNextPage('${pageContext.request.contextPath}/admin')" class="button mouseout_button">Admin Tools</label></tr>
 	    </c:if>
-	    <input type="text" id="" class="" />
-		<label id="search_button" class="button mouseout_button">Search</label>
-		<label id="advance_search_button" class="button mouseout_button">Advance Search</label>
-		<label id="plus_button" class="button mouseout_button">Add Patients</label>
+	    
+	    <tr><form id="searchForm" action="${pageContext.request.contextPath}/patient/search" method="post">
+		    <input type="text" id="" class="" name="searchedValue"/>
+			<label id="search_button" class="button mouseout_button" onClick="submitForm('searchForm')">Search</label>
+		</form></tr>
+		
+		<tr><label id="advance_search_button" class="button mouseout_button">Advance Search</label></tr>
+		<tr><label id="plus_button" class="button mouseout_button">Add Patients</label></tr>
+	</table>
 	</div>
 	
 	<center>

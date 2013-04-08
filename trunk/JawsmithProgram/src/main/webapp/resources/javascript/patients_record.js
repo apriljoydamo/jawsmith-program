@@ -17,7 +17,37 @@ function setAccordion(){
 
 $(document).ready(function() {
     setButtons();
-	$("#patient_medical_info").accordion();
+
+	$("#dd11").slideUp();
+	$("#dd22").slideUp();
+	$("#dd33").slideUp();
+	$("#dd44").slideUp();
+	$("#dd55").slideUp();
+	$("#dd66").slideUp();
+	$("#dd77").slideUp();
+
+    $("#hh11").click(function(){
+    	$("#dd11").slideToggle();
+    });
+    $("#hh22").click(function(){
+    	$("#dd22").slideToggle();
+    });
+    $("#hh33").click(function(){
+    	$("#dd33").slideToggle();
+    });
+    $("#hh44").click(function(){
+    	$("#dd44").slideToggle();
+    });
+    $("#hh55").click(function(){
+    	$("#dd55").slideToggle();
+    });
+    $("#hh66").click(function(){
+    	$("#dd66").slideToggle();
+    });
+    $("#hh77").click(function(){
+    	$("#dd77").slideToggle();
+    });
+    //$("#patient_medical_info").accordion();
 	setAccordion();;
 	
 });
