@@ -11,9 +11,10 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/beauteethful.js"></script>
-		</head>
+	</head>	
+	
 	<body>
-		<div class="" id="body_div">
+		<div class="" id="logbody_div">
 		    <div id="enter_info_panel" class="">
 			<label id="enter_info_label">Please enter your username and password:</label>
 		    <form action="j_spring_security_check" method="POST">
@@ -34,5 +35,6 @@
 		   		<label id="error_message"> Incorrect username and/or password! :D</label>
 			</c:if>
 		</div>
+		
 	</body>
 </html>

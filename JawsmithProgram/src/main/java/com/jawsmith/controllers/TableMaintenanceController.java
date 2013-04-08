@@ -43,7 +43,6 @@ public class TableMaintenanceController {
 		int reference_id = Integer.parseInt(request.getParameter("reference_id"));
 		String code_table_value = request.getParameter("code_table_value");
 		String tbl_maintenance_description = request.getParameter("tbl_maintenance_description");
-		String last_name = request.getParameter("last_name");
 		Boolean status = Boolean.valueOf(request.getParameter("status"));
 		
 		tblMaintenance.setReference_id(reference_id);

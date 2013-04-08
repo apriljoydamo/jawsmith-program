@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report_clinical" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="583ca83a-04a3-4c5a-94fc-38493724dc6c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="clinical_query" uuid="fa959c66-3a6c-42b3-96fb-ee06ca9d0716">
+		<queryString>
+			<![CDATA[select * from clinical_examination]]>
+		</queryString>
+		<field name="CLINIC_EXAM_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LAST_VISIT_DATE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="GINGIVAL_COLOR" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CONSISTENCY_OF_GINGIVAL" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="TOUNGE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="ORAL_HYGIENE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="LYMPH_NODES" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="patients_PATIENT_ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="CHOSEN_PATIENT_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select * from clinical_examination where patients_PATIENT_ID=1]]>
+	</queryString>
+	<field name="CLINIC_EXAM_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LAST_VISIT_DATE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GINGIVAL_COLOR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONSISTENCY_OF_GINGIVAL" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOUNGE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORAL_HYGIENE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LYMPH_NODES" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="patients_PATIENT_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21">
+			<staticText>
+				<reportElement uuid="dea57758-e006-43df-9943-ff27f14e81b8" x="3" y="0" width="132" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Clinical Examination]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f97a360e-87cf-4562-a33c-ec103a96b0a0" x="3" y="0" width="106" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gingival Color:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="57755b09-e20c-41fd-b481-9895e64e7746" x="3" y="20" width="121" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consistency of Gingival:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c85de674-56c5-4152-92f3-9af17a07f9ac" x="3" y="40" width="106" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tounge:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e31198e-f5ef-48d1-b46b-baedcefe310b" x="311" y="0" width="79" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oral Hygiene:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="edd4aa16-a2f3-42b4-8397-7af5495ff2b2" x="311" y="20" width="79" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lymph Nodes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2370d54d-2cce-4080-9478-476777c0e8bd" x="135" y="0" width="173" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GINGIVAL_COLOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="46230290-b7a9-4731-b2b6-6bf4fa4c09c9" x="135" y="20" width="173" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CONSISTENCY_OF_GINGIVAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c3230c30-be6a-4678-a730-020381069b5f" x="135" y="40" width="173" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TOUNGE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39a64dbb-6bf9-402c-a960-a52f969a6003" x="390" y="0" width="144" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ORAL_HYGIENE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d81f9b3-5aeb-4e01-9952-4d35b33150c5" x="390" y="20" width="144" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LYMPH_NODES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

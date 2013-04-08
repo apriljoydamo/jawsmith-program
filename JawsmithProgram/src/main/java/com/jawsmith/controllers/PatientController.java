@@ -292,7 +292,7 @@ public class PatientController {
 		Anxillaries anxillaries = null;
 		Occlusion occlusion = null;
 		OtherInformation other = null;
-		List<TreatmentPlan> treatmentplan = null;
+		List<TreatmentPlan> treatmentplanList = null;
 		
 		//ALL THE LATEST MEDICAL RECORDS TO BE SHOWN HERE
 		try{
@@ -302,7 +302,7 @@ public class PatientController {
 			anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientId(patientId);
 			occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientId(patientId);
 			other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientId(patientId);
-			treatmentplan = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
+			treatmentplanList = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
 		}catch(Exception e){
 			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
 			isNewUser = true;
@@ -314,7 +314,7 @@ public class PatientController {
 		model.addAttribute("anxillaries", anxillaries);
 		model.addAttribute("occlusion", occlusion);
 		model.addAttribute("other", other);
-		model.addAttribute("treatmentplanList", treatmentplan);
+		model.addAttribute("treatmentplanList", treatmentplanList);
 		model.addAttribute("isNewUser", isNewUser);
 		System.out.print("NEW USER:"+isNewUser);
 		return "view_patients_record";

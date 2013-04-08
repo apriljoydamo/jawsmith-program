@@ -14,19 +14,38 @@ body{
 #treatment_record_image{
 	text-align: center;
 	position: relative;
+	width: 350px;
+	height:253px;
 	float: left;
-	top: -30px;
-	left: 30px;
+	top: 60px;
+	left: 120px;
+}
+
+th{
+	font-weight: bold;
+	font-size: 15px;
+	color: white;
+	background-color: #5070cd;
+}
+
+td{
+	background-color: white;
 }
 
 #patients_treatment_plan{
 	position: relative;
 	top: 140px;
+	width: 885px;
+	height: 200px;
+	overflow:auto;
+	border: 1px solid black;
+	background-color: white;
 }
 
 #add_record_button{
 	position: relative;
-	top: 60px;
+	top: -100px;
+	float: right;
 }
 
 .close_edit_treat{

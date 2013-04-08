@@ -34,7 +34,7 @@
 		</div>
 		
 		<div id="treatment_record_image" class="">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/chart3.jpg" />
+			<img id="treatment_record_image" alt="" src="${pageContext.request.contextPath}/resources/images/chart3.jpg" />
 		</div>
 		
 		<div id="patients_treatment_plan" class="">
@@ -74,7 +74,7 @@
 			</table>
 		</div>
 		
-		<label id="add_record_button" class="button mouseout_button">Add Record</label>
+		<label id="add_record_button" class="button mouseout_button" onclick="buttonNextPage('#add_treatment_record_div')">Add Record</label>
 		
 		
 		<jsp:include page="add_treatment_record.jsp"/>

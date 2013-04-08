@@ -12,16 +12,20 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/add_record.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/patients_record.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
-		<jsp:include page="header.jsp" />
+		
 	</head>
 		
+	<center>	
 	<body>
+	<div id="body_div">
+	<jsp:include page="header.jsp" />
 	<jsp:include page="edit_record.jsp" />
 	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
@@ -37,18 +41,19 @@
 	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
 	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
+		
 		<div id="edit_patient_button">
 			<c:if test="${user.access==1 || user.access==2}">
 			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
 			</c:if>
-			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Save Report</label>
+			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Generate Report</label>
 		</div>
 
 		<div id="view_patient_page_div">
-			<div id="patient_medical_info">
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
-				<div id="medical_his_div" class="">
-                   <table>
+			<div id="patient_medical_info" style="">
+				<h3 id="hh11" class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
+				<div id="dd11" style="height: 300px; overflow-y: scroll;" class="">
+                   <table style="">
                   	 	<tr>
 							<th>Question</th>
 							<th>Answer</th>
@@ -61,8 +66,8 @@
 					</c:forEach>
 					</table>
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
-				<div id="dental_his_div">
+				<h3 id="hh22" class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
+				<div id="dd22">
                   <table>
                   		<tr>
                   			<td>
@@ -129,8 +134,8 @@
                   		</tr>
                    </table>
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Clinical Examination</h3>
-				<div id="clinic_exam_div">
+				<h3 id="hh33" class="patient_medical_info patient_medical_info_mouseout">Clinical Examination</h3>
+				<div id="dd33">
                     <table>
                    		<tr>
                    			<td>Gingival Color:</td>
@@ -154,8 +159,8 @@
                    		</tr>
                     </table>
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Occlusion</h3>
-				<div id="occlusion_div">
+				<h3 id="hh44" class="patient_medical_info patient_medical_info_mouseout">Occlusion</h3>
+				<div id="dd44">
                    <table>
                    		<tr>
                    			<td>Class I</td>
@@ -171,8 +176,8 @@
                    		</tr>
                     </table>
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Anxillaries</h3>
-				<div id="anxillaries_div">
+				<h3 id="hh55" class="patient_medical_info patient_medical_info_mouseout">Anxillaries</h3>
+				<div id="dd55">
                    <table>
                    		<tr>
                    			<td>Bleeding Time:</td>
@@ -196,31 +201,31 @@
                    		</tr>
                     </table>
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Chief Complaint</h3>
-				<div id="chief_complaint_div">
+				<h3 id="hh66" class="patient_medical_info patient_medical_info_mouseout">Chief Complaint</h3>
+				<div id="dd66">
                 	<c:out value="${other.chief_complaint}" />
 				</div>
-				<h3 class="patient_medical_info patient_medical_info_mouseout">Diagnosis</h3>
-				<div id="diagnosis_div">
+				<h3 id="hh77" class="patient_medical_info patient_medical_info_mouseout">Diagnosis</h3>
+				<div id="dd77">
 					<c:out value="${other.diagnosis}" />
                 </div>
             </div>
 			<div id="treatment_plan_div">
-				<table>
+				<table id="treatment_table">
 					<tr>
-						<th>Treatment Date</th>
-						<th>Treatment</th>
-						<th>Treatment Fee</th>
-						<th>Alternative Treatment</th>
-						<th>Alternative Treatment Fee</th>
+						<th blue_bg>Treatment Date</th>
+						<th blue_bg>Treatment</th>
+						<th blue_bg>Treatment Fee</th>
+						<th blue_bg>Alternative Treatment</th>
+						<th blue_bg>Alternative Treatment Fee</th>
 					</tr>
-					<c:forEach var="treatmentplan" items="${treatmentPlanList}">
+					<c:forEach var="treatmentplan" items="${treatmentplanList}">
 					<tr>
-						<td><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
-						<td><c:out value="${treatmentplan.treatment}" /></td>
-						<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
-						<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
-						<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
+						<td w_bg><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
+						<td w_bg><c:out value="${treatmentplan.treatment}" /></td>
+						<td w_bg><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
+						<td w_bg><c:out value="${treatmentplan.alternative_treatment}" /></td>
+						<td w_bg><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -243,6 +248,8 @@
         
         <jsp:include page="add_treatment_plan.jsp"/>
 		<jsp:include page="edit_treatment_plan.jsp"/>
-		
+	
+	</div>	
 	</body>
+	</center>
 </html>

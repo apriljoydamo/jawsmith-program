@@ -43,6 +43,18 @@ public class SystemUserController {
 		return "admin_page";
 	}
 	
+	@RequestMapping("/record")
+	public static String editRecord(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		
+		int user_id = Integer.parseInt(request.getParameter("user_id_hidden"));
+		SystemUser selectedUser = (SystemUser) sysUserDataAccesses.findById(user_id);
+		
+		model.addAttribute("selectedUser", selectedUser);
+		
+		return "admin_page";
+	}
+	
 	/**
 	 * This is from /systemUsersPage Add System Users button
 	 * To redirect in ae_systemUsersPages
