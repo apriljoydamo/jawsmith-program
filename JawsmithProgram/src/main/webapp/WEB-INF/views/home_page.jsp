@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker-ui.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>

@@ -15,6 +15,16 @@ function setAccordion(){
     });
 }
 
+function toogleOff(){
+	$("#dd11").slideUp();
+	$("#dd22").slideUp();
+	$("#dd33").slideUp();
+	$("#dd44").slideUp();
+	$("#dd55").slideUp();
+	$("#dd66").slideUp();
+	$("#dd77").slideUp();
+}
+
 $(document).ready(function() {
     setButtons();
 
@@ -27,24 +37,31 @@ $(document).ready(function() {
 	$("#dd77").slideUp();
 
     $("#hh11").click(function(){
+    	toogleOff();
     	$("#dd11").slideToggle();
     });
     $("#hh22").click(function(){
+    	toogleOff();
     	$("#dd22").slideToggle();
     });
     $("#hh33").click(function(){
+    	toogleOff();
     	$("#dd33").slideToggle();
     });
     $("#hh44").click(function(){
+    	toogleOff();
     	$("#dd44").slideToggle();
     });
     $("#hh55").click(function(){
+    	toogleOff();
     	$("#dd55").slideToggle();
     });
     $("#hh66").click(function(){
+    	toogleOff();
     	$("#dd66").slideToggle();
     });
     $("#hh77").click(function(){
+    	toogleOff();
     	$("#dd77").slideToggle();
     });
     //$("#patient_medical_info").accordion();

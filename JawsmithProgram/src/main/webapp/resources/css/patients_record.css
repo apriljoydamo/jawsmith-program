@@ -1,10 +1,10 @@
 /* CSS Document */
 
 #body_div {
-	background-image: url(../images/pages_bg.jpg);
+	background-image: url(../images/900x775_bg.jpg);
 	background-repeat: no-repeat;
 	width: 900px;
-	height: 675px;
+	height: 775px;
 	position: relative;
 	/*right: -660px;
 	top: 180px;
@@ -12,6 +12,10 @@
 	text-align:left;
 	border-radius: 50px;*/
 }
+
+#d11{
+	
+	}
 
 body{
 	background-color: #4a4a4a;
@@ -29,12 +33,17 @@ body{
 	background-color: white;
 }
 
+th, td{
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 5px 5px 5px black;
+}
 #treatment_plan_div{
-	top: -435px;
+	top: -305px;
 	width: 450px;
 	position: relative;
 	overflow-y: auto;
-	left: 440px;
+	left: 420px;
 	height:220px;
 	border: 1px solid black;
 	background-color:white;
@@ -67,7 +76,7 @@ body{
 
 #view_patient_controllers{
 	position: relative;
-	top: -270px;
+	top: -155px;
 }
 
 #patient_medical_info{
@@ -76,6 +85,7 @@ body{
 }
 
 #view_patient_page_div{
+	width: 400px;
 	position: relative;
 	top: 140px;
 	left: -230px;
@@ -85,6 +95,7 @@ body{
 	margin: 2px;
 	padding: 2px;
 	border-radius: 5px;
+	width: 390px;
 }
 
 .patient_medical_info_mouseout{

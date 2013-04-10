@@ -51,9 +51,9 @@
 
 		<div id="view_patient_page_div">
 			<div id="patient_medical_info" style="">
-				<h3 id="hh11" class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
-				<div id="dd11" style="height: 300px; overflow-y: scroll;" class="">
-                   <table style="">
+				<h3 style=""" id="hh11" class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
+				<div id="dd11" style="position: relative;height: 300px; width: 240px; padding: 4px; overflow-y: auto;;" class="">
+                   <table style="width: 100%;">
                   	 	<tr>
 							<th>Question</th>
 							<th>Answer</th>

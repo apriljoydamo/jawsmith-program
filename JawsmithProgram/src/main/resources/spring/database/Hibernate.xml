@@ -26,6 +26,7 @@
 				<value>/hibernate/Occlusion.hbm.xml</value>
 				<value>/hibernate/OtherInformation.hbm.xml</value>
 				<value>/hibernate/Patient.hbm.xml</value>
+				<value>/hibernate/ReportTable.hbm.xml</value>
 				<value>/hibernate/TableMaintenance.hbm.xml</value>
 				<value>/hibernate/TreatmentPlan.hbm.xml</value>
 				<value>/hibernate/TreatmentRecord.hbm.xml</value>
