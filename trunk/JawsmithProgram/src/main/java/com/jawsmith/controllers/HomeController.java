@@ -52,17 +52,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/")
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! the client locale is "+ locale.toString());
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("hello", "HELLO DEVELOPER" );
-		
-		return "home";
+		return "redirect:/loginPage";
 	}
 	
 	@RequestMapping("/loginPage")

@@ -8,6 +8,7 @@
 		<title>Administrator Page</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_page.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>		
@@ -22,15 +23,16 @@
 			<label class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Table Maintenance</label>
 	    </div>   
 		<div id=user_list>
-			<h3>SYSTEM USERS</h3>
+			<h3 style="position: relative; top: 15px">SYSTEM USERS</h3>
 		<center>
+		<div id="user_list_table">
 			<table id="user_table">
 				<tr>
-					<th class="table_header">First Name</th>
-					<th class="table_header">Last Name</th>
-					<th class="table_header">Username</th>
-					<th class="table_header">Password</th>
-					<th class="table_header">User Access</th>
+					<th style="width: 20%;" class="table_header">First Name</th>
+					<th style="width: 20%;" class="table_header">Last Name</th>
+					<th style="width: 20%;" class="table_header">Username</th>
+					<th style="width: 20%;" class="table_header">Password</th>
+					<th style="width: 20%;" class="table_header">User Access</th>
 				</tr>
 				<c:forEach var="sysUser" items="${sysUsersList}">
 				<tr id="user_id" class="patient_records" onclick="selectUser('${sysUser.user_id}')">
@@ -38,12 +40,11 @@
 					<td><c:out value="${sysUser.last_name}"/></td>
 					<td><c:out value="${sysUser.username}"/></td>
 					<td><c:out value="${sysUser.password}"/></td>
-					<td>${sysUser.access}
-						
-					</td>
+					<td>${sysUser.access}</td>
 				</tr>
 				</c:forEach>
 			</table>
+		</div>
 		</center>	
 		</div>
 		
@@ -53,27 +54,25 @@
 		
 		
 		<div id="tm_bg">
-		<h3>TABLE MAINTENANCE</h3>
-		<div id="tablem_list">
-			<div>
-			<table id="tablem_table">
-				<tr>
-					<th class="table_header">Reference Id</th>
-					<th class="table_header">Code Table Value</th>
-					<th class="table_header">Description</th>
-					<th class="table_header">Status</th>
-				</tr>
-				<c:forEach var="tblMaintenance" items="${tblMaintenanceList}">
-				<tr id="tbl_maintenance_id" class="patient_records" onclick="selectTblMaintenance('${tblMaintenance.table_maintenance_id}')">
-					<td><c:out value="${tblMaintenance.reference_id}"/></td>
-					<td><c:out value="${tblMaintenance.code_table_value}"/></td>
-					<td><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
-					<td><c:out value="${tblMaintenance.status}"/></td>
-				</tr>
-				</c:forEach>
-			</table>
+		<h3  style="position: relative; top: 165px">TABLE MAINTENANCE</h3>
+			<div id="tablem_list_table">
+				<table id="tablem_table">
+					<tr>
+						<th style="width: 20%;" class="table_header">Reference Id</th>
+						<th style="width: 20%;" class="table_header">Code Table Value</th>
+						<th style="width: 40%;" class="table_header">Description</th>
+						<th style="width: 20%;" class="table_header">Status</th>
+					</tr>
+					<c:forEach var="tblMaintenance" items="${tblMaintenanceList}">
+					<tr id="tbl_maintenance_id" class="patient_records" onclick="selectTblMaintenance('${tblMaintenance.table_maintenance_id}')">
+						<td><c:out value="${tblMaintenance.reference_id}"/></td>
+						<td><c:out value="${tblMaintenance.code_table_value}"/></td>
+						<td><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
+						<td><c:out value="${tblMaintenance.status}"/></td>
+					</tr>
+					</c:forEach>
+				</table>
 			</div>
-		</div>
 		</div>
 		<form id="tablem_form_id" action="">
 			<input type="hidden" value="" id="tablem_id_hidden" />

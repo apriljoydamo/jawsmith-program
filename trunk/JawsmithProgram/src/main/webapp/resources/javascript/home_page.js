@@ -87,6 +87,15 @@ function selectPatient(id){
 }
 
 $(document).ready(function(e) {
+	$("#add_patient_date_of_birth").datepicker({
+    	maxDate: new Date(),
+    	inline: true,  
+    	showOtherMonths: true,  
+    	dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		changeYear: true,
+		changeMonth: true		
+	});
+	
 	setButtons();    
 	setHighlightRecords();
 	$("#plus_button").click(function(e) {

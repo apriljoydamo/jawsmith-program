@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="444"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="REPORT_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[reportId]]></fieldDescription>
+	</field>
+	<field name="PATIENT_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[patientId]]></fieldDescription>
+	</field>
+	<field name="PATIENT_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[patientNo]]></fieldDescription>
+	</field>
+	<field name="FULL_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[fullName]]></fieldDescription>
+	</field>
+	<field name="BIRTHDAY" class="java.lang.String">
+		<fieldDescription><![CDATA[birthday]]></fieldDescription>
+	</field>
+	<field name="GENDER" class="java.lang.String">
+		<fieldDescription><![CDATA[gender]]></fieldDescription>
+	</field>
+	<field name="CIVIL_STATUS" class="java.lang.String">
+		<fieldDescription><![CDATA[civilStatus]]></fieldDescription>
+	</field>
+	<field name="ADDRESS" class="java.lang.String">
+		<fieldDescription><![CDATA[address]]></fieldDescription>
+	</field>
+	<field name="CONTACT_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[contactNo]]></fieldDescription>
+	</field>
+	<field name="EMAIL" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="NATIONALITY" class="java.lang.String">
+		<fieldDescription><![CDATA[nationality]]></fieldDescription>
+	</field>
+	<field name="OCCUPATION" class="java.lang.String">
+		<fieldDescription><![CDATA[occupation]]></fieldDescription>
+	</field>
+	<field name="RELIGION" class="java.lang.String">
+		<fieldDescription><![CDATA[religion]]></fieldDescription>
+	</field>
+	<field name="REFERRED_BY" class="java.lang.String">
+		<fieldDescription><![CDATA[referredBy]]></fieldDescription>
+	</field>
+	<field name="GUARDIAN" class="java.lang.String">
+		<fieldDescription><![CDATA[guardian]]></fieldDescription>
+	</field>
+	<field name="LAST_VISIT_DATE" class="java.lang.String">
+		<fieldDescription><![CDATA[lastVisitDate]]></fieldDescription>
+	</field>
+	<field name="STATUS" class="java.lang.String">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="BLEEDING_TIME" class="java.lang.String">
+		<fieldDescription><![CDATA[bleedingTime]]></fieldDescription>
+	</field>
+	<field name="BLOOD_PRESSURE" class="java.lang.String">
+		<fieldDescription><![CDATA[bloodPressure]]></fieldDescription>
+	</field>
+	<field name="RADIOGRAPHIC_INTERPRETATION" class="java.lang.String">
+		<fieldDescription><![CDATA[radiographicInterpretation]]></fieldDescription>
+	</field>
+	<field name="CLOTTING_TIME" class="java.lang.String">
+		<fieldDescription><![CDATA[clottingTime]]></fieldDescription>
+	</field>
+	<field name="BLOOD_SUGAR" class="java.lang.String">
+		<fieldDescription><![CDATA[bloodSugar]]></fieldDescription>
+	</field>
+	<field name="GINGIVAL_COLOR" class="java.lang.String">
+		<fieldDescription><![CDATA[gingivalColor]]></fieldDescription>
+	</field>
+	<field name="CONSISTENCY_OF_GINGIVAL" class="java.lang.String">
+		<fieldDescription><![CDATA[consistencyOfGingival]]></fieldDescription>
+	</field>
+	<field name="TOUNGE" class="java.lang.String">
+		<fieldDescription><![CDATA[tounge]]></fieldDescription>
+	</field>
+	<field name="ORAL_HYGIENE" class="java.lang.String">
+		<fieldDescription><![CDATA[oralHygiene]]></fieldDescription>
+	</field>
+	<field name="LYMPH_NODES" class="java.lang.String">
+		<fieldDescription><![CDATA[lymphNodes]]></fieldDescription>
+	</field>
+	<field name="FLUORIDE_TREATMENT" class="java.lang.String">
+		<fieldDescription><![CDATA[fluorideTreatment]]></fieldDescription>
+	</field>
+	<field name="ORTHODONTIC_TREATMENT" class="java.lang.String">
+		<fieldDescription><![CDATA[orthodonticTreatment]]></fieldDescription>
+	</field>
+	<field name="PULP_THERAPY" class="java.lang.String">
+		<fieldDescription><![CDATA[pulpTherapy]]></fieldDescription>
+	</field>
+	<field name="TEMPORO_MANDIBULAR_THERAPY" class="java.lang.String">
+		<fieldDescription><![CDATA[temporoMandibularTherapy]]></fieldDescription>
+	</field>
+	<field name="PERIODONTAL_THERAPY" class="java.lang.String">
+		<fieldDescription><![CDATA[periodontalTherapy]]></fieldDescription>
+	</field>
+	<field name="DENTAL_SURGERY" class="java.lang.String">
+		<fieldDescription><![CDATA[dentalSurgery]]></fieldDescription>
+	</field>
+	<field name="EXTRACTION" class="java.lang.String">
+		<fieldDescription><![CDATA[extraction]]></fieldDescription>
+	</field>
+	<field name="Q1" class="java.lang.String">
+		<fieldDescription><![CDATA[q1]]></fieldDescription>
+	</field>
+	<field name="Q2" class="java.lang.String">
+		<fieldDescription><![CDATA[q2]]></fieldDescription>
+	</field>
+	<field name="Q3" class="java.lang.String">
+		<fieldDescription><![CDATA[q3]]></fieldDescription>
+	</field>
+	<field name="Q4" class="java.lang.String">
+		<fieldDescription><![CDATA[q4]]></fieldDescription>
+	</field>
+	<field name="Q5" class="java.lang.String">
+		<fieldDescription><![CDATA[q5]]></fieldDescription>
+	</field>
+	<field name="Q6" class="java.lang.String">
+		<fieldDescription><![CDATA[q6]]></fieldDescription>
+	</field>
+	<field name="Q7" class="java.lang.String">
+		<fieldDescription><![CDATA[q7]]></fieldDescription>
+	</field>
+	<field name="Q8" class="java.lang.String">
+		<fieldDescription><![CDATA[q8]]></fieldDescription>
+	</field>
+	<field name="CLASS_I" class="java.lang.String">
+		<fieldDescription><![CDATA[classI]]></fieldDescription>
+	</field>
+	<field name="CLASS_II" class="java.lang.String">
+		<fieldDescription><![CDATA[classII]]></fieldDescription>
+	</field>
+	<field name="CLASS_III" class="java.lang.String">
+		<fieldDescription><![CDATA[classIII]]></fieldDescription>
+	</field>
+	<field name="CHIEF_COMPLAINT" class="java.lang.String">
+		<fieldDescription><![CDATA[chiefComplaint]]></fieldDescription>
+	</field>
+	<field name="DIAGNOSIS" class="java.lang.String">
+		<fieldDescription><![CDATA[diagnosis]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="2" width="409" height="56"/>
+				<imageExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="324" y="28" width="248" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PATIENT INFORMATION RECORD]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="572" height="41"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FULL_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="153" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="20" width="572" height="124"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="133" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Personal Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="77" height="20"/>
+				<textElement markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Birthday:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="40" width="61" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="40" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Civil Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact No.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="60" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nationality:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="80" width="61" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Occupation:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="80" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Religion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Referred By:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="100" width="77" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guardian:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="77" height="20"/>
+				<textElement markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Visit Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="120" width="77" height="20"/>
+				<textElement markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Status:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="77" y="21" width="478" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="41" width="137" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BIRTHDAY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="80" width="137" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NATIONALITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="100" width="137" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{REFERRED_BY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="120" width="137" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LAST_VISIT_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="41" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GENDER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="80" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{OCCUPATION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="41" width="115" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CIVIL_STATUS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="61" width="115" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="80" width="115" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{RELIGION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="100" width="115" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GUARDIAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="120" width="115" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="60" width="208" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CONTACT_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="229">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Medical History]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[1. Are you presently under medical treatement?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. Your physician informed you that you have or had:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[3. Have you had any major operation? If YES, what?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="118" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4. Are you allergic to any food or medicine? If YES, what?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="138" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[5. Do you experience shortness of breath when climbing upstairs?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement  x="0" y="159" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[6. Have you experienced any complications with healing?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[7. Are you in good general health at this time?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="339" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[8. Are you pregnant? If YES, how many months?]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="339" y="21" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="60" width="552" height="38"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="99" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="119" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="139" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="158" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="179" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="199" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{Q8}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="93">
+			<staticText>
+				<reportElement x="2" y="2" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Dental History]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="22" width="125" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fluoride Treatment:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="42" width="125" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orthodontic Treatment:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="62" width="125" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pulp Therapy:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="42" width="117" height="34"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Temporo-Mandibular Therapy:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="22" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{FLUORIDE_TREATMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="42" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ORTHODONTIC_TREATMENT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="62" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PULP_THERAPY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="56" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TEMPORO_MANDIBULAR_THERAPY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="227" y="22" width="117" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodontal Therapy:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="344" y="22" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PERIODONTAL_THERAPY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="421" y="56" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dental Surgery:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="499" y="56" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DENTAL_SURGERY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="421" y="22" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extraction:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="501" y="22" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EXTRACTION}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="76">
+			<staticText>
+				<reportElement x="0" y="0" width="133" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Clinical Examination]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="77" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gingival Color:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="77" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GINGIVAL_COLOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="127" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consistency of Gingival:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="40" width="97" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CONSISTENCY_OF_GINGIVAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="229" y="20" width="71" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tounge:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="300" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TOUNGE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="229" y="40" width="71" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oral Hygiene:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="300" y="40" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ORAL_HYGIENE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="421" y="20" width="78" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lymph Nodes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="499" y="20" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LYMPH_NODES}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Occlusion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="20" width="59" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class I div:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="61" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLASS_I}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="233" y="20" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class II div:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="300" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLASS_II}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="421" y="20" width="66" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class III div:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="483" y="20" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLASS_III}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="95">
+			<staticText>
+				<reportElement x="2" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Anxillaries]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="19" width="88" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bleeding Time:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="19" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BLEEDING_TIME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="39" width="88" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Blood Pressure:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="39" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BLOOD_PRESSURE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="59" width="142" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Radiographic Interpretation:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="59" width="428" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{RADIOGRAPHIC_INTERPRETATION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="227" y="19" width="78" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clotting Time:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="305" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLOTTING_TIME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="227" y="39" width="78" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Blood Sugar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="305" y="41" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{BLOOD_SUGAR}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="67">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Chief Complaint]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="20" width="566" height="34"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CHIEF_COMPLAINT}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="54">
+			<staticText>
+				<reportElement x="2" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Diagnosis]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="20" width="570" height="34"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DIAGNOSIS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

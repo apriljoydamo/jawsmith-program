@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jawsmith.model.ReportTable" table="report_tbl" catalog="jawsmith_program">
+        <id name="reportId" type="java.lang.Integer">
+            <column name="REPORT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="patientId" type="string">
+            <column name="PATIENT_ID" length="255" />
+        </property>
+       	<property name="patientNo" type="string">
+            <column name="PATIENT_NO" length="255" />
+        </property>
+       	<property name="fullName" type="string">
+            <column name="FULL_NAME" length="255" />
+        </property>
+        <property name="birthday" type="string">
+            <column name="BIRTHDAY" length="255" />
+        </property>
+        <property name="gender" type="string">
+            <column name="GENDER" length="255" />
+        </property>
+        <property name="civilStatus" type="string">
+            <column name="CIVIL_STATUS" length="255" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="255" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="CONTACT_NO" length="255" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="255" />
+        </property>
+        <property name="nationality" type="string">
+            <column name="NATIONALITY" length="255" />
+        </property>
+        <property name="occupation" type="string">
+            <column name="OCCUPATION" length="255" />
+        </property>
+        <property name="religion" type="string">
+            <column name="RELIGION" length="255" />
+        </property>
+        <property name="referredBy" type="string">
+            <column name="REFERRED_BY" length="255" />
+        </property>
+        <property name="guardian" type="string">
+            <column name="GUARDIAN" length="255" />
+        </property>
+        <property name="lastVisitDate" type="string">
+            <column name="LAST_VISIT_DATE" length="255" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="255" />
+        </property>
+        
+        <property name="bleedingTime" type="string">
+            <column name="BLEEDING_TIME" length="255" />
+        </property>
+        <property name="bloodPressure" type="string">
+            <column name="BLOOD_PRESSURE" length="255" />
+        </property>
+        <property name="radiographicInterpretation" type="string">
+            <column name="RADIOGRAPHIC_INTERPRETATION" length="255" />
+        </property>
+        <property name="clottingTime" type="string">
+            <column name="CLOTTING_TIME" length="255" />
+        </property>
+        <property name="bloodSugar" type="string">
+            <column name="BLOOD_SUGAR" length="255" />
+        </property>
+        
+        <property name="gingivalColor" type="string">
+            <column name="GINGIVAL_COLOR" length="255" />
+        </property>
+        <property name="consistencyOfGingival" type="string">
+            <column name="CONSISTENCY_OF_GINGIVAL" length="255" />
+        </property>
+        <property name="tounge" type="string">
+            <column name="TOUNGE" length="255" />
+        </property>
+        <property name="oralHygiene" type="string">
+            <column name="ORAL_HYGIENE" length="255" />
+        </property>
+        <property name="lymphNodes" type="string">
+            <column name="LYMPH_NODES" length="255" />
+        </property>
+        
+        <property name="fluorideTreatment" type="string">
+            <column name="FLUORIDE_TREATMENT" length="255" />
+        </property>
+        <property name="orthodonticTreatment" type="string">
+            <column name="ORTHODONTIC_TREATMENT" length="255" />
+        </property>
+        <property name="pulpTherapy" type="string">
+            <column name="PULP_THERAPY" length="255" />
+        </property>
+        <property name="temporoMandibularTherapy" type="string">
+            <column name="TEMPORO_MANDIBULAR_THERAPY" length="255" />
+        </property>
+        <property name="periodontalTherapy" type="string">
+            <column name="PERIODONTAL_THERAPY" length="255" />
+        </property>
+        <property name="dentalSurgery" type="string">
+            <column name="DENTAL_SURGERY" length="255" />
+        </property>
+        <property name="extraction" type="string">
+            <column name="EXTRACTION" length="255" />
+        </property>
+        
+        <property name="q1" type="string">
+            <column name="Q1" length="255" />
+        </property>
+        <property name="q2" type="string">
+            <column name="Q2" length="255" />
+        </property>
+        <property name="q3" type="string">
+            <column name="Q3" length="255" />
+        </property>
+        <property name="q4" type="string">
+            <column name="Q4" length="255" />
+        </property>
+        <property name="q5" type="string">
+            <column name="Q5" length="255" />
+        </property>
+        <property name="q6" type="string">
+            <column name="Q6" length="255" />
+        </property>
+        <property name="q7" type="string">
+            <column name="Q7" length="255" />
+        </property>
+         <property name="q8" type="string">
+            <column name="Q8" length="255" />
+        </property>
+        
+        <property name="classI" type="string">
+            <column name="CLASS_I" length="255" />
+        </property>
+        <property name="classII" type="string">
+            <column name="CLASS_II" length="255" />
+        </property>
+        <property name="classIII" type="string">
+            <column name="CLASS_III" length="255" />
+        </property>
+        <property name="chiefComplaint" type="string">
+            <column name="CHIEF_COMPLAINT" length="255" />
+        </property>
+        <property name="diagnosis" type="string">
+            <column name="DIAGNOSIS" length="255" />
+        </property>
+        
+    </class>
+  </hibernate-mapping>
