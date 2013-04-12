@@ -9,18 +9,26 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_page.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>		
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_page.js"></script>		
 	</head>
-	<center>
 	<body>
+	<center>
+	<form id="user_form_id" action="${pageContext.request.contextPath}/system_users/record" method="POST">
+			<input type="hidden" value="" id="user_id_hidden" name="user_id_hidden" />
+		</form>
+		<form id="tablem_form_id" action="${pageContext.request.contextPath}/table_maintenance/record">
+			<input type="hidden" value="" id="tablem_id_hidden" name="tablem_id_hidden"/>
+		</form>
+		
 	<div id="body_div">
 	<jsp:include page="header.jsp" />
 		<div id="homepage_panel">
 			<label class="button mouseout_button" onClick="buttonNextPage('#add_user_div')">Add System Users</label>  
-			<label class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Table Maintenance</label>
+			<label class="button mouseout_button" onClick="buttonNextPage('#add_tablem_div')">Add Table Maintenance</label>
 	    </div>   
 		<div id=user_list>
 			<h3 style="position: relative; top: 15px">SYSTEM USERS</h3>
@@ -48,11 +56,6 @@
 		</center>	
 		</div>
 		
-		<form id="user_form_id" action="${pageContext.request.contextPath}/system_users/record">
-			<input type="hidden" value="" id="user_id_hidden" name="user_id_hidden" />
-		</form>
-		
-		
 		<div id="tm_bg">
 		<h3  style="position: relative; top: 165px">TABLE MAINTENANCE</h3>
 			<div id="tablem_list_table">
@@ -73,17 +76,13 @@
 					</c:forEach>
 				</table>
 			</div>
-		</div>
-		<form id="tablem_form_id" action="">
-			<input type="hidden" value="" id="tablem_id_hidden" />
-		</form>
-			<jsp:include page="${system_user.jsp}" />
+		</div>		
 	</div>	
 	
 	<div id="add_user_div" class="modalDialog">
 			<a href="#close" class="close_reg close" title="">X</a><br/>
 	      	<label id="add_user_label">ADD USER</label>
-	      	<form action="${pageContext.request.contextPath}/system_users/add">
+	      	<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
 				<table>
 					<tr>
 						<td>Username: </td>
@@ -119,7 +118,8 @@
 	<div id="edit_user_div" class="modalDialog">
 			<a href="#close" class="close_reg close" title="">X</a><br/>
 	      	<label id="edit_user_label">EDIT USER</label>
-	      	<form action="${pageContext.request.contextPath}/system_users/edit">
+	      	<form action="${pageContext.request.contextPath}/system_users/edit" method="POST">
+	      	<input type="hidden" name="user_id" value="${selectedUser.user_id}" />
 				<table>
 					<tr>
 						<td>Username: </td>
@@ -140,9 +140,9 @@
 					<tr>
 						<td>Access: </td>
 						<td><select name="access">
-							<option value="1" ${selectedUser.access==1 ? 'checked' : ''}>Administrator</option>
-							<option value="2" ${selectedUser.access==2 ? 'checked' : ''}>Doctor</option>	
-							<option value="3" ${selectedUser.access==3 ? 'checked' : ''}>Secretary</option>	
+							<option value="1" ${selectedUser.access=='1' ? 'selected' : ''}>Administrator</option>
+							<option value="2" ${selectedUser.access=='2' ? 'selected' : ''}>Doctor</option>	
+							<option value="3" ${selectedUser.access=='3' ? 'selected' : ''}>Secretary</option>	
 						</select></td>
 					</tr>
 					
@@ -155,11 +155,17 @@
 		<div id="add_tablem_div" class="modalDialog">
 			<a href="#close" class="close_reg close" title="">X</a><br/>
 	      	<label id="add_tablem_label">ADD TABLE MAINTENANCE</label>
-	      	<form action="${pageContext.request.contextPath}/table_maintenance/add">
+	      	<form action="${pageContext.request.contextPath}/table_maintenance/add" method="POST">
 				<table>
 					<tr>
 						<td>Reference Id:</td>
-						<td><input type="text" name="reference_id" value="" /></td>
+						<td>
+							<select name="reference_id">
+								<c:forEach var="tblMaintenance" items="${refIdList}">
+									<option value="${tblMaintenance.code_table_value}">${tblMaintenance.tbl_maintenance_description}</option>
+								</c:forEach>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td>Code Table Value: </td>
@@ -181,7 +187,43 @@
 				<input type="submit" value="Submit"/>
 			</form>
 		</div>
+		<div id="edit_tablem_div" class="modalDialog">
+			<a href="#close" class="close_reg close" title="">X</a><br/>
+	      	<label id="add_tablem_label">EDIT TABLE MAINTENANCE</label>
+	      	<form action="${pageContext.request.contextPath}/table_maintenance/edit" method="POST">
+	      	<input type="hidden" name="table_maintenance_id" value="${selectedTblMaintenance.table_maintenance_id}" />
+				<table>
+					<tr>
+						<td>Reference Id:</td>
+						<td>
+							<select name="reference_id" >
+								<c:forEach var="tblMaintenance" items="${refIdList}">
+									<option value="${tblMaintenance.code_table_value}" ${selectedTblMaintenance.reference_id==tblMaintenance.code_table_value ? 'selected' : ''} >${tblMaintenance.tbl_maintenance_description}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Code Table Value: </td>
+						<td><input type="text" name="code_table_value" value="${selectedTblMaintenance.code_table_value}" /></td>
+					</tr>
+					<tr>
+						<td>Description: </td>
+						<td><input type="text" name="tbl_maintenance_description" value="${selectedTblMaintenance.tbl_maintenance_description}" /></td>
+					</tr>
+					<tr>
+						<td>Status: </td>
+						<td><select name="status">
+							<option value="true" ${selectedTblMaintenance.status=='true' ? 'selected' : ''} >Active</option>
+							<option value="false" ${selectedTblMaintenance.status=='false' ? 'selected' : ''} >Inactive</option>		
+						</select></td>
+					</tr>
+					
+				</table>
+				<input type="submit" value="Submit"/>
+			</form>
+		</div>
 		
-	</body>	
 	</center>
+	</body>	
 </html>

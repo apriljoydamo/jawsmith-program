@@ -44,6 +44,7 @@ public class HomeController {
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
 	TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
 	PatientMethods patientMethods = (PatientMethods)appContext.getBean("patientsBean");
+	int CODE_TBL_REF = 1;
 	int MED_HIS_QUESTIONS_REF_ID = 2;
 	int PHYSICAL_AILMENTS_REF_ID = 3;
 	
@@ -125,6 +126,10 @@ public class HomeController {
 								  ModelMap model, Principal principal) throws IOException, ServletException{
 		SystemUserController.systemUsersPage(request, response, model, principal);
 		TableMaintenanceController.tableMaintenancePage(request, response, model, principal);
+		
+		List refIdList = tblMaintenanceMethods.findAllByRefId(CODE_TBL_REF);
+		model.addAttribute("refIdList", refIdList);
+		
 		return "admin_page";
 	}
 	

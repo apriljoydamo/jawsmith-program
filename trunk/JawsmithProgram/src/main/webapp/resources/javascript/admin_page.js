@@ -10,8 +10,6 @@ function selectUser(id){
 
 function selectTblMaintenance(id){
 	$("#tablem_id_hidden").val(id);
-	//alert($("#patient_id").val());
-	
 	$("#tablem_form_id").submit();
 }
 

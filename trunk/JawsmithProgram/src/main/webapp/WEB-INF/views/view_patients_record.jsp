@@ -242,7 +242,6 @@
 					<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_record_div')">Add Medical Record</label>
 				</c:if>
 				<label id="" class="button mouseout_button" onClick="buttonNextPage('#add_treatment_plan')">Add Treatment Plan</label>
-	            <label id="" class="button mouseout_button" onClick="buttonNextPage('#edit_treatment_plan')">Edit Treatment Plan</label>
 	            <label id="" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/treatment_record/view')">Treatment Record</label>
 			</c:if>
 		</div>

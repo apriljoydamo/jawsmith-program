@@ -5,11 +5,11 @@
 		<div id="register_panel" class="">
 	    <a href="#close" class="close_reg close" title="">X</a>
 	    <label id="add_patient_label">ADD SYSTEM USER</label>
-		<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
+		<form action="${pageContext.request.contextPath}/system_users/edit" method="POST">
 			<table>
 				<tr>
 					<td>First Name</td>
-					<td><input type="text" name="first_name" value="First Name" /></td>
+					<td><input type="text" name="first_name" value="${selectedUser.getFirst_name}" /></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
