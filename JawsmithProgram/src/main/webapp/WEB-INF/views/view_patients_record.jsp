@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/patients_record.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/add_record.css"/>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>		
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker-ui.css"/>
 		
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
@@ -20,6 +20,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/patients_record.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/register.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/treatment_plan.js"></script>
 		
 	</head>
 		
@@ -31,6 +32,10 @@
 	<jsp:include page="edit_patient.jsp" />
 	<jsp:include page="add_record.jsp" />
 	 
+	<form id="treatment_plan_form_id" action="${pageContext.request.contextPath}/treatment_plan/record" method="POST">
+			<input type="hidden" value="" id="treatment_plan_id_hidden" name="treatment_plan_id_hidden" />
+	</form>
+		
 	   <div class="" id="patient_info_panel">
 	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
 	        <label class="sub_info" id="">Last Visit Date: <fmt:formatDate value="${patient.last_visit_date}" pattern="yyyy-MM-dd"/></label><br/>
@@ -214,19 +219,19 @@
 			<div id="treatment_plan_div">
 				<table id="treatment_table">
 					<tr>
-						<th blue_bg>Treatment Date</th>
-						<th blue_bg>Treatment</th>
-						<th blue_bg>Treatment Fee</th>
-						<th blue_bg>Alternative Treatment</th>
-						<th blue_bg>Alternative Treatment Fee</th>
+						<th>Treatment Date</th>
+						<th>Treatment</th>
+						<th>Treatment Fee</th>
+						<th>Alternative Treatment</th>
+						<th>Alternative Treatment Fee</th>
 					</tr>
 					<c:forEach var="treatmentplan" items="${treatmentplanList}">
-					<tr>
-						<td w_bg><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
-						<td w_bg><c:out value="${treatmentplan.treatment}" /></td>
-						<td w_bg><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
-						<td w_bg><c:out value="${treatmentplan.alternative_treatment}" /></td>
-						<td w_bg><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
+					<tr id="treatment_plan_id" class="patient_records" onclick="selectTreatmentPlan('${treatmentplan.treatment_plan_id}')">
+						<td><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
+						<td><c:out value="${treatmentplan.treatment}" /></td>
+						<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
+						<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
+						<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
 					</tr>
 					</c:forEach>
 				</table>

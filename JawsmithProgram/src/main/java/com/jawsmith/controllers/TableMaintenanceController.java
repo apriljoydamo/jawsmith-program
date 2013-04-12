@@ -42,7 +42,7 @@ public class TableMaintenanceController {
 		TableMaintenance selectedTblMaintenance = (TableMaintenance) dataAccesses.findById(tablem_id_hidden);
 		
 		request.getSession().setAttribute("selectedTblMaintenance", selectedTblMaintenance);
-		System.out.println("Selected User: "+selectedTblMaintenance.getTbl_maintenance_description());
+		System.out.println("Selected Tbl Maintenance: "+selectedTblMaintenance.getTbl_maintenance_description());
 		
 		return "redirect:/admin#edit_tablem_div";
 	}

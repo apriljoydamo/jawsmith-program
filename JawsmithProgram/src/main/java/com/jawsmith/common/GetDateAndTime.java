@@ -19,7 +19,13 @@ public class GetDateAndTime {
 	}
 	
 	public static void main( String[] args ){
-		System.out.println(getDate());
+		
+		//Date date = new Date();
+		//String sDate = date.toString();
+        
+		//System.out.println(sDate);
 		System.out.println(getTime());
+		
+		
 	}
 }

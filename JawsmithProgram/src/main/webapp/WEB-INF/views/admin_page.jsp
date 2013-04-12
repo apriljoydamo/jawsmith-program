@@ -17,7 +17,7 @@
 	</head>
 	<body>
 	<center>
-	<form id="user_form_id" action="${pageContext.request.contextPath}/system_users/record" method="POST">
+		<form id="user_form_id" action="${pageContext.request.contextPath}/system_users/record" method="POST">
 			<input type="hidden" value="" id="user_id_hidden" name="user_id_hidden" />
 		</form>
 		<form id="tablem_form_id" action="${pageContext.request.contextPath}/table_maintenance/record">
@@ -80,44 +80,52 @@
 	</div>	
 	
 	<div id="add_user_div" class="modalDialog">
-			<a href="#close" class="close_reg close" title="">X</a><br/>
-	      	<label id="add_user_label">ADD USER</label>
-	      	<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
-				<table>
-					<tr>
-						<td>Username: </td>
-						<td><input type="text" name="username" value="" /></td>
-					</tr>
-					<tr>
-						<td>Password: </td>
-						<td><input type="password" name="password" value="" /></td>
-					</tr>
-					<tr>
-						<td>First Name: </td>
-						<td><input type="text" name="first_name" value="" /></td>
-					</tr>
-					<tr>
-						<td>Last Name: </td>
-						<td><input type="text" name="last_name" value="" /></td>
-					</tr>
-					<tr>
-						<td>Access: </td>
-						<td><select name="access">
-							<option value="1">Administrator</option>
-							<option value="2">Doctor</option>	
-							<option value="3">Secretary</option>	
-						</select></td>
-					</tr>
-					
-				</table>
-				<input type="submit" value="Submit"/>
-			</form>
+			<div id="add_user_form">
+ 			<a id="close_user" href="#close" class="close_reg close" title="">X</a><br/>
+ 	      		<label id="add_user_label">ADD USER</label>
+ 				<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
+ 					<table>
+ 						<tr>
+ 							<td>Username:</td>
+ 							<td><input type="text" name="username" value="" />
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>Password:</td>
+ 							<td><input type="password" name="password" value="" />
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>First Name:</td>
+ 							<td><input type="text" name="first_name" value="" />
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>Last Name:</td>
+ 							<td><input type="text" name="last_name" value="" />
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>Access:</td>
+ 							<td><select name="access">
+ 									<option value="1">Administrator</option>
+ 									<option value="2">Doctor</option>
+ 									<option value="3">Secretary</option>
+ 							</select>
+ 							</td>
+ 						</tr>
+ 
+ 					</table>
+ 					<input type="submit" value="Submit" />
+ 				</form>
+ 			</div>
 		</div>
 		
 		
-	<div id="edit_user_div" class="modalDialog">
-			<a href="#close" class="close_reg close" title="">X</a><br/>
-	      	<label id="edit_user_label">EDIT USER</label>
+	<div id="edit_user_div" class="modalDialog">	
+		<div id="add_user_form">
+		<a id="close_user" href="#close" class="close_reg close" title="">X</a><br/>
+		<label id="edit_user_label">EDIT USER</label>
 	      	<form action="${pageContext.request.contextPath}/system_users/edit" method="POST">
 	      	<input type="hidden" name="user_id" value="${selectedUser.user_id}" />
 				<table>
@@ -149,12 +157,14 @@
 				</table>
 				<input type="submit" value="Submit"/>
 			</form>
+			</div>
 		</div>
 		
 		
 		<div id="add_tablem_div" class="modalDialog">
-			<a href="#close" class="close_reg close" title="">X</a><br/>
-	      	<label id="add_tablem_label">ADD TABLE MAINTENANCE</label>
+			<div id="tablem_form">
+			<a id="close_tablem" href="#close" class="close_reg close" title="">X</a><br/>
+			<label id="add_tablem_label">ADD TABLE MAINTENANCE</label>
 	      	<form action="${pageContext.request.contextPath}/table_maintenance/add" method="POST">
 				<table>
 					<tr>
@@ -186,10 +196,12 @@
 				</table>
 				<input type="submit" value="Submit"/>
 			</form>
+			</div>
 		</div>
 		<div id="edit_tablem_div" class="modalDialog">
-			<a href="#close" class="close_reg close" title="">X</a><br/>
-	      	<label id="add_tablem_label">EDIT TABLE MAINTENANCE</label>
+			<div id="tablem_form">
+			<a id="close_tablem" href="#close" class="close_reg close" title="">X</a><br/>
+			<label id="add_tablem_label">EDIT TABLE MAINTENANCE</label>
 	      	<form action="${pageContext.request.contextPath}/table_maintenance/edit" method="POST">
 	      	<input type="hidden" name="table_maintenance_id" value="${selectedTblMaintenance.table_maintenance_id}" />
 				<table>
@@ -222,6 +234,7 @@
 				</table>
 				<input type="submit" value="Submit"/>
 			</form>
+			</div>
 		</div>
 		
 	</center>

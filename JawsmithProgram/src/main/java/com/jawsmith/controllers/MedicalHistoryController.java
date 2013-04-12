@@ -91,7 +91,7 @@ public class MedicalHistoryController {
 			int patientId = patient.getPatient_id();
 			Date lastVisitDate = patient.getLast_visit_date();
 	
-			List<MedicalHistory> medicalHistoryList = medicalHistoryMethods.findByPatientIdAndLastVisitDate(patientId, lastVisitDate);
+			List<MedicalHistory> medicalHistoryList = (List<MedicalHistory>) medicalHistoryMethods.findByPatientId(patientId);
 			
 			
 			String appendedPhysicalAilments = "";

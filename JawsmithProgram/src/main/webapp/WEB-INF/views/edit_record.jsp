@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <div id="edit_record_div" name="edit_record_div" class="modalDialog">
    	<div name="add_record_div_form" id="add_record_div_form"> 
 	<a id="close_add_record" href="#close" class="close_add_record close" title="">X</a>	
@@ -16,7 +17,7 @@
 				<c:when test="${tbl_med_his.code_table_value=='2'}">
 					<tr><td>Physical Ailments:</td></tr>
 					<c:forEach var="tbl_physical" items="${physicalAilmentList}">
-						<tr><td><input type="checkbox" name="physical_ailments" value="${tbl_physical.tbl_maintenance_description}"> ${tbl_physical.tbl_maintenance_description}</td></tr>
+						<tr><td><input type="checkbox" name="physical_ailments" value="${tbl_physical.tbl_maintenance_description}" ${fn:contains(answer2, tbl_physical.tbl_maintenance_description) ? 'checked' : ''} > ${tbl_physical.tbl_maintenance_description}</td></tr>
 					</c:forEach>
 				</c:when>
 				<c:when test="${tbl_med_his.code_table_value=='8' && patient.sex=='M'}">
