@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/add_record.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker-ui.css"/>
 		
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
@@ -46,7 +47,7 @@
 			<c:if test="${user.access==1 || user.access==2}">
 			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
 			</c:if>
-			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Generate Report</label>
+			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Generate Report</label>			
 		</div>
 
 		<div id="view_patient_page_div">

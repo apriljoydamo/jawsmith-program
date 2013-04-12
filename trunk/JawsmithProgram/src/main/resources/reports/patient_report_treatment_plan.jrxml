@@ -47,17 +47,6 @@
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="27">
-			<textField>
-				<reportElement x="0" y="0" width="555" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{patients_PATIENT_ID}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
 	<columnHeader>
 		<band height="30">
 			<staticText>
@@ -110,22 +99,22 @@
 			<textField isBlankWhenNull="true">
 				<reportElement x="103" y="1" width="124" height="40"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{TREATMENT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TREATMENT}.toString()]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="227" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{TREATMENT_FEE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TREATMENT_FEE}.toString()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="327" y="1" width="128" height="40"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{ALTERNATIVE_TREATMENT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ALTERNATIVE_TREATMENT}.toString()]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="455" y="0" width="100" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{ALTERNATIVE_TREATMENT_FEE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ALTERNATIVE_TREATMENT_FEE}.toString()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

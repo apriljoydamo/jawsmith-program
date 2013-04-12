@@ -45,7 +45,7 @@
 	          </tr>
 	          <tr>              
 	                <td>Date of Birth: </td>
-	                <td><input placeholder="yyyy-MM-dd" type="text" id="add_patient_date_of_birth" name="dob" class=""/></td> 
+	                <td><input placeholder="MM/dd/yyyy" type="text" id="add_patient_date_of_birth" name="dob" class=""/></td> 
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>
@@ -57,7 +57,7 @@
 	                <td><select name="rel_status" id="add_patient_marital_status">
 	                      <option value="single">Single</option>
 	                      <option value="married">Married</option>
-	                      <option value="widow">Widow</option>
+	                      <option value="widow">Widow</option>a
 	                      <option value="divorced">Divorced</option>
 	                      <option value="seperated">Seperated</option>
 		                  </select>

@@ -30,12 +30,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jawsmith.common.GetDateAndTime;
 import com.jawsmith.interfaces.AnxillariesMethods;
 import com.jawsmith.interfaces.ClinicalExaminationMethods;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.DentalHistoryMethods;
 import com.jawsmith.interfaces.PatientMethods;
 import com.jawsmith.interfaces.TableMaintenanceMethods;
+import com.jawsmith.interfaces.TreatmentRecordMethods;
 import com.jawsmith.model.Anxillaries;
 import com.jawsmith.model.ClinicalExamination;
 import com.jawsmith.model.DentalHistory;
@@ -46,6 +48,7 @@ import com.jawsmith.model.Patient;
 import com.jawsmith.model.ReportTable;
 import com.jawsmith.model.TableMaintenance;
 import com.jawsmith.model.TreatmentPlan;
+import com.jawsmith.model.TreatmentRecord;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -65,7 +68,9 @@ public class PatientController {
 	ApplicationContext appContext = 
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
+	DataAccesses reportTblDataAccesses = (DataAccesses)appContext.getBean("reportTblBean");
 	PatientMethods patientMethods = (PatientMethods)appContext.getBean("patientsBean");
+	TreatmentRecordMethods treatmentRecordMethods = (TreatmentRecordMethods)appContext.getBean("treatmentRecordBean");
 	
 	@RequestMapping("/list")
 	public String viewList(HttpServletRequest request, ModelMap model){
@@ -123,7 +128,7 @@ public class PatientController {
 		Date last_visit_date = new Date();
 		Date dob = null;
 		try {
-			dob = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob"));
+			dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 		} catch (ParseException e) {
 			System.out.println("ERROR WITH PARSING DATE OF BIRTH");
 		}
@@ -179,7 +184,7 @@ public class PatientController {
 		Date last_visit_date = new Date();
 		Date dob = null;
 		try {
-			dob = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob"));
+			dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 			System.out.println("DATE OF BIRTH: "+dob);
 		} catch (ParseException e) {
 			System.out.println("ERROR WITH PARSING DATE OF BIRTH");
@@ -272,13 +277,12 @@ public class PatientController {
 		Patient patient = (Patient)dataAccesses.findById(patient_id);
 		//puts the chosen patient in session
 		request.getSession().setAttribute("patient", patient);		
-		
-		
-		
-		//for jasper report
-		ReportTable report = new ReportTable();
-		
-		
+
+		boolean success = (new File("C:\\JawsmithProgram\\")).mkdirs();
+	    if(!success){
+	    	System.out.println("Directory had been created. No need to create a new one.");
+	    }
+         
 		return "redirect:/patient/view_patient/details";
 	}
 	
@@ -310,8 +314,83 @@ public class PatientController {
 			occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientId(patientId);
 			other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientId(patientId);
 			treatmentplanList = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
+		
+			ReportTable report;
+			
+			try{
+				report = (ReportTable) reportTblDataAccesses.findById(1);
+			}catch(Exception e){
+				report = new ReportTable();
+			}
+			//for jasper report
+			//patient
+			report.setPatientId(""+patient.getPatient_id());
+			report.setPatientNo(patient.getPatient_num());
+			report.setFullName(patient.getLast_name()+", "+patient.getFirst_name()+" "+patient.getMiddle_name());
+			report.setBirthday(""+patient.getBirthday());
+			report.setGender(patient.getSex());
+			report.setCivilStatus(patient.getRelationship_status());
+			report.setAddress(patient.getAddress());
+			report.setContactNo(patient.getMobile_number()+" / "+patient.getTelephone_number());
+			report.setEmail(patient.getEmail_address());
+			report.setNationality(patient.getNationality());
+			report.setOccupation(patient.getOccupation());
+			report.setReferredBy(patient.getReferred_by());
+			report.setGuardian(patient.getGuardian());
+			report.setLastVisitDate(""+patient.getLast_visit_date());
+			report.setStatus(""+patient.getStatus());
+			//anxillaries
+			report.setBleedingTime(anxillaries.getBleeding_time());
+			report.setBloodPressure(anxillaries.getBlood_pressure());
+			report.setRadiographicInterpretation(anxillaries.getRadiographic_interpretation());
+			report.setClottingTime(anxillaries.getClotting_time());
+			report.setBloodSugar(anxillaries.getBlood_sugar());
+			//clinical
+			report.setGingivalColor(clinical.getGingival_color());
+			report.setConsistencyOfGingival(clinical.getConsistency_of_gingival());
+			report.setTounge(clinical.getTounge());
+			report.setOralHygiene(clinical.getOral_hygiene());
+			report.setLymphNodes(clinical.getLymph_nodes());
+			//dentalhis
+			report.setOrthodonticTreatment(""+dentalhis.getOrthodontic_treatment());
+			report.setPulpTherapy(""+dentalhis.getPulp_therapy());
+			report.setTemporoMandibularTherapy(""+dentalhis.getTemporo_mandibular());
+			report.setPeriodontalTherapy(""+dentalhis.getPeriodontal_therapy());
+			report.setDentalSurgery(""+dentalhis.getDental_surgery());
+			report.setExtraction(""+dentalhis.getExtraction());
+			//occlusion
+			report.setClassI(occlusion.getClass_1());
+			report.setClassII(occlusion.getClass_2());
+			report.setClassIII(occlusion.getClass_3());
+			//other info
+			report.setChiefComplaint(other.getChief_complaint());
+			report.setDiagnosis(other.getDiagnosis());
+			//medhis
+			int x = 0;
+			Iterator iter = latestMedHisList.iterator();
+			while(iter.hasNext()){
+				MedicalHistory medhis = (MedicalHistory) iter.next();
+				if(x==0) report.setQ1(medhis.getAnswer());
+				if(x==1) report.setQ2(medhis.getAnswer());
+				if(x==2) report.setQ3(medhis.getAnswer());
+				if(x==3) report.setQ4(medhis.getAnswer());
+				if(x==4) report.setQ5(medhis.getAnswer());
+				if(x==5) report.setQ6(medhis.getAnswer());
+				if(x==6) report.setQ7(medhis.getAnswer());
+				if(x==7) report.setQ8(medhis.getAnswer());
+				x++;
+			}
+			
+			try{
+				reportTblDataAccesses.update(report);
+				System.out.println("UPDATE");
+			}catch(Exception e){
+				reportTblDataAccesses.save(report);
+				System.out.println("SAVE");
+			}
+			
 		}catch(Exception e){
-			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS");
+			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS. MIGHT BE A NEW USER");
 			isNewUser = true;
 		}
 		
@@ -324,47 +403,124 @@ public class PatientController {
 		model.addAttribute("treatmentplanList", treatmentplanList);
 		model.addAttribute("isNewUser", isNewUser);
 		System.out.print("NEW USER:"+isNewUser);
+		
 		return "view_patients_record";
 	}
 	
+	@RequestMapping(value = "/generate_pdf_file") 
+    public String getPDF(HttpServletResponse response,HttpServletRequest request, 
+                                                Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+		getPatientPDF(response, request, model);
+		treatmentPlanPDF(response, request, model);
+		treatmentRecordPDF(response, request, model);
+		
+		return "redirect:/home";
+	}
 	
-	 @RequestMapping(value = "/generate_patient_pdf") 
-	    public String getPDF(HttpServletResponse response,HttpServletRequest request, 
-	                                                Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
-	                
-	                
-	                //LAYOUTS
-	                
-	                InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report2.jrxml");
-	                 
-	                //VALUES TO BE PRINTED HERE
-	                Patient patient = (Patient) request.getSession().getAttribute("patient");
-	                ArrayList<Patient> dataBeanList = new ArrayList<Patient>();
-	                dataBeanList.add(patient);
-	                
-	                JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
-	                   
-	                //COMPILE JRXML FILES
-	                JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
-	                
-	                //COMPILE REPORT
-	                JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
-	               
-	                //FILL REPORT
-	                Map<String, Object> parameters = new HashMap<String, Object>();
-	               
-	                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
-	                
-	                //EXPORT REPORT
-	                String pathFile = "C:/Users/April Joy Damo/Documents/JasperReports/reports/";
-	                String nameOfPatient = patient.getLast_name()+"_"+patient.getFirst_name();
-	                Date date = new Date();
-	                String sDate = date.toString();
-	                JasperExportManager.exportReportToPdfFile(jasperPrint, pathFile+nameOfPatient+"_"+sDate+"_info.pdf"); 
-	               
-	        return "redirect:/home";
-	  
-	  } 
+	
+	//@RequestMapping(value = "/generate_patient_info") 
+    public void getPatientPDF(HttpServletResponse response,HttpServletRequest request, 
+                                                Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+        //LAYOUTS
+        InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report2.jrxml");
+         
+        //VALUES TO BE PRINTED HERE
+        Patient patient = (Patient) request.getSession().getAttribute("patient");
+        ReportTable reportTbl = (ReportTable) reportTblDataAccesses.getAll().get(0);
+        ArrayList<ReportTable> dataBeanList = new ArrayList<ReportTable>();
+        dataBeanList.add(reportTbl);
+        
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+           
+        //COMPILE JRXML FILES
+        JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
+        
+        //COMPILE REPORT
+        JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+       
+        //FILL REPORT
+        Map<String, Object> parameters = new HashMap<String, Object>();
+       
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+        
+        //EXPORT REPORT
+        Date date = new Date();
+		String pathFile = "C:/JawsmithProgram/";
+		String sDate = new SimpleDateFormat("yyyyMMMdd").format(date);
+        String nameOfPatient = patient.getLast_name()+""+patient.getFirst_name();
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathFile+sDate+"_"+nameOfPatient+"_PatientInfo.pdf"); 
+        
+        //return "redirect:/home";
+  	} 
+	
+	//@RequestMapping(value = "/generate_treatment_plan") 
+    public void treatmentPlanPDF(HttpServletResponse response,HttpServletRequest request, 
+                                                Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+                
+        //LAYOUTS
+        InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_treatment_plan.jrxml");
+         
+        //VALUES TO BE PRINTED HERE
+        Patient patient = (Patient) request.getSession().getAttribute("patient");
+        ArrayList<TreatmentPlan> dataBeanList = (ArrayList<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patient.getPatient_id());
+        
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+           
+        //COMPILE JRXML FILES
+        JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
+        
+        //COMPILE REPORT
+        JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+       
+        //FILL REPORT
+        Map<String, Object> parameters = new HashMap<String, Object>();
+       
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+        
+        //EXPORT REPORT
+        Date date = new Date();
+		String pathFile = "C:/JawsmithProgram/";
+		String sDate = new SimpleDateFormat("yyyyMMMdd").format(date);
+        String nameOfPatient = patient.getLast_name()+""+patient.getFirst_name();
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathFile+sDate+"_"+nameOfPatient+"_TreatmentPlan.pdf"); 
+               
+        //return "redirect:/home";
+  
+	} 
+	
+	//@RequestMapping(value = "/generate_treatment_record") 
+    public void treatmentRecordPDF(HttpServletResponse response,HttpServletRequest request, 
+                                                Model model) throws ClassNotFoundException, FileNotFoundException, JRException { 
+           	//LAYOUTS
+            InputStream inputStreamPatientReport = Thread.currentThread().getContextClassLoader().getResourceAsStream("reports/patient_report_treatment_record.jrxml");
+             
+            //VALUES TO BE PRINTED HERE
+            Patient patient = (Patient) request.getSession().getAttribute("patient");
+            ArrayList<TreatmentRecord> dataBeanList = (ArrayList<TreatmentRecord>) treatmentRecordMethods.findByPatientId(patient.getPatient_id());
+            
+            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
+               
+            //COMPILE JRXML FILES
+            JasperDesign jasperMasterDesign = JRXmlLoader.load(inputStreamPatientReport);
+            
+            //COMPILE REPORT
+            JasperReport jasperMasterReport = JasperCompileManager.compileReport(jasperMasterDesign);
+           
+            //FILL REPORT
+            Map<String, Object> parameters = new HashMap<String, Object>();
+           
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperMasterReport, parameters, beanColDataSource);
+            
+            //EXPORT REPORT
+            Date date = new Date();
+    		String pathFile = "C:/JawsmithProgram/";
+    		String sDate = new SimpleDateFormat("yyyyMMMdd").format(date);
+            String nameOfPatient = patient.getLast_name()+""+patient.getFirst_name();
+            JasperExportManager.exportReportToPdfFile(jasperPrint, pathFile+sDate+"_"+nameOfPatient+"_TreatmentRecord.pdf"); 
+            
+            //return "redirect:/home";
+  
+	}
 	        
 	
 	public void pagination(HttpServletRequest request, ModelMap model,String searchedValue){ 

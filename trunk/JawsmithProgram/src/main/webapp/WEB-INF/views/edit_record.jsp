@@ -19,6 +19,9 @@
 						<tr><td><input type="checkbox" name="physical_ailments" value="${tbl_physical.tbl_maintenance_description}"> ${tbl_physical.tbl_maintenance_description}</td></tr>
 					</c:forEach>
 				</c:when>
+				<c:when test="${tbl_med_his.code_table_value=='8' && patient.sex=='M'}">
+					<tr><td><input type="text" disabled="disabled" name="answer" /></td></tr>
+				</c:when>
 				<c:otherwise>
 					<c:forEach var="medhis" items="${latestMedHisList}">
 						<c:if test="${medhis.question_id==tbl_med_his.tbl_maintenance_description}">
