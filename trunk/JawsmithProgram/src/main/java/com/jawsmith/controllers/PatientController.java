@@ -318,7 +318,7 @@ public class PatientController {
 			ReportTable report;
 			
 			try{
-				report = (ReportTable) reportTblDataAccesses.findById(1);
+				report = (ReportTable) reportTblDataAccesses.getAll().get(0);
 			}catch(Exception e){
 				report = new ReportTable();
 			}
@@ -371,7 +371,11 @@ public class PatientController {
 			while(iter.hasNext()){
 				MedicalHistory medhis = (MedicalHistory) iter.next();
 				if(x==0) report.setQ1(medhis.getAnswer());
-				if(x==1) report.setQ2(medhis.getAnswer());
+				if(x==1){
+					report.setQ2(medhis.getAnswer());
+					model.addAttribute("answer2", medhis.getAnswer());
+					System.out.println("answer2: "+medhis.getAnswer());
+				}
 				if(x==2) report.setQ3(medhis.getAnswer());
 				if(x==3) report.setQ4(medhis.getAnswer());
 				if(x==4) report.setQ5(medhis.getAnswer());
@@ -393,6 +397,7 @@ public class PatientController {
 			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS. MIGHT BE A NEW USER");
 			isNewUser = true;
 		}
+		
 		
 		model.addAttribute("latestMedHisList", latestMedHisList);
 		model.addAttribute("dentalhis", dentalhis);

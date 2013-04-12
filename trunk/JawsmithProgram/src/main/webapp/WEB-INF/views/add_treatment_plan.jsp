@@ -9,7 +9,7 @@
 				<tr>
 					<td>Treatment:</td>
 					<td><input type="text" name="treatment" value="" /></td>
-					<td><input type="text" name="treatment_fee" value="Fee" />
+					<td><input type="text" name="treatment_fee" placeholder="Fee" />
 					</td>
 				</tr>
 				<tr>
@@ -17,7 +17,7 @@
 					<td><input type="text" name="alternative_treatment" value="" />
 					</td>
 					<td><input type="text" name="alternative_treatment_fee"
-						value="Fee" />
+						placeholder="Fee" />
 					</td>
 				</tr>
 			</table>

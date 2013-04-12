@@ -19,16 +19,11 @@
 				</tr>
 				<tr>
 					<td>Debit</td>
-					<td><input type="text" name="debit"></td>
-				</tr>
-				<tr>
-					<td>Credit Date</td>
-					<td><input type="text" name="credit_date" value="yyyy-MM-dd">
-					</td>
+					<td><input type="text" name="debit" value="0"></td>
 				</tr>
 				<tr>
 					<td>Credit Amount</td>
-					<td><input type="text" name="credit_amount"></td>
+					<td><input type="text" name="credit_amount" value="0"></td>
 				</tr>
 			</table>
 			<input type="submit" value="Save" />

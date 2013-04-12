@@ -15,10 +15,11 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui-1.10.2.custom.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>        
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/treatment_page.js"></script>
+	 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/treatment_record.js"></script>
 	</head>
 	
-	<center>
 	<body>
+	<center>
 	<div id="body_div">		
 	<jsp:include page="header.jsp" />
  		<div class="" id="patient_info_panel">
@@ -48,9 +49,10 @@
 					<th>Credit Date</th>
 					<th>Credit Amount</th>
 					<th>Balance</th>
+					<th>Note/s</th>
 				</tr>
 				<c:forEach var="treatment_rec" items="${treatmentRecordList}">
-				<tr>
+				<tr id="treatment_record_id" class="patient_records" onclick="selectTreatmentRecord('${treatment_rec.treatment_record_id}')">
 					<td><c:out value="${treatment_rec.last_visit_date}" /></td>
 					<td><c:out value="${treatment_rec.tooth_number}" /></td>
 					<td><c:out value="${treatment_rec.description}" /></td>
@@ -59,6 +61,7 @@
 					<td><fmt:formatDate value="${treatment_rec.credit_date}" pattern="yyyy-MM-dd" /></td>
 					<td><fmt:formatNumber value="${treatment_rec.credit_amount}" type="currency" currencySymbol="" /></td>
 					<td><fmt:formatNumber value="${treatment_rec.debit - treatment_rec.credit_amount}" type="currency" currencySymbol=""/></td>	
+					<td><c:out value="${treatment_rec.description_notes}" /></td>
 				</tr>
 				</c:forEach>
 				<tr>
@@ -70,15 +73,20 @@
 					<td></td>
 					<td>Total Balance:</td>
 					<td><fmt:formatNumber value="${totalBalance}" type="currency" currencySymbol="" /></td>
+					<td></td>
 				</tr>
 			</table>
 		</div>
 		
 		<label id="add_record_button" class="button mouseout_button" onclick="buttonNextPage('#add_treatment_record_div')">Add Record</label>
 		
+		<form id="treatment_record_form_id" action="${pageContext.request.contextPath}/treatment_record/record" method="POST">
+			<input type="hidden" value="" id="treatment_record_id_hidden" name="treatment_record_id_hidden" />
+		</form>
+		
 		<jsp:include page="add_treatment_record.jsp"/>
 		<jsp:include page="edit_treatment_record.jsp"/>
 	</div>	
-	</body>
 	</center>
+	</body>
 </html>

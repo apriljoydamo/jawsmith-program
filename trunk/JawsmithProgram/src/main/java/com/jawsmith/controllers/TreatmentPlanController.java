@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jawsmith.interfaces.DataAccesses;
 import com.jawsmith.interfaces.TreatmentPlanMethods;
 import com.jawsmith.model.Patient;
+import com.jawsmith.model.TableMaintenance;
 import com.jawsmith.model.TreatmentPlan;
 
 
@@ -30,6 +31,19 @@ public class TreatmentPlanController {
 		static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("treatmentPlanBean");
 		static TreatmentPlanMethods treatmentPlanMethods = (TreatmentPlanMethods)appContext.getBean("treatmentPlanBean");
 		static DataAccesses patientDataAccesses = (DataAccesses)appContext.getBean("patientsBean");
+		
+		@RequestMapping("/record")
+		public static String editRecord(HttpServletRequest request, HttpServletResponse response, 
+									  ModelMap model, Principal principal) throws IOException, ServletException{
+			
+			int treatment_plan_id = Integer.parseInt(request.getParameter("treatment_plan_id_hidden"));
+			TreatmentPlan selectedTreatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_id);
+			
+			request.getSession().setAttribute("selectedTreatmentPlan", selectedTreatmentPlan);
+			System.out.println("Selected TreatmentPlan: "+selectedTreatmentPlan.getTreatment_plan_id());
+			
+			return "redirect:/patient/view_patient/details#edit_treatment_plan_div";
+		}
 		
 		@RequestMapping("/add")
 		public static String addMethod(HttpServletRequest request, HttpServletResponse response, 
@@ -67,21 +81,22 @@ public class TreatmentPlanController {
 									ModelMap model, Principal principal) throws IOException, ServletException{
 		
 			Patient patient = (Patient) request.getSession().getAttribute("patient");
-			int patient_id = patient.getPatient_id();
-		
+			//int patient_id = patient.getPatient_id();
+			
+			int treatment_plan_id = Integer.parseInt(request.getParameter("treatment_plan_id"));
 			String treatment = request.getParameter("treatment");
 			Float treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
 			String alternateTreatment = request.getParameter("alternative_treatment");
 			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
 			Date treatment_date = new Date();
 			
-			TreatmentPlan treatmentPlan = (TreatmentPlan) treatmentPlanMethods.findByPatientId(patient_id);
+			TreatmentPlan treatmentPlan = (TreatmentPlan) dataAccesses.findById(treatment_plan_id);
 			treatmentPlan.setTreatment(treatment);
 			treatmentPlan.setTreatment_fee(treatment_fee);
 			treatmentPlan.setAlternative_treatment(alternateTreatment);
 			treatmentPlan.setAlternative_treatment_fee(alternative_treatment_fee);
 			treatmentPlan.setTreatment_date(treatment_date);
-			treatmentPlan.setPatient_id(patient_id);
+			//treatmentPlan.setPatient_id(patient_id);
 			dataAccesses.update(treatmentPlan);
 			
 			

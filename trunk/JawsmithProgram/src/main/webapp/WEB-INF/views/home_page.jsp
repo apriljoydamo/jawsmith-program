@@ -17,8 +17,8 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/home_page.js"></script>
 	</head>
 	
-	<center>
 	<body>
+	<center>
 	<div id="body_div">
 	<jsp:include page="header.jsp" />
 	<div id="register_div" class="modalDialog">
@@ -137,7 +137,6 @@
 			<label id="search_button" class="button mouseout_button" onClick="submitForm('searchForm')">Search</label>
 		</form></tr>
 		
-		<tr><label id="advance_search_button" class="button mouseout_button">Advance Search</label></tr>
 		<tr><label id="plus_button" class="button mouseout_button">Add Patients</label></tr>
 	</table>
 	</div>
@@ -167,37 +166,6 @@
 	    	<td class="results"><c:out value="${patient.relationship_status}" /></td>
 	    </tr>
 	    </c:forEach>
-	    
-	    <tr id="patient_id_" onclick="selectPatient('1')" class="patient_records record_mouseout_button">	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    </tr>
-	    <tr id="patient_id_" onclick="selectPatient('2')" class="patient_records record_mouseout_button">	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    </tr>
-	    <tr id="patient_id_" onclick="selectPatient('3')" class="patient_records record_mouseout_button">	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>	    	
-	    	<td class="results">TEST</td>
-	    	<td class="results">TEST</td>
-	    </tr>
 	</table>
 	
     
@@ -226,6 +194,6 @@
     </table>
 	</div>
 	</div>
-	</body>
 	</center>
+	</body>
 </html>
