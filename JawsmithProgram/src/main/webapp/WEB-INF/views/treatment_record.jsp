@@ -76,7 +76,6 @@
 		
 		<label id="add_record_button" class="button mouseout_button" onclick="buttonNextPage('#add_treatment_record_div')">Add Record</label>
 		
-		
 		<jsp:include page="add_treatment_record.jsp"/>
 		<jsp:include page="edit_treatment_record.jsp"/>
 	</div>	

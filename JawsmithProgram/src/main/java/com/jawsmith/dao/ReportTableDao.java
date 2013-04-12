@@ -28,7 +28,7 @@ public class ReportTableDao extends HibernateDaoSupport implements DataAccesses{
 
 	@Override
 	public Object findById(int i) {
-		List list = getHibernateTemplate().find("from ReportTable where PATIENT_ID=?",i);
+		List list = getHibernateTemplate().find("from ReportTable where REPORT_ID=?",i);
 		return list.get(0);
 	}
 

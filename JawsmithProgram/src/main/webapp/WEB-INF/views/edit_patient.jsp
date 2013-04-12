@@ -24,7 +24,7 @@
 	          </tr>
 	          <tr>              
 	                <td>Date of Birth: </td>
-	                <td><input placeholder="yyyy-MM-dd" type="text" id="add_patient_date_of_birth" name="dob" class="" value="<fmt:formatDate value='${patient.birthday}' pattern='yyyy-MM-dd'/>" /></td> 
+	                <td><input placeholder="MM/dd/yyyy" type="text" id="add_patient_date_of_birth" name="dob" class="" value="<fmt:formatDate value='${patient.birthday}' pattern='MM/dd/yyyy'/>" /></td> 
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>

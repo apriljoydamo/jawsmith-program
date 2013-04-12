@@ -52,7 +52,7 @@ public class TableMaintenanceController {
 		
 		dataAccesses.save(tblMaintenance);
 		
-		return "redirect:/table_maintenance/view";
+		return "redirect:/admin";
 	}
 	
 	/**

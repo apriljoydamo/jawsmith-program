@@ -157,7 +157,7 @@
 		<band height="58" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="2" width="409" height="56"/>
-				<imageExpression><![CDATA["C:\\Users\\April Joy Damo\\Documents\\JasperReports\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["reports\\logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="324" y="28" width="248" height="20"/>

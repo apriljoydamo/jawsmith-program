@@ -80,7 +80,7 @@ public class SystemUserController {
 		
 		sysUserDataAccesses.save(sysUser);
 		
-		return "redirect:/system_users/view";
+		return "redirect:/admin";
 	}
 	
 	/**
