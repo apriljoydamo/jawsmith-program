@@ -5,13 +5,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
 	<!-- System User business object -->
-   <bean id="dentalHistoryBean" class="com.jawsmith.services.DentalHistoryManager" >
-   		<property name="dataAccesses" ref="dentalHistoryDao" />
-  		<property name="dentalHistoryMethods" ref="dentalHistoryDao" />	
+   <bean id="reportTblBean" class="com.jawsmith.services.ReportTableManager" >
+   		<property name="dataAccesses" ref="reportTblDao" />
    </bean>
  
    <!-- System User Data Access Object -->
-   <bean id="dentalHistoryDao" class="com.jawsmith.dao.DentalHistoryDao" >
+   <bean id="reportTblDao" class="com.jawsmith.dao.ReportTableDao" >
    		<property name="sessionFactory" ref="sessionFactory"></property>
    </bean>   	  
  </beans>

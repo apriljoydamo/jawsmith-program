@@ -29,19 +29,7 @@ public class SystemUserController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 
 	static DataAccesses sysUserDataAccesses = (DataAccesses)appContext.getBean("systemUserBean");
-	
-	/**
-	 * Redirecting to /systemUsersPage
-	 **/
-	@RequestMapping("/view")
-	public static String systemUsersPage(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
-		
-		List<SystemUser> sysUsersList = sysUserDataAccesses.getAll();
-		model.addAttribute("sysUsersList", sysUsersList);
-		
-		return "admin_page";
-	}
+
 	
 	@RequestMapping("/record")
 	public static String editRecord(HttpServletRequest request, HttpServletResponse response, 

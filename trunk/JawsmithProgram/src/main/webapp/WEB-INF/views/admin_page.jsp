@@ -57,7 +57,7 @@
 		</div>
 		
 		<div id="tm_bg">
-		<h3  style="position: relative; top: 165px">TABLE MAINTENANCE</h3>
+		<h3 style="position: relative; top: 165px">TABLE MAINTENANCE</h3>
 			<div id="tablem_list_table">
 				<table id="tablem_table">
 					<tr>
