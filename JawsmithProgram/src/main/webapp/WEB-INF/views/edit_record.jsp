@@ -21,7 +21,8 @@
 					</c:forEach>
 				</c:when>
 				<c:when test="${tbl_med_his.code_table_value=='8' && patient.sex=='M'}">
-					<tr><td><input type="text" disabled="disabled" name="answer" /></td></tr>
+					<tr><td><input type="text" disabled="disabled" name="answer" value="-" /></td></tr>
+							<input type="hidden" name="answer" value="-" />
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="medhis" items="${latestMedHisList}">

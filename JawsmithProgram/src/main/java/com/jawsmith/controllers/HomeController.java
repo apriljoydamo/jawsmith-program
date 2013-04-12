@@ -44,6 +44,8 @@ public class HomeController {
 	DataAccesses dataAccesses = (DataAccesses)appContext.getBean("patientsBean");
 	TableMaintenanceMethods tblMaintenanceMethods = (TableMaintenanceMethods) appContext.getBean("tableMaintenanceBean");
 	PatientMethods patientMethods = (PatientMethods)appContext.getBean("patientsBean");
+	DataAccesses tblMaintenanceDataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
+	DataAccesses sysUserDataAccesses = (DataAccesses)appContext.getBean("systemUserBean");
 	int CODE_TBL_REF = 1;
 	int MED_HIS_QUESTIONS_REF_ID = 2;
 	int PHYSICAL_AILMENTS_REF_ID = 3;
@@ -124,8 +126,12 @@ public class HomeController {
 	@RequestMapping("/admin")
 	public String adminTools(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{
-		SystemUserController.systemUsersPage(request, response, model, principal);
-		TableMaintenanceController.tableMaintenancePage(request, response, model, principal);
+		
+		List<SystemUser> sysUsersList = sysUserDataAccesses.getAll();
+		model.addAttribute("sysUsersList", sysUsersList);
+	
+		List<TableMaintenance> tblMaintenanceList = tblMaintenanceDataAccesses.getAll();
+		model.addAttribute("tblMaintenanceList", tblMaintenanceList);
 		
 		List refIdList = tblMaintenanceMethods.findAllByRefId(CODE_TBL_REF);
 		model.addAttribute("refIdList", refIdList);

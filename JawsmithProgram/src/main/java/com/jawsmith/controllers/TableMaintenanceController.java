@@ -25,15 +25,6 @@ public class TableMaintenanceController {
 		new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
 	static DataAccesses dataAccesses = (DataAccesses)appContext.getBean("tableMaintenanceBean");
 	
-	@RequestMapping("/view")
-	public static String tableMaintenancePage(HttpServletRequest request, HttpServletResponse response, 
-								  ModelMap model, Principal principal) throws IOException, ServletException{
-		
-		List<TableMaintenance> tblMaintenanceList = dataAccesses.getAll();
-		model.addAttribute("tblMaintenanceList", tblMaintenanceList);
-		return "admin_page";
-	}
-	
 	@RequestMapping("/record")
 	public static String editRecord(HttpServletRequest request, HttpServletResponse response, 
 								  ModelMap model, Principal principal) throws IOException, ServletException{

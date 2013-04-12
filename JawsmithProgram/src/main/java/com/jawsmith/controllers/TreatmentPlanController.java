@@ -50,10 +50,18 @@ public class TreatmentPlanController {
 										 ModelMap model, Principal principal) throws IOException, ServletException{
 			
 			Patient patient = (Patient) request.getSession().getAttribute("patient");
+			Float treatment_fee = Float.valueOf(0);
+			Float alternative_treatment_fee = Float.valueOf(0);
+			try{
+				treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
+				alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
+			}catch(Exception e){
+				System.out.println("ERROR IN GETTING TREATMENT PLAN FEES");
+			}
+			
+			
 			String treatment = request.getParameter("treatment");
-			Float treatment_fee = Float.parseFloat(request.getParameter("treatment_fee"));
 			String alternateTreatment = request.getParameter("alternative_treatment");
-			Float alternative_treatment_fee = Float.parseFloat(request.getParameter("alternative_treatment_fee"));
 			Date treatment_date = new Date();
 			int patient_id = patient.getPatient_id();
 			
