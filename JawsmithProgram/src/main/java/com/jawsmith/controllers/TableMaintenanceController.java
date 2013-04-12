@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jawsmith.interfaces.DataAccesses;
+import com.jawsmith.model.SystemUser;
 import com.jawsmith.model.TableMaintenance;
 
 @Controller
@@ -31,6 +32,19 @@ public class TableMaintenanceController {
 		List<TableMaintenance> tblMaintenanceList = dataAccesses.getAll();
 		model.addAttribute("tblMaintenanceList", tblMaintenanceList);
 		return "admin_page";
+	}
+	
+	@RequestMapping("/record")
+	public static String editRecord(HttpServletRequest request, HttpServletResponse response, 
+								  ModelMap model, Principal principal) throws IOException, ServletException{
+		
+		int tablem_id_hidden = Integer.parseInt(request.getParameter("tablem_id_hidden"));
+		TableMaintenance selectedTblMaintenance = (TableMaintenance) dataAccesses.findById(tablem_id_hidden);
+		
+		request.getSession().setAttribute("selectedTblMaintenance", selectedTblMaintenance);
+		System.out.println("Selected User: "+selectedTblMaintenance.getTbl_maintenance_description());
+		
+		return "redirect:/admin#edit_tablem_div";
 	}
 	
 	@RequestMapping("/add")
@@ -71,7 +85,6 @@ public class TableMaintenanceController {
 		int reference_id = Integer.parseInt(request.getParameter("reference_id"));
 		String code_table_value = request.getParameter("code_table_value");
 		String tbl_maintenance_description = request.getParameter("tbl_maintenance_description");
-		String last_name = request.getParameter("last_name");
 		Boolean status = Boolean.valueOf(request.getParameter("status"));
 		
 		tblMaintenance.setReference_id(reference_id);
@@ -81,6 +94,6 @@ public class TableMaintenanceController {
 		
 		dataAccesses.update(tblMaintenance);
 
-		return "redirect:/table_maintenance/view";
+		return "redirect:/admin";
 	}
 }

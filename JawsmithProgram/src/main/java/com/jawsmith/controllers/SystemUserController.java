@@ -50,9 +50,10 @@ public class SystemUserController {
 		int user_id = Integer.parseInt(request.getParameter("user_id_hidden"));
 		SystemUser selectedUser = (SystemUser) sysUserDataAccesses.findById(user_id);
 		
-		model.addAttribute("selectedUser", selectedUser);
+		request.getSession().setAttribute("selectedUser", selectedUser);
+		System.out.println("Selected User: "+selectedUser.getUsername());
 		
-		return "admin_page";
+		return "redirect:/admin#edit_user_div";
 	}
 	
 	/**
@@ -110,6 +111,6 @@ public class SystemUserController {
 		
 		sysUserDataAccesses.update(sysUser);
 
-		return "redirect:/system_users/view";
+		return "redirect:/admin";
 	}
 }
