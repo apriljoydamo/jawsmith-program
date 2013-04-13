@@ -23,7 +23,7 @@
 	<div id="body_div">		
 	<jsp:include page="header.jsp" />
  		<div class="" id="patient_info_panel">
-	        <label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label><br/>
+	       	<a href="${pageContext.request.contextPath}/patient/view_patient/details"><label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label></a><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
 	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
 	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
@@ -52,28 +52,28 @@
 					<th>Note/s</th>
 				</tr>
 				<c:forEach var="treatment_rec" items="${treatmentRecordList}">
-				<tr id="treatment_record_id" class="patient_records" onclick="selectTreatmentRecord('${treatment_rec.treatment_record_id}')">
-					<td><c:out value="${treatment_rec.last_visit_date}" /></td>
-					<td><c:out value="${treatment_rec.tooth_number}" /></td>
-					<td><c:out value="${treatment_rec.description}" /></td>
-					<td><c:out value="${treatment_rec.prescription}" /></td>
-					<td><fmt:formatNumber value="${treatment_rec.debit}" type="currency" currencySymbol="" /></td>
-					<td><fmt:formatDate value="${treatment_rec.credit_date}" pattern="yyyy-MM-dd" /></td>
-					<td><fmt:formatNumber value="${treatment_rec.credit_amount}" type="currency" currencySymbol="" /></td>
-					<td><fmt:formatNumber value="${treatment_rec.debit - treatment_rec.credit_amount}" type="currency" currencySymbol=""/></td>	
-					<td><c:out value="${treatment_rec.description_notes}" /></td>
+				<tr id="treatment_record_id" class="patient_records record_mouseout_button" onclick="selectTreatmentRecord('${treatment_rec.treatment_record_id}')">
+					<td class="results"><c:out value="${treatment_rec.last_visit_date}" /></td>
+					<td class="results"><c:out value="${treatment_rec.tooth_number}" /></td>
+					<td class="results"><c:out value="${treatment_rec.description}" /></td>
+					<td class="results"><c:out value="${treatment_rec.prescription}" /></td>
+					<td class="results"><fmt:formatNumber value="${treatment_rec.debit}" type="currency" currencySymbol="" /></td>
+					<td class="results"><fmt:formatDate value="${treatment_rec.credit_date}" pattern="yyyy-MM-dd" /></td>
+					<td class="results"><fmt:formatNumber value="${treatment_rec.credit_amount}" type="currency" currencySymbol="" /></td>
+					<td class="results"><fmt:formatNumber value="${treatment_rec.debit - treatment_rec.credit_amount}" type="currency" currencySymbol=""/></td>	
+					<td class="results"><c:out value="${treatment_rec.description_notes}" /></td>
 				</tr>
 				</c:forEach>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>Total Balance:</td>
-					<td><fmt:formatNumber value="${totalBalance}" type="currency" currencySymbol="" /></td>
-					<td></td>
+					<td w_bg></td>
+					<td w_bg></td>
+					<td w_bg></td>
+					<td w_bg></td>
+					<td w_bg></td>
+					<td w_bg></td>
+					<td w_bg>Total Balance:</td>
+					<td w_bg><fmt:formatNumber value="${totalBalance}" type="currency" currencySymbol="" /></td>
+					<td w_bg></td>
 				</tr>
 			</table>
 		</div>

@@ -81,8 +81,9 @@
 	
 	<div id="add_user_div" class="modalDialog">
 			<div id="add_user_form">
- 			<a id="close_user" href="#close" class="close_reg close" title="">X</a><br/>
- 	      		<label id="add_user_label">ADD USER</label>
+			<label id="add_user_label">ADD USER</label>
+ 			<a id="close_user" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
+ 	      		
  				<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
  					<table>
  						<tr>
@@ -124,8 +125,8 @@
 		
 	<div id="edit_user_div" class="modalDialog">	
 		<div id="add_user_form">
-		<a id="close_user" href="#close" class="close_reg close" title="">X</a><br/>
 		<label id="edit_user_label">EDIT USER</label>
+		<a id="close_user" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
 	      	<form action="${pageContext.request.contextPath}/system_users/edit" method="POST">
 	      	<input type="hidden" name="user_id" value="${selectedUser.user_id}" />
 				<table>
@@ -162,9 +163,9 @@
 		
 		
 		<div id="add_tablem_div" class="modalDialog">
-			<div id="tablem_form">
-			<a id="close_tablem" href="#close" class="close_reg close" title="">X</a><br/>
+			<div id="add_user_form">
 			<label id="add_tablem_label">ADD TABLE MAINTENANCE</label>
+			<a id="close_tablem" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
 	      	<form action="${pageContext.request.contextPath}/table_maintenance/add" method="POST">
 				<table>
 					<tr>
@@ -198,10 +199,11 @@
 			</form>
 			</div>
 		</div>
+		
 		<div id="edit_tablem_div" class="modalDialog">
-			<div id="tablem_form">
-			<a id="close_tablem" href="#close" class="close_reg close" title="">X</a><br/>
+			<div id="add_user_form">
 			<label id="add_tablem_label">EDIT TABLE MAINTENANCE</label>
+			<a id="close_tablem" href="#close" class="close_reg close" title="" floatRight>X</a><br/>
 	      	<form action="${pageContext.request.contextPath}/table_maintenance/edit" method="POST">
 	      	<input type="hidden" name="table_maintenance_id" value="${selectedTblMaintenance.table_maintenance_id}" />
 				<table>

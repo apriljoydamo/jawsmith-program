@@ -13,9 +13,20 @@
 	border-radius: 50px;*/
 }
 
-#d11{
-	
-	}
+#dd11{
+	position: relative; 
+	height: 300px; 
+	width: 240px; 
+	padding: 4px; 
+	overflow-y: auto;
+}
+
+#mdTable{
+	position: relative; 
+	height: 300px; 
+	width: 220px; 
+	background-color: white;
+}
 
 body{
 	background-color: #4a4a4a;
@@ -32,12 +43,10 @@ body{
 [w_bg]{
 	background-color: white;
 }
-
-th, td{
-	background-color: white;
-	border-radius: 3px;
-	box-shadow: 5px 5px 5px black;
+th{
+	background-color: #5070cd;
 }
+
 #treatment_plan_div{
 	top: -305px;
 	width: 450px;

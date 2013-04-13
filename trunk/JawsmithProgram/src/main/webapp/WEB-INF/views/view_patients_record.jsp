@@ -58,8 +58,8 @@
 		<div id="view_patient_page_div">
 			<div id="patient_medical_info" style="">
 				<h3 style=""" id="hh11" class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
-				<div id="dd11" style="position: relative;height: 300px; width: 240px; padding: 4px; overflow-y: auto;;" class="">
-                   <table style="width: 100%;">
+				<div id="dd11" class="">
+                   <table id="mdTable">
                   	 	<tr>
 							<th>Question</th>
 							<th>Answer</th>
@@ -226,12 +226,12 @@
 						<th>Alternative Treatment Fee</th>
 					</tr>
 					<c:forEach var="treatmentplan" items="${treatmentplanList}">
-					<tr id="treatment_plan_id" class="patient_records" onclick="selectTreatmentPlan('${treatmentplan.treatment_plan_id}')">
-						<td><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
-						<td><c:out value="${treatmentplan.treatment}" /></td>
-						<td><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
-						<td><c:out value="${treatmentplan.alternative_treatment}" /></td>
-						<td><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
+					<tr id="treatment_plan_id" class="patient_records record_mouseout_button" onclick="selectTreatmentPlan('${treatmentplan.treatment_plan_id}')">
+						<td class="results"><fmt:formatDate value="${treatmentplan.treatment_date}" pattern="yyyy-MM-dd" /></td>
+						<td class="results"><c:out value="${treatmentplan.treatment}" /></td>
+						<td class="results"><fmt:formatNumber value="${treatmentplan.treatment_fee}" type="currency" currencySymbol="" /></td>
+						<td class="results"><c:out value="${treatmentplan.alternative_treatment}" /></td>
+						<td class="results"><fmt:formatNumber value="${treatmentplan.alternative_treatment_fee}" type="currency" currencySymbol="" /></td>
 					</tr>
 					</c:forEach>
 				</table>
