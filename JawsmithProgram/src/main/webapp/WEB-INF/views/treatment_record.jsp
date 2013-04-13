@@ -22,16 +22,9 @@
 	<center>
 	<div id="body_div">		
 	<jsp:include page="header.jsp" />
- 		<div class="" id="patient_info_panel">
+ 		<div class="" id="patient_info_panel" style="width: 300px; margin-left:590px;">
 	       	<a href="${pageContext.request.contextPath}/patient/view_patient/details"><label class="patient_name" id="">${patient.last_name}, ${patient.first_name} ${patient.middle_name}</label></a><br/>
 	        <label class="sub_info" id="">Last Visit Date: ${patient.last_visit_date}</label><br/>
-	        <label class="sub_info" id="">Birthday: ${patient.birthday}</label><br/>
-	        <label class="sub_info" id="">${patient.sex} | ${patient.relationship_status} | ${patient.nationality}</label><br/>
-	        <label class="sub_info" id="">${patient.address}</label><br/>
-	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
-	        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
-	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
-	        <label class="sub_info" id="">${patient.status}</label><br/>
 		</div>
 		
 		<div id="treatment_record_image" class="">
