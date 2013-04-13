@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patient_report_treatment_record" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.210000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="18"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="TREATMENT_RECORD_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[treatment_record_id]]></fieldDescription>
+	</field>
+	<field name="LAST_VISIT_DATE" class="java.util.Date">
+		<fieldDescription><![CDATA[last_visit_date]]></fieldDescription>
+	</field>
+	<field name="TOOTH_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[tooth_number]]></fieldDescription>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="PRESCRIPTION" class="java.lang.String">
+		<fieldDescription><![CDATA[prescription]]></fieldDescription>
+	</field>
+	<field name="DEBIT" class="java.lang.Float">
+		<fieldDescription><![CDATA[debit]]></fieldDescription>
+	</field>
+	<field name="CREDIT_DATE" class="java.util.Date">
+		<fieldDescription><![CDATA[credit_date]]></fieldDescription>
+	</field>
+	<field name="CREDIT_AMT" class="java.lang.Float">
+		<fieldDescription><![CDATA[credit_amount]]></fieldDescription>
+	</field>
+	<field name="DESC_NOTES" class="java.lang.String">
+		<fieldDescription><![CDATA[description_notes]]></fieldDescription>
+	</field>
+	<field name="DATE_NOTED" class="java.util.Date">
+		<fieldDescription><![CDATA[date_noted]]></fieldDescription>
+	</field>
+	<field name="patients_PATIENT_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[patient_id]]></fieldDescription>
+	</field>
+	<variable name="BALANCE_PER_DATE" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{DEBIT}.floatValue()-$F{CREDIT_AMT}.floatValue()]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_BALANCE" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$V{BALANCE_PER_DATE}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Treatment Record]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="304" splitType="Stretch">
+			<image>
+				<reportElement x="51" y="32" width="480" height="269"/>
+				<imageExpression><![CDATA["reports\\chart3.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="4" width="48" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Visit Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="4" width="34" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tooth No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="4" width="74" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="4" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prescription]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="4" width="42" height="35"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit Amt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="4" width="48" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="4" width="46" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit Amt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="4" width="55" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="35" width="552" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="232" y="4" width="49" height="31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Noted]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="4" width="74" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Note/s]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="3" y="0" width="73" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LAST_VISIT_DATE}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="55" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOOTH_NO}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="85" y="0" width="74" height="52"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPTION}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="413" y="0" width="41" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CREDIT_DATE}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="459" y="0" width="74" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CREDIT_AMT}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="355" y="0" width="58" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEBIT}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="500" y="0" width="55" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{BALANCE_PER_DATE}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="159" y="0" width="74" height="52"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRESCRIPTION}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="232" y="0" width="49" height="40"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE_NOTED}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="281" y="0" width="74" height="52"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_NOTES}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="28" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="479" y="6" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{TOTAL_BALANCE}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="406" y="6" width="73" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Total Balance:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="8" y="2" width="544" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

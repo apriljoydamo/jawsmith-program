@@ -187,7 +187,7 @@ ENGINE = InnoDB;
 
 delimiter $$
 
-CREATE TABLE `report_tbl` (
+CREATE TABLE IF NOT EXISTS `jawsmith_program`.`report_tbl` (
   `REPORT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `PATIENT_ID` varchar(45) DEFAULT NULL,
   `PATIENT_NO` varchar(45) DEFAULT NULL,

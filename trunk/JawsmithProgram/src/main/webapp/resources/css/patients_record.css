@@ -119,9 +119,9 @@ th{
 
 #add_treatment_panel{
 	width: 500px;
+	height: 200px;
 	margin: 30px auto;
 	border: 1px solid black;
-	border-radius: 5px;
 	background-color: white;
 }
 
