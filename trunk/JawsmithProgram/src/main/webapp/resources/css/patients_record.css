@@ -70,22 +70,24 @@ th{
 
 #patient_info_panel{
 	text-align: right;
+	width: 400px;
+	margin-left: 490px;
 	font-size: 15px;
 	height: auto;
-	float: right;
 	padding-right: 10px;
-	position: relative;
+	position: absolute;
 	top: 115px;
 }
 
 #edit_patient_button{
-	position: relative;
+	position: absolute;
+	margin-left: 180px;
 	top: 70px;
 }
 
 #view_patient_controllers{
 	position: relative;
-	top: -155px;
+	top: -145px;
 }
 
 #patient_medical_info{
@@ -96,7 +98,7 @@ th{
 #view_patient_page_div{
 	width: 400px;
 	position: relative;
-	top: 140px;
+	top: 150px;
 	left: -230px;
 }
 
