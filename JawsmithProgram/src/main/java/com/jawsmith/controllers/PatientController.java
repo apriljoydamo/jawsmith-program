@@ -313,16 +313,26 @@ public class PatientController {
 			anxillaries = (Anxillaries) AnxillariesController.anxillariesMethods.findByPatientId(patientId);
 			occlusion = (Occlusion) OcclusionController.occlusionMethods.findByPatientId(patientId);
 			other = (OtherInformation) OtherInformationController.otherInformationMethods.findByPatientId(patientId);
-			treatmentplanList = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
+		}catch(Exception e){
+			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS. MIGHT BE A NEW USER");
+			isNewUser = true;
+		}
 		
+		try{
+			treatmentplanList = (List<TreatmentPlan>) TreatmentPlanController.treatmentPlanMethods.findByPatientId(patientId);			
+		}catch(Exception e){
+			System.out.println("ERROR IN RETRIEVING TREATMENT PLAN. MIGHT BE A NEW USER");
+		}
+		
+		//FOR JASPER REPORTS
+		try{
 			ReportTable report;
-			
+		
 			try{
 				report = (ReportTable) reportTblDataAccesses.getAll().get(0);
 			}catch(Exception e){
 				report = new ReportTable();
 			}
-			//for jasper report
 			//patient
 			report.setPatientId(""+patient.getPatient_id());
 			report.setPatientNo(patient.getPatient_num());
@@ -334,6 +344,7 @@ public class PatientController {
 			report.setContactNo(patient.getMobile_number()+" / "+patient.getTelephone_number());
 			report.setEmail(patient.getEmail_address());
 			report.setNationality(patient.getNationality());
+			report.setReligion(patient.getReligion());
 			report.setOccupation(patient.getOccupation());
 			report.setReferredBy(patient.getReferred_by());
 			report.setGuardian(patient.getGuardian());
@@ -392,11 +403,10 @@ public class PatientController {
 				reportTblDataAccesses.save(report);
 				System.out.println("SAVE");
 			}
-			
 		}catch(Exception e){
-			System.out.println("ERROR IN RETRIEVING LAST VISIT DATES INFOS. MIGHT BE A NEW USER");
-			isNewUser = true;
+			System.out.println("ERROR IN PUTTING DATA ON REPORT TABLE");
 		}
+		
 		
 		
 		model.addAttribute("latestMedHisList", latestMedHisList);

@@ -18,3 +18,17 @@
 	overflow-y: auto;
 	width: 880px;
 }
+
+#add_user_form{
+	background-color: white;
+	width: 380px;
+	margin-top: 180px;
+	border: 3px solid black;
+	radius: 50px;
+	font-family: century gothic;
+	padding: 10px;
+}
+
+[floatRight]{
+	float: right;
+}
