@@ -73,7 +73,7 @@
 					</table>
 				</div>
 				<h3 id="hh22" class="patient_medical_info patient_medical_info_mouseout">Dental History</h3>
-				<div id="dd22">
+				<div id="dd22" w_bg>
                   <table>
                   		<tr>
                   			<td>
@@ -141,7 +141,7 @@
                    </table>
 				</div>
 				<h3 id="hh33" class="patient_medical_info patient_medical_info_mouseout">Clinical Examination</h3>
-				<div id="dd33">
+				<div id="dd33" w_bg>
                     <table>
                    		<tr>
                    			<td>Gingival Color:</td>
@@ -166,7 +166,7 @@
                     </table>
 				</div>
 				<h3 id="hh44" class="patient_medical_info patient_medical_info_mouseout">Occlusion</h3>
-				<div id="dd44">
+				<div id="dd44" w_bg>
                    <table>
                    		<tr>
                    			<td>Class I</td>
@@ -183,7 +183,7 @@
                     </table>
 				</div>
 				<h3 id="hh55" class="patient_medical_info patient_medical_info_mouseout">Anxillaries</h3>
-				<div id="dd55">
+				<div id="dd55" w_bg>
                    <table>
                    		<tr>
                    			<td>Bleeding Time:</td>
@@ -208,11 +208,11 @@
                     </table>
 				</div>
 				<h3 id="hh66" class="patient_medical_info patient_medical_info_mouseout">Chief Complaint</h3>
-				<div id="dd66">
+				<div id="dd66" w_bg>
                 	<c:out value="${other.chief_complaint}" />
 				</div>
 				<h3 id="hh77" class="patient_medical_info patient_medical_info_mouseout">Diagnosis</h3>
-				<div id="dd77">
+				<div id="dd77" w_bg>
 					<c:out value="${other.diagnosis}" />
                 </div>
             </div>
