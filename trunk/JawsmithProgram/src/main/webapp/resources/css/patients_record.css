@@ -25,7 +25,7 @@
 	position: relative; 
 	height: 300px; 
 	width: 220px; 
-	background-color: white;
+	background-color: black;
 }
 
 body{
@@ -117,6 +117,10 @@ th{
 }
 .patient_medical_info_mouseclick{
 	background-color: #99FF99;
+}
+
+th, td{
+	background-color: white;
 }
 
 #add_treatment_panel{

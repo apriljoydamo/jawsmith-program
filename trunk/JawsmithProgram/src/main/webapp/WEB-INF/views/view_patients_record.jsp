@@ -45,21 +45,21 @@
 	        <label class="sub_info" id="">${patient.mobile_number} / ${patient.telephone_number} / ${patient.email_address}</label><br/>
 	        <label class="sub_info" id="">${patient.occupation} | ${patient.religion}</label><br/>
 	        <label class="sub_info" id="">${patient.referred_by} | ${patient.guardian}</label><br/>
-	        <label class="sub_info" id="">${patient.status}</label><br/>
+	        <label class="sub_info" id="">${patient.status==true ? 'Active' : 'Inactive'}</label><br/>
 		</div>
 		
 		<div id="edit_patient_button">
 			<c:if test="${user.access==1 || user.access==2}">
 			<label style="position:relative; top: 50px;" id="plus_button" class="button mouseout_button">Edit Patient</label>
 			</c:if>
-			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Generate Report</label>			
+			<label style="position:relative; top: 50px;" class="button mouseout_button" onClick="alert('REPORT GENERATED');buttonNextPage('${pageContext.request.contextPath}/patient/generate_pdf_file')">Generate Report</label>			
 		</div>
 
 		<div id="view_patient_page_div">
 			<div id="patient_medical_info" style="">
 				<h3 style=""" id="hh11" class="patient_medical_info patient_medical_info_mouseout">Medical History</h3>
 				<div id="dd11" class="">
-                   <table id="mdTable">
+                   <table id="mdTable" style="">
                   	 	<tr>
 							<th>Question</th>
 							<th>Answer</th>

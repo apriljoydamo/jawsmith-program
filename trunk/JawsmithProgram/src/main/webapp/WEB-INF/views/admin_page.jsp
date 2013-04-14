@@ -48,7 +48,13 @@
 					<td><c:out value="${sysUser.last_name}"/></td>
 					<td><c:out value="${sysUser.username}"/></td>
 					<td><c:out value="${sysUser.password}"/></td>
-					<td>${sysUser.access}</td>
+					<td>
+						<c:choose>
+							<c:when test="${sysUser.access==1}">Administrator</c:when>
+							<c:when test="${sysUser.access==2}">Doctor</c:when>
+							<c:when test="${sysUser.access==3}">Secretary</c:when>
+						</c:choose>
+					</td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -71,7 +77,7 @@
 						<td><c:out value="${tblMaintenance.reference_id}"/></td>
 						<td><c:out value="${tblMaintenance.code_table_value}"/></td>
 						<td><c:out value="${tblMaintenance.tbl_maintenance_description}"/></td>
-						<td><c:out value="${tblMaintenance.status}"/></td>
+						<td><c:out value="${tblMaintenance.status==true ? 'Active' : 'Inactive'}"/></td>
 					</tr>
 					</c:forEach>
 				</table>

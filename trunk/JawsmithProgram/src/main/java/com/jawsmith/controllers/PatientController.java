@@ -349,7 +349,14 @@ public class PatientController {
 			report.setReferredBy(patient.getReferred_by());
 			report.setGuardian(patient.getGuardian());
 			report.setLastVisitDate(""+patient.getLast_visit_date());
-			report.setStatus(""+patient.getStatus());
+			String status = "";
+			if(patient.getStatus()==true){
+				status= "Active";
+			}else{
+				status="Inactive";
+			}
+			
+			report.setStatus(status);
 			//anxillaries
 			report.setBleedingTime(anxillaries.getBleeding_time());
 			report.setBloodPressure(anxillaries.getBlood_pressure());
@@ -363,6 +370,7 @@ public class PatientController {
 			report.setOralHygiene(clinical.getOral_hygiene());
 			report.setLymphNodes(clinical.getLymph_nodes());
 			//dentalhis
+			report.setFluorideTreatment(""+dentalhis.getFluoride_treatment());
 			report.setOrthodonticTreatment(""+dentalhis.getOrthodontic_treatment());
 			report.setPulpTherapy(""+dentalhis.getPulp_therapy());
 			report.setTemporoMandibularTherapy(""+dentalhis.getTemporo_mandibular());
