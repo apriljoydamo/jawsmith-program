@@ -49,7 +49,7 @@
 	          </tr>
 	          <tr>              
 	                <td>Gender: </td>
-	                <td><label><input type="radio" name="add_patient_sex" value="Male" />Male</label>
+	                <td><label><input type="radio" name="add_patient_sex" value="Male" checked="checked"/>Male</label>
 	        			<label><input type="radio" name="add_patient_sex" value="Female" />Female</label></td>  
 	          </tr>
 	          <tr>              

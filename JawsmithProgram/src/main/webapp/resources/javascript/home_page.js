@@ -26,7 +26,10 @@ function validatePatient(){
 	//if (selected.length > 0){
 	//    selectedValue = selected.val();
 	//}
-
+	
+	//MARITAL STATUS
+	fields.push($("#add_patient_sex"));
+	
 	//MARITAL STATUS
 	fields.push($("#add_patient_marital_status"));
 	
