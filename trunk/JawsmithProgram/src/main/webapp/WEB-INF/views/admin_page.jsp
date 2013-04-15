@@ -13,7 +13,8 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-prod.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-ui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/common.js"></script>		
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_page.js"></script>		
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_page.js"></script>	
+	
 	</head>
 	<body>
 	<center>
@@ -90,26 +91,26 @@
 			<label id="add_user_label">ADD USER</label>
  			<a id="close_user" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
  	      		
- 				<form action="${pageContext.request.contextPath}/system_users/add" method="POST">
+ 				<form id="admin_add_users" action="${pageContext.request.contextPath}/system_users/add" method="POST">
  					<table>
  						<tr>
  							<td>Username:</td>
- 							<td><input type="text" name="username" value="" />
+ 							<td><input type="text" id="admin_add_username" name="username" value="" maxlength="30"/>
  							</td>
  						</tr>
  						<tr>
  							<td>Password:</td>
- 							<td><input type="password" name="password" value="" />
+ 							<td><input type="password" id="admin_add_password" name="password" value="" maxlength="30" />
  							</td>
  						</tr>
  						<tr>
  							<td>First Name:</td>
- 							<td><input type="text" name="first_name" value="" />
+ 							<td><input type="text" id="admin_add_firstname" name="first_name" value="" maxlength="100"/>
  							</td>
  						</tr>
  						<tr>
  							<td>Last Name:</td>
- 							<td><input type="text" name="last_name" value="" />
+ 							<td><input type="text" id="admin_add_lastname" name="last_name" value="" maxlength="100" />
  							</td>
  						</tr>
  						<tr>
@@ -123,7 +124,8 @@
  						</tr>
  
  					</table>
- 					<input type="submit" value="Submit" />
+ 					<td><label id="save_button" class="button mouseout_button" onclick="validateAdminAddUser()">Save</label></td>
+	         
  				</form>
  			</div>
 		</div>
@@ -133,24 +135,24 @@
 		<div id="add_user_form">
 		<label id="edit_user_label">EDIT USER</label>
 		<a id="close_user" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
-	      	<form action="${pageContext.request.contextPath}/system_users/edit" method="POST">
+	      	<form id="admin_edit_users" action="${pageContext.request.contextPath}/system_users/edit" method="POST">
 	      	<input type="hidden" name="user_id" value="${selectedUser.user_id}" />
 				<table>
 					<tr>
 						<td>Username: </td>
-						<td><input type="text" name="username" value="${selectedUser.username}" /></td>
+						<td><input type="text" name="username" id="admin_edit_username" value="${selectedUser.username}" /></td>
 					</tr>
 					<tr>
 						<td>Password: </td>
-						<td><input type="text"  name="password"  value="${selectedUser.password}" /></td>
+						<td><input type="text"  name="password"  id="admin_edit_password" value="${selectedUser.password}" /></td>
 					</tr>
 					<tr>
 						<td>First Name: </td>
-						<td><input type="text" name="first_name" value="${selectedUser.first_name}" /></td>
+						<td><input type="text" name="first_name" id="admin_edit_firstname" value="${selectedUser.first_name}" /></td>
 					</tr>
 					<tr>
 						<td>Last Name: </td>
-						<td><input type="text" name="last_name"  value="${selectedUser.last_name}" /></td>
+						<td><input type="text" name="last_name"  id="admin_edit_lastname" value="${selectedUser.last_name}" /></td>
 					</tr>
 					<tr>
 						<td>Access: </td>
@@ -162,7 +164,8 @@
 					</tr>
 					
 				</table>
-				<input type="submit" value="Submit"/>
+				<td><label id="save_button" class="button mouseout_button" onclick="validateAdminEditUser()">Save</label></td>
+	         
 			</form>
 			</div>
 		</div>
@@ -172,7 +175,7 @@
 			<div id="add_user_form">
 			<label id="add_tablem_label">ADD TABLE MAINTENANCE</label>
 			<a id="close_tablem" href="#close" class="close_reg close" title="" floatRight>X</a><br/><br/>
-	      	<form action="${pageContext.request.contextPath}/table_maintenance/add" method="POST">
+	      	<form id="admin_add_codevalues" action="${pageContext.request.contextPath}/table_maintenance/add" method="POST">
 				<table>
 					<tr>
 						<td>Reference Id:</td>
@@ -186,11 +189,11 @@
 					</tr>
 					<tr>
 						<td>Code Table Value: </td>
-						<td><input type="text" name="code_table_value" value="" /></td>
+						<td><input type="text" id="admin_add_codevalue" name="code_table_value" value="" maxlength="3"/></td>
 					</tr>
 					<tr>
 						<td>Description: </td>
-						<td><input type="text" name="tbl_maintenance_description" value="" /></td>
+						<td><input type="text" id="admin_add_codedesc" name="tbl_maintenance_description" value="" maxlength="3" /></td>
 					</tr>
 					<tr>
 						<td>Status: </td>
@@ -201,7 +204,8 @@
 					</tr>
 					
 				</table>
-				<input type="submit" value="Submit"/>
+					<td><label id="save_button" class="button mouseout_button" onclick="validateAdminAddTable()">Save</label></td>
+	         
 			</form>
 			</div>
 		</div>
@@ -210,8 +214,8 @@
 			<div id="add_user_form">
 			<label id="add_tablem_label">EDIT TABLE MAINTENANCE</label>
 			<a id="close_tablem" href="#close" class="close_reg close" title="" floatRight>X</a><br/>
-	      	<form action="${pageContext.request.contextPath}/table_maintenance/edit" method="POST">
-	      	<input type="hidden" name="table_maintenance_id" value="${selectedTblMaintenance.table_maintenance_id}" />
+	      	<form id="admin_edit_codevalues" action="${pageContext.request.contextPath}/table_maintenance/edit" method="POST">
+	      	<input  type="hidden" name="table_maintenance_id" value="${selectedTblMaintenance.table_maintenance_id}" />
 				<table>
 					<tr>
 						<td>Reference Id:</td>
@@ -225,11 +229,11 @@
 					</tr>
 					<tr>
 						<td>Code Table Value: </td>
-						<td><input type="text" name="code_table_value" value="${selectedTblMaintenance.code_table_value}" /></td>
+						<td><input type="text" id="admin_edit_codevalue" name="code_table_value" value="${selectedTblMaintenance.code_table_value}" /></td>
 					</tr>
 					<tr>
 						<td>Description: </td>
-						<td><input type="text" name="tbl_maintenance_description" value="${selectedTblMaintenance.tbl_maintenance_description}" /></td>
+						<td><input type="text" id="admin_edit_codedesc" name="tbl_maintenance_description" value="${selectedTblMaintenance.tbl_maintenance_description}" /></td>
 					</tr>
 					<tr>
 						<td>Status: </td>
@@ -240,7 +244,8 @@
 					</tr>
 					
 				</table>
-				<input type="submit" value="Submit"/>
+			<td><label id="save_button" class="button mouseout_button" onclick="validateAdminEditTable()">Save</label></td>
+	    
 			</form>
 			</div>
 		</div>
