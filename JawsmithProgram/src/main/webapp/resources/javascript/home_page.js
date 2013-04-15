@@ -3,6 +3,7 @@
 function validatePatient(){
 	var approved = true;
 	var fields = new Array();
+
 	
 	//PATiENT NUM
 	fields.push($("#add_patient_num"));
@@ -63,18 +64,18 @@ function validatePatient(){
 	for(var x = 0 ; x<fields.length; x++){
 		if($.trim(fields[x].val()) == "" || fields[x].val() == null){
 		//alert(fields[x].parent().child().length);
-		if ( fields[x].parent().child().length < 2 ) {
-		fields[x].parent().append('<label id="asterisk">*</label>');
-		}
-		fields[x].parent().append('<label id="asterisk">*</label>');
-		approved = false;
+			if ( fields[x].parent().children().length < 2 ) {
+				fields[x].parent().append('<label id="asterisk" class="asterisk'+x+'">*</label>');
+			}	
+			approved = false;
+		}else{
+			$('.asterisk'+x).remove();
 		}
 	}
-	alert(approved);
+	
 	if(!approved){
-		alert("INVALID");
+		alert("Please input on all required fields");
 	} else if(approved){
-		alert('approved');
 		$("#add_patient_form").submit();
 	}
 }
