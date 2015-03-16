@@ -1,0 +1,1 @@
+mini thesis for SOFPROJ
